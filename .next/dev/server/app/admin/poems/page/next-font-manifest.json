@@ -1,0 +1,11 @@
+{
+  "pages": {},
+  "app": {
+    "[project]/app/admin/poems/page": [
+      "static/media/2a65768255d6b625-s.p.d19752fb.woff2",
+      "static/media/68d403cf9f2c68c5-s.p.f9f15f61.woff2"
+    ]
+  },
+  "appUsingSizeAdjust": true,
+  "pagesUsingSizeAdjust": false
+}

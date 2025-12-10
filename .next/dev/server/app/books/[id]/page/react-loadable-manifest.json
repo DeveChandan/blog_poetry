@@ -1,0 +1,10 @@
+{
+  "[project]/components/pdf-viewer.tsx [app-client] (ecmascript, next/dynamic entry)": {
+    "id": "[project]/components/pdf-viewer.tsx [app-client] (ecmascript, next/dynamic entry)",
+    "files": [
+      "static/chunks/node_modules_726bf49b._.js",
+      "static/chunks/components_pdf-viewer_tsx_63abcc37._.js",
+      "static/chunks/components_pdf-viewer_tsx_26d877a2._.js"
+    ]
+  }
+}

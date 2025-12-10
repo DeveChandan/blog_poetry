@@ -1,0 +1,5 @@
+Placeholder PDF for testing downloads.
+
+This is not a real PDF — it's a text placeholder so Next.js can serve the path during development.
+
+Replace this file with the real upload in `public/uploads/books/` when available.

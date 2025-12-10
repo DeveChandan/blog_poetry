@@ -1,0 +1,6 @@
+{
+  "version": 3,
+  "sources": [],
+  "sections": [
+    {"offset": {"line": 4, "column": 0}, "map": {"version":3,"sources":["file:///E:/blog_poetry/app/admin/logout/page.tsx"],"sourcesContent":["\"use client\"\n\nimport { useEffect } from \"react\"\nimport { useRouter } from \"next/navigation\"\n\nexport default function LogoutPage() {\n  const router = useRouter()\n\n  useEffect(() => {\n    async function logout() {\n      await fetch(\"/api/auth/logout\", { method: \"POST\" })\n      router.push(\"/\")\n    }\n    logout()\n  }, [router])\n\n  return <div className=\"py-12 text-center\">Logging out...</div>\n}\n"],"names":[],"mappings":";;;;;AAEA;AACA;;;AAHA;;;AAKe,SAAS;;IACtB,MAAM,SAAS,IAAA,kJAAS;IAExB,IAAA,0KAAS;gCAAC;YACR,eAAe;gBACb,MAAM,MAAM,oBAAoB;oBAAE,QAAQ;gBAAO;gBACjD,OAAO,IAAI,CAAC;YACd;YACA;QACF;+BAAG;QAAC;KAAO;IAEX,qBAAO,6LAAC;QAAI,WAAU;kBAAoB;;;;;;AAC5C;GAZwB;;QACP,kJAAS;;;KADF"}}]
+}
