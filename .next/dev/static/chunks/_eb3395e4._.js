@@ -374,7 +374,7 @@ function CreatePoemPage() {
         columnNumber: 5
     }, this);
 }
-_s(CreatePoemPage, "Tmeums6U1r1n7zT8ZeueWJFMTE0=", false, function() {
+_s(CreatePoemPage, "rcvXxS6FwjgM7i251YL86M/oPSA=", false, function() {
     return [
         __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$navigation$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["useRouter"]
     ];

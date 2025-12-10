@@ -505,7 +505,7 @@ function ReactionsBar({ contentId, contentType }) {
         columnNumber: 5
     }, this);
 }
-_s(ReactionsBar, "v9xRN/DuyCw+P46wXGVM0LxlTEc=");
+_s(ReactionsBar, "WjOen4IeBdQ7EOMM8Q3YSOZ5g1A=");
 _c = ReactionsBar;
 var _c;
 __turbopack_context__.k.register(_c, "ReactionsBar");
@@ -1176,7 +1176,7 @@ function BookDetailPage() {
                                                 book.cover ? /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("img", {
                                                     src: book.cover,
                                                     alt: book.title,
-                                                    className: "w-full h-full object-cover transition-transform duration-500"
+                                                    className: "w-full h-full object-cover transition-transformduration-500"
                                                 }, void 0, false, {
                                                     fileName: "[project]/app/books/[id]/page.tsx",
                                                     lineNumber: 224,

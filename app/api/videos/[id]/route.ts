@@ -20,8 +20,14 @@ export async function GET(request: NextRequest, { params }: { params: { id: stri
     await db.collection("videos").updateOne({ _id: new ObjectId(id) }, { $inc: { views: 1 } })
 
     return NextResponse.json({
-      ...video,
       _id: video._id.toString(),
+      title: video.title,
+      description: video.description,
+      thumbnail: video.thumbnail,
+      views: video.views,
+      youtubeId: video.youtubeId,
+      createdAt: video.createdAt,
+      updatedAt: video.updatedAt,
     })
   } catch (error) {
     console.error("Failed to fetch video:", error)
@@ -38,12 +44,13 @@ export async function PUT(request: NextRequest, { params }: { params: { id: stri
     }
 
     const body = await request.json()
-    const { title, description, youtubeId } = body // Remove thumbnail from destructuring
+    const { title, description, youtubeId } = body
 
     const db = await connectDB()
 
     const { id } = await params
-    const generatedThumbnail = `https://img.youtube.com/vi/${youtubeId}/maxresdefault.jpg` // Always generate thumbnail
+    // Use hqdefault instead of maxresdefault for better reliability
+    const generatedThumbnail = `https://img.youtube.com/vi/${youtubeId}/hqdefault.jpg`
 
     const result = await db.collection("videos").updateOne(
       { _id: new ObjectId(id) },
@@ -52,7 +59,7 @@ export async function PUT(request: NextRequest, { params }: { params: { id: stri
           title,
           description,
           youtubeId,
-          thumbnail: generatedThumbnail, // Use the generated thumbnail
+          thumbnail: generatedThumbnail,
           updatedAt: new Date(),
         },
       },

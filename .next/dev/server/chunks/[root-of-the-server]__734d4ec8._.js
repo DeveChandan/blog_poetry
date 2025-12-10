@@ -167,16 +167,61 @@ var __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$serv
 ;
 ;
 ;
+function extractYouTubeId(input) {
+    if (!input) return '';
+    let id = input.trim();
+    // Remove any whitespace
+    id = id.replace(/\s+/g, '');
+    // Try different patterns
+    const patterns = [
+        /(?:youtube\.com\/watch\?v=|youtu\.be\/|youtube\.com\/embed\/)([^&\s\/\?]+)/,
+        /^([A-Za-z0-9_-]{11})$/
+    ];
+    for (const pattern of patterns){
+        const match = id.match(pattern);
+        if (match && match[1]) {
+            return match[1];
+        }
+    }
+    return '';
+}
+function getYouTubeThumbnail(youtubeInput) {
+    const youtubeId = extractYouTubeId(youtubeInput);
+    if (!youtubeId) {
+        console.warn(`Invalid YouTube input: ${youtubeInput}`);
+        return '';
+    }
+    return `https://img.youtube.com/vi/${youtubeId}/hqdefault.jpg`;
+}
 async function GET() {
     try {
         const db = await (0, __TURBOPACK__imported__module__$5b$project$5d2f$lib$2f$db$2e$ts__$5b$app$2d$route$5d$__$28$ecmascript$29$__["connectDB"])();
         const videos = await db.collection("videos").find({}).sort({
             createdAt: -1
         }).toArray();
-        return __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$server$2e$js__$5b$app$2d$route$5d$__$28$ecmascript$29$__["NextResponse"].json(videos.map((v)=>({
-                ...v,
-                id: v._id.toString()
-            })));
+        console.log("Processing videos from DB...");
+        const processedVideos = videos.map((v)=>{
+            const cleanYoutubeId = extractYouTubeId(v.youtubeId || '');
+            const thumbnail = getYouTubeThumbnail(v.youtubeId || '');
+            console.log(`Video ${v._id}:`, {
+                originalInput: v.youtubeId,
+                extractedId: cleanYoutubeId,
+                thumbnail: thumbnail,
+                hasThumbnail: !!thumbnail
+            });
+            return {
+                _id: v._id.toString(),
+                title: v.title || '',
+                description: v.description || '',
+                thumbnail: thumbnail,
+                views: v.views || 0,
+                youtubeId: cleanYoutubeId,
+                originalYoutubeUrl: v.youtubeId,
+                createdAt: v.createdAt,
+                updatedAt: v.updatedAt
+            };
+        });
+        return __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$server$2e$js__$5b$app$2d$route$5d$__$28$ecmascript$29$__["NextResponse"].json(processedVideos);
     } catch (error) {
         console.error("Failed to fetch videos:", error);
         return __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$server$2e$js__$5b$app$2d$route$5d$__$28$ecmascript$29$__["NextResponse"].json({
@@ -197,8 +242,7 @@ async function POST(request) {
             });
         }
         const body = await request.json();
-        const { title, description, youtubeId } = body // Remove thumbnail from destructuring
-        ;
+        const { title, description, youtubeId } = body;
         if (!title || !youtubeId) {
             return __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$server$2e$js__$5b$app$2d$route$5d$__$28$ecmascript$29$__["NextResponse"].json({
                 error: "Title and YouTube ID are required"
@@ -207,12 +251,21 @@ async function POST(request) {
             });
         }
         const db = await (0, __TURBOPACK__imported__module__$5b$project$5d2f$lib$2f$db$2e$ts__$5b$app$2d$route$5d$__$28$ecmascript$29$__["connectDB"])();
-        const generatedThumbnail = `https://img.youtube.com/vi/${youtubeId}/maxresdefault.jpg` // Always generate thumbnail
-        ;
+        // Extract clean ID and generate thumbnail
+        const cleanYoutubeId = extractYouTubeId(youtubeId);
+        if (!cleanYoutubeId) {
+            return __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$server$2e$js__$5b$app$2d$route$5d$__$28$ecmascript$29$__["NextResponse"].json({
+                error: "Invalid YouTube URL or ID. Please provide a valid YouTube URL or video ID."
+            }, {
+                status: 400
+            });
+        }
+        const generatedThumbnail = getYouTubeThumbnail(youtubeId);
         const result = await db.collection("videos").insertOne({
             title,
             description: description || "",
-            youtubeId,
+            youtubeId: cleanYoutubeId,
+            originalYoutubeUrl: youtubeId,
             thumbnail: generatedThumbnail,
             views: 0,
             createdAt: new Date(),
@@ -222,7 +275,7 @@ async function POST(request) {
             _id: result.insertedId.toString(),
             title,
             description,
-            youtubeId,
+            youtubeId: cleanYoutubeId,
             thumbnail: generatedThumbnail,
             views: 0
         });

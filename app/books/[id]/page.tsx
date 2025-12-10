@@ -35,7 +35,11 @@ import {
   Truck,
   RotateCcw,
   X,
-  Lock
+  Lock,
+  File,
+  Printer,
+  Info,
+  ExternalLink
 } from "lucide-react"
 import { toast } from "sonner"
 import {
@@ -47,8 +51,8 @@ import {
   DialogTitle,
 } from "@/components/ui/dialog"
 
-// Dynamically import PdfViewer with ssr: false
-const PdfViewer = dynamic(() => import("@/components/pdf-viewer"), {
+// Dynamically import DocumentViewer
+const DocumentViewer = dynamic(() => import("@/components/document-viewer"), {
   ssr: false,
   loading: () => (
     <div className="h-[600px] flex items-center justify-center bg-gradient-to-br from-gray-50 to-gray-100 dark:from-gray-900 dark:to-gray-800 rounded-xl">
@@ -58,7 +62,7 @@ const PdfViewer = dynamic(() => import("@/components/pdf-viewer"), {
           transition={{ duration: 2, repeat: Infinity, ease: "linear" }}
           className="rounded-full h-12 w-12 border-2 border-primary/30 border-t-primary mx-auto"
         />
-        <p className="text-lg text-muted-foreground">Preparing your reading experience...</p>
+        <p className="text-lg text-muted-foreground">Preparing document viewer...</p>
       </div>
     </div>
   ),
@@ -94,6 +98,7 @@ export default function BookDetailPage() {
   const [currentPage, setCurrentPage] = useState(1)
   const [showPurchaseModal, setShowPurchaseModal] = useState(false)
   const [showFullCover, setShowFullCover] = useState(false)
+  const [fileType, setFileType] = useState<string>("")
 
   // Fetch book data
   useEffect(() => {
@@ -103,6 +108,15 @@ export default function BookDetailPage() {
         if (res.ok) {
           const data = await res.json()
           setBook(data)
+          console.log("Fetched book data:", data)
+          
+          // Detect file type
+          if (data.filePath) {
+            const extension = data.filePath.substring(data.filePath.lastIndexOf('.')).toLowerCase()
+            setFileType(extension)
+            console.log("File type detected:", extension)
+          }
+          
           // Check if book is bookmarked
           const bookmarked = localStorage.getItem(`bookmark_${id}`)
           setIsBookmarked(!!bookmarked)
@@ -166,13 +180,92 @@ export default function BookDetailPage() {
     }
   }
 
-  // Handle page navigation for preview
+  // Handle page navigation for preview (PDF only)
   const handlePageChange = (newPage: number) => {
-    if (newPage > FREE_PREVIEW_PAGES && book?.type !== "physical") {
+    if (newPage > FREE_PREVIEW_PAGES && book?.type !== "physical" && fileType === '.pdf') {
       setShowPurchaseModal(true)
       return
     }
     setCurrentPage(newPage)
+  }
+
+  // Handle document download
+  const handleDownload = async () => {
+    if (!book?.filePath) {
+      toast.error("No file available for download")
+      return
+    }
+
+    try {
+      // Use our secure download API
+      const response = await fetch(`/api/download?url=${encodeURIComponent(book.filePath)}&filename=${encodeURIComponent(book.title + fileType)}`)
+      
+      if (response.ok) {
+        const blob = await response.blob()
+        const downloadUrl = window.URL.createObjectURL(blob)
+        const link = document.createElement('a')
+        link.href = downloadUrl
+        link.download = book.title + fileType
+        document.body.appendChild(link)
+        link.click()
+        document.body.removeChild(link)
+        window.URL.revokeObjectURL(downloadUrl)
+        toast.success("Download started!", {
+          description: "Check your downloads folder",
+        })
+      } else {
+        // Fallback to direct download
+        const link = document.createElement('a')
+        link.href = book.filePath
+        link.download = book.title + fileType
+        link.click()
+        toast.success("Download started!", {
+          description: "Using direct download link",
+        })
+      }
+    } catch (error) {
+      console.error("Download failed:", error)
+      toast.error("Failed to download file")
+    }
+  }
+
+  // Handle read preview
+  const handleReadPreview = () => {
+    if (!book) return
+    
+    if (book.type === "physical") {
+      toast.info("Physical books cannot be previewed online")
+      return
+    }
+    
+    if (!book.filePath) {
+      toast.error("No preview available for this book")
+      return
+    }
+
+    // Scroll to preview section
+    document.getElementById('preview-section')?.scrollIntoView({ behavior: 'smooth' })
+  }
+
+  // Check if document can be previewed inline
+  const canPreviewInline = () => {
+    if (!book?.filePath) return false
+    const extension = book.filePath.substring(book.filePath.lastIndexOf('.')).toLowerCase()
+    const viewableFormats = ['.pdf', '.doc', '.docx', '.txt', '.rtf', '.jpg', '.jpeg', '.png']
+    return viewableFormats.includes(extension)
+  }
+
+  // Get document type name
+  const getDocumentTypeName = () => {
+    if (!book?.filePath) return "Document"
+    const extension = book.filePath.substring(book.filePath.lastIndexOf('.')).toLowerCase()
+    if (extension === '.pdf') return "PDF Document"
+    if (['.doc', '.docx'].includes(extension)) return "Word Document"
+    if (['.xls', '.xlsx'].includes(extension)) return "Excel Spreadsheet"
+    if (['.ppt', '.pptx'].includes(extension)) return "PowerPoint Presentation"
+    if (['.jpg', '.jpeg', '.png', '.gif'].includes(extension)) return "Image File"
+    if (['.txt', '.rtf', '.md'].includes(extension)) return "Text File"
+    return "Document"
   }
 
   // Loading state
@@ -224,7 +317,7 @@ export default function BookDetailPage() {
             transition={{ duration: 0.5 }}
             className="grid lg:grid-cols-3 gap-8 mb-16"
           >
-            {/* Cover Section - Improved Design */}
+            {/* Cover Section */}
             <div className="lg:col-span-1">
               <div className="sticky top-24 space-y-6">
                 <motion.div
@@ -296,6 +389,12 @@ export default function BookDetailPage() {
                         {book.genre[0]}
                       </div>
                     )}
+                    {book.filePath && (
+                      <div className="px-3 py-1 rounded-full bg-blue-100 dark:bg-blue-800 text-blue-700 dark:text-blue-300 text-sm font-medium flex items-center gap-2">
+                        <File className="w-3 h-3" />
+                        {fileType.toUpperCase().replace('.', '')}
+                      </div>
+                    )}
                   </div>
                   
                   <h1 className="text-4xl lg:text-5xl font-bold text-gray-900 dark:text-white mb-4 leading-tight">
@@ -344,6 +443,12 @@ export default function BookDetailPage() {
                         <span>{book.language}</span>
                       </div>
                     )}
+                    {book.filePath && (
+                      <div className="flex items-center gap-2">
+                        <File className="w-4 h-4" />
+                        <span>{getDocumentTypeName()}</span>
+                      </div>
+                    )}
                   </div>
                 </div>
 
@@ -355,7 +460,7 @@ export default function BookDetailPage() {
                         ${book.price.toFixed(2)}
                       </div>
                       <div className="text-sm text-muted-foreground mt-1">
-                        {book.type === "physical" ? "+ Shipping" : "Instant Download"}
+                        {book.type === "physical" ? "+ Shipping" : "Instant Access"}
                       </div>
                     </div>
                     
@@ -386,25 +491,28 @@ export default function BookDetailPage() {
                     Add to Cart
                   </Button>
                   
-                  {book.type !== "physical" && (
+                  {book.type !== "physical" && book.filePath && (
                     <Button
                       size="lg"
                       variant="outline"
                       className="flex-1 gap-3 h-14"
-                      onClick={() => handlePageChange(1)}
+                      onClick={handleReadPreview}
                     >
-                      <BookOpen className="w-5 h-5" />
-                      Read Preview
+                      <Eye className="w-5 h-5" />
+                      {fileType === '.pdf' ? 'Read Preview' : 'View Document'}
                     </Button>
                   )}
                   
-                  <Button
-                    size="lg"
-                    variant="secondary"
-                    className="h-14 px-6"
-                  >
-                    <Download className="w-5 h-5" />
-                  </Button>
+                  {book.filePath && (
+                    <Button
+                      size="lg"
+                      variant="secondary"
+                      className="h-14 px-6"
+                      onClick={handleDownload}
+                    >
+                      <Download className="w-5 h-5" />
+                    </Button>
+                  )}
                 </div>
 
                 {/* Additional info */}
@@ -434,8 +542,8 @@ export default function BookDetailPage() {
                       <Shield className="w-5 h-5 text-purple-600 dark:text-purple-400" />
                     </div>
                     <div>
-                      <div className="font-medium">Secure Payment</div>
-                      <div className="text-sm text-muted-foreground">256-bit SSL</div>
+                      <div className="font-medium">Secure Access</div>
+                      <div className="text-sm text-muted-foreground">Protected documents</div>
                     </div>
                   </div>
                   
@@ -488,9 +596,10 @@ export default function BookDetailPage() {
             </div>
           </motion.section>
 
-          {/* E-book Preview Section */}
+          {/* Document Preview Section */}
           {book.type !== "physical" && book.filePath && (
             <motion.section
+              id="preview-section"
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.5, delay: 0.3 }}
@@ -500,63 +609,70 @@ export default function BookDetailPage() {
                 <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 mb-8">
                   <div className="flex items-center gap-4">
                     <div className="w-12 h-12 rounded-xl bg-primary/10 flex items-center justify-center">
-                      <Zap className="w-6 h-6 text-primary" />
+                      <Eye className="w-6 h-6 text-primary" />
                     </div>
                     <div>
-                      <h2 className="text-2xl font-bold text-gray-900 dark:text-white">Free Preview</h2>
+                      <h2 className="text-2xl font-bold text-gray-900 dark:text-white">
+                        {fileType === '.pdf' ? 'PDF Preview' : 'Document Viewer'}
+                      </h2>
                       <p className="text-muted-foreground mt-1">
-                        Read first {FREE_PREVIEW_PAGES} pages • Page {currentPage} of {FREE_PREVIEW_PAGES}
+                        {fileType === '.pdf' 
+                          ? `Read first ${FREE_PREVIEW_PAGES} pages for free` 
+                          : canPreviewInline() 
+                            ? 'View document in browser' 
+                            : 'Download to view document'
+                        }
                       </p>
                     </div>
                   </div>
                   
                   <div className="flex items-center gap-3">
-                    <div className="flex items-center gap-2">
-                      <Lock className="w-4 h-4 text-muted-foreground" />
-                      <span className="text-sm text-muted-foreground">
-                        Free preview ends on page {FREE_PREVIEW_PAGES}
-                      </span>
+                    <div className="px-4 py-2 rounded-full bg-gray-100 dark:bg-gray-800 text-sm font-medium flex items-center gap-2">
+                      <File className="w-4 h-4" />
+                      {fileType.toUpperCase()}
                     </div>
                   </div>
                 </div>
                 
-                {/* Page Navigation */}
-                <div className="flex items-center justify-between mb-6">
-                  <Button
-                    variant="outline"
-                    onClick={() => handlePageChange(currentPage - 1)}
-                    disabled={currentPage === 1}
-                    className="gap-2"
-                  >
-                    Previous Page
-                  </Button>
-                  
-                  <div className="flex items-center gap-4">
-                    {[1, 2, 3, 4, 5].map((page) => (
-                      <button
-                        key={page}
-                        onClick={() => handlePageChange(page)}
-                        className={`w-10 h-10 rounded-lg flex items-center justify-center font-medium transition-all ${
-                          currentPage === page
-                            ? "bg-primary text-white"
-                            : "bg-gray-100 dark:bg-gray-700 text-gray-700 dark:text-gray-300 hover:bg-gray-200 dark:hover:bg-gray-600"
-                        }`}
-                      >
-                        {page}
-                      </button>
-                    ))}
+                {/* Page Navigation for PDF only */}
+                {fileType === '.pdf' && (
+                  <div className="flex items-center justify-between mb-6">
+                    <Button
+                      variant="outline"
+                      onClick={() => handlePageChange(currentPage - 1)}
+                      disabled={currentPage === 1}
+                      className="gap-2"
+                    >
+                      Previous Page
+                    </Button>
+                    
+                    <div className="flex items-center gap-4">
+                      {[1, 2, 3, 4, 5].map((page) => (
+                        <button
+                          key={page}
+                          onClick={() => handlePageChange(page)}
+                          className={`w-10 h-10 rounded-lg flex items-center justify-center font-medium transition-all ${
+                            currentPage === page
+                              ? "bg-primary text-white"
+                              : "bg-gray-100 dark:bg-gray-700 text-gray-700 dark:text-gray-300 hover:bg-gray-200 dark:hover:bg-gray-600"
+                          }`}
+                        >
+                          {page}
+                        </button>
+                      ))}
+                    </div>
+                    
+                    <Button
+                      variant="outline"
+                      onClick={() => handlePageChange(currentPage + 1)}
+                      className="gap-2"
+                    >
+                      Next Page
+                    </Button>
                   </div>
-                  
-                  <Button
-                    variant="outline"
-                    onClick={() => handlePageChange(currentPage + 1)}
-                    className="gap-2"
-                  >
-                    Next Page
-                  </Button>
-                </div>
+                )}
                 
-                {/* PDF Viewer */}
+                {/* Document Viewer */}
                 <div className="rounded-xl overflow-hidden border border-gray-200 dark:border-gray-700">
                   <div className="bg-gray-50 dark:bg-gray-900 p-4 border-b border-gray-200 dark:border-gray-700">
                     <div className="flex items-center justify-between">
@@ -565,11 +681,14 @@ export default function BookDetailPage() {
                         <div className="w-3 h-3 rounded-full bg-yellow-500" />
                         <div className="w-3 h-3 rounded-full bg-green-500" />
                         <span className="text-sm text-muted-foreground ml-2">
-                          Preview • Page {currentPage}
+                          {fileType === '.pdf' ? 'PDF Preview' : 'Document Viewer'}
                         </span>
                       </div>
                       <div className="text-sm text-muted-foreground">
-                        {FREE_PREVIEW_PAGES - currentPage} free pages remaining
+                        {fileType === '.pdf' 
+                          ? `${FREE_PREVIEW_PAGES - currentPage} free pages remaining`
+                          : canPreviewInline() ? 'Full document access' : 'Download required'
+                        }
                       </div>
                     </div>
                   </div>
@@ -583,30 +702,64 @@ export default function BookDetailPage() {
                             transition={{ duration: 2, repeat: Infinity, ease: "linear" }}
                             className="rounded-full h-12 w-12 border-2 border-primary/30 border-t-primary mx-auto"
                           />
-                          <p className="text-lg text-muted-foreground">Loading page {currentPage}...</p>
+                          <p className="text-lg text-muted-foreground">Loading document viewer...</p>
                         </div>
                       </div>
                     }>
-                      <PdfViewer 
-                        fileUrl={book.filePath} 
-                        pageNumber={currentPage}
-                        onPageChange={handlePageChange}
+                      <DocumentViewer 
+                        fileUrl={book.filePath}
+                        fileName={book.title}
+                        fileType={fileType}
+                        bookId={book._id}
                       />
                     </Suspense>
                   </div>
                   
-                  {/* Preview watermark */}
-                  <div className="absolute inset-0 pointer-events-none flex items-center justify-center">
-                    <div className="text-8xl font-bold text-gray-200 dark:text-gray-800 opacity-20 rotate-45">
-                      PREVIEW
+                  {/* Preview watermark for PDF preview */}
+                  {fileType === '.pdf' && currentPage <= FREE_PREVIEW_PAGES && (
+                    <div className="absolute inset-0 pointer-events-none flex items-center justify-center">
+                      <div className="text-8xl font-bold text-gray-200 dark:text-gray-800 opacity-20 rotate-45">
+                        PREVIEW
+                      </div>
                     </div>
-                  </div>
+                  )}
                 </div>
                 
-                {/* Page counter */}
-                <div className="mt-6 flex items-center justify-between text-sm text-muted-foreground">
-                  <span>Reading progress: {currentPage}/{FREE_PREVIEW_PAGES} pages</span>
-                  <span>Approx. {Math.ceil((FREE_PREVIEW_PAGES - currentPage) * 2)} minutes left</span>
+                {/* Page counter for PDF only */}
+                {fileType === '.pdf' && (
+                  <div className="mt-6 flex items-center justify-between text-sm text-muted-foreground">
+                    <span>Reading progress: {currentPage}/{FREE_PREVIEW_PAGES} pages</span>
+                    <span>Approx. {Math.ceil((FREE_PREVIEW_PAGES - currentPage) * 2)} minutes left</span>
+                  </div>
+                )}
+                
+                {/* Document info */}
+                <div className="mt-6 pt-6 border-t border-gray-200 dark:border-gray-700">
+                  <div className="grid grid-cols-1 md:grid-cols-3 gap-4 text-sm">
+                    <div className="flex items-center gap-3 p-3 bg-gray-50 dark:bg-gray-900 rounded-lg">
+                      <Info className="w-5 h-5 text-blue-500" />
+                      <div>
+                        <div className="font-medium">Format</div>
+                        <div className="text-muted-foreground">{getDocumentTypeName()}</div>
+                      </div>
+                    </div>
+                    
+                    <div className="flex items-center gap-3 p-3 bg-gray-50 dark:bg-gray-900 rounded-lg">
+                      <Download className="w-5 h-5 text-green-500" />
+                      <div>
+                        <div className="font-medium">Download</div>
+                        <div className="text-muted-foreground">Save for offline use</div>
+                      </div>
+                    </div>
+                    
+                    <div className="flex items-center gap-3 p-3 bg-gray-50 dark:bg-gray-900 rounded-lg">
+                      <ExternalLink className="w-5 h-5 text-amber-500" />
+                      <div>
+                        <div className="font-medium">Compatibility</div>
+                        <div className="text-muted-foreground">Works on all devices</div>
+                      </div>
+                    </div>
+                  </div>
                 </div>
               </div>
             </motion.section>
@@ -664,7 +817,7 @@ export default function BookDetailPage() {
           </div>
         </div>
 
-        {/* Purchase Modal */}
+        {/* Purchase Modal for PDF */}
         <Dialog open={showPurchaseModal} onOpenChange={setShowPurchaseModal}>
           <DialogContent className="sm:max-w-md">
             <DialogHeader>
@@ -694,8 +847,8 @@ export default function BookDetailPage() {
                   <span className="font-medium">{book.type === "physical" ? "Physical Copy" : "E-book"}</span>
                 </div>
                 <div className="flex items-center justify-between">
-                  <span className="text-muted-foreground">Pages</span>
-                  <span className="font-medium">{book.pages} total</span>
+                  <span className="text-muted-foreground">File Type</span>
+                  <span className="font-medium">PDF Document</span>
                 </div>
                 <div className="flex items-center justify-between">
                   <span className="text-muted-foreground">Free preview</span>

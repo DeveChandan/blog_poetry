@@ -163,7 +163,7 @@ function AboutPage() {
                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
                             className: "aspect-square bg-muted rounded-lg overflow-hidden",
                             children: settings.authorImage ? /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("img", {
-                                src: settings.authorImage || "/placeholder.svg",
+                                src: "https://imgs.search.brave.com/QXuDfiH86ppSW6KwElQLYm4N_ULUSaBnxlZturc19hw/rs:fit:860:0:0:0/g:ce/aHR0cHM6Ly9waXhs/ci5jb20vaW1nL3Rv/b2wvZm9jdXMtaW5m/by53ZWJw" || settings.authorImage,
                                 alt: "Author",
                                 className: "w-full h-full object-cover"
                             }, void 0, false, {

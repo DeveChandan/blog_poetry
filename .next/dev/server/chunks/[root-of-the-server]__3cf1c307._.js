@@ -194,8 +194,14 @@ async function GET(request, { params }) {
             }
         });
         return __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$server$2e$js__$5b$app$2d$route$5d$__$28$ecmascript$29$__["NextResponse"].json({
-            ...video,
-            _id: video._id.toString()
+            _id: video._id.toString(),
+            title: video.title,
+            description: video.description,
+            thumbnail: video.thumbnail,
+            views: video.views,
+            youtubeId: video.youtubeId,
+            createdAt: video.createdAt,
+            updatedAt: video.updatedAt
         });
     } catch (error) {
         console.error("Failed to fetch video:", error);
@@ -217,12 +223,11 @@ async function PUT(request, { params }) {
             });
         }
         const body = await request.json();
-        const { title, description, youtubeId } = body // Remove thumbnail from destructuring
-        ;
+        const { title, description, youtubeId } = body;
         const db = await (0, __TURBOPACK__imported__module__$5b$project$5d2f$lib$2f$db$2e$ts__$5b$app$2d$route$5d$__$28$ecmascript$29$__["connectDB"])();
         const { id } = await params;
-        const generatedThumbnail = `https://img.youtube.com/vi/${youtubeId}/maxresdefault.jpg` // Always generate thumbnail
-        ;
+        // Use hqdefault instead of maxresdefault for better reliability
+        const generatedThumbnail = `https://img.youtube.com/vi/${youtubeId}/hqdefault.jpg`;
         const result = await db.collection("videos").updateOne({
             _id: new __TURBOPACK__imported__module__$5b$externals$5d2f$mongodb__$5b$external$5d$__$28$mongodb$2c$__cjs$29$__["ObjectId"](id)
         }, {

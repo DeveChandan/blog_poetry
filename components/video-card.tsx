@@ -1,5 +1,6 @@
-import Link from "next/link"
-import { Card, CardContent } from "@/components/ui/card"
+"use client"
+
+import { useState } from "react"
 
 interface VideoCardProps {
   id: string
@@ -10,25 +11,76 @@ interface VideoCardProps {
 }
 
 export default function VideoCard({ id, title, description, thumbnail, views }: VideoCardProps) {
+  const [imgSrc, setImgSrc] = useState(thumbnail)
+  const [hasError, setHasError] = useState(false)
+
+  console.log(`VideoCard ${id} - Thumbnail URL:`, thumbnail)
+
+  const handleImageError = (e: React.SyntheticEvent<HTMLImageElement>) => {
+    console.log(`Image failed to load: ${thumbnail}`)
+    setHasError(true)
+    
+    // Try fallback URLs for YouTube thumbnails
+    if (thumbnail.includes('youtube.com') || thumbnail.includes('ytimg.com')) {
+      const videoId = thumbnail.match(/vi\/([^\/]+)/)?.[1] || 
+                     thumbnail.match(/youtu\.be\/([^\/\?]+)/)?.[1]
+      
+      if (videoId) {
+        const fallbacks = [
+          `https://img.youtube.com/vi/${videoId}/maxresdefault.jpg`,
+          `https://img.youtube.com/vi/${videoId}/hqdefault.jpg`,
+          `https://img.youtube.com/vi/${videoId}/mqdefault.jpg`,
+          `https://img.youtube.com/vi/${videoId}/sddefault.jpg`,
+          `https://img.youtube.com/vi/${videoId}/default.jpg`
+        ]
+        
+        const currentIndex = fallbacks.indexOf(thumbnail)
+        if (currentIndex < fallbacks.length - 1) {
+          const nextFallback = fallbacks[currentIndex + 1]
+          console.log(`Trying fallback: ${nextFallback}`)
+          setImgSrc(nextFallback)
+          return
+        }
+      }
+    }
+    
+    // Ultimate fallback
+    e.currentTarget.style.display = 'none'
+  }
+
   return (
-    <Link href={`/videos/${id}`}>
-      <Card className="cursor-pointer hover:border-primary hover:shadow-lg hover:-translate-y-1 transition duration-300 ease-in-out h-full">
-        <CardContent className="p-0">
-          <div className="relative aspect-video bg-muted overflow-hidden rounded-t-lg">
-            <img
-              src={thumbnail || "/placeholder.svg?height=180&width=320&query=youtube-video-thumbnail"}
-              alt={title}
-              className="w-full h-full object-cover"
-            />
-            <div className="absolute bottom-2 right-2 bg-black/80 text-white px-2 py-1 rounded text-xs">Play Video</div>
+    <div className="border rounded-lg overflow-hidden shadow-sm hover:shadow-md transition-shadow duration-200 bg-white">
+      <div className="relative aspect-video bg-gray-100">
+        {!hasError && imgSrc ? (
+          <img
+            src={imgSrc}
+            alt={`${title} thumbnail`}
+            className="w-full h-full object-cover"
+            onError={handleImageError}
+            loading="lazy"
+          />
+        ) : (
+          <div className="w-full h-full flex items-center justify-center bg-gradient-to-br from-gray-200 to-gray-300">
+            <div className="text-center">
+              <div className="text-gray-400 text-4xl mb-2">📹</div>
+              <p className="text-gray-500 text-sm">No thumbnail</p>
+            </div>
           </div>
-          <div className="p-4">
-            <h3 className="text-lg font-bold text-foreground line-clamp-2">{title}</h3>
-            <p className="text-sm text-muted-foreground mt-2 line-clamp-2">{description}</p>
-            <p className="text-xs text-muted-foreground mt-3">{views} views</p>
-          </div>
-        </CardContent>
-      </Card>
-    </Link>
+        )}
+      </div>
+      <div className="p-4">
+        <h3 className="font-semibold text-lg mb-2 line-clamp-2">{title}</h3>
+        <p className="text-gray-600 text-sm mb-3 line-clamp-2">{description}</p>
+        <div className="flex justify-between items-center text-sm">
+          <span className="text-gray-500">{views.toLocaleString()} views</span>
+          <a 
+            href={`/videos/${id}`} 
+            className="text-blue-600 hover:underline font-medium"
+          >
+            Watch →
+          </a>
+        </div>
+      </div>
+    </div>
   )
 }
