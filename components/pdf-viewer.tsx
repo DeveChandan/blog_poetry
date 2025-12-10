@@ -10,11 +10,12 @@ pdfjs.GlobalWorkerOptions.workerSrc = `/pdf-worker.min.js`
 
 interface PdfViewerProps {
   fileUrl: string
+  pageNumber: number
+  onPageChange: (page: number) => void
 }
 
-export default function PdfViewer({ fileUrl }: PdfViewerProps) {
+export default function PdfViewer({ fileUrl, pageNumber, onPageChange }: PdfViewerProps) {
   const [numPages, setNumPages] = useState<number | null>(null)
-  const [pageNumber, setPageNumber] = useState(1)
   const [loading, setLoading] = useState(true)
   const [error, setError] = useState<string | null>(null)
   // Removed containerWidth state and useEffect for simplification
@@ -33,11 +34,11 @@ export default function PdfViewer({ fileUrl }: PdfViewerProps) {
   }
 
   const goToPrevPage = () => {
-    setPageNumber((prevPageNumber) => Math.max(prevPageNumber - 1, 1))
+    onPageChange(Math.max(pageNumber - 1, 1))
   }
 
   const goToNextPage = () => {
-    setPageNumber((prevPageNumber) => Math.min(prevPageNumber + 1, numPages || 1))
+    onPageChange(Math.min(pageNumber + 1, numPages || 1))
   }
 
   console.log("PdfViewer state:", { fileUrl, pageNumber, numPages, loading, error }); // Removed containerWidth from log

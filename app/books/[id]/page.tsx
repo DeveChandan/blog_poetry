@@ -25,26 +25,42 @@ import {
   Coffee,
   Zap,
   Heart,
-  BookText
+  BookText,
+  Download,
+  User,
+  Calendar,
+  Globe,
+  BookmarkCheck,
+  Shield,
+  Truck,
+  RotateCcw,
+  X,
+  Lock
 } from "lucide-react"
 import { toast } from "sonner"
+import {
+  Dialog,
+  DialogContent,
+  DialogDescription,
+  DialogFooter,
+  DialogHeader,
+  DialogTitle,
+} from "@/components/ui/dialog"
 
 // Dynamically import PdfViewer with ssr: false
 const PdfViewer = dynamic(() => import("@/components/pdf-viewer"), {
   ssr: false,
   loading: () => (
-    <motion.div
-      initial={{ opacity: 0 }}
-      animate={{ opacity: 1 }}
-      className="text-center py-12"
-    >
-      <motion.div
-        animate={{ rotate: 360 }}
-        transition={{ duration: 2, repeat: Infinity, ease: "linear" }}
-        className="rounded-full h-12 w-12 border-2 border-primary/30 border-t-primary mx-auto mb-4"
-      />
-      <p className="text-lg text-muted-foreground">Preparing your reading experience...</p>
-    </motion.div>
+    <div className="h-[600px] flex items-center justify-center bg-gradient-to-br from-gray-50 to-gray-100 dark:from-gray-900 dark:to-gray-800 rounded-xl">
+      <div className="text-center space-y-4">
+        <motion.div
+          animate={{ rotate: 360 }}
+          transition={{ duration: 2, repeat: Infinity, ease: "linear" }}
+          className="rounded-full h-12 w-12 border-2 border-primary/30 border-t-primary mx-auto"
+        />
+        <p className="text-lg text-muted-foreground">Preparing your reading experience...</p>
+      </div>
+    </div>
   ),
 })
 
@@ -63,7 +79,10 @@ interface Book {
   rating?: number
   publishedDate?: string
   language?: string
+  genre?: string[]
 }
+
+const FREE_PREVIEW_PAGES = 5
 
 export default function BookDetailPage() {
   const params = useParams()
@@ -72,7 +91,9 @@ export default function BookDetailPage() {
   const [book, setBook] = useState<Book | null>(null)
   const [loading, setLoading] = useState(true)
   const [isBookmarked, setIsBookmarked] = useState(false)
-  const [hoverCover, setHoverCover] = useState(false)
+  const [currentPage, setCurrentPage] = useState(1)
+  const [showPurchaseModal, setShowPurchaseModal] = useState(false)
+  const [showFullCover, setShowFullCover] = useState(false)
 
   // Fetch book data
   useEffect(() => {
@@ -145,30 +166,44 @@ export default function BookDetailPage() {
     }
   }
 
+  // Handle page navigation for preview
+  const handlePageChange = (newPage: number) => {
+    if (newPage > FREE_PREVIEW_PAGES && book?.type !== "physical") {
+      setShowPurchaseModal(true)
+      return
+    }
+    setCurrentPage(newPage)
+  }
+
   // Loading state
   if (loading) return (
-    <div className="min-h-screen bg-gradient-to-b from-background via-background/95 to-background/90 py-12 px-4 sm:px-6 lg:px-8 flex items-center justify-center">
-      <div className="text-center">
-        <motion.div
-          animate={{ rotate: 360 }}
-          transition={{ duration: 2, repeat: Infinity, ease: "linear" }}
-          className="w-20 h-20 mx-auto mb-6"
-        >
-          <BookOpen className="w-full h-full text-primary/60" />
-        </motion.div>
-        <p className="text-lg text-muted-foreground animate-pulse">Discovering literary treasures...</p>
+    <div className="min-h-screen bg-gradient-to-b from-gray-50 to-white dark:from-gray-900 dark:to-gray-800 py-12 px-4 sm:px-6 lg:px-8 flex items-center justify-center">
+      <div className="text-center space-y-6">
+        <div className="relative">
+          <BookOpen className="w-24 h-24 mx-auto text-primary/60 animate-pulse" />
+          <motion.div
+            animate={{ scale: [1, 1.2, 1] }}
+            transition={{ duration: 2, repeat: Infinity }}
+            className="absolute inset-0 bg-primary/10 rounded-full blur-xl"
+          />
+        </div>
+        <p className="text-lg text-muted-foreground font-medium">Discovering literary treasures...</p>
       </div>
     </div>
   )
 
   // Not found state
   if (!book) return (
-    <div className="min-h-screen bg-gradient-to-b from-background via-background/95 to-background/90 py-12 px-4 sm:px-6 lg:px-8 flex items-center justify-center">
-      <div className="text-center">
-        <BookOpen className="w-24 h-24 mx-auto mb-6 text-muted-foreground/50" />
-        <h2 className="text-3xl font-semibold text-foreground mb-4">Book Not Found</h2>
-        <p className="text-muted-foreground mb-8">The literary adventure you seek is currently unwritten.</p>
-        <Button onClick={() => router.push("/books")}>Browse Library</Button>
+    <div className="min-h-screen bg-gradient-to-b from-gray-50 to-white dark:from-gray-900 dark:to-gray-800 py-12 px-4 sm:px-6 lg:px-8 flex items-center justify-center">
+      <div className="text-center space-y-6 max-w-md">
+        <BookOpen className="w-24 h-24 mx-auto text-muted-foreground/50" />
+        <div className="space-y-2">
+          <h2 className="text-3xl font-bold text-foreground">Book Not Found</h2>
+          <p className="text-muted-foreground">The literary adventure you seek is currently unwritten.</p>
+        </div>
+        <Button onClick={() => router.push("/books")} size="lg">
+          Browse Library
+        </Button>
       </div>
     </div>
   )
@@ -179,249 +214,281 @@ export default function BookDetailPage() {
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
         transition={{ duration: 0.6 }}
-        className="min-h-screen bg-gradient-to-b from-background via-background/95 to-background/90 py-12 px-4 sm:px-6 lg:px-8 relative overflow-hidden"
+        className="min-h-screen bg-gradient-to-b from-gray-50 to-white dark:from-gray-900 dark:to-gray-800 py-12 px-4 sm:px-6 lg:px-8"
       >
-        {/* Background decorative elements */}
-        <div className="absolute inset-0 overflow-hidden pointer-events-none">
-          <motion.div
-            animate={{ y: [0, -30, 0] }}
-            transition={{ duration: 8, repeat: Infinity, ease: "easeInOut" }}
-            className="absolute left-10 top-1/4 w-48 h-48 bg-primary/5 rounded-full blur-3xl"
-          />
-          <motion.div
-            animate={{ y: [0, 30, 0] }}
-            transition={{ duration: 6, repeat: Infinity, ease: "easeInOut", delay: 1 }}
-            className="absolute right-10 top-2/3 w-56 h-56 bg-purple-500/5 rounded-full blur-3xl"
-          />
-          <div className="absolute left-1/4 top-1/3 w-24 h-24 border border-primary/10 rounded-full" />
-          <div className="absolute right-1/3 bottom-1/4 w-12 h-12 border border-purple-500/10 rounded-full" />
-        </div>
-
-        {/* Floating decoration */}
-        <motion.div
-          animate={{ y: [0, -20, 0], rotate: [0, 5, 0] }}
-          transition={{ duration: 4, repeat: Infinity, ease: "easeInOut" }}
-          className="fixed right-8 top-24 w-8 h-8 border border-primary/20 rounded-full hidden lg:block"
-        />
-
-        <div className="max-w-7xl mx-auto relative z-10">
+        <div className="max-w-7xl mx-auto">
           {/* Book Header Section */}
           <motion.div
             initial={{ y: 20, opacity: 0 }}
             animate={{ y: 0, opacity: 1 }}
             transition={{ duration: 0.5 }}
-            className="grid lg:grid-cols-2 gap-12 mb-16"
+            className="grid lg:grid-cols-3 gap-8 mb-16"
           >
-            {/* Cover Section */}
-            <div className="relative">
-              <motion.div
-                whileHover={{ scale: 1.02 }}
-                onHoverStart={() => setHoverCover(true)}
-                onHoverEnd={() => setHoverCover(false)}
-                className="relative aspect-[3/4] bg-gradient-to-br from-primary/10 via-background to-background rounded-2xl overflow-hidden shadow-2xl shadow-primary/10 border border-border/50"
-              >
-                {book.cover ? (
-                  <img
-                    src={book.cover}
-                    alt={book.title}
-                    className="w-full h-full object-cover transition-transform duration-500"
-                  />
-                ) : (
-                  <div className="w-full h-full flex flex-col items-center justify-center p-8">
-                    <BookOpen className="w-24 h-24 text-primary/40 mb-4" />
-                    <span className="text-xl font-medium text-muted-foreground">No Cover Available</span>
-                  </div>
-                )}
-                
-                {/* Overlay effect on hover */}
-                {hoverCover && (
-                  <motion.div
-                    initial={{ opacity: 0 }}
-                    animate={{ opacity: 1 }}
-                    className="absolute inset-0 bg-gradient-to-t from-background/80 via-transparent to-transparent"
-                  />
-                )}
-
-                {/* Decorative corner accents */}
-                <div className="absolute top-4 left-4 w-8 h-8 border-t border-l border-primary/30 rounded-tl-2xl" />
-                <div className="absolute bottom-4 right-4 w-8 h-8 border-b border-r border-primary/30 rounded-br-2xl" />
-              </motion.div>
-
-              {/* Bookmark button */}
-              <motion.button
-                whileHover={{ scale: 1.1 }}
-                whileTap={{ scale: 0.9 }}
-                onClick={toggleBookmark}
-                className="absolute top-6 right-6 w-12 h-12 rounded-full bg-background/80 backdrop-blur-sm border border-border/50 shadow-lg flex items-center justify-center z-10"
-              >
-                <Bookmark className={`w-5 h-5 ${isBookmarked ? "fill-primary text-primary" : "text-muted-foreground"}`} />
-              </motion.button>
-            </div>
-
-            {/* Details Section */}
-            <div className="space-y-8">
-              <div>
-                {/* Title with decorative elements */}
-                <div className="flex items-center gap-2 mb-4">
-                  <Sparkles className="w-5 h-5 text-primary" />
-                  <span className="text-sm font-medium text-primary uppercase tracking-wider">Featured Book</span>
-                </div>
-                
-                <h1 className="text-5xl lg:text-6xl font-bold text-foreground mb-6 leading-tight">
-                  {book.title}
-                </h1>
-                
-                {/* Author and rating */}
-                <div className="flex items-center gap-6 mb-8">
-                  {book.author && (
-                    <div className="flex items-center gap-2">
-                      <Feather className="w-4 h-4 text-muted-foreground" />
-                      <span className="text-lg text-muted-foreground">{book.author}</span>
-                    </div>
-                  )}
-                  {book.rating && (
-                    <div className="flex items-center gap-2">
-                      <Star className="w-4 h-4 fill-yellow-500 text-yellow-500" />
-                      <span className="text-lg font-medium">{book.rating}/5.0</span>
-                    </div>
-                  )}
-                </div>
-
-                {/* Description */}
-                <p className="text-xl text-muted-foreground leading-relaxed mb-8 font-light">
-                  {book.description.substring(0, 200)}...
-                </p>
-              </div>
-
-              {/* Metadata grid */}
-              <div className="grid grid-cols-2 gap-4 mb-8">
-                <div className="bg-card/50 backdrop-blur-sm p-4 rounded-xl border border-border/50">
-                  <div className="flex items-center gap-2 mb-2">
-                    <Layers className="w-4 h-4 text-primary" />
-                    <span className="text-sm text-muted-foreground">ISBN</span>
-                  </div>
-                  <span className="text-lg font-semibold">{book.isbn}</span>
-                </div>
-                
-                <div className="bg-card/50 backdrop-blur-sm p-4 rounded-xl border border-border/50">
-                  <div className="flex items-center gap-2 mb-2">
-                    <BookOpen className="w-4 h-4 text-primary" />
-                    <span className="text-sm text-muted-foreground">Type</span>
-                  </div>
-                  <span className="text-lg font-semibold capitalize">{book.type}</span>
-                </div>
-                
-                {book.pages && (
-                  <div className="bg-card/50 backdrop-blur-sm p-4 rounded-xl border border-border/50">
-                    <div className="flex items-center gap-2 mb-2">
-                      <BookText className="w-4 h-4 text-primary" />
-                      <span className="text-sm text-muted-foreground">Pages</span>
-                    </div>
-                    <span className="text-lg font-semibold">{book.pages}</span>
-                  </div>
-                )}
-                
-                <div className="bg-card/50 backdrop-blur-sm p-4 rounded-xl border border-border/50">
-                  <div className="flex items-center gap-2 mb-2">
-                    {book.stock !== undefined && book.stock > 0 ? (
-                      <TrendingUp className="w-4 h-4 text-green-500" />
+            {/* Cover Section - Improved Design */}
+            <div className="lg:col-span-1">
+              <div className="sticky top-24 space-y-6">
+                <motion.div
+                  whileHover={{ y: -5 }}
+                  className="relative group cursor-pointer"
+                  onClick={() => setShowFullCover(true)}
+                >
+                  <div className="absolute inset-0 bg-gradient-to-br from-primary/20 via-transparent to-transparent rounded-2xl blur-xl group-hover:blur-2xl transition-all duration-500" />
+                  
+                  <div className="relative aspect-[3/4] rounded-2xl overflow-hidden shadow-2xl shadow-primary/5 border border-gray-200 dark:border-gray-800">
+                    {book.cover ? (
+                      <img
+                        src={book.cover}
+                        alt={book.title}
+                        className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
+                      />
                     ) : (
-                      <Eye className="w-4 h-4 text-red-500" />
+                      <div className="w-full h-full flex flex-col items-center justify-center p-8 bg-gradient-to-br from-gray-100 to-gray-200 dark:from-gray-800 dark:to-gray-900">
+                        <BookOpen className="w-24 h-24 text-primary/40 mb-4" />
+                        <span className="text-xl font-medium text-muted-foreground">No Cover Available</span>
+                      </div>
                     )}
-                    <span className="text-sm text-muted-foreground">Stock</span>
-                  </div>
-                  <span className={`text-lg font-semibold ${book.stock !== undefined && book.stock > 0 ? "text-green-500" : "text-red-500"}`}>
-                    {book.stock !== undefined ? (book.stock > 0 ? `${book.stock} In Stock` : "Out of Stock") : "Available"}
-                  </span>
-                </div>
-              </div>
-
-              {/* Price and Actions */}
-              <div className="space-y-6 pt-6 border-t border-border/50">
-                <div className="flex items-center justify-between">
-                  <div>
-                    <div className="text-sm text-muted-foreground mb-1">Price</div>
-                    <div className="flex items-center">
-                      <DollarSign className="w-8 h-8 text-primary mr-1" />
-                      <span className="text-5xl font-bold text-foreground">{book.price.toFixed(2)}</span>
+                    
+                    {/* Gradient overlay */}
+                    <div className="absolute inset-0 bg-gradient-to-t from-black/20 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
+                    
+                    {/* View fullscreen button */}
+                    <div className="absolute bottom-4 right-4 translate-y-2 opacity-0 group-hover:translate-y-0 group-hover:opacity-100 transition-all duration-300">
+                      <Button size="sm" variant="secondary" className="gap-2 backdrop-blur-sm">
+                        <Eye className="w-4 h-4" />
+                        View Full
+                      </Button>
                     </div>
                   </div>
                   
-                  {/* Action Buttons */}
-                  <div className="flex gap-4">
-                    <motion.button
-                      whileHover={{ scale: 1.05 }}
-                      whileTap={{ scale: 0.95 }}
-                      onClick={() => toast.info("Preview feature coming soon!")}
-                      className="px-6 py-3 rounded-xl bg-card border border-border hover:border-primary/50 transition-colors flex items-center gap-2"
-                    >
-                      <Eye className="w-4 h-4" />
-                      Preview
-                    </motion.button>
-                    
-                    <motion.button
-                      whileHover={{ scale: 1.05 }}
-                      whileTap={{ scale: 0.95 }}
-                      onClick={handleAddToCart}
-                      disabled={book.stock !== undefined && book.stock <= 0}
-                      className={`px-8 py-3 rounded-xl flex items-center gap-3 ${
-                        book.stock !== undefined && book.stock <= 0
-                          ? "bg-gray-500/20 cursor-not-allowed"
-                          : "bg-primary text-primary-foreground hover:bg-primary/90"
-                      }`}
-                    >
-                      <ShoppingCart className="w-5 h-5" />
-                      {book.stock !== undefined && book.stock <= 0 ? "Out of Stock" : "Add to Cart"}
-                    </motion.button>
+                  {/* Decorative corner elements */}
+                  <div className="absolute -top-2 -left-2 w-6 h-6 border-t border-l border-primary/30 rounded-tl-2xl" />
+                  <div className="absolute -bottom-2 -right-2 w-6 h-6 border-b border-r border-primary/30 rounded-br-2xl" />
+                </motion.div>
+
+                {/* Bookmark button */}
+                <div className="flex justify-center">
+                  <motion.button
+                    whileHover={{ scale: 1.05 }}
+                    whileTap={{ scale: 0.95 }}
+                    onClick={toggleBookmark}
+                    className="flex items-center gap-3 px-6 py-3 rounded-xl bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 shadow-lg hover:shadow-xl transition-shadow"
+                  >
+                    <Bookmark className={`w-5 h-5 ${isBookmarked ? "fill-primary text-primary" : "text-muted-foreground"}`} />
+                    <span className="font-medium">
+                      {isBookmarked ? "Bookmarked" : "Add to Bookmarks"}
+                    </span>
+                  </motion.button>
+                </div>
+              </div>
+            </div>
+
+            {/* Details Section */}
+            <div className="lg:col-span-2 space-y-8">
+              <div className="space-y-6">
+                {/* Title and author */}
+                <div>
+                  <div className="flex items-center gap-2 mb-4">
+                    <div className="px-3 py-1 rounded-full bg-primary/10 text-primary text-sm font-medium">
+                      {book.type === "physical" ? "Physical Copy" : "E-book"}
+                    </div>
+                    {book.genre?.[0] && (
+                      <div className="px-3 py-1 rounded-full bg-gray-100 dark:bg-gray-800 text-muted-foreground text-sm font-medium">
+                        {book.genre[0]}
+                      </div>
+                    )}
+                  </div>
+                  
+                  <h1 className="text-4xl lg:text-5xl font-bold text-gray-900 dark:text-white mb-4 leading-tight">
+                    {book.title}
+                  </h1>
+                  
+                  {book.author && (
+                    <div className="flex items-center gap-3 text-xl text-muted-foreground">
+                      <User className="w-5 h-5" />
+                      <span>By {book.author}</span>
+                    </div>
+                  )}
+                </div>
+
+                {/* Rating and metadata */}
+                <div className="flex items-center gap-8">
+                  {book.rating && (
+                    <div className="flex items-center gap-2">
+                      <div className="flex">
+                        {[...Array(5)].map((_, i) => (
+                          <Star
+                            key={i}
+                            className={`w-5 h-5 ${
+                              i < Math.floor(book.rating!)
+                                ? "fill-yellow-500 text-yellow-500"
+                                : "fill-gray-200 dark:fill-gray-700 text-gray-200 dark:text-gray-700"
+                            }`}
+                          />
+                        ))}
+                      </div>
+                      <span className="font-semibold">{book.rating.toFixed(1)}</span>
+                      <span className="text-muted-foreground">• 256 reviews</span>
+                    </div>
+                  )}
+                  
+                  <div className="flex items-center gap-6 text-sm text-muted-foreground">
+                    {book.pages && (
+                      <div className="flex items-center gap-2">
+                        <BookText className="w-4 h-4" />
+                        <span>{book.pages} pages</span>
+                      </div>
+                    )}
+                    {book.language && (
+                      <div className="flex items-center gap-2">
+                        <Globe className="w-4 h-4" />
+                        <span>{book.language}</span>
+                      </div>
+                    )}
                   </div>
                 </div>
-                
-                {/* Additional info */}
-                <div className="flex items-center gap-4 text-sm text-muted-foreground">
-                  <div className="flex items-center gap-2">
-                    <Clock className="w-4 h-4" />
-                    <span>Usually ships in 3-5 days</span>
+
+                {/* Price and stock status */}
+                <div className="space-y-4">
+                  <div className="flex items-center justify-between">
+                    <div>
+                      <div className="text-5xl font-bold text-gray-900 dark:text-white">
+                        ${book.price.toFixed(2)}
+                      </div>
+                      <div className="text-sm text-muted-foreground mt-1">
+                        {book.type === "physical" ? "+ Shipping" : "Instant Download"}
+                      </div>
+                    </div>
+                    
+                    <div className="text-right">
+                      <div className={`inline-flex items-center gap-2 px-4 py-2 rounded-full ${
+                        book.stock !== undefined && book.stock > 0
+                          ? "bg-green-100 dark:bg-green-900/30 text-green-700 dark:text-green-400"
+                          : "bg-red-100 dark:bg-red-900/30 text-red-700 dark:text-red-400"
+                      }`}>
+                        <div className="w-2 h-2 rounded-full animate-pulse" />
+                        {book.stock !== undefined && book.stock > 0
+                          ? `${book.stock} in stock`
+                          : "Out of stock"}
+                      </div>
+                    </div>
                   </div>
-                  <div className="flex items-center gap-2">
-                    <Award className="w-4 h-4" />
-                    <span>Best Seller</span>
+                </div>
+
+                {/* Action Buttons */}
+                <div className="flex flex-col sm:flex-row gap-4 pt-6 border-t border-gray-200 dark:border-gray-800">
+                  <Button
+                    size="lg"
+                    className="flex-1 gap-3 h-14"
+                    onClick={handleAddToCart}
+                    disabled={book.stock !== undefined && book.stock <= 0}
+                  >
+                    <ShoppingCart className="w-5 h-5" />
+                    Add to Cart
+                  </Button>
+                  
+                  {book.type !== "physical" && (
+                    <Button
+                      size="lg"
+                      variant="outline"
+                      className="flex-1 gap-3 h-14"
+                      onClick={() => handlePageChange(1)}
+                    >
+                      <BookOpen className="w-5 h-5" />
+                      Read Preview
+                    </Button>
+                  )}
+                  
+                  <Button
+                    size="lg"
+                    variant="secondary"
+                    className="h-14 px-6"
+                  >
+                    <Download className="w-5 h-5" />
+                  </Button>
+                </div>
+
+                {/* Additional info */}
+                <div className="grid grid-cols-2 md:grid-cols-4 gap-4 pt-6 border-t border-gray-200 dark:border-gray-800">
+                  <div className="flex items-center gap-3">
+                    <div className="w-10 h-10 rounded-lg bg-blue-100 dark:bg-blue-900/30 flex items-center justify-center">
+                      <Truck className="w-5 h-5 text-blue-600 dark:text-blue-400" />
+                    </div>
+                    <div>
+                      <div className="font-medium">Free Shipping</div>
+                      <div className="text-sm text-muted-foreground">Over $50</div>
+                    </div>
+                  </div>
+                  
+                  <div className="flex items-center gap-3">
+                    <div className="w-10 h-10 rounded-lg bg-green-100 dark:bg-green-900/30 flex items-center justify-center">
+                      <RotateCcw className="w-5 h-5 text-green-600 dark:text-green-400" />
+                    </div>
+                    <div>
+                      <div className="font-medium">30-Day Returns</div>
+                      <div className="text-sm text-muted-foreground">Easy returns</div>
+                    </div>
+                  </div>
+                  
+                  <div className="flex items-center gap-3">
+                    <div className="w-10 h-10 rounded-lg bg-purple-100 dark:bg-purple-900/30 flex items-center justify-center">
+                      <Shield className="w-5 h-5 text-purple-600 dark:text-purple-400" />
+                    </div>
+                    <div>
+                      <div className="font-medium">Secure Payment</div>
+                      <div className="text-sm text-muted-foreground">256-bit SSL</div>
+                    </div>
+                  </div>
+                  
+                  <div className="flex items-center gap-3">
+                    <div className="w-10 h-10 rounded-lg bg-orange-100 dark:bg-orange-900/30 flex items-center justify-center">
+                      <Award className="w-5 h-5 text-orange-600 dark:text-orange-400" />
+                    </div>
+                    <div>
+                      <div className="font-medium">Best Seller</div>
+                      <div className="text-sm text-muted-foreground">Top rated</div>
+                    </div>
                   </div>
                 </div>
               </div>
             </div>
           </motion.div>
 
-          {/* Full Description Section */}
+          {/* Description Section */}
           <motion.section
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.5, delay: 0.2 }}
             className="mb-16"
           >
-            <div className="bg-card/50 backdrop-blur-sm p-8 rounded-2xl border border-border/50 shadow-lg">
-              <div className="flex items-center gap-3 mb-8">
+            <div className="bg-white dark:bg-gray-800 rounded-2xl p-8 shadow-lg border border-gray-200 dark:border-gray-700">
+              <div className="flex items-center gap-4 mb-8">
                 <div className="w-12 h-12 rounded-xl bg-primary/10 flex items-center justify-center">
                   <BookText className="w-6 h-6 text-primary" />
                 </div>
-                <h2 className="text-3xl font-bold text-foreground">About This Book</h2>
-              </div>
-              <div className="prose prose-lg dark:prose-invert max-w-none">
-                <p className="text-lg leading-relaxed text-muted-foreground">
-                  {book.description}
-                </p>
+                <div>
+                  <h2 className="text-2xl font-bold text-gray-900 dark:text-white">About This Book</h2>
+                  <p className="text-muted-foreground mt-1">Discover what makes this book special</p>
+                </div>
               </div>
               
-              {/* Reading time estimate */}
-              <div className="mt-8 pt-6 border-t border-border/50">
-                <div className="flex items-center gap-2 text-sm text-muted-foreground">
-                  <Coffee className="w-4 h-4" />
-                  <span>Reading time: Approximately {Math.ceil(book.description.length / 1500)} hours</span>
-                </div>
+              <div className="prose prose-lg dark:prose-invert max-w-none">
+                <p className="text-lg leading-relaxed text-gray-700 dark:text-gray-300">
+                  {book.description}
+                </p>
+                
+                {book.publishedDate && (
+                  <div className="mt-8 pt-6 border-t border-gray-200 dark:border-gray-700">
+                    <div className="flex items-center gap-2 text-sm text-muted-foreground">
+                      <Calendar className="w-4 h-4" />
+                      <span>Published: {new Date(book.publishedDate).toLocaleDateString()}</span>
+                    </div>
+                  </div>
+                )}
               </div>
             </div>
           </motion.section>
 
-          {/* PDF Preview Section */}
+          {/* E-book Preview Section */}
           {book.type !== "physical" && book.filePath && (
             <motion.section
               initial={{ opacity: 0, y: 20 }}
@@ -429,34 +496,117 @@ export default function BookDetailPage() {
               transition={{ duration: 0.5, delay: 0.3 }}
               className="mb-16"
             >
-              <div className="bg-card/50 backdrop-blur-sm p-8 rounded-2xl border border-border/50 shadow-lg">
-                <div className="flex items-center justify-between mb-8">
-                  <div className="flex items-center gap-3">
+              <div className="bg-white dark:bg-gray-800 rounded-2xl p-8 shadow-lg border border-gray-200 dark:border-gray-700">
+                <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 mb-8">
+                  <div className="flex items-center gap-4">
                     <div className="w-12 h-12 rounded-xl bg-primary/10 flex items-center justify-center">
                       <Zap className="w-6 h-6 text-primary" />
                     </div>
                     <div>
-                      <h2 className="text-3xl font-bold text-foreground">E-book Preview</h2>
-                      <p className="text-muted-foreground mt-1">Read the first few chapters for free</p>
+                      <h2 className="text-2xl font-bold text-gray-900 dark:text-white">Free Preview</h2>
+                      <p className="text-muted-foreground mt-1">
+                        Read first {FREE_PREVIEW_PAGES} pages • Page {currentPage} of {FREE_PREVIEW_PAGES}
+                      </p>
                     </div>
                   </div>
-                  <Button variant="outline" className="gap-2">
-                    Download Sample
-                    <ChevronRight className="w-4 h-4" />
+                  
+                  <div className="flex items-center gap-3">
+                    <div className="flex items-center gap-2">
+                      <Lock className="w-4 h-4 text-muted-foreground" />
+                      <span className="text-sm text-muted-foreground">
+                        Free preview ends on page {FREE_PREVIEW_PAGES}
+                      </span>
+                    </div>
+                  </div>
+                </div>
+                
+                {/* Page Navigation */}
+                <div className="flex items-center justify-between mb-6">
+                  <Button
+                    variant="outline"
+                    onClick={() => handlePageChange(currentPage - 1)}
+                    disabled={currentPage === 1}
+                    className="gap-2"
+                  >
+                    Previous Page
+                  </Button>
+                  
+                  <div className="flex items-center gap-4">
+                    {[1, 2, 3, 4, 5].map((page) => (
+                      <button
+                        key={page}
+                        onClick={() => handlePageChange(page)}
+                        className={`w-10 h-10 rounded-lg flex items-center justify-center font-medium transition-all ${
+                          currentPage === page
+                            ? "bg-primary text-white"
+                            : "bg-gray-100 dark:bg-gray-700 text-gray-700 dark:text-gray-300 hover:bg-gray-200 dark:hover:bg-gray-600"
+                        }`}
+                      >
+                        {page}
+                      </button>
+                    ))}
+                  </div>
+                  
+                  <Button
+                    variant="outline"
+                    onClick={() => handlePageChange(currentPage + 1)}
+                    className="gap-2"
+                  >
+                    Next Page
                   </Button>
                 </div>
                 
-                <div className="rounded-xl overflow-hidden border border-border">
-                  <Suspense fallback={
-                    <div className="h-96 flex items-center justify-center bg-card">
-                      <div className="animate-pulse text-center">
-                        <BookOpen className="w-12 h-12 mx-auto mb-4 text-primary/40" />
-                        <p className="text-muted-foreground">Loading preview...</p>
+                {/* PDF Viewer */}
+                <div className="rounded-xl overflow-hidden border border-gray-200 dark:border-gray-700">
+                  <div className="bg-gray-50 dark:bg-gray-900 p-4 border-b border-gray-200 dark:border-gray-700">
+                    <div className="flex items-center justify-between">
+                      <div className="flex items-center gap-3">
+                        <div className="w-3 h-3 rounded-full bg-red-500" />
+                        <div className="w-3 h-3 rounded-full bg-yellow-500" />
+                        <div className="w-3 h-3 rounded-full bg-green-500" />
+                        <span className="text-sm text-muted-foreground ml-2">
+                          Preview • Page {currentPage}
+                        </span>
+                      </div>
+                      <div className="text-sm text-muted-foreground">
+                        {FREE_PREVIEW_PAGES - currentPage} free pages remaining
                       </div>
                     </div>
-                  }>
-                    <PdfViewer fileUrl={book.filePath} />
-                  </Suspense>
+                  </div>
+                  
+                  <div className="h-[600px] bg-gradient-to-br from-gray-50 to-gray-100 dark:from-gray-900 dark:to-gray-800">
+                    <Suspense fallback={
+                      <div className="h-full flex items-center justify-center">
+                        <div className="text-center space-y-4">
+                          <motion.div
+                            animate={{ rotate: 360 }}
+                            transition={{ duration: 2, repeat: Infinity, ease: "linear" }}
+                            className="rounded-full h-12 w-12 border-2 border-primary/30 border-t-primary mx-auto"
+                          />
+                          <p className="text-lg text-muted-foreground">Loading page {currentPage}...</p>
+                        </div>
+                      </div>
+                    }>
+                      <PdfViewer 
+                        fileUrl={book.filePath} 
+                        pageNumber={currentPage}
+                        onPageChange={handlePageChange}
+                      />
+                    </Suspense>
+                  </div>
+                  
+                  {/* Preview watermark */}
+                  <div className="absolute inset-0 pointer-events-none flex items-center justify-center">
+                    <div className="text-8xl font-bold text-gray-200 dark:text-gray-800 opacity-20 rotate-45">
+                      PREVIEW
+                    </div>
+                  </div>
+                </div>
+                
+                {/* Page counter */}
+                <div className="mt-6 flex items-center justify-between text-sm text-muted-foreground">
+                  <span>Reading progress: {currentPage}/{FREE_PREVIEW_PAGES} pages</span>
+                  <span>Approx. {Math.ceil((FREE_PREVIEW_PAGES - currentPage) * 2)} minutes left</span>
                 </div>
               </div>
             </motion.section>
@@ -469,13 +619,13 @@ export default function BookDetailPage() {
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.5, delay: 0.4 }}
-              className="bg-card/50 backdrop-blur-sm p-8 rounded-2xl border border-border/50 shadow-lg"
+              className="bg-white dark:bg-gray-800 rounded-2xl p-8 shadow-lg border border-gray-200 dark:border-gray-700"
             >
-              <div className="flex items-center gap-3 mb-8">
+              <div className="flex items-center gap-4 mb-8">
                 <div className="w-12 h-12 rounded-xl bg-primary/10 flex items-center justify-center">
                   <Heart className="w-6 h-6 text-primary" />
                 </div>
-                <h2 className="text-3xl font-bold text-foreground">Reader Reactions</h2>
+                <h2 className="text-2xl font-bold text-gray-900 dark:text-white">Reader Reactions</h2>
               </div>
               <ReactionsBar contentId={id} contentType="book" />
             </motion.section>
@@ -485,13 +635,13 @@ export default function BookDetailPage() {
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.5, delay: 0.5 }}
-              className="bg-card/50 backdrop-blur-sm p-8 rounded-2xl border border-border/50 shadow-lg"
+              className="bg-white dark:bg-gray-800 rounded-2xl p-8 shadow-lg border border-gray-200 dark:border-gray-700"
             >
-              <div className="flex items-center gap-3 mb-8">
+              <div className="flex items-center gap-4 mb-8">
                 <div className="w-12 h-12 rounded-xl bg-primary/10 flex items-center justify-center">
                   <Star className="w-6 h-6 text-primary" />
                 </div>
-                <h2 className="text-3xl font-bold text-foreground">Customer Reviews</h2>
+                <h2 className="text-2xl font-bold text-gray-900 dark:text-white">Customer Reviews</h2>
               </div>
               <ReviewsSection contentId={id} contentType="book" />
             </motion.section>
@@ -501,21 +651,101 @@ export default function BookDetailPage() {
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.5, delay: 0.6 }}
-              className="bg-card/50 backdrop-blur-sm p-8 rounded-2xl border border-border/50 shadow-lg"
+              className="bg-white dark:bg-gray-800 rounded-2xl p-8 shadow-lg border border-gray-200 dark:border-gray-700"
             >
-              <div className="flex items-center gap-3 mb-8">
+              <div className="flex items-center gap-4 mb-8">
                 <div className="w-12 h-12 rounded-xl bg-primary/10 flex items-center justify-center">
                   <Feather className="w-6 h-6 text-primary" />
                 </div>
-                <h2 className="text-3xl font-bold text-foreground">Community Discussion</h2>
+                <h2 className="text-2xl font-bold text-gray-900 dark:text-white">Community Discussion</h2>
               </div>
               <CommentsSection contentId={id} contentType="book" />
             </motion.section>
           </div>
         </div>
 
-        {/* Bottom decorative wave */}
-        <div className="absolute bottom-0 left-0 right-0 h-32 bg-gradient-to-t from-primary/5 to-transparent" />
+        {/* Purchase Modal */}
+        <Dialog open={showPurchaseModal} onOpenChange={setShowPurchaseModal}>
+          <DialogContent className="sm:max-w-md">
+            <DialogHeader>
+              <DialogTitle className="text-2xl font-bold">Continue Reading</DialogTitle>
+              <DialogDescription>
+                You've reached the end of the free preview. Purchase the book to continue reading.
+              </DialogDescription>
+            </DialogHeader>
+            
+            <div className="space-y-6 py-4">
+              <div className="flex items-center gap-4 p-4 bg-gray-50 dark:bg-gray-800 rounded-lg">
+                <img
+                  src={book.cover}
+                  alt={book.title}
+                  className="w-16 h-20 object-cover rounded"
+                />
+                <div>
+                  <h4 className="font-semibold">{book.title}</h4>
+                  <p className="text-sm text-muted-foreground">by {book.author}</p>
+                  <div className="text-2xl font-bold mt-2">${book.price.toFixed(2)}</div>
+                </div>
+              </div>
+              
+              <div className="space-y-3">
+                <div className="flex items-center justify-between">
+                  <span className="text-muted-foreground">Format</span>
+                  <span className="font-medium">{book.type === "physical" ? "Physical Copy" : "E-book"}</span>
+                </div>
+                <div className="flex items-center justify-between">
+                  <span className="text-muted-foreground">Pages</span>
+                  <span className="font-medium">{book.pages} total</span>
+                </div>
+                <div className="flex items-center justify-between">
+                  <span className="text-muted-foreground">Free preview</span>
+                  <span className="font-medium">{FREE_PREVIEW_PAGES} pages</span>
+                </div>
+              </div>
+            </div>
+            
+            <DialogFooter className="flex flex-col sm:flex-row gap-3">
+              <Button
+                variant="outline"
+                className="flex-1"
+                onClick={() => setShowPurchaseModal(false)}
+              >
+                Continue Preview
+              </Button>
+              <Button
+                className="flex-1 gap-2"
+                onClick={() => {
+                  handleAddToCart()
+                  setShowPurchaseModal(false)
+                }}
+              >
+                <ShoppingCart className="w-4 h-4" />
+                Add to Cart & Continue
+              </Button>
+            </DialogFooter>
+          </DialogContent>
+        </Dialog>
+
+        {/* Full Cover Modal */}
+        <Dialog open={showFullCover} onOpenChange={setShowFullCover}>
+          <DialogContent className="max-w-4xl">
+            <div className="relative">
+              <Button
+                size="icon"
+                variant="ghost"
+                className="absolute right-2 top-2 z-10"
+                onClick={() => setShowFullCover(false)}
+              >
+                <X className="w-4 h-4" />
+              </Button>
+              <img
+                src={book.cover}
+                alt={book.title}
+                className="w-full h-auto rounded-lg"
+              />
+            </div>
+          </DialogContent>
+        </Dialog>
       </motion.main>
     </AnimatePresence>
   )
