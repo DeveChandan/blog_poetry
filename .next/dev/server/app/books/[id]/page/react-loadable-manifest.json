@@ -1,10 +1,18 @@
 {
+  "[project]/components/pdf-viewer.tsx [app-client] (ecmascript, next/dynamic entry)": {
+    "id": "[project]/components/pdf-viewer.tsx [app-client] (ecmascript, next/dynamic entry)",
+    "files": [
+      "static/chunks/components_59e8712d._.js",
+      "static/chunks/node_modules_df7c9bf3._.js",
+      "static/chunks/components_pdf-viewer_tsx_fc796348._.js"
+    ]
+  },
   "[project]/components/document-viewer.tsx [app-client] (ecmascript, next/dynamic entry)": {
     "id": "[project]/components/document-viewer.tsx [app-client] (ecmascript, next/dynamic entry)",
     "files": [
-      "static/chunks/components_994a5019._.js",
-      "static/chunks/node_modules_31540bd6._.js",
-      "static/chunks/components_document-viewer_tsx_6e0a4474._.js"
+      "static/chunks/components_386098ac._.js",
+      "static/chunks/node_modules_fe6e3986._.js",
+      "static/chunks/components_document-viewer_tsx_fc796348._.js"
     ]
   }
 }

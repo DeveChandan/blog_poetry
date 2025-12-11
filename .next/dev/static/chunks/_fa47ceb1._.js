@@ -478,7 +478,7 @@ function EditVideoPage() {
         columnNumber: 5
     }, this);
 }
-_s(EditVideoPage, "LH/v5w2sj/OIFpPNLXDliWdBjWA=", false, function() {
+_s(EditVideoPage, "1ooQGJhdJWt+g7O7wLEb6Ac75hY=", false, function() {
     return [
         __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$navigation$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["useParams"],
         __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$navigation$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["useRouter"]

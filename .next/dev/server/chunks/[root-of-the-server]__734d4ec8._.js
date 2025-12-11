@@ -99,20 +99,20 @@ var __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$jose$2f$dist
 ;
 ;
 const secret = new TextEncoder().encode(process.env.JWT_SECRET || "your-secret-key-change-this");
-async function createSession(userId, isAdmin) {
+async function createSession(userId, isAdmin, duration = 60 * 60 * 24 * 7) {
     const token = await new __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$jose$2f$dist$2f$webapi$2f$jwt$2f$sign$2e$js__$5b$app$2d$route$5d$__$28$ecmascript$29$__["SignJWT"]({
         userId,
         isAdmin,
         type: "auth"
     }).setProtectedHeader({
         alg: "HS256"
-    }).setExpirationTime("7d").sign(secret);
+    }).setExpirationTime(Math.floor(Date.now() / 1000) + duration).sign(secret);
     const cookieStore = await (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$headers$2e$js__$5b$app$2d$route$5d$__$28$ecmascript$29$__["cookies"])();
     cookieStore.set("auth_token", token, {
         httpOnly: true,
         secure: ("TURBOPACK compile-time value", "development") === "production",
         sameSite: "lax",
-        maxAge: 60 * 60 * 24 * 7
+        maxAge: duration
     });
     return token;
 }

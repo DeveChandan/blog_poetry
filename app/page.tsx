@@ -16,10 +16,14 @@ import {
   Coffee,
   TrendingUp,
   Notebook,
-  Star
+  Star,
+  Play,
+  Eye,
+  Clock
 } from "lucide-react"
 
 import { connectDB } from "@/lib/db"
+import VideoThumbnail from "@/components/video-thumbnail"
 
 async function getFeaturedPoems() {
   const db = await connectDB()
@@ -47,10 +51,35 @@ async function getFeaturedVideos() {
     ...video,
     _id: video._id.toString(),
     createdAt: video.createdAt?.toISOString(),
+    // Extract video ID from either youtubeId or videoId field
+    youtubeId: video.youtubeId || video.videoId || extractYouTubeId(video.url) || '',
   }))
   console.log("Fetched featured videos:", serializedVideos)
   return serializedVideos
 }
+
+// Helper function to extract YouTube ID from URL
+function extractYouTubeId(url: string) {
+  if (!url) return null
+  
+  const patterns = [
+    /(?:youtube\.com\/watch\?v=|youtu\.be\/|youtube\.com\/embed\/|youtube\.com\/v\/|youtube\.com\/watch\?.*v=)([^&\n?#]+)/,
+    /youtube\.com\/watch\?.*&v=([^&\n?#]+)/,
+    /youtube\.com\/watch\?feature=player_embedded&v=([^&\n?#]+)/,
+    /youtube\.com\/embed\/([^&\n?#]+)/,
+    /youtu\.be\/([^&\n?#]+)/
+  ]
+  
+  for (const pattern of patterns) {
+    const match = url.match(pattern)
+    if (match && match[1]) {
+      return match[1]
+    }
+  }
+  
+  return null
+}
+
 async function getStats() {
   const db = await connectDB()
   const totalPoems = await db.collection("poems").countDocuments()
@@ -286,6 +315,20 @@ function FeaturedVideos({ videos }: { videos: any[] }) {
             </section>
         )
     }
+    
+    // Function to format duration
+    const formatDuration = (seconds?: number) => {
+      if (!seconds) return "N/A"
+      const hours = Math.floor(seconds / 3600)
+      const minutes = Math.floor((seconds % 3600) / 60)
+      const secs = seconds % 60
+      
+      if (hours > 0) {
+        return `${hours}:${minutes.toString().padStart(2, '0')}:${secs.toString().padStart(2, '0')}`
+      }
+      return `${minutes}:${secs.toString().padStart(2, '0')}`
+    }
+
     return (
     <section className="py-20 px-4 sm:px-6 lg:px-8">
       <div className="max-w-7xl mx-auto">
@@ -307,16 +350,35 @@ function FeaturedVideos({ videos }: { videos: any[] }) {
           {videos.map((video) => (
             <Card key={video._id} className="group cursor-pointer overflow-hidden hover:shadow-xl transition-all duration-300 hover:-translate-y-1 border-border/50">
               <CardContent className="p-0">
-                <div className="relative pb-[56.25%] overflow-hidden rounded-t-lg">
-                  <iframe
-                    src={`https://www.youtube.com/embed/${video.videoId}`}
-                    title={video.title}
-                    className="absolute top-0 left-0 w-full h-full"
-                    frameBorder="0"
-                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-                    allowFullScreen
-                  ></iframe>
-                </div>
+                <Link href={`/videos/${video._id}`} className="block relative overflow-hidden rounded-t-lg">
+                  {/* Use the VideoThumbnail component */}
+                  {video.youtubeId ? (
+                    <VideoThumbnail videoId={video.youtubeId} title={video.title} />
+                  ) : (
+                    <div className="relative pb-[56.25%] bg-gradient-to-br from-gray-200 to-gray-300 dark:from-gray-800 dark:to-gray-900">
+                      <div className="absolute inset-0 flex items-center justify-center">
+                        <div className="text-center">
+                          <div className="text-4xl mb-2">📹</div>
+                          <p className="text-sm text-gray-600 dark:text-gray-400">Video Preview</p>
+                        </div>
+                      </div>
+                    </div>
+                  )}
+                  
+                  {/* Duration Badge */}
+                  {video.duration && (
+                    <Badge className="absolute bottom-3 right-3 bg-black/80 text-white text-xs z-10">
+                      <Clock className="h-3 w-3 mr-1" />
+                      {formatDuration(video.duration)}
+                    </Badge>
+                  )}
+                  
+                  {/* Views Badge */}
+                  <Badge variant="secondary" className="absolute top-3 left-3 bg-black/60 text-white backdrop-blur-sm z-10">
+                    <Eye className="h-3 w-3 mr-1" />
+                    {video.views?.toLocaleString() || 0}
+                  </Badge>
+                </Link>
                 <div className="p-6">
                   <h3 className="text-xl font-bold text-foreground mb-4 group-hover:text-primary transition-colors">{video.title}</h3>
                   <p className="text-muted-foreground mb-6 leading-relaxed line-clamp-3">{video.description}</p>
