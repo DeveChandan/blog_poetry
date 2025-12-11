@@ -4,10 +4,14 @@ import type { NextRequest } from "next/server"
 
 const secret = new TextEncoder().encode(process.env.JWT_SECRET || "your-secret-key-change-this")
 
-export async function createSession(userId: string, isAdmin: boolean) {
+export async function createSession(
+  userId: string,
+  isAdmin: boolean,
+  duration: number = 60 * 60 * 24 * 7,
+) {
   const token = await new SignJWT({ userId, isAdmin, type: "auth" })
     .setProtectedHeader({ alg: "HS256" })
-    .setExpirationTime("7d")
+    .setExpirationTime(Math.floor(Date.now() / 1000) + duration)
     .sign(secret)
 
   const cookieStore = await cookies()
@@ -15,7 +19,7 @@ export async function createSession(userId: string, isAdmin: boolean) {
     httpOnly: true,
     secure: process.env.NODE_ENV === "production",
     sameSite: "lax",
-    maxAge: 60 * 60 * 24 * 7,
+    maxAge: duration,
   })
 
   return token

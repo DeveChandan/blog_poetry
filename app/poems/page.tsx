@@ -5,11 +5,14 @@ async function getPoems() {
   const db = await connectDB()
   const poems = await db.collection("poems").find({}).sort({ createdAt: -1 }).toArray()
   // Serialize _id and createdAt for client component
-  return poems.map(poem => ({
-    ...poem,
-    _id: poem._id.toString(),
-    createdAt: poem.createdAt.toISOString(),
-  }))
+  return poems.map(poem => {
+    const { _id, createdAt, ...rest } = poem
+    return {
+      ...rest,
+      _id: _id.toString(),
+      createdAt: createdAt.toISOString(),
+    }
+  })
 }
 
 export default async function PoemsPage() {

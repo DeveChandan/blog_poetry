@@ -9,9 +9,10 @@ interface BookCardProps {
   price: number
   type: string
   cover: string
+  author?: string
 }
 
-export default function BookCard({ id, title, description, price, type, cover }: BookCardProps) {
+export default function BookCard({ id, title, description, price, type, cover, author }: BookCardProps) {
   return (
     <Link href={`/books/${id}`}>
       <Card className="hover:border-primary hover:shadow-lg hover:-translate-y-1 transition duration-300 ease-in-out cursor-pointer h-full flex flex-col">
@@ -26,6 +27,7 @@ export default function BookCard({ id, title, description, price, type, cover }:
         </div>
         <CardHeader>
           <CardTitle className="line-clamp-2">{title}</CardTitle>
+          {author && <p className="text-muted-foreground text-sm">by {author}</p>}
         </CardHeader>
         <CardContent className="flex-1 flex flex-col justify-between">
           <p className="text-muted-foreground line-clamp-2 mb-4">{description}</p>

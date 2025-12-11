@@ -76,7 +76,7 @@ interface Poem {
   language?: string
 }
 
-type ThemeType = 'classic' | 'nature' | 'love' | 'dark' | 'minimal' | 'professional' | 'romantic'
+type ThemeType = 'classic' | 'nature' | 'love' | 'minimal' | 'professional' | 'romantic'
 type FontType = 'serif' | 'sans' | 'mono' | 'poetic' | 'calligraphy' | 'traditional'
 type SizeType = 'small' | 'medium' | 'large'
 type VoiceType = 'male' | 'female'
@@ -105,7 +105,7 @@ export default function PoemDetailPage() {
   const [theme, setTheme] = useState<ThemeType>('classic')
   const [font, setFont] = useState<FontType>('serif')
   const [fontSize, setFontSize] = useState<SizeType>('medium')
-  const [isDarkMode, setIsDarkMode] = useState(false)
+
   const [isReading, setIsReading] = useState(false)
   const [availableVoices, setAvailableVoices] = useState<AvailableVoice[]>([])
   const [voiceWarning, setVoiceWarning] = useState<string>('')
@@ -347,8 +347,6 @@ export default function PoemDetailPage() {
         return `${baseClasses} bg-gradient-to-br from-emerald-50/50 to-teal-50/50 dark:from-emerald-950/30 dark:to-teal-950/30`
       case 'love':
         return `${baseClasses} bg-gradient-to-br from-rose-50/50 to-pink-50/50 dark:from-rose-950/30 dark:to-pink-950/30`
-      case 'dark':
-        return `${baseClasses} bg-gradient-to-br from-gray-900 to-black dark:from-black dark:to-gray-900`
       case 'minimal':
         return `${baseClasses} bg-white dark:bg-gray-900`
       case 'professional':
@@ -441,19 +439,7 @@ export default function PoemDetailPage() {
             <div className="flex items-center justify-between gap-4">
               <div className="flex items-center gap-3">
                 {/* Theme Toggle */}
-                <div className="flex items-center gap-2">
-                  <Button
-                    variant="ghost"
-                    size="icon"
-                    onClick={() => setIsDarkMode(!isDarkMode)}
-                    className="rounded-full h-9 w-9"
-                  >
-                    {isDarkMode ? <Sun className="w-4 h-4" /> : <Moon className="w-4 h-4" />}
-                  </Button>
-                  <span className="text-xs text-gray-500 dark:text-gray-400">
-                    {isDarkMode ? 'Light' : 'Dark'}
-                  </span>
-                </div>
+             
 
                 {/* Theme Selector */}
                 <Select value={theme} onValueChange={(value: ThemeType) => setTheme(value)}>
@@ -467,7 +453,7 @@ export default function PoemDetailPage() {
                     <SelectItem value="love">Love</SelectItem>
                     <SelectItem value="romantic">Romantic</SelectItem>
                     <SelectItem value="professional">Professional</SelectItem>
-                    <SelectItem value="dark">Dark</SelectItem>
+                   
                     <SelectItem value="minimal">Minimal</SelectItem>
                   </SelectContent>
                 </Select>

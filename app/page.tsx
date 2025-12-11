@@ -35,17 +35,35 @@ async function getRecentBooks() {
   return db.collection("books").find({}).sort({ createdAt: -1 }).limit(2).toArray()
 }
 
+async function getFeaturedVideos() {
+  const db = await connectDB()
+  let videos = await db.collection("videos").find({ featured: true }).sort({ createdAt: -1 }).limit(3).toArray()
+  // If no featured videos, get any 3 recent videos
+  if (videos.length === 0) {
+    videos = await db.collection("videos").find({}).sort({ createdAt: -1 }).limit(3).toArray()
+  }
+
+  const serializedVideos = videos.map(video => ({
+    ...video,
+    _id: video._id.toString(),
+    createdAt: video.createdAt?.toISOString(),
+  }))
+  console.log("Fetched featured videos:", serializedVideos)
+  return serializedVideos
+}
 async function getStats() {
   const db = await connectDB()
   const totalPoems = await db.collection("poems").countDocuments()
   const booksPublished = await db.collection("books").countDocuments()
   const totalReaders = await db.collection("users").countDocuments(); 
+  const totalVideos = await db.collection("videos").countDocuments();
   const yearsWriting = new Date().getFullYear() - 2016; 
 
   return {
     totalPoems,
     booksPublished,
     totalReaders,
+    totalVideos,
     yearsWriting,
   }
 }
@@ -126,6 +144,7 @@ function StatsSection({ stats }: { stats: any }) {
           <StatCard icon={PenTool} value={stats.totalPoems} label="Poems Published" />
           <StatCard icon={Users} value={stats.totalReaders.toLocaleString()} label="Readers Worldwide" />
           <StatCard icon={BookOpen} value={stats.booksPublished} label="Published Books" />
+        
           <StatCard icon={Calendar} value={`${stats.yearsWriting}+`} label="Years Writing" />
         </div>
       </div>
@@ -257,6 +276,66 @@ function RecentBooks({ books }: { books: any[] }) {
   )
 }
 
+function FeaturedVideos({ videos }: { videos: any[] }) {
+    if (videos.length === 0) {
+        return (
+            <section className="py-20 px-4 sm:px-6 lg:px-8">
+                <div className="max-w-7xl mx-auto text-center text-muted-foreground">
+                    No featured videos found at the moment.
+                </div>
+            </section>
+        )
+    }
+    return (
+    <section className="py-20 px-4 sm:px-6 lg:px-8">
+      <div className="max-w-7xl mx-auto">
+        <div className="flex items-center justify-between mb-12">
+          <div>
+            <h2 className="text-3xl md:text-4xl font-bold text-foreground mb-3">
+              Featured <span className="text-primary">Videos</span>
+            </h2>
+            <p className="text-muted-foreground">Visual journeys through poetry and literary insights</p>
+          </div>  
+          <Button variant="ghost" asChild className="group">
+            <Link href="/videos" className="flex items-center gap-2">
+              View All Videos
+              <ArrowRight className="h-4 w-4 group-hover:translate-x-1 transition-transform" />
+            </Link>
+          </Button>
+        </div>
+        <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+          {videos.map((video) => (
+            <Card key={video._id} className="group cursor-pointer overflow-hidden hover:shadow-xl transition-all duration-300 hover:-translate-y-1 border-border/50">
+              <CardContent className="p-0">
+                <div className="relative pb-[56.25%] overflow-hidden rounded-t-lg">
+                  <iframe
+                    src={`https://www.youtube.com/embed/${video.videoId}`}
+                    title={video.title}
+                    className="absolute top-0 left-0 w-full h-full"
+                    frameBorder="0"
+                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                    allowFullScreen
+                  ></iframe>
+                </div>
+                <div className="p-6">
+                  <h3 className="text-xl font-bold text-foreground mb-4 group-hover:text-primary transition-colors">{video.title}</h3>
+                  <p className="text-muted-foreground mb-6 leading-relaxed line-clamp-3">{video.description}</p>
+                  <div className="flex items-center justify-between text-sm">
+                    <span className="flex items-center gap-1 text-muted-foreground"><Users className="h-4 w-4" />{video.views || 0} views</span>
+                    <Link href={`/videos/${video._id}`} className="text-primary hover:underline font-medium flex items-center gap-1">
+                      Watch Video
+                      <ArrowRight className="h-4 w-4" />
+                    </Link>
+                  </div>
+                </div>
+              </CardContent>
+            </Card>
+          ))}
+        </div>
+      </div>
+    </section>
+  )
+}
 function CategoriesSection() {
     return (
          <section className="py-20 bg-card/30">
@@ -395,6 +474,9 @@ export default async function Home() {
       </Suspense>
      <Suspense fallback={<div className="text-center p-12">Loading books...</div>}>
         <RecentBooks books={recentBooks} />
+      </Suspense>
+      <Suspense fallback={<div className="text-center p-12">Loading videos...</div>}>
+        <FeaturedVideos videos={await getFeaturedVideos()} />
       </Suspense>
       <CategoriesSection />
       <TestimonialsSection />

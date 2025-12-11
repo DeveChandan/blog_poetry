@@ -11,6 +11,7 @@ interface Book {
   price: number
   type: string
   cover: string
+  author?: string
   // Add other properties that are used in BookCard or filtering
   rating?: number;
   publishedYear?: number;
@@ -28,6 +29,7 @@ export default function FilteredBooks({ books }: { books: Book[] }) {
       (book) =>
         book.title.toLowerCase().includes(search.toLowerCase()) ||
         book.description.toLowerCase().includes(search.toLowerCase()) ||
+        (book.author && book.author.toLowerCase().includes(search.toLowerCase())) ||
         (book.tags && book.tags.some((tag) => tag.toLowerCase().includes(search.toLowerCase())))
     )
 
@@ -72,6 +74,7 @@ export default function FilteredBooks({ books }: { books: Book[] }) {
               price={book.price}
               type={book.type}
               cover={book.cover}
+              author={book.author}
               // Pass other props if needed by BookCard
               rating={book.rating}
               publishedYear={book.publishedYear}

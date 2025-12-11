@@ -13,11 +13,35 @@ export interface Poem {
   title: string
   content: string
   excerpt: string
-  author: string
+  author: string // This should be string (user ID or name), not an object with Buffer
   tags: string[]
   featured: boolean
   createdAt: Date
   updatedAt: Date
+  views: number
+}
+
+// For database results with populated author
+export interface PoemWithAuthor extends Omit<Poem, 'author'> {
+  author: {
+    _id: string
+    name: string
+    // If you have author image as Buffer in DB
+    avatar?: Buffer
+  }
+}
+
+// For client-side serialized data
+export interface SerializedPoem {
+  _id: string
+  title: string
+  content: string
+  excerpt: string
+  author: string // Keep as string ID
+  tags: string[]
+  featured: boolean
+  createdAt: string // Date serialized to string
+  updatedAt: string // Date serialized to string
   views: number
 }
 
@@ -114,3 +138,10 @@ export interface Video {
   createdAt: Date
   updatedAt: Date
 }
+
+// Add these helper types for serialization
+export type Serializable<T> = {
+  [K in keyof T]: T[K] extends Date ? string : T[K]
+}
+
+export type WithStringId<T> = Omit<T, '_id'> & { _id: string }

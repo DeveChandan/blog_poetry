@@ -19,8 +19,9 @@ export async function POST(request: NextRequest) {
     }
 
     const isAdmin = user.isAdmin === true
+    const sessionDuration = isAdmin ? 60 * 60 * 12 : undefined // 12 hours for admins
 
-    await createSession(user._id.toString(), isAdmin)
+    await createSession(user._id.toString(), isAdmin, sessionDuration)
 
     return NextResponse.json(
       {

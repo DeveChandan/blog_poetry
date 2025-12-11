@@ -12,7 +12,7 @@ export default function Navigation() {
   const [isOpen, setIsOpen] = useState(false)
   const router = useRouter()
   const { theme, setTheme, resolvedTheme } = useTheme() // Use resolvedTheme
-  const { user, loading } = useSession() // Use the session hook
+  const { user, loading, refetch } = useSession() // Use the session hook
   const [mounted, setMounted] = useState(false) // State to track if component is mounted
 
   // useEffect to set mounted to true after client-side mount
@@ -22,6 +22,22 @@ export default function Navigation() {
 
   const toggleTheme = () => {
     setTheme(theme === "dark" ? "light" : "dark")
+  }
+
+  const handleLogout = async () => {
+    try {
+      const res = await fetch("/api/auth/logout", { method: "POST" })
+      if (res.ok) {
+        await refetch()
+        router.push("/login")
+      } else {
+        console.error("Logout failed:", await res.json())
+        // Optionally, show an error to the user
+      }
+    } catch (error) {
+      console.error("An error occurred during logout:", error)
+      // Optionally, show an error to the user
+    }
   }
 
   return (
@@ -46,15 +62,31 @@ export default function Navigation() {
               About
             </Link>
             {loading ? (
-              <div className="w-16 h-6 bg-muted animate-pulse rounded"></div> // Placeholder while loading session
+              <div className="w-24 h-8 bg-muted animate-pulse rounded"></div> // Placeholder
             ) : user ? (
-              <Link href="/profile" className="text-foreground hover:text-primary transition">
-                Profile
-              </Link>
+              <div className="flex items-center gap-4">
+                {user.isAdmin ? (
+                  <Link href="/admin" className="text-foreground hover:text-primary transition">
+                    Admin
+                  </Link>
+                ) : (
+                  <Link href="/profile" className="text-foreground hover:text-primary transition">
+                    Profile
+                  </Link>
+                )}
+                <Button variant="ghost" onClick={handleLogout}>
+                  Logout
+                </Button>
+              </div>
             ) : (
-              <Link href="/login" className="text-foreground hover:text-primary transition">
-                Login
-              </Link>
+              <div className="flex items-center gap-4">
+                <Link href="/login" className="text-foreground hover:text-primary transition">
+                  Login
+                </Link>
+                <Button asChild>
+                  <Link href="/register">Sign Up</Link>
+                </Button>
+              </div>
             )}
             {/* Theme Toggle for Desktop */}
             {mounted && ( // Only render theme toggle after component mounts
@@ -106,15 +138,31 @@ export default function Navigation() {
               About
             </Link>
             {loading ? (
-              <div className="w-16 h-6 bg-muted animate-pulse rounded"></div> // Placeholder while loading session
+              <div className="w-20 h-8 bg-muted animate-pulse rounded"></div> // Placeholder
             ) : user ? (
-              <Link href="/profile" className="block py-2 text-foreground hover:text-primary">
-                Profile
-              </Link>
+              <>
+                {user.isAdmin ? (
+                  <Link href="/admin" className="block py-2 text-foreground hover:text-primary">
+                    Admin
+                  </Link>
+                ) : (
+                  <Link href="/profile" className="block py-2 text-foreground hover:text-primary">
+                    Profile
+                  </Link>
+                )}
+                <button onClick={handleLogout} className="block w-full text-left py-2 text-foreground hover:text-primary">
+                  Logout
+                </button>
+              </>
             ) : (
-              <Link href="/login" className="block py-2 text-foreground hover:text-primary">
-                Login
-              </Link>
+              <>
+                <Link href="/login" className="block py-2 text-foreground hover:text-primary">
+                  Login
+                </Link>
+                <Link href="/register" className="block py-2 text-foreground hover:text-primary">
+                  Sign Up
+                </Link>
+              </>
             )}
           </div>
         )}

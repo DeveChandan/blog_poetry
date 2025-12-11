@@ -3,9 +3,43 @@ import FilteredBooks from "./filtered-books"
 
 async function getBooks() {
   const db = await connectDB()
-  const books = await db.collection("books").find({}).sort({ createdAt: -1 }).toArray()
-  // Serialize _id and createdAt for client component
-  return books.map(book => ({
+  const books = await db
+    .collection("books")
+    .aggregate([
+      {
+        $lookup: {
+          from: "users",
+          localField: "author",
+          foreignField: "_id",
+          as: "authorDetails",
+        },
+      },
+      {
+        $unwind: {
+          path: "$authorDetails",
+          preserveNullAndEmptyArrays: true,
+        },
+      },
+      {
+        $project: {
+          title: 1,
+          description: 1,
+          price: 1,
+          type: 1,
+          cover: 1,
+          isbn: 1,
+          filePath: 1,
+          stock: 1,
+          tags: 1,
+          createdAt: 1,
+          author: "$authorDetails.name",
+        },
+      },
+      { $sort: { createdAt: -1 } },
+    ])
+    .toArray()
+
+  return books.map((book) => ({
     ...book,
     _id: book._id.toString(),
     createdAt: book.createdAt?.toISOString(),
