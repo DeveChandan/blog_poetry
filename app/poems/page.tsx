@@ -1,18 +1,19 @@
 import { connectDB } from "@/lib/db"
 import FilteredPoems from "./filtered-poems"
 
+export const revalidate = 60; // Revalidate at most every 60 seconds
+
 async function getPoems() {
   const db = await connectDB()
   const poems = await db.collection("poems").find({}).sort({ createdAt: -1 }).toArray()
-  // Serialize _id and createdAt for client component
-  return poems.map(poem => {
-    const { _id, createdAt, ...rest } = poem
-    return {
-      ...rest,
-      _id: _id.toString(),
-      createdAt: createdAt.toISOString(),
-    }
-  })
+  // Serialize non-plain objects before passing to client component
+  return poems.map(poem => ({
+    ...poem,
+    _id: poem._id.toString(),
+    author: poem.author.toString(),
+    createdAt: poem.createdAt.toISOString(),
+    updatedAt: poem.updatedAt.toISOString(),
+  }))
 }
 
 export default async function PoemsPage() {

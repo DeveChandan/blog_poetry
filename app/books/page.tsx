@@ -1,6 +1,8 @@
 import { connectDB } from "@/lib/db"
 import FilteredBooks from "./filtered-books"
 
+export const revalidate = 60; // Revalidate at most every 60 seconds
+
 async function getBooks() {
   const db = await connectDB()
   const books = await db
@@ -32,6 +34,7 @@ async function getBooks() {
           stock: 1,
           tags: 1,
           createdAt: 1,
+          updatedAt: 1, // Ensure updatedAt is included
           author: "$authorDetails.name",
         },
       },
@@ -39,10 +42,12 @@ async function getBooks() {
     ])
     .toArray()
 
+  // Serialize non-plain objects before passing to client component
   return books.map((book) => ({
     ...book,
     _id: book._id.toString(),
     createdAt: book.createdAt?.toISOString(),
+    updatedAt: book.updatedAt?.toISOString(),
   }))
 }
 

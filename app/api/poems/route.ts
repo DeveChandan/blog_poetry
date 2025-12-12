@@ -1,4 +1,5 @@
 import { type NextRequest, NextResponse } from "next/server"
+import { revalidatePath } from "next/cache"
 import { connectDB } from "@/lib/db"
 import { getSession } from "@/lib/session"
 import { ObjectId } from "mongodb"
@@ -41,6 +42,8 @@ export async function POST(request: NextRequest) {
       updatedAt: new Date(),
       views: 0,
     })
+    
+    revalidatePath('/poems')
 
     return NextResponse.json({ message: "Poem created", id: result.insertedId }, { status: 201 })
   } catch (error) {
