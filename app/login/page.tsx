@@ -9,6 +9,8 @@ import { Button } from "@/components/ui/button"
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
 import { useSession } from "@/hooks/use-session" // Import useSession
 
+import eventBus from "@/lib/event-bus"
+
 export default function LoginPage() {
   const router = useRouter()
   const { refetch } = useSession() // Get the refetch function
@@ -40,12 +42,10 @@ export default function LoginPage() {
 
       if (res.ok) {
         const data = await res.json()
-        const loggedInUser = await refetch() // Await refetch and get the updated user object
-        if (loggedInUser && loggedInUser.isAdmin) { // Use loggedInUser for redirection logic
-          router.push("/admin")
-        } else {
-          router.push("/")
-        }
+        await refetch() // Keep refetch to update session in the background
+        eventBus.dispatch("login") // Dispatch the login event
+        router.refresh() // Refresh the page to update the navbar
+        router.push(data.redirectTo || (data.isAdmin ? "/admin" : "/"))
       } else {
         const error = await res.json()
         setError(error.error || "Login failed")

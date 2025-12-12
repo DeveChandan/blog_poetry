@@ -7,6 +7,7 @@ import { Button } from "@/components/ui/button"
 import { useTheme } from "next-themes" // Import useTheme
 import { Moon, Sun } from "lucide-react" // Import icons
 import { useSession } from "@/hooks/use-session" // Import useSession
+import eventBus from "@/lib/event-bus" // Import the event bus
 
 export default function Navigation() {
   const [isOpen, setIsOpen] = useState(false)
@@ -19,6 +20,16 @@ export default function Navigation() {
   useEffect(() => {
     setMounted(true)
   }, [])
+
+  useEffect(() => {
+    const handleLogin = () => {
+      refetch()
+    }
+    eventBus.on("login", handleLogin)
+    return () => {
+      eventBus.off("login", handleLogin)
+    }
+  }, [refetch])
 
   const toggleTheme = () => {
     setTheme(theme === "dark" ? "light" : "dark")

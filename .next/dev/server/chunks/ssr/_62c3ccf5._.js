@@ -115,7 +115,9 @@ var __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist
 var __TURBOPACK__imported__module__$5b$project$5d2f$components$2f$ui$2f$button$2e$tsx__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__ = __turbopack_context__.i("[project]/components/ui/button.tsx [app-ssr] (ecmascript)");
 var __TURBOPACK__imported__module__$5b$project$5d2f$components$2f$ui$2f$card$2e$tsx__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__ = __turbopack_context__.i("[project]/components/ui/card.tsx [app-ssr] (ecmascript)");
 var __TURBOPACK__imported__module__$5b$project$5d2f$hooks$2f$use$2d$session$2e$ts__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__ = __turbopack_context__.i("[project]/hooks/use-session.ts [app-ssr] (ecmascript)"); // Import useSession
+var __TURBOPACK__imported__module__$5b$project$5d2f$lib$2f$event$2d$bus$2e$ts__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__ = __turbopack_context__.i("[project]/lib/event-bus.ts [app-ssr] (ecmascript)");
 "use client";
+;
 ;
 ;
 ;
@@ -153,13 +155,10 @@ function LoginPage() {
             });
             if (res.ok) {
                 const data = await res.json();
-                const loggedInUser = await refetch() // Await refetch and get the updated user object
-                ;
-                if (loggedInUser && loggedInUser.isAdmin) {
-                    router.push("/admin");
-                } else {
-                    router.push("/");
-                }
+                await refetch(); // Keep refetch to update session in the background
+                __TURBOPACK__imported__module__$5b$project$5d2f$lib$2f$event$2d$bus$2e$ts__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["default"].dispatch("login"); // Dispatch the login event
+                router.refresh(); // Refresh the page to update the navbar
+                router.push(data.redirectTo || (data.isAdmin ? "/admin" : "/"));
             } else {
                 const error = await res.json();
                 setError(error.error || "Login failed");

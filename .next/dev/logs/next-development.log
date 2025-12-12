@@ -1,239 +1,47 @@
-[00:00:02.837] Server  WARN     ⚠ The "middleware" file convention is deprecated. Please use "proxy" instead. Learn more: https://nextjs.org/docs/messages/middleware-to-proxy
-[00:00:03.364] Server  LOG      ✓ Ready in 2.6s
-[00:00:03.725] Server  WARN     ⚠ Cross origin request detected from 192.168.1.20 to /_next/* resource. In a future major version of Next.js, you will need to explicitly configure "allowedDevOrigins" in next.config to allow this.
-Read more: https://nextjs.org/docs/app/api-reference/config/next-config-js/allowedDevOrigins
-[00:00:06.762] Server  LOG      ○ Compiling / ...
-[00:00:17.003] Server  LOG     Fetched featured videos: [{...},{...},{...}]
-[00:00:20.305] Browser INFO    %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold
-[00:00:20.326] Browser INFO    %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold
-[00:00:20.567] Browser INFO    %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold
-[00:00:20.643] Browser LOG     %c[Vercel Web Analytics]%c Debug mode is enabled by default in development. No requests will be sent to the server. color: rgb(120, 120, 120) color: inherit
-[00:00:20.643] Browser LOG     %c[Vercel Web Analytics]%c Running queued event color: rgb(120, 120, 120) color: inherit pageview {"path":"/videos","route":"/videos"}
-[00:00:20.643] Browser LOG     %c[Vercel Web Analytics]%c [pageview] http://192.168.1.20:3000/videos color: rgb(120, 120, 120) color: inherit {"dp":"/videos","o":"http://192.168.1.20:3000/videos","sdkn":"@vercel/analytics/next","sdkv":"1.6.1","sv":"0.1.3","ts":1765450810660}
-[00:00:21.272] Browser ERROR   A tree hydrated but some attributes of the server rendered HTML didn't match the client properties. This won't be patched up. This can happen if a SSR-ed Client Component used:
-
-- A server/client branch `if (typeof window !== 'undefined')`.
-- Variable input such as `Date.now()` or `Math.random()` which changes each time it's called.
-- Date formatting in a user's locale which doesn't match the server.
-- External changing data without sending a snapshot of it along with the HTML.
-- Invalid HTML tag nesting.
-
-It can also happen if the client has a browser extension installed which messes with the HTML before React loaded.
-
-%s%s https://react.dev/link/hydration-mismatch 
-
-  ...
-    <HTTPAccessFallbackBoundary notFound={<SegmentViewNode>} forbidden={undefined} unauthorized={undefined}>
-      <HTTPAccessFallbackErrorBoundary pathname="/" notFound={<SegmentViewNode>} forbidden={undefined} ...>
-        <RedirectBoundary>
-          <RedirectErrorBoundary router={{...}}>
-            <InnerLayoutRouter url="/" tree={[...]} params={{}} cacheNode={{lazyData:null, ...}} segmentPath={[...]} ...>
-              <SegmentViewNode type="page" pagePath="page.tsx">
-                <SegmentTrieNode>
-                <Home>
-                  <main className="min-h-scre...">
-                    <section>
-                    <section>
-                    <Suspense>
-                    <Suspense>
-                    <Suspense>
-                    <section>
-                    <section>
-                    <CTASection>
-                      <section className="py-20 px-4...">
-                        <div className="max-w-4xl ...">
-                          <div className="relative">
-                            <div>
-                            <Card>
-                              <div data-slot="card" className="bg-card te...">
-                                <CardContent>
-                                  <div data-slot="card-content" className="pt-16 pb-1...">
-                                    <div>
-                                    <h2>
-                                    <p>
-                                    <div className="flex flex-...">
-                                      <input
-                                        type="email"
-                                        placeholder="Your email address"
-                                        className="flex-1 px-4 py-3 rounded-lg bg-background border border-border focu..."
--                                       fdprocessedid="t2sk2a"
-                                      >
-                                      <Button>
-                                        <button
-                                          data-slot="button"
-                                          className={"inline-flex items-center justify-center gap-2 text-sm font-medi..."}
--                                         fdprocessedid="gmrz2q"
-                                        >
-                                    ...
-              ...
-            ...
-
-[00:00:21.467] Browser LOG     %c[Vercel Web Analytics]%c Debug mode is enabled by default in development. No requests will be sent to the server. color: rgb(120, 120, 120) color: inherit
-[00:00:21.467] Browser LOG     %c[Vercel Web Analytics]%c Running queued event color: rgb(120, 120, 120) color: inherit pageview {"path":"/","route":"/"}
-[00:00:21.467] Browser LOG     %c[Vercel Web Analytics]%c [pageview] http://localhost:3000/ color: rgb(120, 120, 120) color: inherit {"dp":"/","o":"http://localhost:3000/","sdkn":"@vercel/analytics/next","sdkv":"1.6.1","sv":"0.1.3","ts":1765450801383}
-[00:00:21.756] Browser LOG     %c[Vercel Web Analytics]%c Debug mode is enabled by default in development. No requests will be sent to the server. color: rgb(120, 120, 120) color: inherit
-[00:00:21.756] Browser LOG     %c[Vercel Web Analytics]%c Running queued event color: rgb(120, 120, 120) color: inherit pageview {"path":"/videos","route":"/videos"}
-[00:00:21.756] Browser LOG     %c[Vercel Web Analytics]%c [pageview] http://192.168.1.20:3000/videos color: rgb(120, 120, 120) color: inherit {"dp":"/videos","o":"http://192.168.1.20:3000/videos","sdkn":"@vercel/analytics/next","sdkv":"1.6.1","sv":"0.1.3","ts":1765450811422}
-[00:00:23.511] Server  LOG     API /api/auth/session: Session status: null
-[00:00:23.563] Server  LOG     API /api/auth/session: Session status: {}
-[00:00:23.581] Server  LOG     API /api/auth/session: Session status: {}
-[00:00:23.702] Browser LOG     useSession: Raw response from /api/auth/session: {}
-[00:00:23.702] Browser LOG     useSession: Parsed data from /api/auth/session: {"user":{"exp":1765477105,"isAdmin":true,"type":"auth","userId":"6936a3e510ca4806bcd9c3a3"}}
-[00:00:23.853] Browser LOG     useSession: Raw response from /api/auth/session: {}
-[00:00:23.853] Browser LOG     useSession: Parsed data from /api/auth/session: {"user":{"exp":1765490587,"isAdmin":true,"type":"auth","userId":"6936a3e510ca4806bcd9c3a3"}}
-[00:00:23.853] Browser LOG     useSession: Raw response from /api/auth/session: {}
-[00:00:23.853] Browser LOG     useSession: Parsed data from /api/auth/session: {"user":null}
-[00:00:25.570] Server  LOG     Processing videos from DB...
-[00:00:25.573] Server  LOG     Video 693aa109ed48f1847a2fcd74: {}
-[00:00:25.575] Server  LOG     Video 693a9a33cacc30af90e1f27b: {}
-[00:00:25.577] Server  LOG     Video 693a9998cacc30af90e1f27a: {}
-[00:00:25.579] Server  LOG     Video 693a9912cacc30af90e1f279: {}
-[00:00:25.580] Server  LOG     Video 693a9836cacc30af90e1f278: {}
-[00:00:25.591] Server  LOG     Video 6937f452ff3802d0294f44d7: {}
-[00:00:25.610] Server  LOG     Processing videos from DB...
-[00:00:25.611] Server  LOG     Video 693aa109ed48f1847a2fcd74: {}
-[00:00:25.612] Server  LOG     Video 693a9a33cacc30af90e1f27b: {}
-[00:00:25.614] Server  LOG     Video 693a9998cacc30af90e1f27a: {}
-[00:00:25.625] Server  LOG     Video 693a9912cacc30af90e1f279: {}
-[00:00:25.627] Server  LOG     Video 693a9836cacc30af90e1f278: {}
-[00:00:25.628] Server  LOG     Video 6937f452ff3802d0294f44d7: {}
-[00:00:25.782] Browser LOG     Fetched videos: 6
-[00:00:26.128] Browser LOG     Fetched videos: 6
-[00:00:26.128] Browser WARN    You are trying to animate color from "lab(94.2052 1.15106 3.60569)" to "hsl(var(--foreground))". "hsl(var(--foreground))" is not an animatable value.. For more information and steps for solving, visit https://motion.dev/troubleshooting/value-not-animatable
-[00:00:26.128] Browser WARN    You are trying to animate color from "lab(94.2052 1.15106 3.60569)" to "hsl(var(--foreground))". "hsl(var(--foreground))" is not an animatable value.. For more information and steps for solving, visit https://motion.dev/troubleshooting/value-not-animatable
-[00:00:26.128] Browser WARN    You are trying to animate color from "lab(94.2052 1.15106 3.60569)" to "hsl(var(--foreground))". "hsl(var(--foreground))" is not an animatable value.. For more information and steps for solving, visit https://motion.dev/troubleshooting/value-not-animatable
-[00:00:26.128] Browser WARN    You are trying to animate color from "lab(94.2052 1.15106 3.60569)" to "hsl(var(--foreground))". "hsl(var(--foreground))" is not an animatable value.. For more information and steps for solving, visit https://motion.dev/troubleshooting/value-not-animatable
-[00:00:26.128] Browser WARN    You are trying to animate color from "lab(94.2052 1.15106 3.60569)" to "hsl(var(--foreground))". "hsl(var(--foreground))" is not an animatable value.. For more information and steps for solving, visit https://motion.dev/troubleshooting/value-not-animatable
-[00:00:26.128] Browser WARN    You are trying to animate color from "lab(94.2052 1.15106 3.60569)" to "hsl(var(--foreground))". "hsl(var(--foreground))" is not an animatable value.. For more information and steps for solving, visit https://motion.dev/troubleshooting/value-not-animatable
-[00:00:32.925] Browser INFO    %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold
-[00:00:32.939] Server  LOG     API /api/auth/session: Session status: {}
-[00:00:33.334] Browser LOG     %c[Vercel Web Analytics]%c Debug mode is enabled by default in development. No requests will be sent to the server. color: rgb(120, 120, 120) color: inherit
-[00:00:33.334] Browser LOG     %c[Vercel Web Analytics]%c Running queued event color: rgb(120, 120, 120) color: inherit pageview {"path":"/videos/693aa109ed48f1847a2fcd74","route":"/videos/[id]"}
-[00:00:33.334] Browser LOG     %c[Vercel Web Analytics]%c [pageview] http://192.168.1.20:3000/videos/693aa109ed48f1847a2fcd74 color: rgb(120, 120, 120) color: inherit {"dp":"/videos/[id]","o":"http://192.168.1.20:3000/videos/693aa109ed48f1847a2fcd74","sdkn":"@vercel/analytics/next","sdkv":"1.6.1","sv":"0.1.3","ts":1765450823065}
-[00:00:33.334] Browser LOG     useSession: Raw response from /api/auth/session: {}
-[00:00:33.334] Browser LOG     useSession: Parsed data from /api/auth/session: {"user":{"exp":1765490587,"isAdmin":true,"type":"auth","userId":"6936a3e510ca4806bcd9c3a3"}}
-[00:00:39.410] Browser LOG     %c[Vercel Web Analytics]%c [pageview] http://192.168.1.20:3000/videos color: rgb(120, 120, 120) color: inherit {"dp":"/videos","o":"http://192.168.1.20:3000/videos","sdkn":"@vercel/analytics/next","sdkv":"1.6.1","sv":"0.1.3","ts":1765450829365}
-[00:00:39.522] Server  LOG     Processing videos from DB...
-[00:00:39.524] Server  LOG     Video 693aa109ed48f1847a2fcd74: {}
-[00:00:39.526] Server  LOG     Video 693a9a33cacc30af90e1f27b: {}
-[00:00:39.529] Server  LOG     Video 693a9998cacc30af90e1f27a: {}
-[00:00:39.531] Server  LOG     Video 693a9912cacc30af90e1f279: {}
-[00:00:39.533] Server  LOG     Video 693a9836cacc30af90e1f278: {}
-[00:00:39.554] Server  LOG     Video 6937f452ff3802d0294f44d7: {}
-[00:00:39.863] Browser LOG     %c[Vercel Web Analytics]%c [pageview] http://localhost:3000/videos/693a9a33cacc30af90e1f27b color: rgb(120, 120, 120) color: inherit {"dp":"/videos/[id]","o":"http://localhost:3000/videos/693a9a33cacc30af90e1f27b","sdkn":"@vercel/analytics/next","sdkv":"1.6.1","sv":"0.1.3","ts":1765450819803}
-[00:00:39.999] Server  LOG     Processing videos from DB...
-[00:00:40.004] Server  LOG     Video 693aa109ed48f1847a2fcd74: {}
-[00:00:40.010] Server  LOG     Video 693a9a33cacc30af90e1f27b: {}
-[00:00:40.034] Server  LOG     Video 693a9998cacc30af90e1f27a: {}
-[00:00:40.045] Server  LOG     Video 693a9912cacc30af90e1f279: {}
-[00:00:40.047] Server  LOG     Video 693a9836cacc30af90e1f278: {}
-[00:00:40.049] Server  LOG     Video 6937f452ff3802d0294f44d7: {}
-[00:00:40.068] Browser LOG     Fetched videos: 6
-[00:00:40.187] Browser WARN    You are trying to animate color from "lab(94.2052 1.15106 3.60569)" to "hsl(var(--foreground))". "hsl(var(--foreground))" is not an animatable value.. For more information and steps for solving, visit https://motion.dev/troubleshooting/value-not-animatable
-[00:00:40.187] Browser WARN    You are trying to animate color from "lab(94.2052 1.15106 3.60569)" to "hsl(var(--foreground))". "hsl(var(--foreground))" is not an animatable value.. For more information and steps for solving, visit https://motion.dev/troubleshooting/value-not-animatable
-[00:00:40.187] Browser WARN    You are trying to animate color from "lab(94.2052 1.15106 3.60569)" to "hsl(var(--foreground))". "hsl(var(--foreground))" is not an animatable value.. For more information and steps for solving, visit https://motion.dev/troubleshooting/value-not-animatable
-[00:00:40.187] Browser WARN    You are trying to animate color from "lab(94.2052 1.15106 3.60569)" to "hsl(var(--foreground))". "hsl(var(--foreground))" is not an animatable value.. For more information and steps for solving, visit https://motion.dev/troubleshooting/value-not-animatable
-[00:00:40.187] Browser WARN    You are trying to animate color from "lab(94.2052 1.15106 3.60569)" to "hsl(var(--foreground))". "hsl(var(--foreground))" is not an animatable value.. For more information and steps for solving, visit https://motion.dev/troubleshooting/value-not-animatable
-[00:00:40.187] Browser WARN    You are trying to animate color from "lab(94.2052 1.15106 3.60569)" to "hsl(var(--foreground))". "hsl(var(--foreground))" is not an animatable value.. For more information and steps for solving, visit https://motion.dev/troubleshooting/value-not-animatable
-[00:00:40.187] Browser LOG     Fetched videos: 6
-[00:00:44.412] Browser LOG     %c[Vercel Web Analytics]%c [pageview] http://localhost:3000/ color: rgb(120, 120, 120) color: inherit {"dp":"/","o":"http://localhost:3000/","sdkn":"@vercel/analytics/next","sdkv":"1.6.1","sv":"0.1.3","ts":1765450824321}
-[00:00:45.489] Server  LOG     API /api/auth/session: Session status: {}
-[00:00:45.618] Browser INFO    %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold
-[00:00:45.618] Browser LOG     %c[Vercel Web Analytics]%c Debug mode is enabled by default in development. No requests will be sent to the server. color: rgb(120, 120, 120) color: inherit
-[00:00:45.619] Browser LOG     %c[Vercel Web Analytics]%c Running queued event color: rgb(120, 120, 120) color: inherit pageview {"path":"/videos/693a9a33cacc30af90e1f27b","route":"/videos/[id]"}
-[00:00:45.619] Browser LOG     %c[Vercel Web Analytics]%c [pageview] http://192.168.1.20:3000/videos/693a9a33cacc30af90e1f27b color: rgb(120, 120, 120) color: inherit {"dp":"/videos/[id]","o":"http://192.168.1.20:3000/videos/693a9a33cacc30af90e1f27b","sdkn":"@vercel/analytics/next","sdkv":"1.6.1","sv":"0.1.3","ts":1765450835623}
-[00:00:45.638] Browser LOG     useSession: Raw response from /api/auth/session: {}
-[00:00:45.638] Browser LOG     useSession: Parsed data from /api/auth/session: {"user":{"exp":1765490587,"isAdmin":true,"type":"auth","userId":"6936a3e510ca4806bcd9c3a3"}}
-[00:00:50.833] Browser LOG     %c[Vercel Web Analytics]%c [pageview] http://localhost:3000/about color: rgb(120, 120, 120) color: inherit {"dp":"/about","o":"http://localhost:3000/about","sdkn":"@vercel/analytics/next","sdkv":"1.6.1","sv":"0.1.3","ts":1765450830750}
-[00:00:52.062] Browser LOG     %c[Vercel Web Analytics]%c [pageview] http://192.168.1.20:3000/videos color: rgb(120, 120, 120) color: inherit {"dp":"/videos","o":"http://192.168.1.20:3000/videos","sdkn":"@vercel/analytics/next","sdkv":"1.6.1","sv":"0.1.3","ts":1765450842027}
-[00:00:52.213] Server  LOG     Processing videos from DB...
-[00:00:52.214] Server  LOG     Video 693aa109ed48f1847a2fcd74: {}
-[00:00:52.215] Server  LOG     Video 693a9a33cacc30af90e1f27b: {}
-[00:00:52.217] Server  LOG     Video 693a9998cacc30af90e1f27a: {}
-[00:00:52.218] Server  LOG     Video 693a9912cacc30af90e1f279: {}
-[00:00:52.219] Server  LOG     Video 693a9836cacc30af90e1f278: {}
-[00:00:52.221] Server  LOG     Video 6937f452ff3802d0294f44d7: {}
-[00:00:52.603] Server  LOG     Processing videos from DB...
-[00:00:52.605] Server  LOG     Video 693aa109ed48f1847a2fcd74: {}
-[00:00:52.606] Server  LOG     Video 693a9a33cacc30af90e1f27b: {}
-[00:00:52.609] Server  LOG     Video 693a9998cacc30af90e1f27a: {}
-[00:00:52.611] Server  LOG     Video 693a9912cacc30af90e1f279: {}
-[00:00:52.612] Server  LOG     Video 693a9836cacc30af90e1f278: {}
-[00:00:52.614] Server  LOG     Video 6937f452ff3802d0294f44d7: {}
-[00:00:53.234] Server  LOG     Processing videos from DB...
-[00:00:53.235] Server  LOG     Video 693aa109ed48f1847a2fcd74: {}
-[00:00:53.236] Server  LOG     Video 693a9a33cacc30af90e1f27b: {}
-[00:00:53.237] Server  LOG     Video 693a9998cacc30af90e1f27a: {}
-[00:00:53.239] Server  LOG     Video 693a9912cacc30af90e1f279: {}
-[00:00:53.243] Server  LOG     Video 693a9836cacc30af90e1f278: {}
-[00:00:53.244] Server  LOG     Video 6937f452ff3802d0294f44d7: {}
-[00:00:53.386] Server  LOG     Processing videos from DB...
-[00:00:53.388] Server  LOG     Video 693aa109ed48f1847a2fcd74: {}
-[00:00:53.389] Server  LOG     Video 693a9a33cacc30af90e1f27b: {}
-[00:00:53.390] Server  LOG     Video 693a9998cacc30af90e1f27a: {}
-[00:00:53.392] Server  LOG     Video 693a9912cacc30af90e1f279: {}
-[00:00:53.395] Server  LOG     Video 693a9836cacc30af90e1f278: {}
-[00:00:53.397] Server  LOG     Video 6937f452ff3802d0294f44d7: {}
-[00:00:53.421] Browser LOG     Fetched videos: 6
-[00:00:53.657] Browser WARN    You are trying to animate color from "lab(94.2052 1.15106 3.60569)" to "hsl(var(--foreground))". "hsl(var(--foreground))" is not an animatable value.. For more information and steps for solving, visit https://motion.dev/troubleshooting/value-not-animatable
-[00:00:53.657] Browser WARN    You are trying to animate color from "lab(94.2052 1.15106 3.60569)" to "hsl(var(--foreground))". "hsl(var(--foreground))" is not an animatable value.. For more information and steps for solving, visit https://motion.dev/troubleshooting/value-not-animatable
-[00:00:53.657] Browser WARN    You are trying to animate color from "lab(94.2052 1.15106 3.60569)" to "hsl(var(--foreground))". "hsl(var(--foreground))" is not an animatable value.. For more information and steps for solving, visit https://motion.dev/troubleshooting/value-not-animatable
-[00:00:53.657] Browser WARN    You are trying to animate color from "lab(94.2052 1.15106 3.60569)" to "hsl(var(--foreground))". "hsl(var(--foreground))" is not an animatable value.. For more information and steps for solving, visit https://motion.dev/troubleshooting/value-not-animatable
-[00:00:53.657] Browser WARN    You are trying to animate color from "lab(94.2052 1.15106 3.60569)" to "hsl(var(--foreground))". "hsl(var(--foreground))" is not an animatable value.. For more information and steps for solving, visit https://motion.dev/troubleshooting/value-not-animatable
-[00:00:53.657] Browser WARN    You are trying to animate color from "lab(94.2052 1.15106 3.60569)" to "hsl(var(--foreground))". "hsl(var(--foreground))" is not an animatable value.. For more information and steps for solving, visit https://motion.dev/troubleshooting/value-not-animatable
-[00:00:53.657] Browser LOG     Fetched videos: 6
-[00:00:59.988] Browser LOG     %c[Vercel Web Analytics]%c [pageview] http://localhost:3000/books color: rgb(120, 120, 120) color: inherit {"dp":"/books","o":"http://localhost:3000/books","sdkn":"@vercel/analytics/next","sdkv":"1.6.1","sv":"0.1.3","ts":1765450839881}
-[00:01:05.088] Server  ERROR   Only plain objects can be passed to Client Components from Server Components. Objects with toJSON methods are not supported. Convert it manually to a simple value before passing it to props.
-  {title: ..., content: ..., excerpt: ..., author: {buffer: ...}, tags: ..., featured: ..., updatedAt: ..., views: ..., _id: ..., createdAt: ...}
-                                                   ^^^^^^^^^^^^^
-[00:01:05.095] Server  ERROR   Only plain objects can be passed to Client Components from Server Components. Objects with toJSON methods are not supported. Convert it manually to a simple value before passing it to props.
-  {title: ..., content: ..., excerpt: ..., author: {buffer: ...}, tags: ..., featured: ..., updatedAt: ..., views: ..., _id: ..., createdAt: ...}
-                                                   ^^^^^^^^^^^^^
-[00:01:05.100] Server  ERROR   Only plain objects can be passed to Client Components from Server Components. Objects with toJSON methods are not supported. Convert it manually to a simple value before passing it to props.
-  {title: ..., content: ..., excerpt: ..., author: {buffer: ...}, tags: ..., featured: ..., updatedAt: ..., views: ..., _id: ..., createdAt: ...}
-                                                   ^^^^^^^^^^^^^
-[00:01:05.103] Server  ERROR   Only plain objects can be passed to Client Components from Server Components. Objects with toJSON methods are not supported. Convert it manually to a simple value before passing it to props.
-  {title: ..., content: ..., excerpt: ..., author: {buffer: ...}, tags: ..., featured: ..., updatedAt: ..., views: ..., _id: ..., createdAt: ...}
-                                                   ^^^^^^^^^^^^^
-[00:01:05.105] Server  ERROR   Only plain objects can be passed to Client Components from Server Components. Objects with toJSON methods are not supported. Convert it manually to a simple value before passing it to props.
-  {title: ..., content: ..., excerpt: ..., author: {buffer: ...}, tags: ..., featured: ..., updatedAt: ..., views: ..., _id: ..., createdAt: ...}
-                                                   ^^^^^^^^^^^^^
-[00:01:05.400] Browser LOG     %c[Vercel Web Analytics]%c [pageview] http://localhost:3000/poems color: rgb(120, 120, 120) color: inherit {"dp":"/poems","o":"http://localhost:3000/poems","sdkn":"@vercel/analytics/next","sdkv":"1.6.1","sv":"0.1.3","ts":1765450845300}
-[00:01:09.172] Browser LOG     %c[Vercel Web Analytics]%c [pageview] http://localhost:3000/videos color: rgb(120, 120, 120) color: inherit {"dp":"/videos","o":"http://localhost:3000/videos","sdkn":"@vercel/analytics/next","sdkv":"1.6.1","sv":"0.1.3","ts":1765450849056}
-[00:01:09.463] Server  LOG     Processing videos from DB...
-[00:01:09.464] Server  LOG     Video 693aa109ed48f1847a2fcd74: {}
-[00:01:09.465] Server  LOG     Video 693a9a33cacc30af90e1f27b: {}
-[00:01:09.468] Server  LOG     Video 693a9998cacc30af90e1f27a: {}
-[00:01:09.470] Server  LOG     Video 693a9912cacc30af90e1f279: {}
-[00:01:09.472] Server  LOG     Video 693a9836cacc30af90e1f278: {}
-[00:01:09.473] Server  LOG     Video 6937f452ff3802d0294f44d7: {}
-[00:01:09.653] Browser LOG     Fetched videos: 6
-[00:01:09.829] Server  LOG     Processing videos from DB...
-[00:01:09.832] Server  LOG     Video 693aa109ed48f1847a2fcd74: {}
-[00:01:09.833] Server  LOG     Video 693a9a33cacc30af90e1f27b: {}
-[00:01:09.835] Server  LOG     Video 693a9998cacc30af90e1f27a: {}
-[00:01:09.838] Server  LOG     Video 693a9912cacc30af90e1f279: {}
-[00:01:09.840] Server  LOG     Video 693a9836cacc30af90e1f278: {}
-[00:01:09.904] Server  LOG     Video 6937f452ff3802d0294f44d7: {}
-[00:01:09.939] Browser WARN    You are trying to animate color from "lab(3.01922 -0.727452 -4.46609)" to "hsl(var(--foreground))". "hsl(var(--foreground))" is not an animatable value.. For more information and steps for solving, visit https://motion.dev/troubleshooting/value-not-animatable
-[00:01:09.939] Browser WARN    You are trying to animate color from "lab(3.01922 -0.727452 -4.46609)" to "hsl(var(--foreground))". "hsl(var(--foreground))" is not an animatable value.. For more information and steps for solving, visit https://motion.dev/troubleshooting/value-not-animatable
-[00:01:09.939] Browser WARN    You are trying to animate color from "lab(3.01922 -0.727452 -4.46609)" to "hsl(var(--foreground))". "hsl(var(--foreground))" is not an animatable value.. For more information and steps for solving, visit https://motion.dev/troubleshooting/value-not-animatable
-[00:01:09.939] Browser WARN    You are trying to animate color from "lab(3.01922 -0.727452 -4.46609)" to "hsl(var(--foreground))". "hsl(var(--foreground))" is not an animatable value.. For more information and steps for solving, visit https://motion.dev/troubleshooting/value-not-animatable
-[00:01:09.939] Browser WARN    You are trying to animate color from "lab(3.01922 -0.727452 -4.46609)" to "hsl(var(--foreground))". "hsl(var(--foreground))" is not an animatable value.. For more information and steps for solving, visit https://motion.dev/troubleshooting/value-not-animatable
-[00:01:09.939] Browser WARN    You are trying to animate color from "lab(3.01922 -0.727452 -4.46609)" to "hsl(var(--foreground))". "hsl(var(--foreground))" is not an animatable value.. For more information and steps for solving, visit https://motion.dev/troubleshooting/value-not-animatable
-[00:01:10.170] Browser LOG     Fetched videos: 6
-[00:01:17.183] Browser LOG     %c[Vercel Web Analytics]%c [pageview] http://localhost:3000/about color: rgb(120, 120, 120) color: inherit {"dp":"/about","o":"http://localhost:3000/about","sdkn":"@vercel/analytics/next","sdkv":"1.6.1","sv":"0.1.3","ts":1765450857102}
-[00:01:17.343] Server  LOG     Processing videos from DB...
-[00:01:17.345] Server  LOG     Video 693aa109ed48f1847a2fcd74: {}
-[00:01:17.346] Server  LOG     Video 693a9a33cacc30af90e1f27b: {}
-[00:01:17.348] Server  LOG     Video 693a9998cacc30af90e1f27a: {}
-[00:01:17.355] Server  LOG     Video 693a9912cacc30af90e1f279: {}
-[00:01:17.357] Server  LOG     Video 693a9836cacc30af90e1f278: {}
-[00:01:17.360] Server  LOG     Video 6937f452ff3802d0294f44d7: {}
-[00:01:17.788] Server  LOG     Processing videos from DB...
-[00:01:17.790] Server  LOG     Video 693aa109ed48f1847a2fcd74: {}
-[00:01:17.792] Server  LOG     Video 693a9a33cacc30af90e1f27b: {}
-[00:01:17.793] Server  LOG     Video 693a9998cacc30af90e1f27a: {}
-[00:01:17.796] Server  LOG     Video 693a9912cacc30af90e1f279: {}
-[00:01:17.798] Server  LOG     Video 693a9836cacc30af90e1f278: {}
-[00:01:17.801] Server  LOG     Video 6937f452ff3802d0294f44d7: {}
+[00:00:01.621] Server  WARN     ⚠ The "middleware" file convention is deprecated. Please use "proxy" instead. Learn more: https://nextjs.org/docs/messages/middleware-to-proxy
+[00:00:01.899] Server  LOG      ✓ Ready in 1365ms
+[00:00:05.061] Server  LOG      ○ Compiling / ...
+[00:00:10.773] Server  LOG     Fetched featured videos: [{...},{...},{...}]
+[00:00:12.766] Browser INFO    %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold
+[00:00:13.307] Browser LOG     %c[Vercel Web Analytics]%c Debug mode is enabled by default in development. No requests will be sent to the server. color: rgb(120, 120, 120) color: inherit
+[00:00:13.308] Browser LOG     %c[Vercel Web Analytics]%c Running queued event color: rgb(120, 120, 120) color: inherit pageview {"path":"/","route":"/"}
+[00:00:13.308] Browser LOG     %c[Vercel Web Analytics]%c [pageview] http://localhost:3000/ color: rgb(120, 120, 120) color: inherit {"dp":"/","o":"http://localhost:3000/","sdkn":"@vercel/analytics/next","sdkv":"1.6.1","sv":"0.1.3","ts":1765518905902}
+[00:00:14.939] Server  LOG     API /api/auth/session: Session status: {}
+[00:00:15.073] Browser LOG     useSession: Raw response from /api/auth/session: {}
+[00:00:15.073] Browser LOG     useSession: Parsed data from /api/auth/session: {"user":{"exp":1765561814,"isAdmin":true,"type":"auth","userId":"6936a3e510ca4806bcd9c3a3"}}
+[00:00:17.517] Server  LOG     API /api/auth/session: Session status: null
+[00:00:17.630] Browser LOG     useSession: Raw response from /api/auth/session: {}
+[00:00:17.631] Browser LOG     useSession: Parsed data from /api/auth/session: {"user":null}
+[00:00:19.685] Server  LOG     API /api/auth/session: Session status: null
+[00:00:19.776] Server  LOG     API /api/auth/session: Session status: null
+[00:00:19.893] Browser LOG     %c[Vercel Web Analytics]%c [pageview] http://localhost:3000/login color: rgb(120, 120, 120) color: inherit {"dp":"/login","o":"http://localhost:3000/login","sdkn":"@vercel/analytics/next","sdkv":"1.6.1","sv":"0.1.3","ts":1765518912329}
+[00:00:19.893] Browser LOG     useSession: Raw response from /api/auth/session: {}
+[00:00:19.893] Browser LOG     useSession: Parsed data from /api/auth/session: {"user":null}
+[00:00:19.893] Browser LOG     useSession: Raw response from /api/auth/session: {}
+[00:00:19.893] Browser LOG     useSession: Parsed data from /api/auth/session: {"user":null}
+[00:00:30.344] Server  LOG     API /api/auth/session: Session status: {}
+[00:00:30.683] Browser LOG     useSession: Raw response from /api/auth/session: {}
+[00:00:30.683] Browser LOG     useSession: Parsed data from /api/auth/session: {"user":{"exp":1765562122,"isAdmin":true,"type":"auth","userId":"6936a3e510ca4806bcd9c3a3"}}
+[00:00:30.818] Server  LOG     API /api/auth/session: Session status: {}
+[00:00:30.943] Browser LOG     useSession: Raw response from /api/auth/session: {}
+[00:00:30.943] Browser LOG     useSession: Parsed data from /api/auth/session: {"user":{"exp":1765562122,"isAdmin":true,"type":"auth","userId":"6936a3e510ca4806bcd9c3a3"}}
+[00:00:32.240] Browser LOG     %c[Vercel Web Analytics]%c [pageview] http://localhost:3000/admin color: rgb(120, 120, 120) color: inherit {"dp":"/admin","o":"http://localhost:3000/admin","sdkn":"@vercel/analytics/next","sdkv":"1.6.1","sv":"0.1.3","ts":1765518924831}
+[00:00:37.960] Server  LOG     API /api/auth/session: Session status: null
+[00:00:38.070] Browser LOG     useSession: Raw response from /api/auth/session: {}
+[00:00:38.070] Browser LOG     useSession: Parsed data from /api/auth/session: {"user":null}
+[00:00:38.236] Browser LOG     %c[Vercel Web Analytics]%c [pageview] http://localhost:3000/login color: rgb(120, 120, 120) color: inherit {"dp":"/login","o":"http://localhost:3000/login","sdkn":"@vercel/analytics/next","sdkv":"1.6.1","sv":"0.1.3","ts":1765518930811}
+[00:00:38.249] Server  LOG     API /api/auth/session: Session status: null
+[00:00:38.280] Server  LOG     API /api/auth/session: Session status: null
+[00:00:38.396] Browser LOG     useSession: Raw response from /api/auth/session: {}
+[00:00:38.396] Browser LOG     useSession: Parsed data from /api/auth/session: {"user":null}
+[00:00:38.396] Browser LOG     useSession: Raw response from /api/auth/session: {}
+[00:00:38.396] Browser LOG     useSession: Parsed data from /api/auth/session: {"user":null}
+[00:00:45.472] Server  LOG     API /api/auth/session: Session status: {}
+[00:00:45.621] Browser LOG     useSession: Raw response from /api/auth/session: {}
+[00:00:45.621] Browser LOG     useSession: Parsed data from /api/auth/session: {"user":{"exp":1765562138,"isAdmin":true,"type":"auth","userId":"6936a3e510ca4806bcd9c3a3"}}
+[00:00:45.632] Server  LOG     API /api/auth/session: Session status: {}
+[00:00:45.888] Browser LOG     useSession: Raw response from /api/auth/session: {}
+[00:00:45.888] Browser LOG     useSession: Parsed data from /api/auth/session: {"user":{"exp":1765562138,"isAdmin":true,"type":"auth","userId":"6936a3e510ca4806bcd9c3a3"}}
+[00:00:45.888] Browser LOG     %c[Vercel Web Analytics]%c [pageview] http://localhost:3000/admin color: rgb(120, 120, 120) color: inherit {"dp":"/admin","o":"http://localhost:3000/admin","sdkn":"@vercel/analytics/next","sdkv":"1.6.1","sv":"0.1.3","ts":1765518938459}
+[00:01:10.153] Server  LOG     Fetched featured videos: [{...},{...},{...}]
+[00:01:10.655] Browser LOG     %c[Vercel Web Analytics]%c [pageview] http://localhost:3000/ color: rgb(120, 120, 120) color: inherit {"dp":"/","o":"http://localhost:3000/","sdkn":"@vercel/analytics/next","sdkv":"1.6.1","sv":"0.1.3","ts":1765518963241}
