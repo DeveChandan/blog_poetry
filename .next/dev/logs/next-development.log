@@ -9,3 +9,5 @@
 [00:00:37.366] Server  LOG     API /api/auth/session: Session status: {}
 [00:00:37.493] Browser LOG     useSession: Raw response from /api/auth/session: {}
 [00:00:37.493] Browser LOG     useSession: Parsed data from /api/auth/session: {"user":{"exp":1765562138,"isAdmin":true,"type":"auth","userId":"6936a3e510ca4806bcd9c3a3"}}
+[00:04:02.908] Server  LOG      ✓ Compiled in 369ms
+[00:04:07.482] Server  LOG     Fetched featured videos: [{...},{...},{...}]

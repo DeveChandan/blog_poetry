@@ -69,7 +69,7 @@ export default function RootLayout({
           enableSystem
           disableTransitionOnChange
         >
-          <GoogleAnalytics measurementId="G-HMNMDCB0P7" />
+          <GoogleAnalytics measurementId="G-FT6C92VF91" />
           <Navigation />
           <main className="min-h-screen">{children}</main>
           <Analytics />
