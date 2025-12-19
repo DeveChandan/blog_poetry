@@ -1,35 +1,31 @@
-import { type NextRequest, NextResponse } from "next/server"
-import { getSession } from "@/lib/session"
-import { writeFile } from "fs/promises"
-import path from "path"
+import { put } from '@vercel/blob';
+import { NextResponse } from 'next/server';
+import { getSession } from '@/lib/session';
 
-export async function POST(request: NextRequest) {
-  const session = await getSession()
+export async function POST(request: Request): Promise<NextResponse> {
+  const session = await getSession();
 
   if (!session || !session.isAdmin) {
-    return NextResponse.json({ error: "Unauthorized: Admin access required" }, { status: 403 })
+    return NextResponse.json({ error: 'Unauthorized: Admin access required' }, { status: 403 });
   }
 
+  const { pathname } = await request.json();
+
+  if (!pathname) {
+    return NextResponse.json({ error: 'No pathname provided' }, { status: 400 });
+  }
+
+  // The `put` function, when called with an empty body, returns a signed URL for client-side uploads.
+  // The client-side code will then use this URL to upload the file directly to Vercel Blob.
   try {
-    const formData = await request.formData()
-    const file = formData.get("file") as File | null
+    const blob = await put(pathname, '', {
+      access: 'public',
+      addRandomSuffix: true, // Prevent filename conflicts
+    });
 
-    if (!file) {
-      return NextResponse.json({ error: "No file uploaded" }, { status: 400 })
-    }
-
-    const buffer = Buffer.from(await file.arrayBuffer())
-    const filename = Date.now() + "_" + file.name.replaceAll(" ", "_")
-    const uploadDir = path.join(process.cwd(), "public", "uploads", "books")
-    const filePath = path.join(uploadDir, filename)
-
-    await writeFile(filePath, buffer)
-
-    // Return the relative path to be stored in the database
-    const relativeFilePath = `/uploads/books/${filename}`
-    return NextResponse.json({ filePath: relativeFilePath }, { status: 200 })
+    return NextResponse.json(blob);
   } catch (error) {
-    console.error("File upload error:", error)
-    return NextResponse.json({ error: "Failed to upload file" }, { status: 500 })
+    console.error('Error generating Vercel Blob signed URL:', error);
+    return NextResponse.json({ error: 'Failed to generate upload URL' }, { status: 500 });
   }
 }

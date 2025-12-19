@@ -14,7 +14,7 @@ export default function CreateBookPage() {
     description: "",
     isbn: "",
     price: "",
-    type: "both",
+    type: "ebook",
     stock: "",
     tags: "",
     cover: "",
@@ -43,25 +43,44 @@ export default function CreateBookPage() {
     if (!selectedFile) return null
 
     setUploading(true)
-    const data = new FormData()
-    data.append("file", selectedFile)
+    const pathname = `books/${Date.now()}_${selectedFile.name.replaceAll(" ", "_")}`
 
     try {
-      const res = await fetch("/api/upload", {
+      // Request the signed upload URL from our API
+      const response = await fetch("/api/upload", {
         method: "POST",
-        body: data,
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ pathname }),
       })
 
-      if (res.ok) {
-        const { filePath } = await res.json()
-        return filePath
+      if (!response.ok) {
+        alert("Failed to get secure upload URL.")
+        return null
+      }
+
+      const blob = await response.json()
+      const uploadUrl = blob.url
+
+      // Upload the file to Vercel Blob's signed URL
+      const uploadResponse = await fetch(uploadUrl, {
+        method: "PUT",
+        body: selectedFile,
+        headers: {
+          "Content-Type": selectedFile.type,
+        },
+      })
+
+      if (uploadResponse.ok) {
+        // The final URL is the signed URL without the query parameters
+        const finalUrl = uploadUrl.split("?")[0]
+        return finalUrl
       } else {
-        alert("Failed to upload file")
+        alert("Failed to upload file to storage.")
         return null
       }
     } catch (error) {
       console.error("Error uploading file:", error)
-      alert("Error uploading file")
+      alert("An error occurred during file upload.")
       return null
     } finally {
       setUploading(false)
@@ -73,7 +92,8 @@ export default function CreateBookPage() {
     setLoading(true)
 
     let uploadedFilePath = formData.filePath
-    if (selectedFile) {
+    // Check if a new file is selected or if the type requires a file
+    if (selectedFile && (formData.type === "ebook" || formData.type === "both")) {
       uploadedFilePath = await uploadFile()
       if (!uploadedFilePath) {
         setLoading(false)
@@ -215,6 +235,7 @@ export default function CreateBookPage() {
                   type="file"
                   name="file"
                   onChange={handleFileChange}
+                  accept="application/pdf"
                   className="w-full px-3 py-2 rounded border border-border bg-background text-foreground"
                 />
                 {selectedFile && <p className="text-sm text-muted-foreground mt-1">Selected: {selectedFile.name}</p>}
