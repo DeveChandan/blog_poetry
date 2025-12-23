@@ -1,39 +1,42 @@
 import { connectDB } from "@/lib/db"
 import { getSessionUser } from "@/lib/session"
 import { type NextRequest, NextResponse } from "next/server"
+import { revalidatePath } from "next/cache"
+
+export const dynamic = 'force-dynamic'
 
 function extractYouTubeId(input: string): string {
   if (!input) return ''
-  
+
   let id = input.trim()
-  
+
   // Remove any whitespace
   id = id.replace(/\s+/g, '')
-  
+
   // Try different patterns
   const patterns = [
     /(?:youtube\.com\/watch\?v=|youtu\.be\/|youtube\.com\/embed\/)([^&\s\/\?]+)/,
     /^([A-Za-z0-9_-]{11})$/
   ]
-  
+
   for (const pattern of patterns) {
     const match = id.match(pattern)
     if (match && match[1]) {
       return match[1]
     }
   }
-  
+
   return ''
 }
 
 function getYouTubeThumbnail(youtubeInput: string) {
   const youtubeId = extractYouTubeId(youtubeInput)
-  
+
   if (!youtubeId) {
     console.warn(`Invalid YouTube input: ${youtubeInput}`)
     return ''
   }
-  
+
   return `https://img.youtube.com/vi/${youtubeId}/hqdefault.jpg`
 }
 
@@ -43,18 +46,18 @@ export async function GET() {
     const videos = await db.collection("videos").find({}).sort({ createdAt: -1 }).toArray()
 
     console.log("Processing videos from DB...")
-    
+
     const processedVideos = videos.map((v) => {
       const cleanYoutubeId = extractYouTubeId(v.youtubeId || '')
       const thumbnail = getYouTubeThumbnail(v.youtubeId || '')
-      
+
       console.log(`Video ${v._id}:`, {
         originalInput: v.youtubeId,
         extractedId: cleanYoutubeId,
         thumbnail: thumbnail,
         hasThumbnail: !!thumbnail
       })
-      
+
       return {
         _id: v._id.toString(),
         title: v.title || '',
@@ -94,13 +97,13 @@ export async function POST(request: NextRequest) {
 
     // Extract clean ID and generate thumbnail
     const cleanYoutubeId = extractYouTubeId(youtubeId)
-    
+
     if (!cleanYoutubeId) {
-      return NextResponse.json({ 
-        error: "Invalid YouTube URL or ID. Please provide a valid YouTube URL or video ID." 
+      return NextResponse.json({
+        error: "Invalid YouTube URL or ID. Please provide a valid YouTube URL or video ID."
       }, { status: 400 })
     }
-    
+
     const generatedThumbnail = getYouTubeThumbnail(youtubeId)
 
     const result = await db.collection("videos").insertOne({
@@ -113,6 +116,9 @@ export async function POST(request: NextRequest) {
       createdAt: new Date(),
       updatedAt: new Date(),
     })
+
+    revalidatePath('/videos')
+    revalidatePath('/')
 
     return NextResponse.json({
       _id: result.insertedId.toString(),

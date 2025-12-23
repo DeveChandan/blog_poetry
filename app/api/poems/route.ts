@@ -4,6 +4,8 @@ import { connectDB } from "@/lib/db"
 import { getSession } from "@/lib/session"
 import { ObjectId } from "mongodb"
 
+export const dynamic = 'force-dynamic'
+
 export async function GET() {
   try {
     const db = await connectDB()
@@ -42,8 +44,9 @@ export async function POST(request: NextRequest) {
       updatedAt: new Date(),
       views: 0,
     })
-    
+
     revalidatePath('/poems')
+    revalidatePath('/')
 
     return NextResponse.json({ message: "Poem created", id: result.insertedId }, { status: 201 })
   } catch (error) {
