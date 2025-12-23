@@ -1,31 +1,37 @@
-import { put } from '@vercel/blob';
+import { handleUpload, type HandleUploadBody } from '@vercel/blob/client';
 import { NextResponse } from 'next/server';
 import { getSession } from '@/lib/session';
 
 export async function POST(request: Request): Promise<NextResponse> {
-  const session = await getSession();
+  const body = (await request.json()) as HandleUploadBody;
 
-  if (!session || !session.isAdmin) {
-    return NextResponse.json({ error: 'Unauthorized: Admin access required' }, { status: 403 });
-  }
-
-  const { pathname } = await request.json();
-
-  if (!pathname) {
-    return NextResponse.json({ error: 'No pathname provided' }, { status: 400 });
-  }
-
-  // The `put` function, when called with an empty body, returns a signed URL for client-side uploads.
-  // The client-side code will then use this URL to upload the file directly to Vercel Blob.
   try {
-    const blob = await put(pathname, '', {
-      access: 'public',
-      addRandomSuffix: true, // Prevent filename conflicts
+    const jsonResponse = await handleUpload({
+      body,
+      request,
+      onBeforeGenerateToken: async (pathname) => {
+        const session = await getSession();
+        if (!session || !session.isAdmin) {
+          throw new Error('Unauthorized');
+        }
+
+        return {
+          allowedContentTypes: ['application/pdf'],
+          tokenPayload: JSON.stringify({
+            userId: session.userId,
+          }),
+        };
+      },
+      onUploadCompleted: async ({ blob, tokenPayload }) => {
+        console.log('Blob upload completed:', blob, tokenPayload);
+      },
     });
 
-    return NextResponse.json(blob);
+    return NextResponse.json(jsonResponse);
   } catch (error) {
-    console.error('Error generating Vercel Blob signed URL:', error);
-    return NextResponse.json({ error: 'Failed to generate upload URL' }, { status: 500 });
+    return NextResponse.json(
+      { error: (error as Error).message },
+      { status: 400 }, // The webhook will retry 5 times automatically if the status code is 500
+    );
   }
 }

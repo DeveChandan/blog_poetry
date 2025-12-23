@@ -69,45 +69,27 @@ export default function EditBookPage() {
     }
   }
 
-  const uploadFile = async (): Promise<string | null> => {
-    if (!selectedFile) return null
-
-    setUploading(true)
-    const data = new FormData()
-    data.append("file", selectedFile)
-
-    try {
-      const res = await fetch("/api/upload", {
-        method: "POST",
-        body: data,
-      })
-
-      if (res.ok) {
-        const { filePath } = await res.json()
-        return filePath
-      } else {
-        alert("Failed to upload file")
-        return null
-      }
-    } catch (error) {
-      console.error("Error uploading file:", error)
-      alert("Error uploading file")
-      return null
-    } finally {
-      setUploading(false)
-    }
-  }
-
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault()
     setSaving(true)
 
     let uploadedFilePath = formData.filePath
     if (selectedFile) {
-      uploadedFilePath = await uploadFile()
-      if (!uploadedFilePath) {
+      setUploading(true)
+      try {
+        const { upload } = await import('@vercel/blob/client');
+        const newBlob = await upload(selectedFile.name, selectedFile, {
+          access: 'public',
+          handleUploadUrl: '/api/upload',
+        });
+        uploadedFilePath = newBlob.url;
+        setUploading(false);
+      } catch (error) {
+        console.error("Error uploading file:", error)
+        alert("Error uploading file")
+        setUploading(false)
         setSaving(false)
-        return // Stop submission if file upload failed
+        return
       }
     }
 

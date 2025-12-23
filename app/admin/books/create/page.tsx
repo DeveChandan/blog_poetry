@@ -39,54 +39,6 @@ export default function CreateBookPage() {
     }
   }
 
-  const uploadFile = async (): Promise<string | null> => {
-    if (!selectedFile) return null
-
-    setUploading(true)
-    const pathname = `books/${Date.now()}_${selectedFile.name.replaceAll(" ", "_")}`
-
-    try {
-      // Request the signed upload URL from our API
-      const response = await fetch("/api/upload", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ pathname }),
-      })
-
-      if (!response.ok) {
-        alert("Failed to get secure upload URL.")
-        return null
-      }
-
-      const blob = await response.json()
-      const uploadUrl = blob.url
-
-      // Upload the file to Vercel Blob's signed URL
-      const uploadResponse = await fetch(uploadUrl, {
-        method: "PUT",
-        body: selectedFile,
-        headers: {
-          "Content-Type": selectedFile.type,
-        },
-      })
-
-      if (uploadResponse.ok) {
-        // The final URL is the signed URL without the query parameters
-        const finalUrl = uploadUrl.split("?")[0]
-        return finalUrl
-      } else {
-        alert("Failed to upload file to storage.")
-        return null
-      }
-    } catch (error) {
-      console.error("Error uploading file:", error)
-      alert("An error occurred during file upload.")
-      return null
-    } finally {
-      setUploading(false)
-    }
-  }
-
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault()
     setLoading(true)
@@ -94,10 +46,21 @@ export default function CreateBookPage() {
     let uploadedFilePath = formData.filePath
     // Check if a new file is selected or if the type requires a file
     if (selectedFile && (formData.type === "ebook" || formData.type === "both")) {
-      uploadedFilePath = await uploadFile()
-      if (!uploadedFilePath) {
+      setUploading(true)
+      try {
+        const { upload } = await import('@vercel/blob/client');
+        const newBlob = await upload(selectedFile.name, selectedFile, {
+          access: 'public',
+          handleUploadUrl: '/api/upload',
+        });
+        uploadedFilePath = newBlob.url;
+        setUploading(false)
+      } catch (error) {
+        console.error("Error uploading file:", error)
+        alert("Error uploading file")
+        setUploading(false)
         setLoading(false)
-        return // Stop submission if file upload failed
+        return
       }
     }
 
