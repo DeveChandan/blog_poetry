@@ -28,7 +28,8 @@
   --chart-3: oklch(0.398 0.07 227.392);
   --chart-4: oklch(0.828 0.189 84.429);
   --chart-5: oklch(0.769 0.188 70.08);
-  --radius: 0.625rem; /* Updated from styles/globals.css */
+  --radius: 0.625rem;
+  /* Updated from styles/globals.css */
   --sidebar: oklch(0.985 0 0);
   --sidebar-foreground: oklch(0.145 0 0);
   --sidebar-primary: oklch(0.205 0 0);
@@ -75,8 +76,12 @@
 }
 
 @theme inline {
-  --font-sans: 'Geist', 'Geist Fallback'; /* Moved from styles/globals.css */
-  --font-mono: 'Geist Mono', 'Geist Mono Fallback'; /* Moved from styles/globals.css */
+  --font-sans: 'Geist', 'Geist Fallback';
+  /* Moved from styles/globals.css */
+  --font-mono: 'Geist Mono', 'Geist Mono Fallback';
+  /* Moved from styles/globals.css */
+  --font-serif: var(--font-serif);
+  --font-cursive: var(--font-cursive);
   --color-background: var(--background);
   --color-foreground: var(--foreground);
   --color-card: var(--card);
@@ -119,6 +124,7 @@
   * {
     @apply border-border outline-ring/50;
   }
+
   body {
     @apply bg-background text-foreground;
   }
@@ -141,6 +147,3 @@
     @apply font-serif text-4xl font-bold text-foreground mb-8 text-balance;
   }
 }
-
-
-

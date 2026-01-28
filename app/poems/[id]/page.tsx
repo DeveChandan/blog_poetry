@@ -3,16 +3,16 @@
 import { useEffect, useState } from "react"
 import { useParams } from "next/navigation"
 import { motion, AnimatePresence } from "framer-motion"
-import { 
-  BookOpen, 
-  Heart, 
-  Eye, 
-  Calendar, 
-  Tag, 
-  Feather, 
-  Sparkles, 
-  Bookmark, 
-  Share2, 
+import {
+  BookOpen,
+  Heart,
+  Eye,
+  Calendar,
+  Tag,
+  Feather,
+  Sparkles,
+  Bookmark,
+  Share2,
   Printer,
   Moon,
   Sun,
@@ -59,6 +59,7 @@ import { Label } from "@/components/ui/label"
 import { Slider } from "@/components/ui/slider"
 import { Alert, AlertDescription } from "@/components/ui/alert"
 import { toast } from "sonner"
+import { useLanguage } from "@/lib/language-context"
 
 interface Poem {
   _id: string
@@ -106,6 +107,12 @@ export default function PoemDetailPage() {
   const [font, setFont] = useState<FontType>('serif')
   const [fontSize, setFontSize] = useState<SizeType>('medium')
 
+  // Translation states
+  const [translatedContent, setTranslatedContent] = useState<string | null>(null)
+  const [translatedTitle, setTranslatedTitle] = useState<string | null>(null)
+  const [isTranslating, setIsTranslating] = useState(false)
+  const [currentTranslateLang, setCurrentTranslateLang] = useState<string | null>(null)
+
   const [isReading, setIsReading] = useState(false)
   const [availableVoices, setAvailableVoices] = useState<AvailableVoice[]>([])
   const [voiceWarning, setVoiceWarning] = useState<string>('')
@@ -118,6 +125,71 @@ export default function PoemDetailPage() {
     autoPlay: false
   })
 
+  // Translation function
+  const handleTranslate = async (targetLang: string) => {
+    if (!poem) return
+
+    // If clicking same language, toggle back to original
+    if (currentTranslateLang === targetLang) {
+      setTranslatedContent(null)
+      setTranslatedTitle(null)
+      setCurrentTranslateLang(null)
+      toast.info('Showing original content')
+      return
+    }
+
+    setIsTranslating(true)
+    try {
+      // Translate title
+      const titleRes = await fetch('/api/translate', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ text: poem.title, targetLang })
+      })
+      const titleData = await titleRes.json()
+
+      // Translate content
+      const contentRes = await fetch('/api/translate', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ text: poem.content, targetLang })
+      })
+      const contentData = await contentRes.json()
+
+      if (contentData.translatedText && titleData.translatedText) {
+        setTranslatedContent(contentData.translatedText)
+        setTranslatedTitle(titleData.translatedText)
+        setCurrentTranslateLang(targetLang)
+        const langName = targetLang === 'hi' ? 'Hindi' : targetLang === 'ur' ? 'Urdu' : 'Bengali'
+        toast.success(`Translated to ${langName}`)
+      } else {
+        throw new Error('Translation failed')
+      }
+    } catch (error) {
+      console.error('Translation error:', error)
+      toast.error('Translation failed. Please try again.')
+    } finally {
+      setIsTranslating(false)
+    }
+  }
+
+  // Auto-translate when navbar language changes
+  const { currentLanguage } = useLanguage()
+
+  useEffect(() => {
+    if (!poem) return
+
+    if (currentLanguage.code === 'en') {
+      // Reset to original
+      setTranslatedContent(null)
+      setTranslatedTitle(null)
+      setCurrentTranslateLang(null)
+    } else {
+      // Auto-translate to selected navbar language
+      handleTranslate(currentLanguage.code)
+    }
+  }, [currentLanguage.code, poem?._id])
+
   useEffect(() => {
     // Check if speech synthesis is supported
     if (!('speechSynthesis' in window)) {
@@ -128,7 +200,7 @@ export default function PoemDetailPage() {
 
     const loadVoices = () => {
       const voices = speechSynthesis.getVoices()
-      
+
       if (voices.length === 0) {
         setVoiceWarning('No voices available. Please check your browser settings.')
         return
@@ -138,10 +210,10 @@ export default function PoemDetailPage() {
       const mappedVoices: AvailableVoice[] = voices.map(voice => {
         // Detect gender from voice name
         const voiceName = voice.name.toLowerCase()
-        const gender: VoiceType = voiceName.includes('female') || 
-                                 voiceName.includes('woman') || 
-                                 voiceName.includes('girl') ? 'female' : 'male'
-        
+        const gender: VoiceType = voiceName.includes('female') ||
+          voiceName.includes('woman') ||
+          voiceName.includes('girl') ? 'female' : 'male'
+
         // Detect language
         let language: LanguageType = 'english'
         if (voice.lang.startsWith('hi')) {
@@ -168,7 +240,7 @@ export default function PoemDetailPage() {
 
     // Load voices initially
     loadVoices()
-    
+
     // Set up voice change listener
     speechSynthesis.onvoiceschanged = loadVoices
 
@@ -186,8 +258,8 @@ export default function PoemDetailPage() {
 
   const findBestVoice = (voices: AvailableVoice[], prefs: UserPreferences) => {
     // Try to find exact match
-    let bestVoice = voices.find(v => 
-      v.gender === prefs.voiceType && 
+    let bestVoice = voices.find(v =>
+      v.gender === prefs.voiceType &&
       (prefs.language === 'hindi' && v.lang.startsWith('hi')) ||
       (prefs.language === 'bengali' && v.lang.startsWith('bn')) ||
       (prefs.language === 'english' && v.lang.startsWith('en'))
@@ -219,7 +291,7 @@ export default function PoemDetailPage() {
       if (res.ok) {
         const data = await res.json()
         setPoem(data)
-        
+
         const bookmarked = localStorage.getItem(`bookmark_${id}`)
         setIsBookmarked(!!bookmarked)
 
@@ -275,7 +347,7 @@ export default function PoemDetailPage() {
 
   const handleTextToSpeech = () => {
     if (!poem) return
-    
+
     if (isReading) {
       speechSynthesis.cancel()
       setIsReading(false)
@@ -288,9 +360,9 @@ export default function PoemDetailPage() {
     }
 
     // Check if selected voice matches preferred language
-    const voiceLang = selectedVoice.lang.startsWith('hi') ? 'hindi' : 
-                     selectedVoice.lang.startsWith('bn') ? 'bengali' : 'english'
-    
+    const voiceLang = selectedVoice.lang.startsWith('hi') ? 'hindi' :
+      selectedVoice.lang.startsWith('bn') ? 'bengali' : 'english'
+
     if (voiceLang !== userPreferences.language) {
       toast.warning(`Using ${voiceLang} voice for ${userPreferences.language} text`)
     }
@@ -300,7 +372,7 @@ export default function PoemDetailPage() {
     utterance.rate = userPreferences.readingSpeed
     utterance.pitch = 1.0
     utterance.volume = 1.0
-    
+
     // Set appropriate language for pronunciation
     if (userPreferences.language === 'hindi') {
       utterance.lang = 'hi-IN'
@@ -327,22 +399,22 @@ export default function PoemDetailPage() {
     if (!isVoiceSupported) return
 
     const testText = userPreferences.language === 'hindi' ? 'नमस्ते' :
-                    userPreferences.language === 'bengali' ? 'হ্যালো' :
-                    'Hello'
+      userPreferences.language === 'bengali' ? 'হ্যালো' :
+        'Hello'
 
     const utterance = new SpeechSynthesisUtterance(testText)
     utterance.voice = voice.voice
     utterance.rate = 1.0
     utterance.onend = () => toast.success(`Voice ${voice.name} is working!`)
     utterance.onerror = () => toast.error(`Voice ${voice.name} failed to play`)
-    
+
     speechSynthesis.speak(utterance)
   }
 
   const getThemeClasses = () => {
     const baseClasses = "min-h-screen transition-all duration-500"
-    
-    switch(theme) {
+
+    switch (theme) {
       case 'nature':
         return `${baseClasses} bg-gradient-to-br from-emerald-50/50 to-teal-50/50 dark:from-emerald-950/30 dark:to-teal-950/30`
       case 'love':
@@ -359,7 +431,7 @@ export default function PoemDetailPage() {
   }
 
   const getFontClasses = () => {
-    switch(font) {
+    switch (font) {
       case 'sans':
         return "font-sans"
       case 'mono':
@@ -376,7 +448,7 @@ export default function PoemDetailPage() {
   }
 
   const getFontSizeClass = () => {
-    switch(fontSize) {
+    switch (fontSize) {
       case 'small':
         return "text-base"
       case 'large':
@@ -439,7 +511,7 @@ export default function PoemDetailPage() {
             <div className="flex items-center justify-between gap-4">
               <div className="flex items-center gap-3">
                 {/* Theme Toggle */}
-             
+
 
                 {/* Theme Selector */}
                 <Select value={theme} onValueChange={(value: ThemeType) => setTheme(value)}>
@@ -453,7 +525,7 @@ export default function PoemDetailPage() {
                     <SelectItem value="love">Love</SelectItem>
                     <SelectItem value="romantic">Romantic</SelectItem>
                     <SelectItem value="professional">Professional</SelectItem>
-                   
+
                     <SelectItem value="minimal">Minimal</SelectItem>
                   </SelectContent>
                 </Select>
@@ -738,7 +810,7 @@ export default function PoemDetailPage() {
             <Alert className="mb-6">
               <Languages className="w-4 h-4" />
               <AlertDescription className="text-sm">
-                {userPreferences.language === 'hindi' 
+                {userPreferences.language === 'hindi'
                   ? 'Hindi voice support requires Chrome/Edge browser with Hindi TTS enabled. If unavailable, the system will use the closest available voice.'
                   : 'Bengali voice support requires Chrome/Edge browser with Bengali TTS enabled. If unavailable, the system will use the closest available voice.'}
               </AlertDescription>
@@ -758,11 +830,11 @@ export default function PoemDetailPage() {
                 <Sparkles className="w-4 h-4" />
                 {poem.language ? `${poem.language.toUpperCase()} POEM` : 'FEATURED POEM'}
               </div>
-              
+
               <h1 className="text-4xl md:text-5xl font-bold text-gray-900 dark:text-white leading-tight">
-                {poem.title}
+                {translatedTitle || poem.title}
               </h1>
-              
+
               <div className="flex flex-col items-center gap-2">
                 {poem.author && (
                   <div className="flex items-center gap-2 text-lg text-gray-600 dark:text-gray-400">
@@ -792,6 +864,57 @@ export default function PoemDetailPage() {
               </div>
             </div>
 
+            {/* Translation Controls */}
+            <div className="flex items-center justify-center gap-3 py-4">
+              <span className="text-sm text-muted-foreground">Translate to:</span>
+              <div className="flex gap-2">
+                <Button
+                  variant={currentTranslateLang === 'hi' ? 'default' : 'outline'}
+                  size="sm"
+                  onClick={() => handleTranslate('hi')}
+                  disabled={isTranslating}
+                  className="gap-1"
+                >
+                  🇮🇳 Hindi
+                </Button>
+                <Button
+                  variant={currentTranslateLang === 'ur' ? 'default' : 'outline'}
+                  size="sm"
+                  onClick={() => handleTranslate('ur')}
+                  disabled={isTranslating}
+                  className="gap-1"
+                >
+                  🇵🇰 Urdu
+                </Button>
+                <Button
+                  variant={currentTranslateLang === 'bn' ? 'default' : 'outline'}
+                  size="sm"
+                  onClick={() => handleTranslate('bn')}
+                  disabled={isTranslating}
+                  className="gap-1"
+                >
+                  🇧🇩 Bengali
+                </Button>
+                {currentTranslateLang && (
+                  <Button
+                    variant="ghost"
+                    size="sm"
+                    onClick={() => {
+                      setTranslatedContent(null)
+                      setTranslatedTitle(null)
+                      setCurrentTranslateLang(null)
+                    }}
+                    className="text-muted-foreground"
+                  >
+                    Show Original
+                  </Button>
+                )}
+              </div>
+              {isTranslating && (
+                <span className="text-sm text-muted-foreground animate-pulse">Translating...</span>
+              )}
+            </div>
+
             {/* Poem Content */}
             <motion.div
               initial={{ opacity: 0 }}
@@ -802,10 +925,10 @@ export default function PoemDetailPage() {
               {/* Decorative Quote Marks */}
               <Quote className="absolute -left-8 top-0 w-8 h-8 text-gray-300 dark:text-gray-700 opacity-50" />
               <Quote className="absolute -right-8 bottom-0 w-8 h-8 text-gray-300 dark:text-gray-700 opacity-50 rotate-180" />
-              
+
               {/* Content Lines */}
-              <div className="relative pl-8 md:pl-12">
-                {poem.content.split('\n').map((line, index) => (
+              <div className={`relative pl-8 md:pl-12 ${currentTranslateLang === 'ur' ? 'text-right' : ''}`} dir={currentTranslateLang === 'ur' ? 'rtl' : 'ltr'}>
+                {(translatedContent || poem.content).split('\n').map((line, index) => (
                   <motion.p
                     key={index}
                     initial={{ opacity: 0, x: -20 }}
@@ -817,7 +940,7 @@ export default function PoemDetailPage() {
                       <span className="block h-4"></span>
                     ) : (
                       <>
-                        {index % 2 === 0 && (
+                        {index % 2 === 0 && !translatedContent && (
                           <CornerDownRight className="inline w-4 h-4 mr-3 text-primary/50" />
                         )}
                         {line}
@@ -1027,7 +1150,7 @@ export default function PoemDetailPage() {
               <Feather className="w-6 h-6" />
             </Button>
           </motion.div>
-          
+
           <motion.div
             initial={{ opacity: 0, scale: 0 }}
             animate={{ opacity: 1, scale: 1 }}

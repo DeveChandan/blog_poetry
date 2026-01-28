@@ -3,11 +3,11 @@ import { Suspense } from "react"
 import { Button } from "@/components/ui/button"
 import { Card, CardContent } from "@/components/ui/card"
 import { Badge } from "@/components/ui/badge"
-import { 
-  BookOpen, 
-  PenTool, 
-  Users, 
-  Calendar, 
+import {
+  BookOpen,
+  PenTool,
+  Users,
+  Calendar,
   ArrowRight,
   Sparkles,
   Heart,
@@ -24,6 +24,8 @@ import {
 
 import { connectDB } from "@/lib/db"
 import VideoThumbnail from "@/components/video-thumbnail"
+import HomeSlider from "@/components/home-slider"
+import { TranslatableHero } from "@/components/translatable-home"
 
 async function getFeaturedPoems() {
   const db = await connectDB()
@@ -61,7 +63,7 @@ async function getFeaturedVideos() {
 // Helper function to extract YouTube ID from URL
 function extractYouTubeId(url: string) {
   if (!url) return null
-  
+
   const patterns = [
     /(?:youtube\.com\/watch\?v=|youtu\.be\/|youtube\.com\/embed\/|youtube\.com\/v\/|youtube\.com\/watch\?.*v=)([^&\n?#]+)/,
     /youtube\.com\/watch\?.*&v=([^&\n?#]+)/,
@@ -69,14 +71,14 @@ function extractYouTubeId(url: string) {
     /youtube\.com\/embed\/([^&\n?#]+)/,
     /youtu\.be\/([^&\n?#]+)/
   ]
-  
+
   for (const pattern of patterns) {
     const match = url.match(pattern)
     if (match && match[1]) {
       return match[1]
     }
   }
-  
+
   return null
 }
 
@@ -84,9 +86,9 @@ async function getStats() {
   const db = await connectDB()
   const totalPoems = await db.collection("poems").countDocuments()
   const booksPublished = await db.collection("books").countDocuments()
-  const totalReaders = await db.collection("users").countDocuments(); 
+  const totalReaders = await db.collection("users").countDocuments();
   const totalVideos = await db.collection("videos").countDocuments();
-  const yearsWriting = new Date().getFullYear() - 2016; 
+  const yearsWriting = new Date().getFullYear() - 2016;
 
   return {
     totalPoems,
@@ -98,29 +100,29 @@ async function getStats() {
 }
 
 const testimonials = [
-    {
-      content: "Reading Chandan's poetry is like finding a quiet corner in a noisy world. Each verse resonates deeply.",
-      author: "Priya Sharma",
-      role: "Literature Professor"
-    },
-    {
-      content: "The way emotions are woven into words is simply breathtaking. A must-read for poetry lovers!",
-      author: "Rahul Mehta",
-      role: "Book Critic"
-    },
-    {
-      content: "Modern poetry at its finest. Relatable, profound, and beautifully crafted.",
-      author: "Anjali Patel",
-      role: "Author"
-    }
-  ]
+  {
+    content: "Reading Chandan's poetry is like finding a quiet corner in a noisy world. Each verse resonates deeply.",
+    author: "Priya Sharma",
+    role: "Literature Professor"
+  },
+  {
+    content: "The way emotions are woven into words is simply breathtaking. A must-read for poetry lovers!",
+    author: "Rahul Mehta",
+    role: "Book Critic"
+  },
+  {
+    content: "Modern poetry at its finest. Relatable, profound, and beautifully crafted.",
+    author: "Anjali Patel",
+    role: "Author"
+  }
+]
 const categories = [
-    { name: "Nature", icon: Sparkles, count: 42 },
-    { name: "Love", icon: Heart, count: 38 },
-    { name: "Urban Life", icon: TrendingUp, count: 28 },
-    { name: "Reflections", icon: Coffee, count: 34 },
-    { name: "Haiku", icon: Feather, count: 56 }
-  ]
+  { name: "Nature", icon: Sparkles, count: 42 },
+  { name: "Love", icon: Heart, count: 38 },
+  { name: "Urban Life", icon: TrendingUp, count: 28 },
+  { name: "Reflections", icon: Coffee, count: 34 },
+  { name: "Haiku", icon: Feather, count: 56 }
+]
 
 function Hero() {
   return (
@@ -173,7 +175,7 @@ function StatsSection({ stats }: { stats: any }) {
           <StatCard icon={PenTool} value={stats.totalPoems} label="Poems Published" />
           <StatCard icon={Users} value={stats.totalReaders.toLocaleString()} label="Readers Worldwide" />
           <StatCard icon={BookOpen} value={stats.booksPublished} label="Published Books" />
-        
+
           <StatCard icon={Calendar} value={`${stats.yearsWriting}+`} label="Years Writing" />
         </div>
       </div>
@@ -244,59 +246,59 @@ function FeaturedPoems({ poems }: { poems: any[] }) {
 }
 
 function RecentBooks({ books }: { books: any[] }) {
-    if (books.length === 0) return null
+  if (books.length === 0) return null
   return (
     <section className="py-20 px-4 sm:px-6 lg:px-8">
       <div className="max-w-7xl mx-auto">
         <div className="flex items-center justify-between mb-12">
-            <div>
-              <h2 className="text-3xl md:text-4xl font-bold text-foreground mb-3">
-                Published <span className="text-primary">Books</span>
-              </h2>
-              <p className="text-muted-foreground">Collections of poetry and literary works in print and digital</p>
-            </div>
-            <Button variant="ghost" asChild className="group">
-              <Link href="/books" className="flex items-center gap-2">
-                View All Books
-                <ArrowRight className="h-4 w-4 group-hover:translate-x-1 transition-transform" />
-              </Link>
-            </Button>
+          <div>
+            <h2 className="text-3xl md:text-4xl font-bold text-foreground mb-3">
+              Published <span className="text-primary">Books</span>
+            </h2>
+            <p className="text-muted-foreground">Collections of poetry and literary works in print and digital</p>
           </div>
+          <Button variant="ghost" asChild className="group">
+            <Link href="/books" className="flex items-center gap-2">
+              View All Books
+              <ArrowRight className="h-4 w-4 group-hover:translate-x-1 transition-transform" />
+            </Link>
+          </Button>
+        </div>
         <div className="grid md:grid-cols-2 gap-8">
           {books.map((book) => (
             <Card key={book._id} className="group overflow-hidden hover:shadow-xl transition-shadow">
-               <div className="md:flex">
-                    <div className="md:w-1/3 p-6 flex items-center justify-center">
-                      <div className="relative w-48 h-64 rounded-lg overflow-hidden shadow-lg">
-                        <img
-                          src={book.cover || '/placeholder.jpg'}
-                          alt={book.title}
-                          className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
-                        />
-                         <div className="absolute top-3 right-3">
-                          <Badge className="bg-primary/90 backdrop-blur-sm">
-                            <Star className="h-3 w-3 mr-1" />
-                            {book.rating || "N/A"}
-                          </Badge>
-                        </div>
-                      </div>
-                    </div>
-                    <div className="md:w-2/3 p-6">
-                      <Badge variant="outline" className="mb-3">{book.tags?.[0] || 'Book'}</Badge>
-                      <h3 className="text-2xl font-bold text-foreground mb-3 group-hover:text-primary transition-colors">{book.title}</h3>
-                      <p className="text-muted-foreground mb-4 line-clamp-3">{book.description}</p>
-                      <div className="flex items-center justify-between">
-                        <span className="text-sm text-muted-foreground">
-                          Published {new Date(book.createdAt).getFullYear()}
-                        </span>
-                        <Button asChild size="sm">
-                          <Link href={`/books/${book._id}`}>
-                            View Details
-                          </Link>
-                        </Button>
-                      </div>
+              <div className="md:flex">
+                <div className="md:w-1/3 p-6 flex items-center justify-center">
+                  <div className="relative w-48 h-64 rounded-lg overflow-hidden shadow-lg">
+                    <img
+                      src={book.cover || '/placeholder.jpg'}
+                      alt={book.title}
+                      className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
+                    />
+                    <div className="absolute top-3 right-3">
+                      <Badge className="bg-primary/90 backdrop-blur-sm">
+                        <Star className="h-3 w-3 mr-1" />
+                        {book.rating || "N/A"}
+                      </Badge>
                     </div>
                   </div>
+                </div>
+                <div className="md:w-2/3 p-6">
+                  <Badge variant="outline" className="mb-3">{book.tags?.[0] || 'Book'}</Badge>
+                  <h3 className="text-2xl font-bold text-foreground mb-3 group-hover:text-primary transition-colors">{book.title}</h3>
+                  <p className="text-muted-foreground mb-4 line-clamp-3">{book.description}</p>
+                  <div className="flex items-center justify-between">
+                    <span className="text-sm text-muted-foreground">
+                      Published {new Date(book.createdAt).getFullYear()}
+                    </span>
+                    <Button asChild size="sm">
+                      <Link href={`/books/${book._id}`}>
+                        View Details
+                      </Link>
+                    </Button>
+                  </div>
+                </div>
+              </div>
             </Card>
           ))}
         </div>
@@ -306,30 +308,30 @@ function RecentBooks({ books }: { books: any[] }) {
 }
 
 function FeaturedVideos({ videos }: { videos: any[] }) {
-    if (videos.length === 0) {
-        return (
-            <section className="py-20 px-4 sm:px-6 lg:px-8">
-                <div className="max-w-7xl mx-auto text-center text-muted-foreground">
-                    No featured videos found at the moment.
-                </div>
-            </section>
-        )
-    }
-    
-    // Function to format duration
-    const formatDuration = (seconds?: number) => {
-      if (!seconds) return "N/A"
-      const hours = Math.floor(seconds / 3600)
-      const minutes = Math.floor((seconds % 3600) / 60)
-      const secs = seconds % 60
-      
-      if (hours > 0) {
-        return `${hours}:${minutes.toString().padStart(2, '0')}:${secs.toString().padStart(2, '0')}`
-      }
-      return `${minutes}:${secs.toString().padStart(2, '0')}`
-    }
-
+  if (videos.length === 0) {
     return (
+      <section className="py-20 px-4 sm:px-6 lg:px-8">
+        <div className="max-w-7xl mx-auto text-center text-muted-foreground">
+          No featured videos found at the moment.
+        </div>
+      </section>
+    )
+  }
+
+  // Function to format duration
+  const formatDuration = (seconds?: number) => {
+    if (!seconds) return "N/A"
+    const hours = Math.floor(seconds / 3600)
+    const minutes = Math.floor((seconds % 3600) / 60)
+    const secs = seconds % 60
+
+    if (hours > 0) {
+      return `${hours}:${minutes.toString().padStart(2, '0')}:${secs.toString().padStart(2, '0')}`
+    }
+    return `${minutes}:${secs.toString().padStart(2, '0')}`
+  }
+
+  return (
     <section className="py-20 px-4 sm:px-6 lg:px-8">
       <div className="max-w-7xl mx-auto">
         <div className="flex items-center justify-between mb-12">
@@ -338,7 +340,7 @@ function FeaturedVideos({ videos }: { videos: any[] }) {
               Featured <span className="text-primary">Videos</span>
             </h2>
             <p className="text-muted-foreground">Visual journeys through poetry and literary insights</p>
-          </div>  
+          </div>
           <Button variant="ghost" asChild className="group">
             <Link href="/videos" className="flex items-center gap-2">
               View All Videos
@@ -364,7 +366,7 @@ function FeaturedVideos({ videos }: { videos: any[] }) {
                       </div>
                     </div>
                   )}
-                  
+
                   {/* Duration Badge */}
                   {video.duration && (
                     <Badge className="absolute bottom-3 right-3 bg-black/80 text-white text-xs z-10">
@@ -372,7 +374,7 @@ function FeaturedVideos({ videos }: { videos: any[] }) {
                       {formatDuration(video.duration)}
                     </Badge>
                   )}
-                  
+
                   {/* Views Badge */}
                   <Badge variant="secondary" className="absolute top-3 left-3 bg-black/60 text-white backdrop-blur-sm z-10">
                     <Eye className="h-3 w-3 mr-1" />
@@ -399,127 +401,128 @@ function FeaturedVideos({ videos }: { videos: any[] }) {
   )
 }
 function CategoriesSection() {
-    return (
-         <section className="py-20 bg-card/30">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="text-center mb-12">
-            <h2 className="text-3xl md:text-4xl font-bold text-foreground mb-4">
-              Explore by <span className="text-primary">Theme</span>
-            </h2>
-            <p className="text-muted-foreground max-w-2xl mx-auto">
-              Discover poems that resonate with your mood and moments
-            </p>
-          </div>
-
-          <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-4">
-            {categories.map((category) => (
-              <Link
-                key={category.name}
-                href={`/poems?category=${category.name.toLowerCase()}`}
-                className="group"
-              >
-                <div className="aspect-square rounded-xl bg-background border border-border/50 p-6 flex flex-col items-center justify-center text-center hover:border-primary hover:bg-primary/5 transition-all duration-300 hover:scale-105">
-                  <div className="p-3 rounded-lg bg-primary/10 text-primary mb-4 group-hover:bg-primary group-hover:text-primary-foreground transition-colors">
-                    <category.icon className="h-6 w-6" />
-                  </div>
-                  <h3 className="font-semibold text-foreground mb-1">{category.name}</h3>
-                  <p className="text-sm text-muted-foreground">{category.count} poems</p>
-                </div>
-              </Link>
-            ))}
-          </div>
+  return (
+    <section className="py-20 bg-card/30">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div className="text-center mb-12">
+          <h2 className="text-3xl md:text-4xl font-bold text-foreground mb-4">
+            Explore by <span className="text-primary">Theme</span>
+          </h2>
+          <p className="text-muted-foreground max-w-2xl mx-auto">
+            Discover poems that resonate with your mood and moments
+          </p>
         </div>
-      </section>
-    )
+
+        <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-4">
+          {categories.map((category) => (
+            <Link
+              key={category.name}
+              href={`/poems?category=${category.name.toLowerCase()}`}
+              className="group"
+            >
+              <div className="aspect-square rounded-xl bg-background border border-border/50 p-6 flex flex-col items-center justify-center text-center hover:border-primary hover:bg-primary/5 transition-all duration-300 hover:scale-105">
+                <div className="p-3 rounded-lg bg-primary/10 text-primary mb-4 group-hover:bg-primary group-hover:text-primary-foreground transition-colors">
+                  <category.icon className="h-6 w-6" />
+                </div>
+                <h3 className="font-semibold text-foreground mb-1">{category.name}</h3>
+                <p className="text-sm text-muted-foreground">{category.count} poems</p>
+              </div>
+            </Link>
+          ))}
+        </div>
+      </div>
+    </section>
+  )
 }
 
 function TestimonialsSection() {
-    return (
-         <section className="py-20 bg-card/50">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="text-center mb-12">
-            <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-primary/10 text-primary mb-4">
-              <Quote className="h-4 w-4" />
-              <span className="text-sm font-medium">What Readers Say</span>
-            </div>
-            <h2 className="text-3xl md:text-4xl font-bold text-foreground mb-4">
-              Voices from the <span className="text-primary">Community</span>
-            </h2>
+  return (
+    <section className="py-20 bg-card/50">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div className="text-center mb-12">
+          <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-primary/10 text-primary mb-4">
+            <Quote className="h-4 w-4" />
+            <span className="text-sm font-medium">What Readers Say</span>
           </div>
-
-          <div className="grid md:grid-cols-3 gap-8">
-            {testimonials.map((testimonial, index) => (
-              <Card key={index} className="relative overflow-hidden border-border/50">
-                <CardContent className="p-6">
-                  <div className="text-4xl text-primary/20 mb-4">"</div>
-                  <p className="text-muted-foreground mb-6 italic leading-relaxed">
-                    {testimonial.content}
-                  </p>
-                  <div className="flex items-center gap-3">
-                    <div className="w-10 h-10 rounded-full bg-primary/10 flex items-center justify-center">
-                      <span className="font-bold text-primary">
-                        {testimonial.author.charAt(0)}
-                      </span>
-                    </div>
-                    <div>
-                      <h4 className="font-semibold text-foreground">{testimonial.author}</h4>
-                      <p className="text-sm text-muted-foreground">{testimonial.role}</p>
-                    </div>
-                  </div>
-                </CardContent>
-              </Card>
-            ))}
-          </div>
+          <h2 className="text-3xl md:text-4xl font-bold text-foreground mb-4">
+            Voices from the <span className="text-primary">Community</span>
+          </h2>
         </div>
-      </section>
-    )
+
+        <div className="grid md:grid-cols-3 gap-8">
+          {testimonials.map((testimonial, index) => (
+            <Card key={index} className="relative overflow-hidden border-border/50">
+              <CardContent className="p-6">
+                <div className="text-4xl text-primary/20 mb-4">"</div>
+                <p className="text-muted-foreground mb-6 italic leading-relaxed">
+                  {testimonial.content}
+                </p>
+                <div className="flex items-center gap-3">
+                  <div className="w-10 h-10 rounded-full bg-primary/10 flex items-center justify-center">
+                    <span className="font-bold text-primary">
+                      {testimonial.author.charAt(0)}
+                    </span>
+                  </div>
+                  <div>
+                    <h4 className="font-semibold text-foreground">{testimonial.author}</h4>
+                    <p className="text-sm text-muted-foreground">{testimonial.role}</p>
+                  </div>
+                </div>
+              </CardContent>
+            </Card>
+          ))}
+        </div>
+      </div>
+    </section>
+  )
 }
 
 function CTASection() {
-    return (
-         <section className="py-20 px-4 sm:px-6 lg:px-8">
-        <div className="max-w-4xl mx-auto text-center">
-          <div className="relative">
-            <div className="absolute -top-20 left-1/2 transform -translate-x-1/2">
-              <div className="w-40 h-40 bg-primary/10 rounded-full blur-3xl" />
-            </div>
-            
-            <Card className="relative overflow-hidden border-0 bg-gradient-to-br from-primary/10 via-background to-purple-500/5">
-              <CardContent className="pt-16 pb-16 px-8">
-                <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-primary/20 text-primary mb-6">
-                  <Notebook className="h-4 w-4" />
-                  <span className="text-sm font-medium">Join the Journey</span>
-                </div>
-                
-                <h2 className="text-3xl md:text-4xl font-bold text-foreground mb-6">
-                  Stay Connected with the Words
-                </h2>
-                
-                <p className="text-xl text-muted-foreground mb-10 max-w-2xl mx-auto">
-                  Subscribe to receive new poems, writing insights, and literary updates directly in your inbox.
-                </p>
-                
-                <div className="flex flex-col sm:flex-row gap-4 max-w-md mx-auto">
-                  <input
-                    type="email"
-                    placeholder="Your email address"
-                    className="flex-1 px-4 py-3 rounded-lg bg-background border border-border focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent"
-                  />
-                  <Button size="lg" className="whitespace-nowrap">
-                    Subscribe
-                    <ArrowRight className="ml-2 h-4 w-4" />
-                  </Button>
-                </div>
-                
-                <p className="text-sm text-muted-foreground mt-6">
-                  No spam, only poetry. Unsubscribe anytime.
-                </p>
-              </CardContent>
-            </Card>
+  return (
+    <section className="py-20 px-4 sm:px-6 lg:px-8">
+      <div className="max-w-4xl mx-auto text-center">
+        <div className="relative">
+          <div className="absolute -top-20 left-1/2 transform -translate-x-1/2">
+            <div className="w-40 h-40 bg-primary/10 rounded-full blur-3xl" />
           </div>
+
+          <Card className="relative overflow-hidden border-0 bg-gradient-to-br from-primary/10 via-background to-purple-500/5">
+            <CardContent className="pt-16 pb-16 px-8">
+              <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-primary/20 text-primary mb-6">
+                <Notebook className="h-4 w-4" />
+                <span className="text-sm font-medium">Join the Journey</span>
+              </div>
+
+              <h2 className="text-3xl md:text-4xl font-bold text-foreground mb-6">
+                Stay Connected with the Words
+              </h2>
+
+              <p className="text-xl text-muted-foreground mb-10 max-w-2xl mx-auto">
+                Subscribe to receive new poems, writing insights, and literary updates directly in your inbox.
+              </p>
+
+              <div className="flex flex-col sm:flex-row gap-4 max-w-md mx-auto">
+                <input
+                  type="email"
+                  placeholder="Your email address"
+                  className="flex-1 px-4 py-3 rounded-lg bg-background border border-border focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent"
+                  suppressHydrationWarning
+                />
+                <Button size="lg" className="whitespace-nowrap" suppressHydrationWarning>
+                  Subscribe
+                  <ArrowRight className="ml-2 h-4 w-4" />
+                </Button>
+              </div>
+
+              <p className="text-sm text-muted-foreground mt-6">
+                No spam, only poetry. Unsubscribe anytime.
+              </p>
+            </CardContent>
+          </Card>
         </div>
-      </section>
-    )
+      </div>
+    </section>
+  )
 }
 
 export default async function Home() {
@@ -529,12 +532,32 @@ export default async function Home() {
 
   return (
     <main className="min-h-screen bg-gradient-to-b from-background via-background to-muted/10">
-      <Hero />
+      <HomeSlider />
+
+      {/* Welcome Message Section */}
+      <section className="py-8 px-4 bg-gradient-to-r from-primary/5 via-purple-500/5 to-primary/5 border-y border-border/50">
+        <div className="max-w-6xl mx-auto text-center">
+          <div className="flex items-center justify-center gap-2 mb-3">
+            <Sparkles className="h-5 w-5 text-primary animate-pulse" />
+            <h2 className="text-2xl md:text-3xl font-bold text-foreground">
+              Welcome to the World of Poetry
+            </h2>
+            <Sparkles className="h-5 w-5 text-primary animate-pulse" />
+          </div>
+          <p className="text-lg md:text-xl text-muted-foreground max-w-3xl mx-auto leading-relaxed">
+            Explore the heartfelt verses and literary creations of{" "}
+            <span className="font-bold text-primary">Dr. Rupesh Kumar Singh</span>
+            {" "}- where emotions flow through every word and verse.
+          </p>
+        </div>
+      </section>
+
+      <div className="hidden"><TranslatableHero /></div> {/* Hidden fallback if needed or remove completely */}
       <StatsSection stats={stats} />
       <Suspense fallback={<div className="text-center p-12">Loading poems...</div>}>
-         <FeaturedPoems poems={featuredPoems} />
+        <FeaturedPoems poems={featuredPoems} />
       </Suspense>
-     <Suspense fallback={<div className="text-center p-12">Loading books...</div>}>
+      <Suspense fallback={<div className="text-center p-12">Loading books...</div>}>
         <RecentBooks books={recentBooks} />
       </Suspense>
       <Suspense fallback={<div className="text-center p-12">Loading videos...</div>}>

@@ -2,21 +2,24 @@
 
 import Link from "next/link"
 import { useRouter } from "next/navigation"
-import { useState, useEffect } from "react" // Import useEffect
+import { useState, useEffect, useCallback } from "react"
 import { Button } from "@/components/ui/button"
-import { useTheme } from "next-themes" // Import useTheme
-import { Moon, Sun } from "lucide-react" // Import icons
-import { useSession } from "@/hooks/use-session" // Import useSession
-import eventBus from "@/lib/event-bus" // Import the event bus
+import { NavigationDropdown } from "@/components/navigation-dropdown"
+import { useTheme } from "next-themes"
+import { Moon, Sun, Feather, BookOpen, Video, PenTool, HelpCircle, Menu, X } from "lucide-react"
+import { useSession } from "@/hooks/use-session"
+import eventBus from "@/lib/event-bus"
+import LanguageSelector from "@/components/language-selector"
+import { useTranslations } from "@/lib/language-context"
 
 export default function Navigation() {
   const [isOpen, setIsOpen] = useState(false)
   const router = useRouter()
-  const { theme, setTheme, resolvedTheme } = useTheme() // Use resolvedTheme
-  const { user, loading, refetch } = useSession() // Use the session hook
-  const [mounted, setMounted] = useState(false) // State to track if component is mounted
+  const { theme, setTheme, resolvedTheme } = useTheme()
+  const { user, loading, refetch } = useSession()
+  const [mounted, setMounted] = useState(false)
+  const { t, isRtl } = useTranslations()
 
-  // useEffect to set mounted to true after client-side mount
   useEffect(() => {
     setMounted(true)
   }, [])
@@ -31,11 +34,11 @@ export default function Navigation() {
     }
   }, [refetch])
 
-  const toggleTheme = () => {
+  const toggleTheme = useCallback(() => {
     setTheme(theme === "dark" ? "light" : "dark")
-  }
+  }, [theme, setTheme])
 
-  const handleLogout = async () => {
+  const handleLogout = useCallback(async () => {
     try {
       const res = await fetch("/api/auth/logout", { method: "POST" })
       if (res.ok) {
@@ -43,68 +46,129 @@ export default function Navigation() {
         router.push("/login")
       } else {
         console.error("Logout failed:", await res.json())
-        // Optionally, show an error to the user
       }
     } catch (error) {
       console.error("An error occurred during logout:", error)
-      // Optionally, show an error to the user
     }
-  }
+  }, [refetch, router])
 
   return (
-    <nav className="sticky top-0 z-50 bg-background border-b border-border">
+    <nav className="sticky top-0 z-50 bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60 border-b border-border">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex justify-between items-center h-16">
-          <Link href="/" className="text-2xl font-bold text-primary">
-            Poetry & Books
+          <Link href="/" className="flex items-center gap-3 group">
+            <div className="relative flex h-10 w-10 items-center justify-center rounded-xl bg-primary/10 text-primary transition-all duration-300 group-hover:scale-105 group-hover:bg-primary group-hover:text-primary-foreground group-active:scale-95 shadow-sm">
+              <Feather className="h-6 w-6 stroke-[2.5px]" />
+            </div>
+            <span className="font-serif text-xl sm:text-2xl font-bold tracking-tight text-foreground transition-colors group-hover:text-primary">
+              Dr Rupesh Kumar Singh
+            </span>
           </Link>
 
-          <div className="hidden md:flex items-center gap-8">
-            <Link href="/poems" className="text-foreground hover:text-primary transition">
-              Poems
-            </Link>
-            <Link href="/books" className="text-foreground hover:text-primary transition">
-              Books
-            </Link>
-            <Link href="/videos" className="text-foreground hover:text-primary transition">
-              Videos
-            </Link>
-            <Link href="/about" className="text-foreground hover:text-primary transition">
+          {/* Desktop Navigation */}
+          <div className="hidden md:flex items-center gap-2" dir={isRtl ? 'rtl' : 'ltr'}>
+            <NavigationDropdown
+              trigger="Literature"
+              featured={{
+                href: "/poems",
+                label: "Poems",
+                description: "Explore a vast collection of heartfelt and soul-stirring poetry.",
+                icon: <Feather className="h-6 w-6 text-primary mb-2" />
+              }}
+              items={[
+                {
+                  href: "/books",
+                  label: "Books",
+                  description: "Published works and literary collections.",
+                  icon: <BookOpen className="h-4 w-4" />
+                },
+                {
+                  href: "/shayari",
+                  label: "Shayari",
+                  description: "Traditional Urdu and Hindi couplets.",
+                  icon: <PenTool className="h-4 w-4" />
+                },
+                {
+                  href: "/sher",
+                  label: "Sher",
+                  description: "Short, impactful poetic verses.",
+                  icon: <Feather className="h-4 w-4" />
+                }
+              ]}
+            />
+
+            <NavigationDropdown
+              trigger="Media"
+              items={[
+                {
+                  href: "/videos",
+                  label: "Videos",
+                  description: "Watch recitations, interviews, and more.",
+                  icon: <Video className="h-4 w-4" />
+                },
+                {
+                  href: "/blog",
+                  label: "Blog",
+                  description: "Thoughts, articles, and literary analysis.",
+                  icon: <BookOpen className="h-4 w-4" />
+                }
+              ]}
+            />
+
+            <NavigationDropdown
+              trigger="Interact"
+              items={[
+                {
+                  href: "/quiz",
+                  label: "Quiz",
+                  description: "Test your knowledge of poetry and literature.",
+                  icon: <HelpCircle className="h-4 w-4" />
+                }
+              ]}
+            />
+
+            <Link
+              href="/about"
+              className="inline-flex h-9 items-center justify-center rounded-md bg-background px-4 py-2 text-sm font-medium hover:bg-accent hover:text-accent-foreground transition-colors"
+            >
               About
             </Link>
+
             {loading ? (
-              <div className="w-24 h-8 bg-muted animate-pulse rounded"></div> // Placeholder
+              <div className="w-24 h-8 bg-muted animate-pulse rounded"></div>
             ) : user ? (
               <div className="flex items-center gap-4">
                 {user.isAdmin ? (
-                  <Link href="/admin" className="text-foreground hover:text-primary transition">
-                    Admin
+                  <Link href="/admin" className="text-foreground hover:text-primary transition font-medium text-sm">
+                    {t('admin')}
                   </Link>
                 ) : (
-                  <Link href="/profile" className="text-foreground hover:text-primary transition">
-                    Profile
+                  <Link href="/profile" className="text-foreground hover:text-primary transition font-medium text-sm">
+                    {t('profile')}
                   </Link>
                 )}
-                <Button variant="ghost" onClick={handleLogout}>
-                  Logout
+                <Button variant="ghost" size="sm" onClick={handleLogout}>
+                  {t('logout')}
                 </Button>
               </div>
             ) : (
               <div className="flex items-center gap-4">
-                <Link href="/login" className="text-foreground hover:text-primary transition">
-                  Login
+                <Link href="/login" className="text-foreground hover:text-primary transition font-medium text-sm">
+                  {t('login')}
                 </Link>
-                <Button asChild>
-                  <Link href="/register">Sign Up</Link>
+                <Button asChild size="sm">
+                  <Link href="/register">{t('signUp')}</Link>
                 </Button>
               </div>
             )}
+            {/* Language Selector for Desktop */}
+            {mounted && <LanguageSelector />}
             {/* Theme Toggle for Desktop */}
-            {mounted && ( // Only render theme toggle after component mounts
+            {mounted && (
               <Button variant="ghost" size="icon" onClick={toggleTheme}>
-                {resolvedTheme === "dark" ? ( // If current theme is dark, show Sun icon (to switch to light)
+                {resolvedTheme === "dark" ? (
                   <Sun className="h-[1.2rem] w-[1.2rem] rotate-0 scale-100 transition-all" />
-                ) : ( // If current theme is light, show Moon icon (to switch to dark)
+                ) : (
                   <Moon className="h-[1.2rem] w-[1.2rem] rotate-0 scale-100 transition-all" />
                 )}
                 <span className="sr-only">Toggle theme</span>
@@ -114,67 +178,93 @@ export default function Navigation() {
 
           {/* Mobile menu button */}
           <div className="flex items-center md:hidden">
+            {/* Language Selector for Mobile */}
+            {mounted && <LanguageSelector />}
             {/* Theme Toggle for Mobile */}
-            {mounted && ( // Only render theme toggle after component mounts
+            {mounted && (
               <Button variant="ghost" size="icon" onClick={toggleTheme} className="mr-2">
-                {resolvedTheme === "dark" ? ( // If current theme is dark, show Sun icon (to switch to light)
+                {resolvedTheme === "dark" ? (
                   <Sun className="h-[1.2rem] w-[1.2rem] rotate-0 scale-100 transition-all" />
-                ) : ( // If current theme is light, show Moon icon (to switch to dark)
+                ) : (
                   <Moon className="h-[1.2rem] w-[1.2rem] rotate-0 scale-100 transition-all" />
                 )}
                 <span className="sr-only">Toggle theme</span>
               </Button>
             )}
-            <button onClick={() => setIsOpen(!isOpen)} className="flex flex-col gap-1">
-              <div className="w-6 h-0.5 bg-foreground"></div>
-              <div className="w-6 h-0.5 bg-foreground"></div>
-              <div className="w-6 h-0.5 bg-foreground"></div>
+            <button onClick={() => setIsOpen(!isOpen)} className="p-2 text-foreground" suppressHydrationWarning>
+              {isOpen ? <X className="h-6 w-6" /> : <Menu className="h-6 w-6" />}
             </button>
           </div>
         </div>
 
         {/* Mobile menu */}
         {isOpen && (
-          <div className="md:hidden pb-4 border-t border-border">
-            <Link href="/poems" className="block py-2 text-foreground hover:text-primary">
-              Poems
-            </Link>
-            <Link href="/books" className="block py-2 text-foreground hover:text-primary">
-              Books
-            </Link>
-            <Link href="/videos" className="block py-2 text-foreground hover:text-primary">
-              Videos
-            </Link>
-            <Link href="/about" className="block py-2 text-foreground hover:text-primary">
-              About
-            </Link>
-            {loading ? (
-              <div className="w-20 h-8 bg-muted animate-pulse rounded"></div> // Placeholder
-            ) : user ? (
-              <>
-                {user.isAdmin ? (
-                  <Link href="/admin" className="block py-2 text-foreground hover:text-primary">
-                    Admin
-                  </Link>
-                ) : (
-                  <Link href="/profile" className="block py-2 text-foreground hover:text-primary">
-                    Profile
-                  </Link>
-                )}
-                <button onClick={handleLogout} className="block w-full text-left py-2 text-foreground hover:text-primary">
-                  Logout
-                </button>
-              </>
-            ) : (
-              <>
-                <Link href="/login" className="block py-2 text-foreground hover:text-primary">
-                  Login
+          <div className="md:hidden pb-4 border-t border-border animate-in slide-in-from-top-5" dir={isRtl ? 'rtl' : 'ltr'}>
+            <div className="space-y-4 py-4">
+              {/* Literature Section */}
+              <div className="px-2">
+                <h3 className="mb-2 px-2 text-lg font-semibold tracking-tight text-primary">Literature</h3>
+                <div className="grid grid-cols-2 gap-2">
+                  <Link href="/poems" className="block p-2 text-sm text-foreground hover:bg-muted rounded-md" onClick={() => setIsOpen(false)}>Poems</Link>
+                  <Link href="/books" className="block p-2 text-sm text-foreground hover:bg-muted rounded-md" onClick={() => setIsOpen(false)}>Books</Link>
+                  <Link href="/shayari" className="block p-2 text-sm text-foreground hover:bg-muted rounded-md" onClick={() => setIsOpen(false)}>Shayari</Link>
+                  <Link href="/sher" className="block p-2 text-sm text-foreground hover:bg-muted rounded-md" onClick={() => setIsOpen(false)}>Sher</Link>
+                </div>
+              </div>
+
+              {/* Media Section */}
+              <div className="px-2">
+                <h3 className="mb-2 px-2 text-lg font-semibold tracking-tight text-primary">Media</h3>
+                <div className="grid grid-cols-2 gap-2">
+                  <Link href="/videos" className="block p-2 text-sm text-foreground hover:bg-muted rounded-md" onClick={() => setIsOpen(false)}>Videos</Link>
+                  <Link href="/blog" className="block p-2 text-sm text-foreground hover:bg-muted rounded-md" onClick={() => setIsOpen(false)}>Blog</Link>
+                </div>
+              </div>
+
+              {/* Interact Section */}
+              <div className="px-2">
+                <h3 className="mb-2 px-2 text-lg font-semibold tracking-tight text-primary">Interact</h3>
+                <div>
+                  <Link href="/quiz" className="block p-2 text-sm text-foreground hover:bg-muted rounded-md" onClick={() => setIsOpen(false)}>Quiz</Link>
+                </div>
+              </div>
+
+              <div className="px-4">
+                <Link href="/about" className="block py-2 text-lg font-medium text-foreground hover:text-primary border-b border-border" onClick={() => setIsOpen(false)}>
+                  About
                 </Link>
-                <Link href="/register" className="block py-2 text-foreground hover:text-primary">
-                  Sign Up
-                </Link>
-              </>
-            )}
+              </div>
+            </div>
+
+            <div className="px-4 py-4 space-y-3">
+              {loading ? (
+                <div className="w-20 h-8 bg-muted animate-pulse rounded"></div>
+              ) : user ? (
+                <>
+                  {user.isAdmin ? (
+                    <Link href="/admin" className="block py-2 text-foreground hover:text-primary font-medium" onClick={() => setIsOpen(false)}>
+                      {t('admin')}
+                    </Link>
+                  ) : (
+                    <Link href="/profile" className="block py-2 text-foreground hover:text-primary font-medium" onClick={() => setIsOpen(false)}>
+                      {t('profile')}
+                    </Link>
+                  )}
+                  <button onClick={() => { handleLogout(); setIsOpen(false); }} className="block w-full text-left py-2 text-red-500 hover:text-red-600 font-medium">
+                    {t('logout')}
+                  </button>
+                </>
+              ) : (
+                <div className="flex flex-col gap-2">
+                  <Link href="/login" className="block py-2 text-foreground hover:text-primary" onClick={() => setIsOpen(false)}>
+                    {t('login')}
+                  </Link>
+                  <Link href="/register" className="block py-2 text-primary font-bold" onClick={() => setIsOpen(false)}>
+                    {t('signUp')}
+                  </Link>
+                </div>
+              )}
+            </div>
           </div>
         )}
       </div>

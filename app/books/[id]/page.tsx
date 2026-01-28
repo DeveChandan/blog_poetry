@@ -52,6 +52,7 @@ import {
   Minimize2
 } from "lucide-react"
 import { toast } from "sonner"
+import { useLanguage } from "@/lib/language-context"
 import {
   Dialog,
   DialogContent,
@@ -134,7 +135,7 @@ const useMediaQuery = (query: string): boolean => {
     if (media.matches !== matches) {
       setMatches(media.matches)
     }
-    
+
     const listener = () => setMatches(media.matches)
     window.addEventListener('resize', listener)
     return () => window.removeEventListener('resize', listener)
@@ -147,7 +148,7 @@ export default function BookDetailPage() {
   const params = useParams()
   const router = useRouter()
   const id = params.id as string
-  
+
   const [book, setBook] = useState<Book | null>(null)
   const [loading, setLoading] = useState(true)
   const [showPurchaseModal, setShowPurchaseModal] = useState(false)
@@ -163,9 +164,15 @@ export default function BookDetailPage() {
   const [isPurchasing, setIsPurchasing] = useState(false)
   const [viewCount, setViewCount] = useState(0)
   const [isFullscreen, setIsFullscreen] = useState(false)
-  
+
   const isMobile = useMediaQuery("(max-width: 768px)")
   const isTablet = useMediaQuery("(max-width: 1024px)")
+
+  // Translation states for app-wide language
+  const { currentLanguage } = useLanguage()
+  const [translatedTitle, setTranslatedTitle] = useState<string | null>(null)
+  const [translatedDescription, setTranslatedDescription] = useState<string | null>(null)
+  const [isTranslating, setIsTranslating] = useState(false)
 
   useEffect(() => {
     setMounted(true)
@@ -173,17 +180,17 @@ export default function BookDetailPage() {
 
   useEffect(() => {
     if (!mounted) return
-    
+
     async function fetchBook() {
       try {
         setLoading(true)
-        
+
         const res = await fetch(`/api/books/${id}`)
         if (!res.ok) throw new Error("Failed to fetch book")
-        
+
         const data = await res.json()
         setBook(data)
-        
+
         // Update view count
         try {
           await fetch(`/api/books/${id}/view`, {
@@ -192,27 +199,27 @@ export default function BookDetailPage() {
         } catch (e) {
           console.error('Failed to update view count:', e)
         }
-        
+
         if (data.filePath) {
           const extension = data.filePath.substring(data.filePath.lastIndexOf('.')).toLowerCase()
           setFileType(extension)
           setViewerMode(extension === '.pdf' ? "pdf" : "document")
         }
-        
+
         // Client-side check for purchase status
         const purchaseStatus = localStorage.getItem(`purchased_${id}`)
         setHasPurchased(!!purchaseStatus)
-        
+
         // Check bookmark status
         const bookmarkStatus = localStorage.getItem(`bookmark_${id}`)
         setIsBookmarked(!!bookmarkStatus)
-        
+
         // Check like status
         const likeStatus = localStorage.getItem(`like_${id}`)
         setIsLiked(!!likeStatus)
-        
+
         setViewCount(data.viewCount || 0)
-        
+
       } catch (error) {
         console.error("Failed to fetch book:", error)
         toast.error("Could not load book details")
@@ -221,9 +228,49 @@ export default function BookDetailPage() {
         setLoading(false)
       }
     }
-    
+
     fetchBook()
   }, [id, router, mounted])
+
+  // Auto-translate when navbar language changes
+  useEffect(() => {
+    if (!book) return
+
+    const translateBook = async () => {
+      if (currentLanguage.code === 'en') {
+        setTranslatedTitle(null)
+        setTranslatedDescription(null)
+        return
+      }
+
+      setIsTranslating(true)
+      try {
+        const [titleRes, descRes] = await Promise.all([
+          fetch('/api/translate', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ text: book.title, targetLang: currentLanguage.code })
+          }),
+          fetch('/api/translate', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ text: book.description, targetLang: currentLanguage.code })
+          })
+        ])
+
+        const [titleData, descData] = await Promise.all([titleRes.json(), descRes.json()])
+
+        if (titleData.translatedText) setTranslatedTitle(titleData.translatedText)
+        if (descData.translatedText) setTranslatedDescription(descData.translatedText)
+      } catch (error) {
+        console.error('Translation error:', error)
+      } finally {
+        setIsTranslating(false)
+      }
+    }
+
+    translateBook()
+  }, [currentLanguage.code, book?._id])
 
   const handleAddToCart = async () => {
     if (!book) return
@@ -231,40 +278,40 @@ export default function BookDetailPage() {
       toast.error("This book is currently out of stock")
       return
     }
-    
+
     setIsAddingToCart(true)
     try {
       const res = await fetch("/api/cart", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ 
-          bookId: id, 
-          quantity: 1, 
+        body: JSON.stringify({
+          bookId: id,
+          quantity: 1,
           price: book.price,
           title: book.title,
           cover: book.cover
         }),
       })
-      
+
       const data = await res.json()
-      
+
       if (res.ok) {
         toast.success("Added to cart!", {
-          action: { 
-            label: "View Cart", 
-            onClick: () => router.push("/cart") 
+          action: {
+            label: "View Cart",
+            onClick: () => router.push("/cart")
           },
           description: `${book.title} has been added to your cart`,
           duration: isMobile ? 3000 : 5000,
         })
-        
+
         // Update cart count in local storage for cart badge
         const cartCount = localStorage.getItem('cart_count') || '0'
         localStorage.setItem('cart_count', (parseInt(cartCount) + 1).toString())
-        
+
         // Dispatch custom event for cart update
         window.dispatchEvent(new Event('cart-updated'))
-        
+
       } else {
         toast.error(data.message || "Please login to add items to cart")
         if (data.redirect) {
@@ -285,22 +332,22 @@ export default function BookDetailPage() {
       toast.error("This book is currently out of stock")
       return
     }
-    
+
     setIsPurchasing(true)
     try {
       const res = await fetch("/api/purchase", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ 
-          bookId: id, 
+        body: JSON.stringify({
+          bookId: id,
           price: book.price,
           title: book.title,
-          author: book.author 
+          author: book.author
         }),
       })
-      
+
       const data = await res.json()
-      
+
       if (res.ok) {
         localStorage.setItem(`purchased_${id}`, "true")
         // Add to purchase history
@@ -312,26 +359,26 @@ export default function BookDetailPage() {
           price: book.price
         })
         localStorage.setItem('purchases', JSON.stringify(purchases))
-        
+
         setHasPurchased(true)
         setShowPurchaseModal(false)
-        
+
         toast.success("Purchase successful!", {
           description: "You now have full access to this book",
-          action: !isMobile ? { 
-            label: "Start Reading", 
-            onClick: () => document.getElementById('preview-section')?.scrollIntoView({ behavior: 'smooth' }) 
+          action: !isMobile ? {
+            label: "Start Reading",
+            onClick: () => document.getElementById('preview-section')?.scrollIntoView({ behavior: 'smooth' })
           } : undefined,
           duration: 5000,
         })
-        
+
         // Update download count
         try {
           await fetch(`/api/books/${id}/download`, { method: 'POST' })
         } catch (e) {
           console.error('Failed to update download count:', e)
         }
-        
+
       } else {
         toast.error(data.message || "Purchase failed. Please try again.")
         if (data.redirect) {
@@ -366,14 +413,14 @@ export default function BookDetailPage() {
       link.click()
       link.remove()
       window.URL.revokeObjectURL(downloadUrl)
-      
+
       // Update download count
       try {
         await fetch(`/api/books/${id}/download`, { method: 'POST' })
       } catch (e) {
         console.error('Failed to update download count:', e)
       }
-      
+
       toast.success("Download started!")
     } catch (error) {
       console.error("Download failed:", error)
@@ -384,11 +431,11 @@ export default function BookDetailPage() {
   const handleReadPreview = () => {
     const previewSection = document.getElementById('preview-section')
     if (previewSection) {
-      previewSection.scrollIntoView({ 
+      previewSection.scrollIntoView({
         behavior: 'smooth',
         block: 'center'
       })
-      
+
       // Add visual feedback
       previewSection.classList.add('ring-2', 'ring-primary', 'ring-offset-2')
       setTimeout(() => {
@@ -403,7 +450,7 @@ export default function BookDetailPage() {
         localStorage.removeItem(`bookmark_${id}`)
         setIsBookmarked(false)
         toast("Bookmark removed")
-        
+
         // API call to remove bookmark
         await fetch(`/api/books/${id}/bookmark`, {
           method: 'DELETE'
@@ -415,7 +462,7 @@ export default function BookDetailPage() {
           description: "Added to your collection",
           icon: <BookmarkCheck className="h-4 w-4" />,
         })
-        
+
         // API call to add bookmark
         await fetch(`/api/books/${id}/bookmark`, {
           method: 'POST'
@@ -432,7 +479,7 @@ export default function BookDetailPage() {
         localStorage.removeItem(`like_${id}`)
         setIsLiked(false)
         toast("Removed from likes")
-        
+
         await fetch(`/api/books/${id}/like`, {
           method: 'DELETE'
         })
@@ -440,7 +487,7 @@ export default function BookDetailPage() {
         localStorage.setItem(`like_${id}`, "true")
         setIsLiked(true)
         toast("Added to likes")
-        
+
         await fetch(`/api/books/${id}/like`, {
           method: 'POST'
         })
@@ -456,7 +503,7 @@ export default function BookDetailPage() {
       text: `Check out "${book?.title}" by ${book?.author} on our platform!`,
       url: window.location.href,
     }
-    
+
     if (navigator.share && isMobile) {
       navigator.share(shareData)
         .then(() => console.log('Shared successfully'))
@@ -466,7 +513,7 @@ export default function BookDetailPage() {
       toast("Link copied to clipboard!")
     }
   }
-  
+
   const getDocumentTypeName = () => {
     if (!fileType) return "Document"
     if (fileType === '.pdf') return "PDF Document"
@@ -506,7 +553,7 @@ export default function BookDetailPage() {
               <div className="text-lg font-bold text-primary">${book?.price.toFixed(2)}</div>
             </div>
             <div className="flex items-center gap-2">
-              <Button 
+              <Button
                 size="sm"
                 variant="outline"
                 className="h-10 px-3"
@@ -514,7 +561,7 @@ export default function BookDetailPage() {
               >
                 <Bookmark className={`h-4 w-4 ${isBookmarked ? 'fill-primary' : ''}`} />
               </Button>
-              <Button 
+              <Button
                 size="sm"
                 className="h-10 px-4"
                 onClick={handleAddToCart}
@@ -554,14 +601,14 @@ export default function BookDetailPage() {
           <p className="text-muted-foreground mt-2">The book you're looking for doesn't exist or has been removed.</p>
         </div>
         <div className="flex flex-col sm:flex-row gap-3 justify-center">
-          <Button 
+          <Button
             onClick={() => router.push("/books")}
             className="group"
           >
             Browse Library
             <ChevronRight className="ml-2 h-4 w-4 group-hover:translate-x-1 transition-transform" />
           </Button>
-          <Button 
+          <Button
             variant="outline"
             onClick={() => router.back()}
           >
@@ -592,11 +639,11 @@ export default function BookDetailPage() {
                 <ChevronLeft className="h-5 w-5 mr-1" />
                 <span className="hidden sm:inline">Back</span>
               </Button>
-              
+
               <div className="flex-1 max-w-xs mx-4">
                 <h1 className="text-sm font-semibold truncate text-center">{book.title}</h1>
               </div>
-              
+
               <div className="flex items-center gap-1">
                 <TooltipProvider>
                   <Tooltip>
@@ -615,7 +662,7 @@ export default function BookDetailPage() {
                     </TooltipContent>
                   </Tooltip>
                 </TooltipProvider>
-                
+
                 <Sheet>
                   <SheetTrigger asChild>
                     <Button variant="ghost" size="icon" className="h-9 w-9">
@@ -637,9 +684,9 @@ export default function BookDetailPage() {
                           </Button>
                         </div>
                       </div>
-                      
+
                       <Separator />
-                      
+
                       <div className="space-y-2">
                         <h3 className="font-semibold">Book Details</h3>
                         <div className="space-y-1 text-sm">
@@ -657,14 +704,14 @@ export default function BookDetailPage() {
                           </div>
                         </div>
                       </div>
-                      
+
                       <Separator />
-                      
+
                       <div className="space-y-3">
                         <h3 className="font-semibold">Reading Options</h3>
                         <div className="space-y-2">
-                          <Button 
-                            className="w-full justify-start" 
+                          <Button
+                            className="w-full justify-start"
                             variant="outline"
                             onClick={handleReadPreview}
                           >
@@ -672,8 +719,8 @@ export default function BookDetailPage() {
                             Read {hasPurchased ? 'Now' : 'Preview'}
                           </Button>
                           {hasPurchased && (
-                            <Button 
-                              className="w-full justify-start" 
+                            <Button
+                              className="w-full justify-start"
                               variant="outline"
                               onClick={handleDownload}
                             >
@@ -703,7 +750,7 @@ export default function BookDetailPage() {
             <div className="lg:col-span-1 space-y-6">
               <div className="lg:sticky lg:top-24 space-y-6">
                 {/* Cover Image */}
-                <div 
+                <div
                   className="relative group cursor-pointer rounded-2xl md:rounded-3xl overflow-hidden shadow-lg md:shadow-2xl"
                   onClick={() => setShowFullCover(true)}
                 >
@@ -746,7 +793,7 @@ export default function BookDetailPage() {
                           { icon: <Star className="h-3 w-3 md:h-4 md:w-4" />, label: "Rating", value: book.rating?.toFixed(1) || "N/A" },
                           { icon: <BookText className="h-3 w-3 md:h-4 md:w-4" />, label: "Pages", value: book.pages || "N/A" },
                           { icon: <Clock className="h-3 w-3 md:h-4 md:w-4" />, label: "Time", value: `${getReadingTime()}m` },
-                          { icon: <Users className="h-3 w-3 md:h-4 md:w-4" />, label: "Readers", value: viewCount > 1000 ? `${(viewCount/1000).toFixed(1)}k` : viewCount },
+                          { icon: <Users className="h-3 w-3 md:h-4 md:w-4" />, label: "Readers", value: viewCount > 1000 ? `${(viewCount / 1000).toFixed(1)}k` : viewCount },
                         ].map((stat, index) => (
                           <Tooltip key={index}>
                             <TooltipTrigger asChild>
@@ -855,9 +902,9 @@ export default function BookDetailPage() {
             <div className="lg:col-span-2 space-y-6 md:space-y-8">
               {/* Title & Author */}
               <div className="space-y-4">
-                <div>
-                  <h1 className="text-2xl md:text-4xl lg:text-5xl font-bold tracking-tight">
-                    {book.title}
+                <div dir={currentLanguage.rtl ? 'rtl' : 'ltr'}>
+                  <h1 className={`text-2xl md:text-4xl lg:text-5xl font-bold tracking-tight ${isTranslating ? 'opacity-70' : ''}`}>
+                    {translatedTitle || book.title}
                   </h1>
                   {book.author && (
                     <p className="text-base md:text-xl text-muted-foreground mt-2">
@@ -871,7 +918,7 @@ export default function BookDetailPage() {
                   <div className="text-3xl md:text-5xl font-bold text-primary">
                     ${book.price.toFixed(2)}
                   </div>
-                  
+
                   {book.stock !== undefined && (
                     <div className="text-sm md:text-base">
                       {book.stock > 0 ? (
@@ -893,7 +940,7 @@ export default function BookDetailPage() {
                 {/* Badges */}
                 <div className="flex flex-wrap gap-2">
                   {book.genre?.slice(0, isMobile ? 3 : 5).map((g, i) => (
-                    <Badge 
+                    <Badge
                       key={g}
                       variant="secondary"
                       className="rounded-full px-3 py-1 text-xs md:text-sm"
@@ -1008,8 +1055,8 @@ export default function BookDetailPage() {
               {!isMobile && (
                 <div className="space-y-4">
                   <div className="flex flex-col sm:flex-row gap-4">
-                    <Button 
-                      size="lg" 
+                    <Button
+                      size="lg"
                       className="flex-1 h-14 text-lg shadow-lg hover:shadow-xl transition-all duration-300 bg-gradient-to-r from-primary to-secondary hover:from-primary/90 hover:to-secondary/90"
                       onClick={handleAddToCart}
                       disabled={isAddingToCart || (book.stock === 0)}
@@ -1029,11 +1076,11 @@ export default function BookDetailPage() {
                         </span>
                       )}
                     </Button>
-                    
+
                     {book.filePath && (
-                      <Button 
+                      <Button
                         size="lg"
-                        variant="outline" 
+                        variant="outline"
                         className="flex-1 h-14 text-lg border-2 hover:border-primary hover:bg-primary/5 transition-all duration-300 group"
                         onClick={handleReadPreview}
                       >
@@ -1086,8 +1133,8 @@ export default function BookDetailPage() {
                         )}
                       </h2>
                       <p className="text-sm md:text-base text-muted-foreground mt-1 md:mt-2">
-                        {hasPurchased 
-                          ? "You have full access to this document" 
+                        {hasPurchased
+                          ? "You have full access to this document"
                           : "Purchase to unlock full access"}
                       </p>
                     </div>
@@ -1106,7 +1153,7 @@ export default function BookDetailPage() {
                         </Button>
                       )}
                       {!hasPurchased && (
-                        <Button 
+                        <Button
                           onClick={() => setShowPurchaseModal(true)}
                           size={isMobile ? "sm" : "default"}
                           className="bg-gradient-to-r from-primary to-secondary"
@@ -1156,7 +1203,7 @@ export default function BookDetailPage() {
                             </p>
                           </div>
                         </div>
-                        <Button 
+                        <Button
                           size={isMobile ? "sm" : "default"}
                           variant="default"
                           onClick={() => setShowPurchaseModal(true)}
@@ -1181,7 +1228,7 @@ export default function BookDetailPage() {
               </div>
               <div className="space-y-6 md:space-y-8">
                 <ReactionsBar contentId={id} contentType="book" />
-                
+
                 {/* Related Info Card */}
                 <Card className="border-0 shadow-lg md:shadow-xl bg-gradient-to-br from-white to-gray-50 dark:from-gray-900 dark:to-gray-800">
                   <CardContent className="p-4 md:p-6">
@@ -1223,7 +1270,7 @@ export default function BookDetailPage() {
                   Purchase this book to access all features
                 </DialogDescription>
               </DialogHeader>
-              
+
               <div className="my-6 md:my-8 space-y-4 md:space-y-6">
                 <div className="text-center">
                   <div className="text-3xl md:text-5xl font-bold text-primary">
@@ -1251,15 +1298,15 @@ export default function BookDetailPage() {
               </div>
 
               <DialogFooter className="flex flex-col sm:flex-row gap-2 md:gap-3 mt-4">
-                <Button 
-                  variant="outline" 
+                <Button
+                  variant="outline"
                   onClick={() => setShowPurchaseModal(false)}
                   className="w-full sm:flex-1"
                   size={isMobile ? "sm" : "default"}
                 >
                   Not Now
                 </Button>
-                <Button 
+                <Button
                   onClick={handlePurchase}
                   disabled={isPurchasing}
                   className="w-full sm:flex-1 bg-gradient-to-r from-primary to-secondary hover:from-primary/90 hover:to-secondary/90"
@@ -1276,7 +1323,7 @@ export default function BookDetailPage() {
             </div>
           </DialogContent>
         </Dialog>
-        
+
         {/* Full Cover Modal - Mobile optimized */}
         {showFullCover && (
           <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/90 backdrop-blur-sm p-4">

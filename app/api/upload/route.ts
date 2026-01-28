@@ -16,7 +16,15 @@ export async function POST(request: Request): Promise<NextResponse> {
         }
 
         return {
-          allowedContentTypes: ['application/pdf'],
+          allowedContentTypes: [
+            'application/pdf',
+            'image/png',
+            'image/jpeg',
+            'image/jpg',
+            'image/gif',
+            'image/webp',
+            'image/svg+xml'
+          ],
           tokenPayload: JSON.stringify({
             userId: session.userId,
           }),

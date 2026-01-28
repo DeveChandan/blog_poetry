@@ -142,9 +142,6 @@ function AdminDashboardContent() {
               <Button asChild className="w-full">
                 <Link href="/admin/orders">View All Orders</Link>
               </Button>
-              <Button asChild variant="outline" className="w-full bg-transparent">
-                <Link href="/admin/settings">Site Settings</Link>
-              </Button>
             </CardContent>
           </Card>
 
@@ -173,6 +170,53 @@ function AdminDashboardContent() {
               </Button>
               <Button asChild variant="outline" className="w-full bg-transparent">
                 <Link href="/admin/videos/create">Add New Video</Link>
+              </Button>
+            </CardContent>
+          </Card>
+
+          {/* New Content Management */}
+          <Card>
+            <CardHeader>
+              <CardTitle>Poetry & Blog</CardTitle>
+            </CardHeader>
+            <CardContent className="space-y-3">
+              <Button asChild className="w-full">
+                <Link href="/admin/shayari">Manage Shayari</Link>
+              </Button>
+              <Button asChild variant="outline" className="w-full bg-transparent">
+                <Link href="/admin/sher">Manage Sher</Link>
+              </Button>
+              <Button asChild variant="outline" className="w-full bg-transparent">
+                <Link href="/admin/blogs">Manage Blogs</Link>
+              </Button>
+            </CardContent>
+          </Card>
+
+          {/* Interactive & Home */}
+          <Card>
+            <CardHeader>
+              <CardTitle>Interactive & Home</CardTitle>
+            </CardHeader>
+            <CardContent className="space-y-3">
+              <Button asChild className="w-full">
+                <Link href="/admin/quiz">Manage Quiz</Link>
+              </Button>
+              <Button asChild variant="outline" className="w-full bg-transparent">
+                <Link href="/admin/sliders">Home Sliders</Link>
+              </Button>
+            </CardContent>
+          </Card>
+        </div>
+
+        {/* Settings & Configuration */}
+        <div className="mb-12">
+          <Card>
+            <CardHeader>
+              <CardTitle>Settings & Configuration</CardTitle>
+            </CardHeader>
+            <CardContent>
+              <Button asChild className="w-full md:w-auto" size="lg">
+                <Link href="/admin/settings">Manage About Section & Site Settings</Link>
               </Button>
             </CardContent>
           </Card>

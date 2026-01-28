@@ -8,11 +8,13 @@ import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
 
 export default function AdminSettingsPage() {
   const [formData, setFormData] = useState({
-    siteName: "",
-    siteDescription: "",
-    authorBio: "",
     authorImage: "",
-    youtubeChannel: "",
+    youtube: "",
+    instagram: "",
+    facebook: "",
+    twitter: "",
+    linkedin: "",
+    email: "",
   })
   const [loading, setLoading] = useState(true)
   const [saving, setSaving] = useState(false)
@@ -23,7 +25,7 @@ export default function AdminSettingsPage() {
       const res = await fetch("/api/settings")
       if (res.ok) {
         const data = await res.json()
-        setFormData(data)
+        setFormData(prev => ({ ...prev, ...data }))
       }
     } catch (error) {
       console.error("Failed to fetch settings:", error)
@@ -80,44 +82,10 @@ export default function AdminSettingsPage() {
       <div className="max-w-2xl mx-auto">
         <Card>
           <CardHeader>
-            <CardTitle>Site Settings</CardTitle>
+            <CardTitle>About Section & Site Settings</CardTitle>
           </CardHeader>
           <CardContent>
             <form onSubmit={handleSubmit} className="space-y-6">
-              <div>
-                <label className="text-sm text-muted-foreground mb-2 block">Site Name</label>
-                <input
-                  type="text"
-                  name="siteName"
-                  value={formData.siteName}
-                  onChange={handleChange}
-                  className="w-full px-3 py-2 rounded border border-border bg-background text-foreground"
-                  placeholder="Your Site Name"
-                />
-              </div>
-
-              <div>
-                <label className="text-sm text-muted-foreground mb-2 block">Site Description</label>
-                <textarea
-                  name="siteDescription"
-                  value={formData.siteDescription}
-                  onChange={handleChange}
-                  className="w-full px-3 py-2 rounded border border-border bg-background text-foreground min-h-24"
-                  placeholder="Describe your site..."
-                />
-              </div>
-
-              <div>
-                <label className="text-sm text-muted-foreground mb-2 block">Author Bio</label>
-                <textarea
-                  name="authorBio"
-                  value={formData.authorBio}
-                  onChange={handleChange}
-                  className="w-full px-3 py-2 rounded border border-border bg-background text-foreground min-h-32"
-                  placeholder="Tell your story..."
-                />
-              </div>
-
               <div>
                 <label className="text-sm text-muted-foreground mb-2 block">Author Image URL</label>
                 <input
@@ -130,16 +98,76 @@ export default function AdminSettingsPage() {
                 />
               </div>
 
-              <div>
-                <label className="text-sm text-muted-foreground mb-2 block">YouTube Channel Handle</label>
-                <input
-                  type="text"
-                  name="youtubeChannel"
-                  value={formData.youtubeChannel}
-                  onChange={handleChange}
-                  className="w-full px-3 py-2 rounded border border-border bg-background text-foreground"
-                  placeholder="@yourchannelname"
-                />
+              <div className="pt-4 border-t border-border">
+                <h3 className="text-lg font-medium mb-4">Social Media Profiles</h3>
+                <div className="grid gap-4">
+                  <div>
+                    <label className="text-sm text-muted-foreground mb-2 block">YouTube Channel URL</label>
+                    <input
+                      type="url"
+                      name="youtube"
+                      value={formData.youtube}
+                      onChange={handleChange}
+                      className="w-full px-3 py-2 rounded border border-border bg-background text-foreground"
+                      placeholder="https://youtube.com/channel/..."
+                    />
+                  </div>
+                  <div>
+                    <label className="text-sm text-muted-foreground mb-2 block">Instagram URL</label>
+                    <input
+                      type="url"
+                      name="instagram"
+                      value={formData.instagram}
+                      onChange={handleChange}
+                      className="w-full px-3 py-2 rounded border border-border bg-background text-foreground"
+                      placeholder="https://instagram.com/..."
+                    />
+                  </div>
+                  <div>
+                    <label className="text-sm text-muted-foreground mb-2 block">Facebook URL</label>
+                    <input
+                      type="url"
+                      name="facebook"
+                      value={formData.facebook}
+                      onChange={handleChange}
+                      className="w-full px-3 py-2 rounded border border-border bg-background text-foreground"
+                      placeholder="https://facebook.com/..."
+                    />
+                  </div>
+                  <div>
+                    <label className="text-sm text-muted-foreground mb-2 block">Twitter/X URL</label>
+                    <input
+                      type="url"
+                      name="twitter"
+                      value={formData.twitter}
+                      onChange={handleChange}
+                      className="w-full px-3 py-2 rounded border border-border bg-background text-foreground"
+                      placeholder="https://twitter.com/..."
+                    />
+                  </div>
+                  <div>
+                    <label className="text-sm text-muted-foreground mb-2 block">LinkedIn URL</label>
+                    <input
+                      type="url"
+                      name="linkedin"
+                      value={formData.linkedin}
+                      onChange={handleChange}
+                      className="w-full px-3 py-2 rounded border border-border bg-background text-foreground"
+                      placeholder="https://linkedin.com/in/..."
+                    />
+                  </div>
+                  <div>
+                    <label className="text-sm text-muted-foreground mb-2 block">Email Address (Public)</label>
+                    <input
+                      type="email"
+                      name="email"
+                      value={formData.email}
+                      onChange={handleChange}
+                      className="w-full px-3 py-2 rounded border border-border bg-background text-foreground"
+                      placeholder="contact@example.com"
+                    />
+                  </div>
+                </div>
               </div>
 
               <Button type="submit" disabled={saving}>
