@@ -78,3 +78,149 @@ Read more: https://nextjs.org/docs/messages/next-image-unconfigured-qualities
 Read more: https://nextjs.org/docs/messages/next-image-unconfigured-qualities
 [00:13:03.163] Browser WARN    Image with src "https://7l3slzqzrwbxftjs.public.blob.vercel-storage.com/Screenshot%202024-06-21%20181816.png" is using quality "100" which is not configured in images.qualities [75]. Please update your config to [100, 75].
 Read more: https://nextjs.org/docs/messages/next-image-unconfigured-qualities
+[00:30:11.506] Server  LOG      ✓ Compiled in 2.2s
+[00:30:12.208] Server  LOG     API /api/auth/session: Session status: {}
+[00:30:13.303] Browser LOG     useSession: Raw response from /api/auth/session: {}
+[00:30:13.303] Browser LOG     useSession: Parsed data from /api/auth/session: {"user":{"exp":1769625334,"isAdmin":true,"type":"auth","userId":"6936a3e510ca4806bcd9c3a3"}}
+[00:30:47.156] Server  LOG     Fetched featured videos: [{...},{...},{...}]
+[00:30:49.676] Browser INFO    %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold
+[00:30:51.105] Server  LOG     API /api/auth/session: Session status: {}
+[00:30:51.729] Browser LOG     useSession: Raw response from /api/auth/session: {}
+[00:30:51.729] Browser LOG     useSession: Parsed data from /api/auth/session: {"user":{"exp":1769625334,"isAdmin":true,"type":"auth","userId":"6936a3e510ca4806bcd9c3a3"}}
+[00:30:51.729] Browser WARN    Image with src "https://as2.ftcdn.net/v2/jpg/05/49/14/01/1000_F_549140174_v4ZXn1YswQTaGpcsW5EohoToNoePMTna.jpg" is using quality "100" which is not configured in images.qualities [75]. Please update your config to [100, 75].
+Read more: https://nextjs.org/docs/messages/next-image-unconfigured-qualities
+[00:30:51.914] Browser LOG     %c[Vercel Web Analytics]%c Debug mode is enabled by default in development. No requests will be sent to the server. color: rgb(120, 120, 120) color: inherit
+[00:30:51.914] Browser LOG     %c[Vercel Web Analytics]%c Running queued event color: rgb(120, 120, 120) color: inherit pageview {"path":"/","route":"/"}
+[00:30:51.914] Browser LOG     %c[Vercel Web Analytics]%c [pageview] http://localhost:3000/ color: rgb(120, 120, 120) color: inherit {"dp":"/","o":"http://localhost:3000/","sdkn":"@vercel/analytics/next","sdkv":"1.6.1","sv":"0.1.3","ts":1769587993969}
+[00:30:57.276] Browser WARN    Image with src "https://as1.ftcdn.net/v2/jpg/03/11/29/16/1000_F_311291674_K3QG0a3CXZ71pt05c4OWWHT181bh2dEC.jpg" is using quality "100" which is not configured in images.qualities [75]. Please update your config to [100, 75].
+Read more: https://nextjs.org/docs/messages/next-image-unconfigured-qualities
+[00:31:02.278] Browser WARN    Image with src "https://7l3slzqzrwbxftjs.public.blob.vercel-storage.com/Screenshot%202024-06-21%20181816.png" is using quality "100" which is not configured in images.qualities [75]. Please update your config to [100, 75].
+Read more: https://nextjs.org/docs/messages/next-image-unconfigured-qualities
+[00:37:07.803] Server  WARN     ⚠ Fast Refresh had to perform a full reload when ./lib/translations.ts changed. Read more: https://nextjs.org/docs/messages/fast-refresh-reload
+[00:37:07.824] Server  LOG      ✓ Compiled in 474ms
+[00:37:09.810] Server  WARN     ⚠ Fast Refresh had to perform a full reload when ./lib/translations.ts changed. Read more: https://nextjs.org/docs/messages/fast-refresh-reload
+[00:37:10.949] Server  LOG      ✓ Compiled in 15ms
+[00:37:14.457] Server  LOG     Fetched featured videos: [{...},{...},{...}]
+[00:37:16.703] Server  LOG     Fetched featured videos: [{...},{...},{...}]
+[00:37:17.067] Server  ERROR   D:\Web Project\Poemsite\blog_poetry\.next\dev\server\chunks\ssr\[root-of-the-server]__d205b5d9._.js: Invalid source map. Only conformant source maps can be used to find the original code. Cause: Error: sourceMapURL could not be parsed
+[00:37:17.072] Server  ERROR   D:\Web Project\Poemsite\blog_poetry\.next\dev\server\chunks\ssr\components_4badf587._.js: Invalid source map. Only conformant source maps can be used to find the original code. Cause: Error: sourceMapURL could not be parsed
+[00:37:17.076] Server  ERROR    ⨯ Error: useLanguage must be used within LanguageProvider
+[00:37:17.848] Browser INFO    %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold
+[00:37:18.901] Server  LOG     API /api/auth/session: Session status: {}
+[00:37:19.402] Browser LOG     useSession: Raw response from /api/auth/session: {}
+[00:37:19.402] Browser LOG     useSession: Parsed data from /api/auth/session: {"user":{"exp":1769625334,"isAdmin":true,"type":"auth","userId":"6936a3e510ca4806bcd9c3a3"}}
+[00:37:19.402] Browser WARN    Image with src "https://as2.ftcdn.net/v2/jpg/05/49/14/01/1000_F_549140174_v4ZXn1YswQTaGpcsW5EohoToNoePMTna.jpg" is using quality "100" which is not configured in images.qualities [75]. Please update your config to [100, 75].
+Read more: https://nextjs.org/docs/messages/next-image-unconfigured-qualities
+[00:37:20.313] Browser LOG     %c[Vercel Web Analytics]%c Debug mode is enabled by default in development. No requests will be sent to the server. color: rgb(120, 120, 120) color: inherit
+[00:37:20.313] Browser LOG     %c[Vercel Web Analytics]%c Running queued event color: rgb(120, 120, 120) color: inherit pageview {"path":"/","route":"/"}
+[00:37:20.313] Browser LOG     %c[Vercel Web Analytics]%c [pageview] http://localhost:3000/ color: rgb(120, 120, 120) color: inherit {"dp":"/","o":"http://localhost:3000/","sdkn":"@vercel/analytics/next","sdkv":"1.6.1","sv":"0.1.3","ts":1769588381567}
+[00:37:43.944] Browser WARN    Image with src "https://as1.ftcdn.net/v2/jpg/03/11/29/16/1000_F_311291674_K3QG0a3CXZ71pt05c4OWWHT181bh2dEC.jpg" is using quality "100" which is not configured in images.qualities [75]. Please update your config to [100, 75].
+Read more: https://nextjs.org/docs/messages/next-image-unconfigured-qualities
+[00:37:44.868] Browser WARN    Image with src "https://7l3slzqzrwbxftjs.public.blob.vercel-storage.com/Screenshot%202024-06-21%20181816.png" is using quality "100" which is not configured in images.qualities [75]. Please update your config to [100, 75].
+Read more: https://nextjs.org/docs/messages/next-image-unconfigured-qualities
+[00:38:04.295] Server  LOG      ✓ Compiled in 450ms
+[00:38:04.391] Server  WARN     ⚠ Fast Refresh had to perform a full reload when ./lib/translations.ts changed. Read more: https://nextjs.org/docs/messages/fast-refresh-reload
+[00:38:20.106] Server  LOG     Fetched featured videos: [{...},{...},{...}]
+[00:38:20.979] Server  LOG     Fetched featured videos: [{...},{...},{...}]
+[00:38:23.023] Browser INFO    %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold
+[00:38:23.715] Server  LOG     API /api/auth/session: Session status: {}
+[00:38:24.044] Browser LOG     useSession: Raw response from /api/auth/session: {}
+[00:38:24.044] Browser LOG     %c[Vercel Web Analytics]%c Debug mode is enabled by default in development. No requests will be sent to the server. color: rgb(120, 120, 120) color: inherit
+[00:38:24.044] Browser LOG     %c[Vercel Web Analytics]%c Running queued event color: rgb(120, 120, 120) color: inherit pageview {"path":"/","route":"/"}
+[00:38:24.044] Browser LOG     %c[Vercel Web Analytics]%c [pageview] http://localhost:3000/ color: rgb(120, 120, 120) color: inherit {"dp":"/","o":"http://localhost:3000/","sdkn":"@vercel/analytics/next","sdkv":"1.6.1","sv":"0.1.3","ts":1769588445961}
+[00:38:24.044] Browser LOG     useSession: Parsed data from /api/auth/session: {"user":{"exp":1769625334,"isAdmin":true,"type":"auth","userId":"6936a3e510ca4806bcd9c3a3"}}
+[00:38:24.044] Browser WARN    Image with src "https://as2.ftcdn.net/v2/jpg/05/49/14/01/1000_F_549140174_v4ZXn1YswQTaGpcsW5EohoToNoePMTna.jpg" is using quality "100" which is not configured in images.qualities [75]. Please update your config to [100, 75].
+Read more: https://nextjs.org/docs/messages/next-image-unconfigured-qualities
+[00:38:29.595] Browser WARN    Image with src "https://as1.ftcdn.net/v2/jpg/03/11/29/16/1000_F_311291674_K3QG0a3CXZ71pt05c4OWWHT181bh2dEC.jpg" is using quality "100" which is not configured in images.qualities [75]. Please update your config to [100, 75].
+Read more: https://nextjs.org/docs/messages/next-image-unconfigured-qualities
+[00:38:34.583] Browser WARN    Image with src "https://7l3slzqzrwbxftjs.public.blob.vercel-storage.com/Screenshot%202024-06-21%20181816.png" is using quality "100" which is not configured in images.qualities [75]. Please update your config to [100, 75].
+Read more: https://nextjs.org/docs/messages/next-image-unconfigured-qualities
+[00:38:58.186] Browser LOG     %c[Vercel Web Analytics]%c [pageview] http://localhost:3000/poems color: rgb(120, 120, 120) color: inherit {"dp":"/poems","o":"http://localhost:3000/poems","sdkn":"@vercel/analytics/next","sdkv":"1.6.1","sv":"0.1.3","ts":1769588480157}
+[00:39:10.792] Browser LOG     %c[Vercel Web Analytics]%c [pageview] http://localhost:3000/poems/693fed9f85cf42af856fba1a color: rgb(120, 120, 120) color: inherit {"dp":"/poems/[id]","o":"http://localhost:3000/poems/693fed9f85cf42af856fba1a","sdkn":"@vercel/analytics/next","sdkv":"1.6.1","sv":"0.1.3","ts":1769588492833}
+[00:40:06.625] Browser LOG     %c[Vercel Web Analytics]%c [pageview] http://localhost:3000/poems color: rgb(120, 120, 120) color: inherit {"dp":"/poems","o":"http://localhost:3000/poems","sdkn":"@vercel/analytics/next","sdkv":"1.6.1","sv":"0.1.3","ts":1769588548616}
+[00:42:29.039] Server  LOG      ✓ Compiled in 1020ms
+[00:42:37.882] Server  LOG      ✓ Compiled in 1027ms
+[00:42:39.867] Server  LOG      ✓ Compiled in 803ms
+[00:43:01.534] Server  LOG      ✓ Compiled in 663ms
+[00:43:28.691] Server  LOG      ✓ Compiled in 366ms
+[00:43:55.348] Browser INFO    %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold
+[00:43:55.748] Browser ERROR   A tree hydrated but some attributes of the server rendered HTML didn't match the client properties. This won't be patched up. This can happen if a SSR-ed Client Component used:
+
+- A server/client branch `if (typeof window !== 'undefined')`.
+- Variable input such as `Date.now()` or `Math.random()` which changes each time it's called.
+- Date formatting in a user's locale which doesn't match the server.
+- External changing data without sending a snapshot of it along with the HTML.
+- Invalid HTML tag nesting.
+
+It can also happen if the client has a browser extension installed which messes with the HTML before React loaded.
+
+%s%s https://react.dev/link/hydration-mismatch 
+
+  ...
+    <HotReload globalError={[...]} webSocket={WebSocket} staticIndicatorState={{pathname:null, ...}}>
+      <AppDevOverlayErrorBoundary globalError={[...]}>
+        <ReplaySsrOnlyErrors>
+        <DevRootHTTPAccessFallbackBoundary>
+          <HTTPAccessFallbackBoundary notFound={<NotAllowedRootHTTPFallbackError>}>
+            <HTTPAccessFallbackErrorBoundary pathname="/poems" notFound={<NotAllowedRootHTTPFallbackError>} ...>
+              <RedirectBoundary>
+                <RedirectErrorBoundary router={{...}}>
+                  <Head>
+                  <__next_root_layout_boundary__>
+                    <SegmentViewNode type="layout" pagePath="layout.tsx">
+                      <SegmentTrieNode>
+                      <link>
+                      <script>
+                      <script>
+                      <script>
+                      <RootLayout>
+                        <html lang="en" className="inter_b299..." suppressHydrationWarning={true}>
+                          <body
+                            className="font-sans antialiased"
+-                           data-new-gr-c-s-check-loaded="14.1270.0"
+-                           data-gr-ext-installed=""
+                          >
+                  ...
+
+[00:43:56.015] Browser LOG     %c[Vercel Web Analytics]%c Debug mode is enabled by default in development. No requests will be sent to the server. color: rgb(120, 120, 120) color: inherit
+[00:43:56.015] Browser LOG     %c[Vercel Web Analytics]%c Running queued event color: rgb(120, 120, 120) color: inherit pageview {"path":"/poems","route":"/poems"}
+[00:43:56.015] Browser LOG     %c[Vercel Web Analytics]%c [pageview] http://localhost:3000/poems color: rgb(120, 120, 120) color: inherit {"dp":"/poems","o":"http://localhost:3000/poems","sdkn":"@vercel/analytics/next","sdkv":"1.6.1","sv":"0.1.3","ts":1769588777956}
+[00:43:56.198] Server  LOG     API /api/auth/session: Session status: {}
+[00:43:56.357] Browser LOG     useSession: Raw response from /api/auth/session: {}
+[00:43:56.357] Browser LOG     useSession: Parsed data from /api/auth/session: {"user":{"exp":1769625334,"isAdmin":true,"type":"auth","userId":"6936a3e510ca4806bcd9c3a3"}}
+[00:44:18.384] Browser LOG     %c[Vercel Web Analytics]%c [pageview] http://localhost:3000/poems/693fed9f85cf42af856fba1a color: rgb(120, 120, 120) color: inherit {"dp":"/poems/[id]","o":"http://localhost:3000/poems/693fed9f85cf42af856fba1a","sdkn":"@vercel/analytics/next","sdkv":"1.6.1","sv":"0.1.3","ts":1769588800398}
+[00:44:23.679] Browser LOG     %c[Vercel Web Analytics]%c [pageview] http://localhost:3000/poems color: rgb(120, 120, 120) color: inherit {"dp":"/poems","o":"http://localhost:3000/poems","sdkn":"@vercel/analytics/next","sdkv":"1.6.1","sv":"0.1.3","ts":1769588805656}
+[00:44:34.751] Browser LOG     %c[Vercel Web Analytics]%c [pageview] http://localhost:3000/poems/693fed9f85cf42af856fba1a color: rgb(120, 120, 120) color: inherit {"dp":"/poems/[id]","o":"http://localhost:3000/poems/693fed9f85cf42af856fba1a","sdkn":"@vercel/analytics/next","sdkv":"1.6.1","sv":"0.1.3","ts":1769588816798}
+[00:44:44.353] Browser LOG     %c[Vercel Web Analytics]%c [pageview] http://localhost:3000/admin color: rgb(120, 120, 120) color: inherit {"dp":"/admin","o":"http://localhost:3000/admin","sdkn":"@vercel/analytics/next","sdkv":"1.6.1","sv":"0.1.3","ts":1769588826366}
+[00:45:09.773] Browser LOG     %c[Vercel Web Analytics]%c [pageview] http://localhost:3000/admin/poems color: rgb(120, 120, 120) color: inherit {"dp":"/admin/poems","o":"http://localhost:3000/admin/poems","sdkn":"@vercel/analytics/next","sdkv":"1.6.1","sv":"0.1.3","ts":1769588851726}
+[00:45:16.175] Browser LOG     %c[Vercel Web Analytics]%c [pageview] http://localhost:3000/admin/poems/693fed9f85cf42af856fba1a/edit color: rgb(120, 120, 120) color: inherit {"dp":"/admin/poems/[id]/edit","o":"http://localhost:3000/admin/poems/693fed9f85cf42af856fba1a/edit","sdkn":"@vercel/analytics/next","sdkv":"1.6.1","sv":"0.1.3","ts":1769588858228}
+[00:47:31.115] Server  LOG      ✓ Compiled in 499ms
+[00:48:08.859] Server  LOG     Fetched featured videos: [{...},{...},{...}]
+[00:48:09.945] Browser LOG     %c[Vercel Web Analytics]%c [pageview] http://localhost:3000/ color: rgb(120, 120, 120) color: inherit {"dp":"/","o":"http://localhost:3000/","sdkn":"@vercel/analytics/next","sdkv":"1.6.1","sv":"0.1.3","ts":1769589031981}
+[00:48:10.392] Browser WARN    Image with src "https://as2.ftcdn.net/v2/jpg/05/49/14/01/1000_F_549140174_v4ZXn1YswQTaGpcsW5EohoToNoePMTna.jpg" is using quality "100" which is not configured in images.qualities [75]. Please update your config to [100, 75].
+Read more: https://nextjs.org/docs/messages/next-image-unconfigured-qualities
+[00:48:15.890] Browser WARN    Image with src "https://as1.ftcdn.net/v2/jpg/03/11/29/16/1000_F_311291674_K3QG0a3CXZ71pt05c4OWWHT181bh2dEC.jpg" is using quality "100" which is not configured in images.qualities [75]. Please update your config to [100, 75].
+Read more: https://nextjs.org/docs/messages/next-image-unconfigured-qualities
+[00:48:19.241] Browser LOG     %c[Vercel Web Analytics]%c [pageview] http://localhost:3000/poems color: rgb(120, 120, 120) color: inherit {"dp":"/poems","o":"http://localhost:3000/poems","sdkn":"@vercel/analytics/next","sdkv":"1.6.1","sv":"0.1.3","ts":1769589041219}
+[00:49:13.244] Browser INFO    %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold
+[00:49:14.311] Server  LOG     API /api/auth/session: Session status: {}
+[00:49:14.452] Browser LOG     %c[Vercel Web Analytics]%c Debug mode is enabled by default in development. No requests will be sent to the server. color: rgb(120, 120, 120) color: inherit
+[00:49:14.452] Browser LOG     %c[Vercel Web Analytics]%c Running queued event color: rgb(120, 120, 120) color: inherit pageview {"path":"/poems","route":"/poems"}
+[00:49:14.452] Browser LOG     %c[Vercel Web Analytics]%c [pageview] http://localhost:3000/poems color: rgb(120, 120, 120) color: inherit {"dp":"/poems","o":"http://localhost:3000/poems","sdkn":"@vercel/analytics/next","sdkv":"1.6.1","sv":"0.1.3","ts":1769589096356}
+[00:49:14.452] Browser LOG     useSession: Raw response from /api/auth/session: {}
+[00:49:14.452] Browser LOG     useSession: Parsed data from /api/auth/session: {"user":{"exp":1769625334,"isAdmin":true,"type":"auth","userId":"6936a3e510ca4806bcd9c3a3"}}
+[00:49:18.672] Server  LOG     Fetched featured videos: [{...},{...},{...}]
+[00:49:19.349] Browser LOG     %c[Vercel Web Analytics]%c [pageview] http://localhost:3000/ color: rgb(120, 120, 120) color: inherit {"dp":"/","o":"http://localhost:3000/","sdkn":"@vercel/analytics/next","sdkv":"1.6.1","sv":"0.1.3","ts":1769589101388}
+[00:49:19.503] Browser WARN    Image with src "https://as2.ftcdn.net/v2/jpg/05/49/14/01/1000_F_549140174_v4ZXn1YswQTaGpcsW5EohoToNoePMTna.jpg" is using quality "100" which is not configured in images.qualities [75]. Please update your config to [100, 75].
+Read more: https://nextjs.org/docs/messages/next-image-unconfigured-qualities
+[00:49:25.053] Browser LOG     %c[Vercel Web Analytics]%c [pageview] http://localhost:3000/poems color: rgb(120, 120, 120) color: inherit {"dp":"/poems","o":"http://localhost:3000/poems","sdkn":"@vercel/analytics/next","sdkv":"1.6.1","sv":"0.1.3","ts":1769589107040}
+[00:49:48.346] Server  LOG     Fetched featured videos: [{...},{...},{...}]
+[00:49:48.965] Browser LOG     %c[Vercel Web Analytics]%c [pageview] http://localhost:3000/ color: rgb(120, 120, 120) color: inherit {"dp":"/","o":"http://localhost:3000/","sdkn":"@vercel/analytics/next","sdkv":"1.6.1","sv":"0.1.3","ts":1769589130949}
+[00:49:54.592] Browser WARN    Image with src "https://as1.ftcdn.net/v2/jpg/03/11/29/16/1000_F_311291674_K3QG0a3CXZ71pt05c4OWWHT181bh2dEC.jpg" is using quality "100" which is not configured in images.qualities [75]. Please update your config to [100, 75].
+Read more: https://nextjs.org/docs/messages/next-image-unconfigured-qualities
+[00:49:59.577] Browser WARN    Image with src "https://7l3slzqzrwbxftjs.public.blob.vercel-storage.com/Screenshot%202024-06-21%20181816.png" is using quality "100" which is not configured in images.qualities [75]. Please update your config to [100, 75].
+Read more: https://nextjs.org/docs/messages/next-image-unconfigured-qualities
+[00:50:07.358] Server  LOG     Fetched featured videos: [{...},{...},{...}]
+[00:51:43.103] Server  LOG      ✓ Compiled in 858ms
+[00:54:25.807] Server  LOG      ✓ Compiled in 2.7s
+[00:55:31.116] Server  LOG     Fetched featured videos: [{...},{...},{...}]

@@ -68,60 +68,60 @@ export default function Navigation() {
           {/* Desktop Navigation */}
           <div className="hidden md:flex items-center gap-2" dir={isRtl ? 'rtl' : 'ltr'}>
             <NavigationDropdown
-              trigger="Literature"
+              trigger={t('literature')}
               featured={{
                 href: "/poems",
-                label: "Poems",
-                description: "Explore a vast collection of heartfelt and soul-stirring poetry.",
+                label: t('poems'),
+                description: t('poems_description'),
                 icon: <Feather className="h-6 w-6 text-primary mb-2" />
               }}
               items={[
                 {
                   href: "/books",
-                  label: "Books",
-                  description: "Published works and literary collections.",
+                  label: t('books'),
+                  description: t('books_description'),
                   icon: <BookOpen className="h-4 w-4" />
                 },
                 {
                   href: "/shayari",
-                  label: "Shayari",
-                  description: "Traditional Urdu and Hindi couplets.",
+                  label: t('shayari'),
+                  description: t('shayari_description'),
                   icon: <PenTool className="h-4 w-4" />
                 },
                 {
                   href: "/sher",
-                  label: "Sher",
-                  description: "Short, impactful poetic verses.",
+                  label: t('sher'),
+                  description: t('sher_description'),
                   icon: <Feather className="h-4 w-4" />
                 }
               ]}
             />
 
             <NavigationDropdown
-              trigger="Media"
+              trigger={t('media')}
               items={[
                 {
                   href: "/videos",
-                  label: "Videos",
-                  description: "Watch recitations, interviews, and more.",
+                  label: t('videos'),
+                  description: t('videos_description'),
                   icon: <Video className="h-4 w-4" />
                 },
                 {
                   href: "/blog",
-                  label: "Blog",
-                  description: "Thoughts, articles, and literary analysis.",
+                  label: t('blog'),
+                  description: t('blog_description'),
                   icon: <BookOpen className="h-4 w-4" />
                 }
               ]}
             />
 
             <NavigationDropdown
-              trigger="Interact"
+              trigger={t('interact')}
               items={[
                 {
                   href: "/quiz",
-                  label: "Quiz",
-                  description: "Test your knowledge of poetry and literature.",
+                  label: t('quiz'),
+                  description: t('quiz_description'),
                   icon: <HelpCircle className="h-4 w-4" />
                 }
               ]}
@@ -131,7 +131,7 @@ export default function Navigation() {
               href="/about"
               className="inline-flex h-9 items-center justify-center rounded-md bg-background px-4 py-2 text-sm font-medium hover:bg-accent hover:text-accent-foreground transition-colors"
             >
-              About
+              {t('about')}
             </Link>
 
             {loading ? (

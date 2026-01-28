@@ -17,6 +17,18 @@ export const translations = {
         login: "Login",
         logout: "Logout",
         signUp: "Sign Up",
+        literature: "Literature",
+        media: "Media",
+        interact: "Interact",
+
+        // Navigation descriptions
+        poems_description: "Explore a vast collection of heartfelt and soul-stirring poetry.",
+        books_description: "Published works and literary collections.",
+        shayari_description: "Traditional Urdu and Hindi couplets.",
+        sher_description: "Short, impactful poetic verses.",
+        videos_description: "Watch recitations, interviews, and more.",
+        blog_description: "Thoughts, articles, and literary analysis.",
+        quiz_description: "Test your knowledge of poetry and literature.",
 
         // Common
         search: "Search",
@@ -66,6 +78,18 @@ export const translations = {
         login: "लॉगिन",
         logout: "लॉगआउट",
         signUp: "साइन अप",
+        literature: "साहित्य",
+        media: "मीडिया",
+        interact: "संवाद",
+
+        // Navigation descriptions
+        poems_description: "हृदयस्पर्शी और मार्मिक कविताओं का विशाल संग्रह देखें।",
+        books_description: "प्रकाशित रचनाएँ और साहित्यिक संग्रह।",
+        shayari_description: "पारंपरिक उर्दू और हिंदी दोहे।",
+        sher_description: "संक्षिप्त, प्रभावशाली काव्य पंक्तियाँ।",
+        videos_description: "पाठ, साक्षात्कार और बहुत कुछ देखें।",
+        blog_description: "विचार, लेख और साहित्यिक विश्लेषण।",
+        quiz_description: "कविता और साहित्य के अपने ज्ञान का परीक्षण करें।",
 
         // Common
         search: "खोजें",
@@ -115,6 +139,18 @@ export const translations = {
         login: "لاگ ان",
         logout: "لاگ آؤٹ",
         signUp: "سائن اپ",
+        literature: "ادب",
+        media: "میڈیا",
+        interact: "بات چیت",
+
+        // Navigation descriptions
+        poems_description: "دل کو چھونے والی اور روح پرور شاعری کا وسیع ذخیرہ دریافت کریں۔",
+        books_description: "شائع شدہ تصنیفات اور ادبی مجموعے।",
+        shayari_description: "روایتی اردو اور ہندی اشعار۔",
+        sher_description: "مختصر، اثر انگیز شعری مصرعے۔",
+        videos_description: "تلاوت، انٹرویوز اور مزید دیکھیں۔",
+        blog_description: "خیالات، مضامین اور ادبی تجزیہ۔",
+        quiz_description: "شاعری اور ادب کے اپنے علم کی جانچ کریں۔",
 
         // Common
         search: "تلاش کریں",
@@ -164,6 +200,18 @@ export const translations = {
         login: "লগইন",
         logout: "লগআউট",
         signUp: "সাইন আপ",
+        literature: "সাহিত্য",
+        media: "মিডিয়া",
+        interact: "ইন্টারঅ্যাক্ট",
+
+        // Navigation descriptions
+        poems_description: "হৃদয়স্পর্শী এবং আত্মার শিহরণ জাগানো কবিতার বিশাল সংগ্রহ অন্বেষণ করুন।",
+        books_description: "প্রকাশিত রচনা এবং সাহিত্যিক সংগ্রহ।",
+        shayari_description: "ঐতিহ্যবাহী উর্দু এবং হিন্দি দোহা।",
+        sher_description: "সংক্ষিপ্ত, প্রভাবশালী কবিতার পংক্তি।",
+        videos_description: "আবৃত্তি, সাক্ষাৎকার এবং আরও অনেক কিছু দেখুন।",
+        blog_description: "চিন্তাভাবনা, নিবন্ধ এবং সাহিত্য বিশ্লেষণ।",
+        quiz_description: "কবিতা এবং সাহিত্যে আপনার জ্ঞান পরীক্ষা করুন।",
 
         // Common
         search: "অনুসন্ধান",

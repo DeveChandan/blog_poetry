@@ -4,6 +4,7 @@ import { useState, useEffect } from "react"
 import PoemCard from "@/components/poem-card"
 import { Input } from "@/components/ui/input"
 import { Button } from "@/components/ui/button"
+import { useTranslations } from "@/lib/language-context"
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -28,6 +29,7 @@ const PRIMARY_LETTERS = ['All', 'A', 'B', 'C', 'D', 'E']
 const MORE_LETTERS = ['F', 'G', 'H', 'I', 'J', 'K', 'L', 'M', 'N', 'O', 'P', 'Q', 'R', 'S', 'T', 'U', 'V', 'W', 'X', 'Y', 'Z']
 
 export default function FilteredPoems({ poems }: { poems: Poem[] }) {
+  const { t } = useTranslations()
   const [filteredPoems, setFilteredPoems] = useState<Poem[]>(poems)
   const [search, setSearch] = useState("")
   const [selectedLetter, setSelectedLetter] = useState<string>("All")
@@ -73,7 +75,7 @@ export default function FilteredPoems({ poems }: { poems: Poem[] }) {
       <div className="mb-8 space-y-4">
         {/* Search Input */}
         <Input
-          placeholder="Search poems by title or tag..."
+          placeholder={t('search') + "..."}
           value={search}
           onChange={(e) => setSearch(e.target.value)}
           className="max-w-md"
@@ -89,8 +91,8 @@ export default function FilteredPoems({ poems }: { poems: Poem[] }) {
               size="sm"
               onClick={() => handleLetterSelect(letter)}
               className={`min-w-[40px] font-medium transition-all ${selectedLetter === letter
-                  ? "bg-primary text-primary-foreground shadow-md"
-                  : "hover:bg-primary/10 hover:border-primary"
+                ? "bg-primary text-primary-foreground shadow-md"
+                : "hover:bg-primary/10 hover:border-primary"
                 }`}
             >
               {letter}
@@ -104,11 +106,11 @@ export default function FilteredPoems({ poems }: { poems: Poem[] }) {
                 variant={isMoreLetterSelected ? "default" : "outline"}
                 size="sm"
                 className={`min-w-[60px] font-medium ${isMoreLetterSelected
-                    ? "bg-primary text-primary-foreground"
-                    : ""
+                  ? "bg-primary text-primary-foreground"
+                  : ""
                   }`}
               >
-                {isMoreLetterSelected ? selectedLetter : "More"}
+                {isMoreLetterSelected ? selectedLetter : t('more')}
                 <ChevronDown className="ml-1 h-3 w-3" />
               </Button>
             </DropdownMenuTrigger>
@@ -122,8 +124,8 @@ export default function FilteredPoems({ poems }: { poems: Poem[] }) {
                     key={letter}
                     onClick={() => handleLetterSelect(letter)}
                     className={`flex items-center justify-center p-2 cursor-pointer rounded-md ${selectedLetter === letter
-                        ? "bg-primary text-primary-foreground"
-                        : "hover:bg-primary/10"
+                      ? "bg-primary text-primary-foreground"
+                      : "hover:bg-primary/10"
                       }`}
                   >
                     {letter}
@@ -142,7 +144,7 @@ export default function FilteredPoems({ poems }: { poems: Poem[] }) {
               className="text-muted-foreground hover:text-foreground"
             >
               <X className="h-4 w-4 mr-1" />
-              Clear
+              {t('clear')}
             </Button>
           )}
         </div>
@@ -162,9 +164,9 @@ export default function FilteredPoems({ poems }: { poems: Poem[] }) {
       {/* Poems Grid */}
       {filteredPoems.length === 0 ? (
         <div className="text-center py-12">
-          <p className="text-muted-foreground text-lg mb-4">No poems found</p>
+          <p className="text-muted-foreground text-lg mb-4">{t('noResults')}</p>
           <Button variant="outline" onClick={clearFilter}>
-            Clear filters
+            {t('clear')}
           </Button>
         </div>
       ) : (
@@ -177,8 +179,6 @@ export default function FilteredPoems({ poems }: { poems: Poem[] }) {
               excerpt={poem.excerpt}
               tags={poem.tags}
               views={poem.views}
-              content={poem.content}
-              createdAt={poem.createdAt}
             />
           ))}
         </div>

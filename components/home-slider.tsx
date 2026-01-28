@@ -119,14 +119,14 @@ export default function HomeSlider() {
                 <>
                     <button
                         onClick={goToPrevious}
-                        className="absolute left-4 top-1/2 -translate-y-1/2 z-20 bg-white/20 hover:bg-white/40 backdrop-blur-sm rounded-full p-2 md:p-3 text-white transition-colors"
+                        className="absolute left-4 top-1/2 -translate-y-1/2 z-20 bg-black/40 hover:bg-black/60 backdrop-blur-sm rounded-full p-2 md:p-3 text-white transition-all shadow-lg ring-2 ring-white/20"
                         aria-label="Previous slide"
                     >
                         <ChevronLeft className="h-5 w-5 md:h-6 md:w-6" />
                     </button>
                     <button
                         onClick={goToNext}
-                        className="absolute right-4 top-1/2 -translate-y-1/2 z-20 bg-white/20 hover:bg-white/40 backdrop-blur-sm rounded-full p-2 md:p-3 text-white transition-colors"
+                        className="absolute right-4 top-1/2 -translate-y-1/2 z-20 bg-black/40 hover:bg-black/60 backdrop-blur-sm rounded-full p-2 md:p-3 text-white transition-all shadow-lg ring-2 ring-white/20"
                         aria-label="Next slide"
                     >
                         <ChevronRight className="h-5 w-5 md:h-6 md:w-6" />
@@ -141,9 +141,9 @@ export default function HomeSlider() {
                         <button
                             key={index}
                             onClick={() => goToSlide(index)}
-                            className={`w-2.5 h-2.5 rounded-full transition-all ${index === currentIndex
+                            className={`w-2.5 h-2.5 rounded-full transition-all shadow-lg ring-2 ring-white/30 ${index === currentIndex
                                 ? 'bg-white w-8'
-                                : 'bg-white/50 hover:bg-white/70'
+                                : 'bg-black/50 hover:bg-black/70'
                                 }`}
                             aria-label={`Go to slide ${index + 1}`}
                         />
