@@ -9,6 +9,7 @@ import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
 export default function AdminSettingsPage() {
   const [formData, setFormData] = useState({
     authorImage: "",
+    featuredInstagramReel: "",
     youtube: "",
     instagram: "",
     facebook: "",
@@ -96,6 +97,19 @@ export default function AdminSettingsPage() {
                   className="w-full px-3 py-2 rounded border border-border bg-background text-foreground"
                   placeholder="https://..."
                 />
+              </div>
+
+              <div>
+                <label className="text-sm text-muted-foreground mb-2 block">Featured Instagram Reel URL</label>
+                <input
+                  type="url"
+                  name="featuredInstagramReel"
+                  value={formData.featuredInstagramReel || ""}
+                  onChange={handleChange}
+                  className="w-full px-3 py-2 rounded border border-border bg-background text-foreground"
+                  placeholder="https://www.instagram.com/reel/..."
+                />
+                <p className="text-xs text-muted-foreground mt-1">This will be embedded on the vintage home screen.</p>
               </div>
 
               <div className="pt-4 border-t border-border">

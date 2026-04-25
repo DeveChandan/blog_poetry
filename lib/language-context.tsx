@@ -2,7 +2,7 @@
 
 import React, { createContext, useContext, useState, useEffect, ReactNode } from 'react'
 
-export type LanguageCode = 'en' | 'hi' | 'ur' | 'bn'
+export type LanguageCode = 'en' | 'hi' | 'ur' | 'bn' | 'es'
 
 export interface Language {
   code: LanguageCode
@@ -17,6 +17,7 @@ export const SUPPORTED_LANGUAGES: Language[] = [
   { code: 'hi', name: 'Hindi', nativeName: 'हिन्दी', flag: '🇮🇳' },
   { code: 'ur', name: 'Urdu', nativeName: 'اردو', flag: '🇵🇰', rtl: true },
   { code: 'bn', name: 'Bengali', nativeName: 'বাংলা', flag: '🇧🇩' },
+  { code: 'es', name: 'Spanish', nativeName: 'Español', flag: '🇪🇸' },
 ]
 
 interface LanguageContextType {

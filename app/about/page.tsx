@@ -22,6 +22,7 @@ import {
 } from "lucide-react"
 import { Button } from "@/components/ui/button"
 import Link from "next/link"
+import { useTranslations } from "@/lib/language-context"
 
 interface DataItem {
   _id: string
@@ -39,6 +40,7 @@ export default function AboutPage() {
   const [recentVideos, setRecentVideos] = useState<DataItem[]>([])
   const [recentPoems, setRecentPoems] = useState<DataItem[]>([])
   const [recentBlogs, setRecentBlogs] = useState<DataItem[]>([])
+  const { t } = useTranslations()
 
   const [settings, setSettings] = useState<any>({})
 
@@ -137,7 +139,7 @@ export default function AboutPage() {
 
           <div className="space-y-6">
             <div>
-              <h2 className="text-primary font-serif font-medium text-xl mb-2">About the Author</h2>
+              <h2 className="text-primary font-serif font-medium text-xl mb-2">{t("aboutAuthor")}</h2>
               <h1 className="text-4xl md:text-5xl font-bold font-serif text-foreground mb-4">
                 Dr. Rupesh Kumar Singh
               </h1>
@@ -146,22 +148,14 @@ export default function AboutPage() {
 
             <div className="prose prose-lg dark:prose-invert text-muted-foreground">
               <p className="lead text-xl text-foreground font-medium">
-                संवेदना, स्मृति और शब्द - ये तीन तत्व डॉ. रूपेश कुमार सिंह की लेखनी की आत्मा हैं।
+                {t("about_p1")}
               </p>
-              <p>
-                उनका लेखन जीवन के उन कोनों से जन्म लेता है, जहाँ भावनाएँ शब्दों से पहले जागती हैं, और फिर कविता, ग़ज़ल या कहानी बनकर पाठक के मन में अपनी गहरी छाप छोड़ जाती हैं।
-              </p>
-              <p>
-                डॉ. सिंह ने इनफॉर्मेशन टेक्नोलॉजी के क्षेत्र में अपनी गहन दृष्टि और नेतृत्व से एक अलग पहचान बनाई है। आज वे Big 4 में Partner के रूप में कार्यरत हैं - जहाँ वे दुनिया भर की यात्राएँ करते हुए नई संस्कृतियों, अनुभवों और मानवीय पहलुओं को आत्मसात करते हैं।
-              </p>
-              <p>
-                परंतु सफलता के इस शिखर पर भी उनके भीतर का लेखक अब भी जीवित, सजग और संवेदनशील है - जो हर यात्रा, हर मिलन, हर बिछोह से एक नया अर्थ खोज लेता है। उनके लिए साहित्य केवल अभिव्यक्ति नहीं, बल्कि आत्मा की वह भाषा है जो शब्दों से नहीं, संवेदनाओं से बोली जाती है।
-              </p>
-              <p>
-                उनकी कविताएँ और कहानियाँ स्मृतियों की रौशनी में डूबकर प्रेम, वियोग और जीवन के गहरे अर्थों को उजागर करती हैं। “अब सब याद आता है, छूटे हुए का दर्द बहुत सताता है” जैसी कविताएँ और “स्मृतियों की रोशनी” जैसी रचनाएँ इस बात का प्रमाण हैं कि उनके शब्द अँधेरे को मिटाते नहीं, बल्कि उसे सुंदर बना देते हैं।
-              </p>
+              <p>{t("about_p2")}</p>
+              <p>{t("about_p3")}</p>
+              <p>{t("about_p4")}</p>
+              <p>{t("about_p5")}</p>
               <p className="font-medium text-foreground italic">
-                डॉ. रूपेश कुमार सिंह का लेखन एक ऐसी यात्रा है - जहाँ पाठक अपने भीतर झाँकता है, और हर स्मृति एक नई रौशनी बनकर झिलमिला उठती है।
+                {t("about_p6")}
               </p>
             </div>
 
@@ -169,13 +163,13 @@ export default function AboutPage() {
               <Button className="font-serif gap-2" asChild>
                 <a href={`mailto:${settings.email || 'contact@example.com'}`}>
                   <Mail className="h-4 w-4" />
-                  Contact Me
+                  {t("contactMe")}
                 </a>
               </Button>
               <Button variant="outline" className="font-serif gap-2" asChild>
                 <Link href="/poems">
                   <Feather className="h-4 w-4" />
-                  Read Poems
+                  {t("readPoemsContent")}
                 </Link>
               </Button>
             </div>
@@ -188,10 +182,10 @@ export default function AboutPage() {
             <div className="flex items-center justify-between border-b pb-4">
               <h2 className="text-3xl font-serif font-bold flex items-center gap-3">
                 <Video className="h-6 w-6 text-primary" />
-                Latest Videos
+                {t("latestVideos")}
               </h2>
               <Button variant="ghost" className="text-primary" asChild>
-                <Link href="/videos">View All</Link>
+                <Link href="/videos">{t("viewAll")}</Link>
               </Button>
             </div>
             <div className="grid md:grid-cols-3 gap-6">
@@ -217,10 +211,10 @@ export default function AboutPage() {
             <div className="flex items-center justify-between border-b pb-4">
               <h2 className="text-3xl font-serif font-bold flex items-center gap-3">
                 <Feather className="h-6 w-6 text-primary" />
-                Recent Poems
+                {t("recentPoemsTitle")}
               </h2>
               <Button variant="ghost" className="text-primary" asChild>
-                <Link href="/poems">Read More</Link>
+                <Link href="/poems">{t("readMore")}</Link>
               </Button>
             </div>
             <div className="grid md:grid-cols-3 gap-6">
@@ -250,10 +244,10 @@ export default function AboutPage() {
             <div className="flex items-center justify-between border-b pb-4">
               <h2 className="text-3xl font-serif font-bold flex items-center gap-3">
                 <BookOpen className="h-6 w-6 text-primary" />
-                Latest from Blog
+                {t("latestFromBlog")}
               </h2>
               <Button variant="ghost" className="text-primary" asChild>
-                <Link href="/blog">Visit Blog</Link>
+                <Link href="/blog">{t("viewAll")}</Link>
               </Button>
             </div>
             <div className="grid md:grid-cols-3 gap-6">

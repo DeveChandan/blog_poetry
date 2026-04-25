@@ -1,7 +1,7 @@
 "use client"
 
 import Link from "next/link"
-import { useRouter } from "next/navigation"
+import { usePathname, useRouter } from "next/navigation"
 import { useState, useEffect, useCallback } from "react"
 import { Button } from "@/components/ui/button"
 import { NavigationDropdown } from "@/components/navigation-dropdown"
@@ -19,6 +19,7 @@ export default function Navigation() {
   const { user, loading, refetch } = useSession()
   const [mounted, setMounted] = useState(false)
   const { t, isRtl } = useTranslations()
+  const pathname = usePathname()
 
   useEffect(() => {
     setMounted(true)
@@ -51,6 +52,8 @@ export default function Navigation() {
       console.error("An error occurred during logout:", error)
     }
   }, [refetch, router])
+
+  if (pathname === "/") return null;
 
   return (
     <nav className="sticky top-0 z-50 bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60 border-b border-border">

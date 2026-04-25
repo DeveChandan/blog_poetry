@@ -156,6 +156,9 @@ function AdminDashboardContent() {
               <Button asChild variant="outline" className="w-full bg-transparent">
                 <Link href="/admin/comments">Manage Comments</Link>
               </Button>
+              <Button asChild variant="outline" className="w-full bg-transparent">
+                <Link href="/admin/contacts">View Contact Messages</Link>
+              </Button>
             </CardContent>
           </Card>
 
