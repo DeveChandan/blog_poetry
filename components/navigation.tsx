@@ -53,7 +53,9 @@ export default function Navigation() {
     }
   }, [refetch, router])
 
-  if (pathname === "/") return null;
+  // Hide main navigation on the home page as it has its own custom vintage navigation
+  const isHomePage = pathname === "/" || pathname === "" || pathname === null || pathname === "/index";
+  if (isHomePage) return null;
 
   return (
     <nav className="sticky top-0 z-50 bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60 border-b border-border">
