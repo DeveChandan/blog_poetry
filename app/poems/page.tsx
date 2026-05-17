@@ -23,7 +23,7 @@ export default async function PoemsPage() {
     <main className="min-h-screen bg-background py-12 px-4 sm:px-6 lg:px-8">
       <div className="max-w-6xl mx-auto">
         <h1 className="text-4xl font-bold text-foreground mb-8">My Poems</h1>
-        <FilteredPoems poems={poems} />
+        <FilteredPoems poems={poems as any} />
       </div>
     </main>
   )

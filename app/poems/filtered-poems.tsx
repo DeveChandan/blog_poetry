@@ -5,13 +5,7 @@ import PoemCard from "@/components/poem-card"
 import { Input } from "@/components/ui/input"
 import { Button } from "@/components/ui/button"
 import { useTranslations } from "@/lib/language-context"
-import {
-  DropdownMenu,
-  DropdownMenuContent,
-  DropdownMenuItem,
-  DropdownMenuTrigger,
-} from "@/components/ui/dropdown-menu"
-import { ChevronDown, X } from "lucide-react"
+import { X } from "lucide-react"
 
 interface Poem {
   _id: string
@@ -23,25 +17,33 @@ interface Poem {
   createdAt: string
 }
 
-// Primary letters shown as buttons
-const PRIMARY_LETTERS = ['All', 'A', 'B', 'C', 'D', 'E']
-// Additional letters shown in dropdown
-const MORE_LETTERS = ['F', 'G', 'H', 'I', 'J', 'K', 'L', 'M', 'N', 'O', 'P', 'Q', 'R', 'S', 'T', 'U', 'V', 'W', 'X', 'Y', 'Z']
-
 export default function FilteredPoems({ poems }: { poems: Poem[] }) {
   const { t } = useTranslations()
   const [filteredPoems, setFilteredPoems] = useState<Poem[]>(poems)
   const [search, setSearch] = useState("")
-  const [selectedLetter, setSelectedLetter] = useState<string>("All")
-  const [dropdownOpen, setDropdownOpen] = useState(false)
+  const [selectedTag, setSelectedTag] = useState<string>("All")
+  const [tags, setTags] = useState<string[]>([])
+
+  useEffect(() => {
+    // Extract unique, non-empty tags from all poems
+    const uniqueTags = Array.from(
+      new Set(
+        poems
+          .flatMap((poem) => poem.tags || [])
+          .map((tag) => tag.trim())
+          .filter((tag) => tag.length > 0)
+      )
+    ).sort((a, b) => a.localeCompare(b, undefined, { sensitivity: 'base' }))
+    setTags(uniqueTags)
+  }, [poems])
 
   useEffect(() => {
     let filtered = poems
 
-    // Apply alphabetical filter first
-    if (selectedLetter && selectedLetter !== "All") {
+    // Apply tag filter first
+    if (selectedTag && selectedTag !== "All") {
       filtered = filtered.filter(
-        (poem) => poem.title.charAt(0).toUpperCase() === selectedLetter
+        (poem) => poem.tags && poem.tags.some(tag => tag.toLowerCase() === selectedTag.toLowerCase())
       )
     }
 
@@ -55,19 +57,12 @@ export default function FilteredPoems({ poems }: { poems: Poem[] }) {
     }
 
     setFilteredPoems(filtered)
-  }, [search, selectedLetter, poems])
-
-  const handleLetterSelect = (letter: string) => {
-    setSelectedLetter(letter)
-    setDropdownOpen(false)
-  }
+  }, [search, selectedTag, poems])
 
   const clearFilter = () => {
-    setSelectedLetter("All")
+    setSelectedTag("All")
     setSearch("")
   }
-
-  const isMoreLetterSelected = MORE_LETTERS.includes(selectedLetter)
 
   return (
     <div>
@@ -81,67 +76,44 @@ export default function FilteredPoems({ poems }: { poems: Poem[] }) {
           className="max-w-md"
         />
 
-        {/* Alphabetical Filter Bar */}
+        {/* Tags Filter Bar */}
         <div className="flex flex-wrap items-center gap-2">
-          {/* Primary Letter Buttons */}
-          {PRIMARY_LETTERS.map((letter) => (
+          <Button
+            variant={selectedTag === "All" ? "default" : "outline"}
+            size="sm"
+            onClick={() => setSelectedTag("All")}
+            className={`min-w-[50px] font-medium transition-all rounded-full ${
+              selectedTag === "All"
+                ? "bg-primary text-primary-foreground shadow-md hover:bg-primary/95"
+                : "hover:bg-primary/10 hover:border-primary text-muted-foreground hover:text-primary bg-transparent"
+            }`}
+          >
+            {t('all')}
+          </Button>
+
+          {tags.map((tag) => (
             <Button
-              key={letter}
-              variant={selectedLetter === letter ? "default" : "outline"}
+              key={tag}
+              variant={selectedTag === tag ? "default" : "outline"}
               size="sm"
-              onClick={() => handleLetterSelect(letter)}
-              className={`min-w-[40px] font-medium transition-all ${selectedLetter === letter
-                ? "bg-primary text-primary-foreground shadow-md"
-                : "hover:bg-primary/10 hover:border-primary"
-                }`}
+              onClick={() => setSelectedTag(tag)}
+              className={`font-medium transition-all rounded-full ${
+                selectedTag === tag
+                  ? "bg-primary text-primary-foreground shadow-md hover:bg-primary/95"
+                  : "hover:bg-primary/10 hover:border-primary text-muted-foreground hover:text-primary bg-transparent"
+              }`}
             >
-              {letter}
+              #{tag}
             </Button>
           ))}
 
-          {/* More Letters Dropdown */}
-          <DropdownMenu open={dropdownOpen} onOpenChange={setDropdownOpen}>
-            <DropdownMenuTrigger asChild>
-              <Button
-                variant={isMoreLetterSelected ? "default" : "outline"}
-                size="sm"
-                className={`min-w-[60px] font-medium ${isMoreLetterSelected
-                  ? "bg-primary text-primary-foreground"
-                  : ""
-                  }`}
-              >
-                {isMoreLetterSelected ? selectedLetter : t('more')}
-                <ChevronDown className="ml-1 h-3 w-3" />
-              </Button>
-            </DropdownMenuTrigger>
-            <DropdownMenuContent
-              align="start"
-              className="w-[280px] p-2"
-            >
-              <div className="grid grid-cols-7 gap-1">
-                {MORE_LETTERS.map((letter) => (
-                  <DropdownMenuItem
-                    key={letter}
-                    onClick={() => handleLetterSelect(letter)}
-                    className={`flex items-center justify-center p-2 cursor-pointer rounded-md ${selectedLetter === letter
-                      ? "bg-primary text-primary-foreground"
-                      : "hover:bg-primary/10"
-                      }`}
-                  >
-                    {letter}
-                  </DropdownMenuItem>
-                ))}
-              </div>
-            </DropdownMenuContent>
-          </DropdownMenu>
-
           {/* Clear Filter Button */}
-          {(selectedLetter !== "All" || search) && (
+          {(selectedTag !== "All" || search) && (
             <Button
               variant="ghost"
               size="sm"
               onClick={clearFilter}
-              className="text-muted-foreground hover:text-foreground"
+              className="text-muted-foreground hover:text-foreground rounded-full"
             >
               <X className="h-4 w-4 mr-1" />
               {t('clear')}
@@ -150,9 +122,9 @@ export default function FilteredPoems({ poems }: { poems: Poem[] }) {
         </div>
 
         {/* Active Filter Indicator */}
-        {selectedLetter !== "All" && (
+        {selectedTag !== "All" && (
           <p className="text-sm text-muted-foreground">
-            Showing poems starting with "{selectedLetter}"
+            Showing poems tagged with <span className="font-semibold text-primary">#{selectedTag}</span>
             {search && ` matching "${search}"`}
             <span className="ml-2 text-primary font-medium">
               ({filteredPoems.length} {filteredPoems.length === 1 ? 'poem' : 'poems'})
