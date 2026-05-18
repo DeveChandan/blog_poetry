@@ -195,12 +195,12 @@ const HeroSection = memo(function HeroSection({ t, sliders }: { t: (key: any) =>
         </AnimatePresence>
         {/* Overlay text in the hero image aligned to the right */}
         <div className="vintage-hero-text-overlay relative z-10">
-          <h2>{currentQuote}</h2>
+          {/* <h2>{currentQuote}</h2> */}
         </div>
       </div>
 
       <div className="vintage-exact-quote-ribbon">
-        <p>“{t("welcomeQuote")}”</p>
+        {/*<p>“{t("welcomeQuote")}”</p>*/}
       </div>
     </motion.section>
   )
@@ -529,7 +529,7 @@ const VintageCombinedFooter = memo(function VintageCombinedFooter({
         <div className="flex flex-col h-full">
           <div className="vintage-col-header mb-8">
             <span className="line"></span>
-            <h3 className="whitespace-nowrap">Information</h3>
+            <h3 className="whitespace-nowrap">{t("footerInformation")}</h3>
             <span className="line"></span>
           </div>
 
@@ -560,8 +560,8 @@ const VintageCombinedFooter = memo(function VintageCombinedFooter({
                     <Mail size={20} className="text-[#3c2a1e] dark:text-[#e6dfcd]" />
                   </div>
                   <div>
-                    <p className="text-[10px] uppercase opacity-60 font-bold tracking-widest font-sans">Email Address</p>
-                    <p className="text-base md:text-lg font-serif font-bold">contact@drrupeshsingh.com</p>
+                    <p className="text-[10px] uppercase opacity-60 font-bold tracking-widest font-sans">{t("emailAddressLabel")}</p>
+                    <p className="text-base md:text-lg font-serif font-bold">drrupeshpoetry@rsunkahi.com</p>
                   </div>
                 </div>
 
@@ -570,9 +570,9 @@ const VintageCombinedFooter = memo(function VintageCombinedFooter({
                     <Info size={20} className="text-[#3c2a1e] dark:text-[#e6dfcd]" />
                   </div>
                   <div>
-                    <p className="text-[10px] uppercase opacity-60 font-bold tracking-widest font-sans">Biography</p>
+                    <p className="text-[10px] uppercase opacity-60 font-bold tracking-widest font-sans">{t("biographyLabel")}</p>
                     <p className="text-base md:text-lg font-serif font-bold group-hover:underline underline-offset-4 decoration-[#3c2a1e]/40 dark:decoration-[#e6dfcd]/40">
-                      About Dr Rupesh Kumar Singh
+                      {t("aboutAuthorText")}
                     </p>
                   </div>
                 </Link>
@@ -581,7 +581,7 @@ const VintageCombinedFooter = memo(function VintageCombinedFooter({
 
             {/* Social Links Row */}
             <div className="mt-8 pt-6 border-t border-[#3c2a1e]/10 dark:border-[#e6dfcd]/10">
-              <p className="text-[10px] uppercase opacity-60 font-bold tracking-widest font-sans text-center mb-4">Follow the Journey</p>
+              <p className="text-[10px] uppercase opacity-60 font-bold tracking-widest font-sans text-center mb-4">{t("followJourney")}</p>
               <div className="flex items-center justify-center gap-3.5 flex-wrap">
                 {socialLinks.map((social) => (
                   <Link
@@ -649,16 +649,15 @@ export default function VintageHome({
               animate={{ y: 0, opacity: 1 }}
               exit={{ y: -80, opacity: 0 }}
               transition={{ duration: 0.3, ease: "easeInOut" }}
-              className="fixed top-0 left-0 right-0 z-[100] bg-[#f4e8d4]/95 dark:bg-[#1f1a14]/95 backdrop-blur-md border-b border-[#3c2a1e]/10 dark:border-[#e6dfcd]/10 shadow-md py-3 px-6 md:px-12 flex items-center justify-between"
+              className="fixed top-0 left-0 right-0 z-[100] bg-[#f4e8d4]/95 dark:bg-[#1f1a14]/95 backdrop-blur-md border-b border-[#3c2a1e]/10 dark:border-[#e6dfcd]/10 shadow-md py-1 md:py-1.5 px-6 md:px-12 flex items-center justify-between"
             >
-              {/* Logo on top left */}
               <Link href="/" className="flex items-center gap-2">
-                <div className="relative h-10 w-28 md:h-12 md:w-32 overflow-hidden rounded bg-transparent">
+                <div className="relative h-14 w-40 md:h-18 md:w-52 -my-2 md:-my-3 overflow-hidden rounded bg-transparent">
                   <Image
                     src="/IMG_1779.PNG"
                     alt="Unkahi Logo"
                     fill
-                    sizes="120px"
+                    sizes="250px"
                     className="object-contain mix-blend-multiply dark:brightness-200 dark:invert"
                   />
                 </div>

@@ -64,8 +64,8 @@ export const translations = {
 
         // Vintage Home page
         siteTitle: "Shabdon ki Duniya",
-        heroQuote: "The youth of emotions has taken the form of words....",
-        welcomeQuote: "",
+        //heroQuote: "The youth of emotions has taken the form of words....",
+        //welcomeQuote: "",
         poemsSection: "Poems",
         myBooks: "My Books",
         poetryRay: "Poetry Ray",
@@ -86,6 +86,11 @@ export const translations = {
         readersWorldwide: "Readers Worldwide",
         booksPublishedLabel: "Published Books",
         yearsWriting: "Years Writing",
+        footerInformation: "Information",
+        emailAddressLabel: "Email Address",
+        biographyLabel: "Biography",
+        aboutAuthorText: "About Dr Rupesh Kumar Singh",
+        followJourney: "Follow the Journey",
 
         // About Page
         about_p1: "Sensitivity, memory, and words - these three elements are the soul of Dr. Rupesh Kumar Singh's writing.",
@@ -171,11 +176,11 @@ export const translations = {
         morePoems: "और चलिये...",
         moreBlogs: "और चलिये...",
         pathsInWords: "पादों मे रस्ते",
-        subscribeTitle: "नांवदों करें",
+        subscribeTitle: "हमसे जुड़ें",
         subscribeSubtitle: "अक्षरों शब्दों का बोझे...",
         nameLabel: "नाम",
-        emailLabel: "अविन",
-        messageLabel: "संदेत",
+        emailLabel: "इलेक्ट्रॉनिक डाक",
+        messageLabel: "संदेश",
         sendButton: "भेजें",
         welcomeToPoetry: "काव्य की दुनिया में आपका स्वागत है",
         welcomeDescription: "हृदयस्पर्शी छंद और साहित्यिक रचनाएं देखें",
@@ -185,6 +190,11 @@ export const translations = {
         readersWorldwide: "पाठक विश्वभर में",
         booksPublishedLabel: "प्रकाशित किताबें",
         yearsWriting: "वर्ष लेखन",
+        footerInformation: "जानकारी",
+        emailAddressLabel: "ईमेल पता",
+        biographyLabel: "जीवनी",
+        aboutAuthorText: "डॉ. रूपेश कुमार सिंह के बारे में",
+        followJourney: "सफ़र से जुड़ें",
 
         // About Page
         about_p1: "संवेदना, स्मृति और शब्द - ये तीन तत्व डॉ. रूपेश कुमार सिंह की लेखनी की आत्मा हैं।",
@@ -284,6 +294,11 @@ export const translations = {
         readersWorldwide: "قارئین دنیا بھر میں",
         booksPublishedLabel: "شائع شدہ کتابیں",
         yearsWriting: "سال تحریر",
+        footerInformation: "معلومات",
+        emailAddressLabel: "ای میل پتہ",
+        biographyLabel: "سوانح عمری",
+        aboutAuthorText: "ڈاکٹر روپیش کمار سنگھ کے بارے میں",
+        followJourney: "سفر کی پیروی کریں",
 
         // About Page
         about_p1: "حساسیت، یادیں اور الفاظ - یہ تین عناصر ڈاکٹر روپیش کمار سنگھ کی تحریر کی روح ہیں۔",
@@ -383,6 +398,11 @@ export const translations = {
         readersWorldwide: "পাঠক বিশ্বজুড়ে",
         booksPublishedLabel: "প্রকাশিত বই",
         yearsWriting: "বছর লেখালেখি",
+        footerInformation: "তথ্য",
+        emailAddressLabel: "ইমেল ঠিকানা",
+        biographyLabel: "জীবনী",
+        aboutAuthorText: "ডঃ রূপেশ কুমার সিংহ সম্পর্কে",
+        followJourney: "যাত্রার সাথে থাকুন",
 
         // About Page
         about_p1: "সংবেদনশীলতা, স্মৃতি এবং শব্দ - এই তিনটি উপাদান ডক্টর রূপেশ কুমার সিং-এর লেখার আত্মা।",
@@ -482,6 +502,11 @@ export const translations = {
         readersWorldwide: "Lectores en todo el Mundo",
         booksPublishedLabel: "Libros Publicados",
         yearsWriting: "Años Escribiendo",
+        footerInformation: "Información",
+        emailAddressLabel: "Correo electrónico",
+        biographyLabel: "Biografía",
+        aboutAuthorText: "Sobre el Dr. Rupesh Kumar Singh",
+        followJourney: "Sigue el viaje",
 
         // About Page
         about_p1: "La sensibilidad, la memoria y las palabras: estos tres elementos son el alma de la escritura del Dr. Rupesh Kumar Singh.",

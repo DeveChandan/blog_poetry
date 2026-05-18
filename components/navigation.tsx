@@ -63,12 +63,12 @@ export default function Navigation() {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex justify-between items-center h-16">
           <Link href="/" className="flex items-center gap-3 group">
-            <div className="relative h-10 w-24 overflow-hidden bg-transparent transition-transform duration-300 group-hover:scale-105">
+            <div className="relative h-14 w-40 md:h-16 md:w-48 overflow-hidden bg-transparent transition-transform duration-300 group-hover:scale-105">
               <Image
                 src="/IMG_1779.PNG"
                 alt="Unkahi Logo"
                 fill
-                sizes="100px"
+                sizes="250px"
                 className="object-contain dark:brightness-200 dark:invert"
                 priority
               />
