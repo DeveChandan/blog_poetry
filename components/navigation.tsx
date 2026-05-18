@@ -1,6 +1,7 @@
 "use client"
 
 import Link from "next/link"
+import Image from "next/image"
 import { usePathname, useRouter } from "next/navigation"
 import { useState, useEffect, useCallback } from "react"
 import { Button } from "@/components/ui/button"
@@ -62,8 +63,15 @@ export default function Navigation() {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex justify-between items-center h-16">
           <Link href="/" className="flex items-center gap-3 group">
-            <div className="relative flex h-10 w-10 items-center justify-center rounded-xl bg-primary/10 text-primary transition-all duration-300 group-hover:scale-105 group-hover:bg-primary group-hover:text-primary-foreground group-active:scale-95 shadow-sm">
-              <Feather className="h-6 w-6 stroke-[2.5px]" />
+            <div className="relative h-10 w-24 overflow-hidden bg-transparent transition-transform duration-300 group-hover:scale-105">
+              <Image
+                src="/IMG_1779.PNG"
+                alt="Unkahi Logo"
+                fill
+                sizes="100px"
+                className="object-contain dark:brightness-200 dark:invert"
+                priority
+              />
             </div>
             <span className="font-serif text-xl sm:text-2xl font-bold tracking-tight text-foreground transition-colors group-hover:text-primary">
               Dr Rupesh Kumar Singh

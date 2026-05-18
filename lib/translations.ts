@@ -63,9 +63,9 @@ export const translations = {
         publishedBooks: "Published Books",
 
         // Vintage Home page
-        siteTitle: "World of Words",
+        siteTitle: "Shabdon ki Duniya",
         heroQuote: "The youth of emotions has taken the form of words....",
-        welcomeQuote: "I am a poet of words, born to weave poetry in every verse!",
+        welcomeQuote: "",
         poemsSection: "Poems",
         myBooks: "My Books",
         poetryRay: "Poetry Ray",

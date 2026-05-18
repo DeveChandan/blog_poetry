@@ -6,9 +6,7 @@ import Image from "next/image"
 import { motion, useInView, AnimatePresence } from "framer-motion"
 import { useTranslations } from "@/lib/language-context"
 import LanguageSelector from "@/components/language-selector"
-import AnimatedQuill from "@/components/animated-quill"
-import AnimatedCandle from "@/components/animated-candle"
-import { Facebook, Twitter, Instagram, Youtube, Linkedin, ChevronLeft, ChevronRight, Mail, Info } from "lucide-react"
+import { Facebook, Twitter, Instagram, Youtube, Linkedin, ChevronLeft, ChevronRight, Mail, Info, Menu, X } from "lucide-react"
 import useEmblaCarousel from "embla-carousel-react"
 
 // ─── Animation Variants ───
@@ -93,7 +91,7 @@ const VintageVisitorCounter = memo(function VintageVisitorCounter({ t }: { t?: a
 function VintageHeader({ t }: { t: (key: any) => string }) {
   return (
     <motion.section
-      className="vintage-header-exact relative"
+      className="vintage-header-exact relative flex flex-col items-center"
       initial="hidden"
       animate="visible"
       variants={staggerContainer}
@@ -105,6 +103,25 @@ function VintageHeader({ t }: { t: (key: any) => string }) {
       <div className="absolute top-4 right-4 z-50">
         <LanguageSelector />
       </div>
+
+      {/* Main emblem logo */}
+      <motion.div
+        className="flex justify-center mb-1 mt-6"
+        variants={fadeInUp}
+      >
+        <Link href="/" className="transition-transform hover:scale-105 duration-300">
+          <div className="relative h-20 w-52 md:h-24 md:w-64 overflow-hidden rounded bg-transparent">
+            <Image
+              src="/IMG_1779.PNG"
+              alt="Unkahi Logo"
+              fill
+              sizes="560px"
+              className="object-contain mix-blend-multiply dark:brightness-200 dark:invert"
+              priority
+            />
+          </div>
+        </Link>
+      </motion.div>
 
       <motion.h1 className="vintage-exact-title" variants={fadeInUp}>
         {t("siteTitle")}
@@ -208,7 +225,7 @@ const VintageCarousel = memo(function VintageCarousel({
   recentVideo: any
   settings?: any
 }) {
-  const [emblaRef, emblaApi] = useEmblaCarousel({ 
+  const [emblaRef, emblaApi] = useEmblaCarousel({
     loop: true,
     align: "start",
     slidesToScroll: 1,
@@ -237,7 +254,7 @@ const VintageCarousel = memo(function VintageCarousel({
     <div className="relative max-w-[1400px] mx-auto py-16 px-4 md:px-12 overflow-hidden">
       <div className="embla overflow-hidden" ref={emblaRef}>
         <div className="embla__container flex gap-6">
-          
+
           {/* ── Slide 1: Poems ── */}
           <div className="embla__slide flex-[0_0_85%] md:flex-[0_0_48%] lg:flex-[0_0_30%] min-w-0">
             <div className="vintage-col h-full">
@@ -350,16 +367,16 @@ const VintageCarousel = memo(function VintageCarousel({
                 <span className="line"></span>
               </div>
               <div className="vintage-col-1-box h-full min-h-[450px] p-2 flex items-center justify-center">
-                 {settings?.featuredInstagramReel ? (
-                   <iframe
+                {settings?.featuredInstagramReel ? (
+                  <iframe
                     src={`${settings.featuredInstagramReel.split("?")[0].replace(/\/$/, "")}/embed`}
-                  allow="encrypted-media"
+                    allow="encrypted-media"
                     className="rounded bg-white w-full max-w-[320px]"
                     style={{ height: '380px' }}
                   ></iframe>
-                 ) : (
-                   <div className="text-[#3c2a1e] opacity-50 italic">No Reel Featured</div>
-                 )}
+                ) : (
+                  <div className="text-[#3c2a1e] opacity-50 italic">No Reel Featured</div>
+                )}
               </div>
             </div>
           </div>
@@ -368,13 +385,13 @@ const VintageCarousel = memo(function VintageCarousel({
       </div>
 
       {/* Navigation Buttons */}
-      <button 
+      <button
         onClick={scrollPrev}
         className="absolute left-2 top-1/2 -translate-y-1/2 z-30 p-2 rounded-full bg-[#f4e8d4] border border-[#3c2a1e]/20 text-[#3c2a1e] hover:bg-[#3c2a1e] hover:text-[#f4e8d4] transition-all shadow-md hidden md:block"
       >
         <ChevronLeft size={24} />
       </button>
-      <button 
+      <button
         onClick={scrollNext}
         className="absolute right-2 top-1/2 -translate-y-1/2 z-30 p-2 rounded-full bg-[#f4e8d4] border border-[#3c2a1e]/20 text-[#3c2a1e] hover:bg-[#3c2a1e] hover:text-[#f4e8d4] transition-all shadow-md hidden md:block"
       >
@@ -387,12 +404,12 @@ const VintageCarousel = memo(function VintageCarousel({
 // ═══════════════════════════════════════════════
 // COMBINED FOOTER (Subscribe & Info)
 // ═══════════════════════════════════════════════
-const VintageCombinedFooter = memo(function VintageCombinedFooter({ 
-  t, 
-  settings 
-}: { 
+const VintageCombinedFooter = memo(function VintageCombinedFooter({
+  t,
+  settings
+}: {
   t: any
-  settings?: any 
+  settings?: any
 }) {
   const [name, setName] = useState("")
   const [email, setEmail] = useState("")
@@ -436,115 +453,149 @@ const VintageCombinedFooter = memo(function VintageCombinedFooter({
   ].filter(link => link.url)
 
   return (
-    <motion.section 
+    <motion.section
       className="max-w-[1200px] mx-auto py-16 px-6 relative z-20"
       initial="hidden"
       whileInView="visible"
       viewport={{ once: true, amount: 0.1 }}
       variants={fadeInUp}
     >
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-16 lg:gap-24">
-        
+      <div className="grid grid-cols-1 md:grid-cols-2 gap-12 lg:gap-16">
+
         {/* ── Left: Subscription Form ── */}
-        <div className="flex flex-col">
+        <div className="flex flex-col h-full">
           <div className="vintage-col-header mb-8">
             <span className="line"></span>
             <h3 className="whitespace-nowrap">{t("subscribeTitle")}</h3>
             <span className="line"></span>
           </div>
-          <form className="vintage-exact-form w-full" onSubmit={handleSubmit}>
-            <div className="input-group mb-4">
-              <input
-                type="text"
-                placeholder={t("nameLabel")}
-                className="vintage-exact-input w-full"
-                value={name}
-                onChange={(e) => setName(e.target.value)}
-                required
-              />
-            </div>
-            <div className="input-group mb-4">
-              <input
-                type="email"
-                placeholder={t("emailLabel")}
-                className="vintage-exact-input w-full"
-                value={email}
-                onChange={(e) => setEmail(e.target.value)}
-                required
-              />
-            </div>
-            <div className="input-group mb-4">
-              <textarea
-                placeholder={t("messageLabel")}
-                className="vintage-exact-input w-full resize-none"
-                value={message}
-                onChange={(e) => setMessage(e.target.value)}
-                rows={3}
-                required
-              />
-            </div>
 
-            {status === "success" && (
-              <p className="text-green-700 mb-4 font-medium italic">Message sent successfully!</p>
-            )}
-            {status === "error" && (
-              <p className="text-red-600 mb-4 font-medium italic">Failed to send message.</p>
-            )}
+          <div className="bg-[#ebdcb9]/30 dark:bg-[#2c2317]/30 border border-[#3c2a1e]/15 dark:border-[#e6dfcd]/15 rounded-lg p-6 md:p-8 shadow-md relative overflow-hidden backdrop-blur-sm flex-grow flex flex-col justify-center">
+            {/* Corner decorations */}
+            <div className="absolute top-0 right-0 w-12 h-12 pointer-events-none opacity-10 border-t-2 border-r-2 border-[#3c2a1e] dark:border-[#e6dfcd] m-2"></div>
+            <div className="absolute bottom-0 left-0 w-12 h-12 pointer-events-none opacity-10 border-b-2 border-l-2 border-[#3c2a1e] dark:border-[#e6dfcd] m-2"></div>
 
-            <button type="submit" className="vintage-exact-btn-dark w-full py-3" disabled={loading}>
-              {loading ? "Sending..." : t("sendButton")}
-            </button>
-          </form>
+            <form className="w-full flex flex-col gap-4" onSubmit={handleSubmit}>
+              <div className="relative">
+                <input
+                  type="text"
+                  placeholder={t("nameLabel")}
+                  className="w-full bg-[#fcf9f2] dark:bg-[#1a150f] border border-[#3c2a1e]/25 dark:border-[#e6dfcd]/25 rounded px-4 py-3 font-serif text-[#3c2a1e] dark:text-[#e6dfcd] placeholder-[#3c2a1e]/50 dark:placeholder-[#e6dfcd]/50 outline-none focus:border-[#3c2a1e] dark:focus:border-[#e6dfcd] transition-colors"
+                  value={name}
+                  onChange={(e) => setName(e.target.value)}
+                  required
+                />
+              </div>
+              <div className="relative">
+                <input
+                  type="email"
+                  placeholder={t("emailLabel")}
+                  className="w-full bg-[#fcf9f2] dark:bg-[#1a150f] border border-[#3c2a1e]/25 dark:border-[#e6dfcd]/25 rounded px-4 py-3 font-serif text-[#3c2a1e] dark:text-[#e6dfcd] placeholder-[#3c2a1e]/50 dark:placeholder-[#e6dfcd]/50 outline-none focus:border-[#3c2a1e] dark:focus:border-[#e6dfcd] transition-colors"
+                  value={email}
+                  onChange={(e) => setEmail(e.target.value)}
+                  required
+                />
+              </div>
+              <div className="relative">
+                <textarea
+                  placeholder={t("messageLabel")}
+                  className="w-full bg-[#fcf9f2] dark:bg-[#1a150f] border border-[#3c2a1e]/25 dark:border-[#e6dfcd]/25 rounded px-4 py-3 font-serif text-[#3c2a1e] dark:text-[#e6dfcd] placeholder-[#3c2a1e]/50 dark:placeholder-[#e6dfcd]/50 outline-none focus:border-[#3c2a1e] dark:focus:border-[#e6dfcd] transition-colors resize-none"
+                  value={message}
+                  onChange={(e) => setMessage(e.target.value)}
+                  rows={4}
+                  required
+                />
+              </div>
+
+              {status === "success" && (
+                <p className="text-green-800 dark:text-green-400 font-semibold italic text-sm text-center">Message sent successfully!</p>
+              )}
+              {status === "error" && (
+                <p className="text-red-700 dark:text-red-400 font-semibold italic text-sm text-center">Failed to send message.</p>
+              )}
+
+              <button
+                type="submit"
+                className="w-full py-3 bg-[#3c2a1e] text-[#f4e8d4] dark:bg-[#e6dfcd] dark:text-[#1f1a14] font-serif font-bold text-base rounded shadow hover:bg-[#523b2b] dark:hover:bg-[#fcf9f2] transition-colors active:scale-[0.98] transform duration-150 disabled:opacity-50 mt-2"
+                disabled={loading}
+              >
+                {loading ? "Sending..." : t("sendButton")}
+              </button>
+            </form>
+          </div>
         </div>
 
         {/* ── Right: Information & Social ── */}
-        <div className="flex flex-col">
+        <div className="flex flex-col h-full">
           <div className="vintage-col-header mb-8">
             <span className="line"></span>
             <h3 className="whitespace-nowrap">Information</h3>
             <span className="line"></span>
           </div>
-          
-          <div className="flex flex-col gap-8">
-            {/* Social Media Grid */}
-            <div className="grid grid-cols-2 gap-y-4 gap-x-6">
-              {socialLinks.map((social) => (
-                <Link 
-                  key={social.id}
-                  href={social.url} 
-                  target="_blank" 
-                  rel="noopener noreferrer" 
-                  className="flex items-center gap-3 text-[#3c2a1e] hover:text-[#6b4c3a] transition-colors group"
-                >
-                  <div className="p-2 rounded-full bg-[#f4e8d4] border border-[#3c2a1e]/10 shadow-inner group-hover:scale-110 transition-transform">
-                    <social.icon size={18} />
-                  </div>
-                  <span className="font-semibold text-lg">{social.name}</span>
-                </Link>
-              ))}
-            </div>
 
-            {/* Contact & About */}
-            <div className="mt-4 pt-8 border-t border-[#3c2a1e]/10 flex flex-col gap-6">
-              <div className="flex items-center gap-4 text-[#3c2a1e]">
-                <div className="p-2 rounded-full bg-[#f4e8d4] border border-[#3c2a1e]/10 shadow-inner">
-                  <Mail size={20} />
+          <div className="bg-[#ebdcb9]/30 dark:bg-[#2c2317]/30 border border-[#3c2a1e]/15 dark:border-[#e6dfcd]/15 rounded-lg p-6 md:p-8 shadow-md relative overflow-hidden backdrop-blur-sm flex-grow flex flex-col justify-between">
+            {/* Corner decorations */}
+            <div className="absolute top-0 left-0 w-12 h-12 pointer-events-none opacity-10 border-t-2 border-l-2 border-[#3c2a1e] dark:border-[#e6dfcd] m-2"></div>
+            <div className="absolute bottom-0 right-0 w-12 h-12 pointer-events-none opacity-10 border-b-2 border-r-2 border-[#3c2a1e] dark:border-[#e6dfcd] m-2"></div>
+
+            <div className="flex flex-col gap-6">
+              {/* Logo Emblem branding inside info section */}
+              <div className="flex flex-col items-center border-b border-[#3c2a1e]/10 dark:border-[#e6dfcd]/10">
+                <div className="relative h-18 w-46 overflow-hidden">
+                  <Image
+                    src="/IMG_1779.PNG"
+                    alt="Unkahi"
+                    fill
+                    sizes="560px"
+                    className="object-contain mix-blend-multiply dark:brightness-200 dark:invert"
+                  />
                 </div>
-                <div>
-                  <p className="text-xs uppercase opacity-60 font-bold tracking-widest">Email Address</p>
-                  <p className="text-lg font-semibold">contact@drrupeshsingh.com</p>
-                </div>
+
               </div>
 
-              <Link href="/about" className="flex items-center gap-4 text-[#3c2a1e] group">
-                <div className="p-2 rounded-full bg-[#f4e8d4] border border-[#3c2a1e]/10 shadow-inner group-hover:scale-110 transition-transform">
-                  <Info size={20} />
+              {/* Contact Items */}
+              <div className="flex flex-col gap-6 py-2">
+                <div className="flex items-center gap-4 text-[#3c2a1e] dark:text-[#e6dfcd]">
+                  <div className="p-3 rounded-full bg-[#f4e8d4] dark:bg-[#1f1a14] border border-[#3c2a1e]/10 dark:border-[#e6dfcd]/10 shadow-inner flex-shrink-0">
+                    <Mail size={20} className="text-[#3c2a1e] dark:text-[#e6dfcd]" />
+                  </div>
+                  <div>
+                    <p className="text-[10px] uppercase opacity-60 font-bold tracking-widest font-sans">Email Address</p>
+                    <p className="text-base md:text-lg font-serif font-bold">contact@drrupeshsingh.com</p>
+                  </div>
                 </div>
-                <div>
-                  <p className="text-xs uppercase opacity-60 font-bold tracking-widest">Biography</p>
-                  <p className="text-lg font-semibold group-hover:underline underline-offset-4">About Dr Rupesh Kumar Singh</p>
-                </div>
-              </Link>
+
+                <Link href="/about" className="flex items-center gap-4 text-[#3c2a1e] dark:text-[#e6dfcd] group">
+                  <div className="p-3 rounded-full bg-[#f4e8d4] dark:bg-[#1f1a14] border border-[#3c2a1e]/10 dark:border-[#e6dfcd]/10 shadow-inner flex-shrink-0 group-hover:scale-105 transition-transform duration-300">
+                    <Info size={20} className="text-[#3c2a1e] dark:text-[#e6dfcd]" />
+                  </div>
+                  <div>
+                    <p className="text-[10px] uppercase opacity-60 font-bold tracking-widest font-sans">Biography</p>
+                    <p className="text-base md:text-lg font-serif font-bold group-hover:underline underline-offset-4 decoration-[#3c2a1e]/40 dark:decoration-[#e6dfcd]/40">
+                      About Dr Rupesh Kumar Singh
+                    </p>
+                  </div>
+                </Link>
+              </div>
+            </div>
+
+            {/* Social Links Row */}
+            <div className="mt-8 pt-6 border-t border-[#3c2a1e]/10 dark:border-[#e6dfcd]/10">
+              <p className="text-[10px] uppercase opacity-60 font-bold tracking-widest font-sans text-center mb-4">Follow the Journey</p>
+              <div className="flex items-center justify-center gap-3.5 flex-wrap">
+                {socialLinks.map((social) => (
+                  <Link
+                    key={social.id}
+                    href={social.url}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="p-3 rounded-full bg-[#f4e8d4] dark:bg-[#1f1a14] border border-[#3c2a1e]/10 dark:border-[#e6dfcd]/10 text-[#3c2a1e] dark:text-[#e6dfcd] hover:bg-[#3c2a1e] hover:text-[#f4e8d4] dark:hover:bg-[#e6dfcd] dark:hover:text-[#1f1a14] transition-all shadow duration-300 hover:scale-110 flex items-center justify-center"
+                    title={social.name}
+                  >
+                    <social.icon size={18} />
+                  </Link>
+                ))}
+              </div>
             </div>
           </div>
         </div>
@@ -572,44 +623,118 @@ export default function VintageHome({
   settings?: any
 }) {
   const { t, isRtl } = useTranslations()
+  const [showStickyNav, setShowStickyNav] = useState(false)
+  const [mobileMenuOpen, setMobileMenuOpen] = useState(false)
+
+  useEffect(() => {
+    const handleScroll = () => {
+      if (window.scrollY > 200) {
+        setShowStickyNav(true)
+      } else {
+        setShowStickyNav(false)
+        setMobileMenuOpen(false)
+      }
+    }
+    window.addEventListener("scroll", handleScroll)
+    return () => window.removeEventListener("scroll", handleScroll)
+  }, [])
 
   return (
     <div className="vintage-master-container" dir={isRtl ? "rtl" : "ltr"}>
+      <AnimatePresence>
+        {showStickyNav && (
+          <>
+            <motion.div
+              initial={{ y: -80, opacity: 0 }}
+              animate={{ y: 0, opacity: 1 }}
+              exit={{ y: -80, opacity: 0 }}
+              transition={{ duration: 0.3, ease: "easeInOut" }}
+              className="fixed top-0 left-0 right-0 z-[100] bg-[#f4e8d4]/95 dark:bg-[#1f1a14]/95 backdrop-blur-md border-b border-[#3c2a1e]/10 dark:border-[#e6dfcd]/10 shadow-md py-3 px-6 md:px-12 flex items-center justify-between"
+            >
+              {/* Logo on top left */}
+              <Link href="/" className="flex items-center gap-2">
+                <div className="relative h-10 w-28 md:h-12 md:w-32 overflow-hidden rounded bg-transparent">
+                  <Image
+                    src="/IMG_1779.PNG"
+                    alt="Unkahi Logo"
+                    fill
+                    sizes="120px"
+                    className="object-contain mix-blend-multiply dark:brightness-200 dark:invert"
+                  />
+                </div>
+              </Link>
+
+              {/* Navigation Options for Desktop */}
+              <div className="hidden md:flex items-center">
+                <Link href="/poems" className="vintage-exact-link text-sm lg:text-base">{t("poems")}</Link>
+                <TitleSeparator />
+                <Link href="/shayari" className="vintage-exact-link text-sm lg:text-base">{t("shayari")}</Link>
+                <TitleSeparator />
+                <Link href="/books" className="vintage-exact-link text-sm lg:text-base">{t("books")}</Link>
+                <TitleSeparator />
+                <Link href="/blog" className="vintage-exact-link text-sm lg:text-base">{t("blog")}</Link>
+                <TitleSeparator />
+                <Link href="/videos" className="vintage-exact-link text-sm lg:text-base">{t("videos")}</Link>
+                <TitleSeparator />
+                <Link href="/about" className="vintage-exact-link text-sm lg:text-base">{t("about")}</Link>
+              </div>
+
+              {/* Controls on Right */}
+              <div className="flex items-center gap-3">
+                <LanguageSelector />
+
+                {/* Mobile Menu Button */}
+                <button
+                  onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
+                  className="md:hidden p-1.5 rounded bg-[#3c2a1e]/10 dark:bg-[#e6dfcd]/10 text-[#3c2a1e] dark:text-[#e6dfcd] hover:bg-[#3c2a1e]/20 transition-colors"
+                  aria-label="Toggle Navigation Menu"
+                >
+                  {mobileMenuOpen ? <X size={20} /> : <Menu size={20} />}
+                </button>
+              </div>
+            </motion.div>
+
+            {/* Mobile Dropdown Menu */}
+            {mobileMenuOpen && (
+              <motion.div
+                initial={{ opacity: 0, y: -20 }}
+                animate={{ opacity: 1, y: 0 }}
+                exit={{ opacity: 0, y: -20 }}
+                transition={{ duration: 0.2 }}
+                className="fixed top-[64px] left-0 right-0 z-[99] bg-[#f4e8d4] dark:bg-[#1f1a14] border-b border-[#3c2a1e]/10 dark:border-[#e6dfcd]/10 shadow-lg p-6 flex flex-col gap-4 items-center md:hidden"
+              >
+                <Link href="/poems" onClick={() => setMobileMenuOpen(false)} className="vintage-exact-link text-lg">{t("poems")}</Link>
+                <div className="w-full h-[1px] bg-[#3c2a1e]/10 dark:bg-[#e6dfcd]/10" />
+                <Link href="/shayari" onClick={() => setMobileMenuOpen(false)} className="vintage-exact-link text-lg">{t("shayari")}</Link>
+                <div className="w-full h-[1px] bg-[#3c2a1e]/10 dark:bg-[#e6dfcd]/10" />
+                <Link href="/books" onClick={() => setMobileMenuOpen(false)} className="vintage-exact-link text-lg">{t("books")}</Link>
+                <div className="w-full h-[1px] bg-[#3c2a1e]/10 dark:bg-[#e6dfcd]/10" />
+                <Link href="/blog" onClick={() => setMobileMenuOpen(false)} className="vintage-exact-link text-lg">{t("blog")}</Link>
+                <div className="w-full h-[1px] bg-[#3c2a1e]/10 dark:bg-[#e6dfcd]/10" />
+                <Link href="/videos" onClick={() => setMobileMenuOpen(false)} className="vintage-exact-link text-lg">{t("videos")}</Link>
+                <div className="w-full h-[1px] bg-[#3c2a1e]/10 dark:bg-[#e6dfcd]/10" />
+                <Link href="/about" onClick={() => setMobileMenuOpen(false)} className="vintage-exact-link text-lg">{t("about")}</Link>
+              </motion.div>
+            )}
+          </>
+        )}
+      </AnimatePresence>
+
       <VintageHeader t={t} />
       <HeroSection t={t} sliders={sliders} />
 
       {/* ─── 4-SECTION CAROUSEL ─── */}
       <div className="relative w-full">
-        {/* Left Side Quill */}
-        <div className="absolute left-[-1rem] xl:left-[-5rem] top-[15%] w-[100px] xl:w-[140px] aspect-square pointer-events-none opacity-30 hidden lg:block -rotate-12">
-          <AnimatedQuill className="w-full h-full" />
-        </div>
-
-        {/* Right Side Mirrored Quill */}
-        <div className="absolute right-[-1rem] xl:right-[-5rem] top-[45%] w-[100px] xl:w-[140px] aspect-square pointer-events-none opacity-30 hidden lg:block rotate-12" style={{ transform: "scaleX(-1) rotate(-12deg)" }}>
-          <AnimatedQuill className="w-full h-full" />
-        </div>
-
-        <VintageCarousel 
-          poems={featuredPoems} 
-          books={recentBooks} 
-          recentVideo={recentVideo} 
-          t={t} 
+        <VintageCarousel
+          poems={featuredPoems}
+          books={recentBooks}
+          recentVideo={recentVideo}
+          t={t}
           settings={settings}
         />
       </div>
 
       <div className="relative w-full overflow-hidden">
-        {/* Left Quill Decor (SVG) */}
-        <div className="absolute left-[-2rem] md:left-4 bottom-10 w-[150px] md:w-[200px] aspect-square pointer-events-none opacity-80 hidden sm:block">
-          <AnimatedQuill className="w-full h-full" />
-        </div>
-
-        {/* Right Candle Decor (SVG with Fire) */}
-        <div className="absolute right-[-2rem] md:right-4 bottom-10 w-[150px] md:w-[200px] aspect-square pointer-events-none opacity-80 hidden sm:block">
-          <AnimatedCandle className="w-full h-full" />
-        </div>
-
         <VintageCombinedFooter t={t} settings={settings} />
       </div>
     </div>
