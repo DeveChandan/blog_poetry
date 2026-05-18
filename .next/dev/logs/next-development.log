@@ -724,3 +724,5 @@ Read more: https://nextjs.org/docs/app/api-reference/components/image#loading
 [02:53:23.077] Server  LOG     Video 6979d3dc0f91cdd2dcff3b3d: {}
 [02:53:23.078] Server  LOG     Video 6979d37e8dd9033ee80a4750: {}
 [02:53:23.079] Server  LOG     Video 69771d7a2364bd908d7f0e21: {}
+[02:59:39.701] Browser INFO    %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold
+[02:59:51.789] Server  LOG     API /api/auth/session: Session status: {}
