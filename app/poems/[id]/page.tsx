@@ -180,10 +180,15 @@ export default function PoemDetailPage() {
     if (!poem) return
 
     if (currentLanguage.code === 'en') {
-      // Reset to original
-      setTranslatedContent(null)
-      setTranslatedTitle(null)
-      setCurrentTranslateLang(null)
+      // If the original poem is in Devanagari (Hindi), translate/transliterate it to English/Hinglish
+      if (/[\u0900-\u097F]/.test(poem.content)) {
+        handleTranslate('en')
+      } else {
+        // Reset to original
+        setTranslatedContent(null)
+        setTranslatedTitle(null)
+        setCurrentTranslateLang(null)
+      }
     } else {
       // Auto-translate to selected navbar language
       handleTranslate(currentLanguage.code)

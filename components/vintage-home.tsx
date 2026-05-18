@@ -4,10 +4,30 @@ import React, { useEffect, useState, useRef, memo } from "react"
 import Link from "next/link"
 import Image from "next/image"
 import { motion, useInView, AnimatePresence } from "framer-motion"
-import { useTranslations } from "@/lib/language-context"
+import { useTranslations, useLanguage } from "@/lib/language-context"
 import LanguageSelector from "@/components/language-selector"
 import { Facebook, Twitter, Instagram, Youtube, Linkedin, ChevronLeft, ChevronRight, Mail, Info, Menu, X } from "lucide-react"
 import useEmblaCarousel from "embla-carousel-react"
+
+// ─── Dynamic Translit/Translation Helper ───
+const TranslatedPoemTitle = ({ title }: { title: string }) => {
+  const { currentLanguage, translate } = useLanguage()
+  const [translatedTitle, setTranslatedTitle] = useState(title)
+
+  useEffect(() => {
+    if (currentLanguage.code === 'en') {
+      if (/[\u0900-\u097F]/.test(title)) {
+        translate(title).then(setTranslatedTitle).catch(console.error)
+      } else {
+        setTranslatedTitle(title)
+      }
+      return
+    }
+    translate(title).then(setTranslatedTitle).catch(console.error)
+  }, [currentLanguage.code, title, translate])
+
+  return <>{translatedTitle}</>
+}
 
 // ─── Animation Variants ───
 const fadeInUp = {
@@ -105,23 +125,7 @@ function VintageHeader({ t }: { t: (key: any) => string }) {
       </div>
 
       {/* Main emblem logo */}
-      <motion.div
-        className="flex justify-center mb-1 mt-6"
-        variants={fadeInUp}
-      >
-        <Link href="/" className="transition-transform hover:scale-105 duration-300">
-          <div className="relative h-20 w-52 md:h-24 md:w-64 overflow-hidden rounded bg-transparent">
-            <Image
-              src="/IMG_1779.PNG"
-              alt="Unkahi Logo"
-              fill
-              sizes="560px"
-              className="object-contain mix-blend-multiply dark:brightness-200 dark:invert"
-              priority
-            />
-          </div>
-        </Link>
-      </motion.div>
+
 
       <motion.h1 className="vintage-exact-title" variants={fadeInUp}>
         {t("siteTitle")}
@@ -266,7 +270,12 @@ const VintageCarousel = memo(function VintageCarousel({
               <div className="vintage-col-1-box h-full min-h-[450px]">
                 <ul className="vintage-col-1-list">
                   {poems.slice(0, 4).map((p, i) => (
-                    <li key={p._id || i}><span>•</span> {p.title?.slice(0, 15)}....</li>
+                    <li key={p._id || i}>
+                      <span>•</span>{" "}
+                      <Link href={`/poems/${p._id}`} className="hover:underline hover:text-primary transition-colors">
+                        <TranslatedPoemTitle title={p.title} />
+                      </Link>
+                    </li>
                   ))}
                   {poems.length === 0 && (
                     <>
@@ -333,7 +342,11 @@ const VintageCarousel = memo(function VintageCarousel({
                         <div className="flex items-center justify-center w-full h-full text-white">Video unavailable</div>
                       )}
                     </div>
-                    <h4 className="poetry-title text-center text-[1rem] leading-tight mt-2">{recentVideo.title}</h4>
+                    <h4 className="poetry-title text-center text-[1rem] leading-tight mt-2 hover:underline hover:text-primary transition-colors">
+                      <Link href={`/videos/${recentVideo._id}`}>
+                        <TranslatedPoemTitle title={recentVideo.title} />
+                      </Link>
+                    </h4>
                     <div className="vintage-btn-wrapper-left">
                       <Link href="/videos" className="vintage-exact-btn-dark">
                         {t("moreVideos")}

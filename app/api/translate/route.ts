@@ -12,8 +12,15 @@ export async function POST(request: NextRequest) {
             )
         }
 
-        // If target is English, return original text
+        // If target is English, check for Devanagari to transliterate to Hinglish
         if (targetLang === 'en') {
+            if (/[\u0900-\u097F]/.test(text)) {
+                const { transliterateDevanagari } = await import("@/lib/transliterate");
+                return NextResponse.json({ 
+                    translatedText: transliterateDevanagari(text),
+                    detectedLanguage: 'hi'
+                })
+            }
             return NextResponse.json({ translatedText: text })
         }
 

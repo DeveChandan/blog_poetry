@@ -7,8 +7,11 @@
   "/api/auth/verify/route": "app/api/auth/verify/route.js",
   "/api/blogs/route": "app/api/blogs/route.js",
   "/api/books/route": "app/api/books/route.js",
+  "/api/comments/route": "app/api/comments/route.js",
   "/api/orders/route": "app/api/orders/route.js",
+  "/api/poems/[id]/route": "app/api/poems/[id]/route.js",
   "/api/poems/route": "app/api/poems/route.js",
+  "/api/reactions/route": "app/api/reactions/route.js",
   "/api/reviews/route": "app/api/reviews/route.js",
   "/api/settings/route": "app/api/settings/route.js",
   "/api/sliders/route": "app/api/sliders/route.js",
@@ -17,6 +20,7 @@
   "/api/visit/route": "app/api/visit/route.js",
   "/login/page": "app/login/page.js",
   "/page": "app/page.js",
+  "/poems/[id]/page": "app/poems/[id]/page.js",
   "/poems/page": "app/poems/page.js",
   "/videos/page": "app/videos/page.js"
 }

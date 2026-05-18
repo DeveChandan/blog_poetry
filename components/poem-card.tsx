@@ -21,10 +21,22 @@ export default function PoemCard({ id, title, excerpt, tags, views }: PoemCardPr
   const [translatedExcerpt, setTranslatedExcerpt] = useState(excerpt)
 
   useEffect(() => {
-    // Reset to original if English
+    // Reset to original if English and does not contain Devanagari
     if (currentLanguage.code === 'en') {
-      setTranslatedTitle(title)
-      setTranslatedExcerpt(excerpt)
+      if (/[\u0900-\u097F]/.test(title) || /[\u0900-\u097F]/.test(excerpt)) {
+        const translateContent = async () => {
+          const [newTitle, newExcerpt] = await Promise.all([
+            translate(title),
+            translate(excerpt)
+          ])
+          setTranslatedTitle(newTitle)
+          setTranslatedExcerpt(newExcerpt)
+        }
+        translateContent()
+      } else {
+        setTranslatedTitle(title)
+        setTranslatedExcerpt(excerpt)
+      }
       return
     }
 

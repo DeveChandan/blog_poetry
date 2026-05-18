@@ -66,8 +66,34 @@ export default function BlogDetailPage() {
 
         const translateBlog = async () => {
             if (currentLanguage.code === 'en') {
-                setTranslatedContent(null)
-                setTranslatedTitle(null)
+                if (/[\u0900-\u097F]/.test(blog.title) || /[\u0900-\u097F]/.test(blog.content)) {
+                    setIsTranslating(true)
+                    try {
+                        const [titleRes, contentRes] = await Promise.all([
+                            fetch('/api/translate', {
+                                method: 'POST',
+                                headers: { 'Content-Type': 'application/json' },
+                                body: JSON.stringify({ text: blog.title, targetLang: 'en' })
+                            }),
+                            fetch('/api/translate', {
+                                method: 'POST',
+                                headers: { 'Content-Type': 'application/json' },
+                                body: JSON.stringify({ text: blog.content, targetLang: 'en' })
+                            })
+                        ])
+                        const [titleData, contentData] = await Promise.all([titleRes.json(), contentRes.json()])
+
+                        if (titleData.translatedText) setTranslatedTitle(titleData.translatedText)
+                        if (contentData.translatedText) setTranslatedContent(contentData.translatedText)
+                    } catch (error) {
+                        console.error('Translation error:', error)
+                    } finally {
+                        setIsTranslating(false)
+                    }
+                } else {
+                    setTranslatedContent(null)
+                    setTranslatedTitle(null)
+                }
                 return
             }
 

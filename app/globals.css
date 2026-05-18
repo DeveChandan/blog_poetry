@@ -197,7 +197,7 @@
 
 .vintage-exact-title {
   font-family: var(--font-yatra), serif;
-  font-size: clamp(3rem, 7vw, 6rem);
+  font-size: clamp(4.5rem, 10vw, 8.5rem);
   color: var(--vintage-ink);
   letter-spacing: 0.05em;
   margin: 0;

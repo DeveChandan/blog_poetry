@@ -65,7 +65,26 @@ export default function ShayariDetailPage() {
 
         const translateContent = async () => {
             if (currentLanguage.code === 'en') {
-                setTranslatedContent(null)
+                if (/[\u0900-\u097F]/.test(shayari.content)) {
+                    setIsTranslating(true)
+                    try {
+                        const res = await fetch('/api/translate', {
+                            method: 'POST',
+                            headers: { 'Content-Type': 'application/json' },
+                            body: JSON.stringify({ text: shayari.content, targetLang: 'en' })
+                        })
+                        const data = await res.json()
+                        if (data.translatedText) {
+                            setTranslatedContent(data.translatedText)
+                        }
+                    } catch (error) {
+                        console.error('Translation error:', error)
+                    } finally {
+                        setIsTranslating(false)
+                    }
+                } else {
+                    setTranslatedContent(null)
+                }
                 return
             }
 

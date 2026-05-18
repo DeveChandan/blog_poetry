@@ -238,8 +238,35 @@ export default function BookDetailPage() {
 
     const translateBook = async () => {
       if (currentLanguage.code === 'en') {
-        setTranslatedTitle(null)
-        setTranslatedDescription(null)
+        if (/[\u0900-\u097F]/.test(book.title) || /[\u0900-\u097F]/.test(book.description)) {
+          setIsTranslating(true)
+          try {
+            const [titleRes, descRes] = await Promise.all([
+              fetch('/api/translate', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ text: book.title, targetLang: 'en' })
+              }),
+              fetch('/api/translate', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ text: book.description, targetLang: 'en' })
+              })
+            ])
+
+            const [titleData, descData] = await Promise.all([titleRes.json(), descRes.json()])
+
+            if (titleData.translatedText) setTranslatedTitle(titleData.translatedText)
+            if (descData.translatedText) setTranslatedDescription(descData.translatedText)
+          } catch (error) {
+            console.error('Translation error:', error)
+          } finally {
+            setIsTranslating(false)
+          }
+        } else {
+          setTranslatedTitle(null)
+          setTranslatedDescription(null)
+        }
         return
       }
 

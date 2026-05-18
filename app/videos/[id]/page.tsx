@@ -48,8 +48,35 @@ export default function VideoDetailPage() {
 
     const translateVideo = async () => {
       if (currentLanguage.code === 'en') {
-        setTranslatedTitle(null)
-        setTranslatedDescription(null)
+        if (/[\u0900-\u097F]/.test(video.title) || /[\u0900-\u097F]/.test(video.description)) {
+          setIsTranslating(true)
+          try {
+            const [titleRes, descRes] = await Promise.all([
+              fetch('/api/translate', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ text: video.title, targetLang: 'en' })
+              }),
+              fetch('/api/translate', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ text: video.description, targetLang: 'en' })
+              })
+            ])
+
+            const [titleData, descData] = await Promise.all([titleRes.json(), descRes.json()])
+
+            if (titleData.translatedText) setTranslatedTitle(titleData.translatedText)
+            if (descData.translatedText) setTranslatedDescription(descData.translatedText)
+          } catch (error) {
+            console.error('Translation error:', error)
+          } finally {
+            setIsTranslating(false)
+          }
+        } else {
+          setTranslatedTitle(null)
+          setTranslatedDescription(null)
+        }
         return
       }
 

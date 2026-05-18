@@ -52,7 +52,11 @@ export function LanguageProvider({ children }: { children: ReactNode }) {
   }
 
   const translate = async (text: string): Promise<string> => {
-    if (currentLanguage.code === 'en') return text
+    if (currentLanguage.code === 'en') {
+      if (!/[\u0900-\u097F]/.test(text)) {
+        return text
+      }
+    }
 
     const cacheKey = `${text.slice(0, 50)}_${currentLanguage.code}`
     if (translationCache.has(cacheKey)) {
