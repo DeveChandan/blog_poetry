@@ -4,8 +4,8 @@
 export const translations = {
     en: {
         // Navigation
-        poems: "Poems",
-        books: "Books",
+        poems: "Kavitayein",
+        books: "Kitabein",
         videos: "Videos",
         shayari: "Shayari",
         sher: "Sher",
@@ -179,7 +179,7 @@ export const translations = {
         subscribeTitle: "हमसे जुड़ें",
         subscribeSubtitle: "अक्षरों शब्दों का बोझे...",
         nameLabel: "नाम",
-        emailLabel: "इलेक्ट्रॉनिक डाक",
+        emailLabel: "ई-मेल",
         messageLabel: "संदेश",
         sendButton: "भेजें",
         welcomeToPoetry: "काव्य की दुनिया में आपका स्वागत है",

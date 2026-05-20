@@ -4,23 +4,29 @@ import Link from "next/link"
 import Image from "next/image"
 import { usePathname, useRouter } from "next/navigation"
 import { useState, useEffect, useCallback } from "react"
-import { Button } from "@/components/ui/button"
-import { NavigationDropdown } from "@/components/navigation-dropdown"
 import { useTheme } from "next-themes"
-import { Moon, Sun, Feather, BookOpen, Video, PenTool, HelpCircle, Menu, X } from "lucide-react"
+import { Moon, Sun, Feather, BookOpen, Video, PenTool, HelpCircle, Menu, X, User } from "lucide-react"
 import { useSession } from "@/hooks/use-session"
 import eventBus from "@/lib/event-bus"
 import LanguageSelector from "@/components/language-selector"
 import { useTranslations } from "@/lib/language-context"
+import { motion, AnimatePresence } from "framer-motion"
+
+const TitleSeparator = () => (
+  <span className="opacity-30 mx-3 hidden sm:inline-block text-[#3c2a1e] dark:text-[#e6dfcd]">|</span>
+)
 
 export default function Navigation() {
   const [isOpen, setIsOpen] = useState(false)
+  const [showNav, setShowNav] = useState(true)
   const router = useRouter()
   const { theme, setTheme, resolvedTheme } = useTheme()
   const { user, loading, refetch } = useSession()
   const [mounted, setMounted] = useState(false)
   const { t, isRtl } = useTranslations()
   const pathname = usePathname()
+
+  const isHomePage = pathname === "/" || pathname === "" || pathname === null || pathname === "/index"
 
   useEffect(() => {
     setMounted(true)
@@ -35,6 +41,33 @@ export default function Navigation() {
       eventBus.off("login", handleLogin)
     }
   }, [refetch])
+
+  useEffect(() => {
+    if (!isHomePage) {
+      setShowNav(true)
+      return
+    }
+
+    const handleScroll = () => {
+      if (window.scrollY > 200) {
+        setShowNav(true)
+      } else {
+        setShowNav(false)
+        setIsOpen(false)
+      }
+    }
+    
+    // Initial check
+    handleScroll()
+    
+    window.addEventListener("scroll", handleScroll)
+    return () => window.removeEventListener("scroll", handleScroll)
+  }, [isHomePage])
+
+  // Close mobile menu when route changes
+  useEffect(() => {
+    setIsOpen(false)
+  }, [pathname])
 
   const toggleTheme = useCallback(() => {
     setTheme(theme === "dark" ? "light" : "dark")
@@ -54,233 +87,137 @@ export default function Navigation() {
     }
   }, [refetch, router])
 
-  // Hide main navigation on the home page as it has its own custom vintage navigation
-  const isHomePage = pathname === "/" || pathname === "" || pathname === null || pathname === "/index";
-  if (isHomePage) return null;
-
   return (
-    <nav className="sticky top-0 z-50 bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60 border-b border-border">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="flex justify-between items-center h-16">
-          <Link href="/" className="flex items-center gap-3 group">
-            <div className="relative h-14 w-40 md:h-16 md:w-48 overflow-hidden bg-transparent transition-transform duration-300 group-hover:scale-105">
-              <Image
-                src="/IMG_1779.PNG"
-                alt="Unkahi Logo"
-                fill
-                sizes="250px"
-                className="object-contain dark:brightness-200 dark:invert"
-                priority
-              />
-            </div>
-            <span className="font-serif text-xl sm:text-2xl font-bold tracking-tight text-foreground transition-colors group-hover:text-primary">
-              Dr Rupesh Kumar Singh
-            </span>
-          </Link>
+    <AnimatePresence>
+      {showNav && (
+        <motion.nav
+          initial={isHomePage ? { y: -80, opacity: 0 } : { y: 0, opacity: 1 }}
+          animate={{ y: 0, opacity: 1 }}
+          exit={isHomePage ? { y: -80, opacity: 0 } : { y: 0, opacity: 1 }}
+          transition={{ duration: 0.3, ease: "easeInOut" }}
+          className={`top-0 left-0 right-0 z-[100] bg-[#f4e8d4]/95 dark:bg-[#1f1a14]/95 backdrop-blur-md border-b border-[#3c2a1e]/10 dark:border-[#e6dfcd]/10 shadow-md ${!isHomePage ? 'sticky' : 'fixed'}`}
+          dir={isRtl ? "rtl" : "ltr"}
+        >
+          {/* REDUCED PADDING HERE - from py-2 md:py-3 to py-1 */}
+          <div className="max-w-[1400px] mx-auto py-1 px-4 md:px-12 flex items-center justify-between">
+            {/* Logo (Left side) - KEEPING ORIGINAL BIG SIZE */}
+         <Link href="/" className="flex items-center flex-shrink-0 z-10">
+  <Image
+    src="/IMG_1790.PNG"
+    alt="Unkahi Logo"
+    width={200}
+    height={50}
+    className="object-contain mix-blend-multiply dark:brightness-200 dark:invert w-auto h-10 sm:h-16 md:h-12 lg:h-12"
+    priority
+  />
+</Link>
 
-          {/* Desktop Navigation */}
-          <div className="hidden md:flex items-center gap-2" dir={isRtl ? 'rtl' : 'ltr'}>
-            <NavigationDropdown
-              trigger={t('literature')}
-              featured={{
-                href: "/poems",
-                label: t('poems'),
-                description: t('poems_description'),
-                icon: <Feather className="h-6 w-6 text-primary mb-2" />
-              }}
-              items={[
-                {
-                  href: "/books",
-                  label: t('books'),
-                  description: t('books_description'),
-                  icon: <BookOpen className="h-4 w-4" />
-                },
-                {
-                  href: "/shayari",
-                  label: t('shayari'),
-                  description: t('shayari_description'),
-                  icon: <PenTool className="h-4 w-4" />
-                },
-                {
-                  href: "/sher",
-                  label: t('sher'),
-                  description: t('sher_description'),
-                  icon: <Feather className="h-4 w-4" />
-                }
-              ]}
-            />
-
-            <NavigationDropdown
-              trigger={t('media')}
-              items={[
-                {
-                  href: "/videos",
-                  label: t('videos'),
-                  description: t('videos_description'),
-                  icon: <Video className="h-4 w-4" />
-                },
-                {
-                  href: "/blog",
-                  label: t('blog'),
-                  description: t('blog_description'),
-                  icon: <BookOpen className="h-4 w-4" />
-                }
-              ]}
-            />
-
-            <NavigationDropdown
-              trigger={t('interact')}
-              items={[
-                {
-                  href: "/quiz",
-                  label: t('quiz'),
-                  description: t('quiz_description'),
-                  icon: <HelpCircle className="h-4 w-4" />
-                }
-              ]}
-            />
-
-            <Link
-              href="/about"
-              className="inline-flex h-9 items-center justify-center rounded-md bg-background px-4 py-2 text-sm font-medium hover:bg-accent hover:text-accent-foreground transition-colors"
-            >
-              {t('about')}
-            </Link>
-
-            {loading ? (
-              <div className="w-24 h-8 bg-muted animate-pulse rounded"></div>
-            ) : user ? (
-              <div className="flex items-center gap-4">
-                {user.isAdmin ? (
-                  <Link href="/admin" className="text-foreground hover:text-primary transition font-medium text-sm">
-                    {t('admin')}
-                  </Link>
-                ) : (
-                  <Link href="/profile" className="text-foreground hover:text-primary transition font-medium text-sm">
-                    {t('profile')}
-                  </Link>
-                )}
-                <Button variant="ghost" size="sm" onClick={handleLogout}>
-                  {t('logout')}
-                </Button>
-              </div>
-            ) : (
-              <div className="flex items-center gap-4">
-                <Link href="/login" className="text-foreground hover:text-primary transition font-medium text-sm">
-                  {t('login')}
-                </Link>
-                <Button asChild size="sm">
-                  <Link href="/register">{t('signUp')}</Link>
-                </Button>
-              </div>
-            )}
-            {/* Language Selector for Desktop */}
-            {mounted && <LanguageSelector />}
-            {/* Theme Toggle for Desktop */}
-            {mounted && (
-              <Button variant="ghost" size="icon" onClick={toggleTheme}>
-                {resolvedTheme === "dark" ? (
-                  <Sun className="h-[1.2rem] w-[1.2rem] rotate-0 scale-100 transition-all" />
-                ) : (
-                  <Moon className="h-[1.2rem] w-[1.2rem] rotate-0 scale-100 transition-all" />
-                )}
-                <span className="sr-only">Toggle theme</span>
-              </Button>
-            )}
-          </div>
-
-          {/* Mobile menu button */}
-          <div className="flex items-center md:hidden">
-            {/* Language Selector for Mobile */}
-            {mounted && <LanguageSelector />}
-            {/* Theme Toggle for Mobile */}
-            {mounted && (
-              <Button variant="ghost" size="icon" onClick={toggleTheme} className="mr-2">
-                {resolvedTheme === "dark" ? (
-                  <Sun className="h-[1.2rem] w-[1.2rem] rotate-0 scale-100 transition-all" />
-                ) : (
-                  <Moon className="h-[1.2rem] w-[1.2rem] rotate-0 scale-100 transition-all" />
-                )}
-                <span className="sr-only">Toggle theme</span>
-              </Button>
-            )}
-            <button onClick={() => setIsOpen(!isOpen)} className="p-2 text-foreground" suppressHydrationWarning>
-              {isOpen ? <X className="h-6 w-6" /> : <Menu className="h-6 w-6" />}
-            </button>
-          </div>
-        </div>
-
-        {/* Mobile menu */}
-        {isOpen && (
-          <div className="md:hidden pb-4 border-t border-border animate-in slide-in-from-top-5" dir={isRtl ? 'rtl' : 'ltr'}>
-            <div className="space-y-4 py-4">
-              {/* Literature Section */}
-              <div className="px-2">
-                <h3 className="mb-2 px-2 text-lg font-semibold tracking-tight text-primary">Literature</h3>
-                <div className="grid grid-cols-2 gap-2">
-                  <Link href="/poems" className="block p-2 text-sm text-foreground hover:bg-muted rounded-md" onClick={() => setIsOpen(false)}>Poems</Link>
-                  <Link href="/books" className="block p-2 text-sm text-foreground hover:bg-muted rounded-md" onClick={() => setIsOpen(false)}>Books</Link>
-                  <Link href="/shayari" className="block p-2 text-sm text-foreground hover:bg-muted rounded-md" onClick={() => setIsOpen(false)}>Shayari</Link>
-                  <Link href="/sher" className="block p-2 text-sm text-foreground hover:bg-muted rounded-md" onClick={() => setIsOpen(false)}>Sher</Link>
-                </div>
-              </div>
-
-              {/* Media Section */}
-              <div className="px-2">
-                <h3 className="mb-2 px-2 text-lg font-semibold tracking-tight text-primary">Media</h3>
-                <div className="grid grid-cols-2 gap-2">
-                  <Link href="/videos" className="block p-2 text-sm text-foreground hover:bg-muted rounded-md" onClick={() => setIsOpen(false)}>Videos</Link>
-                  <Link href="/blog" className="block p-2 text-sm text-foreground hover:bg-muted rounded-md" onClick={() => setIsOpen(false)}>Blog</Link>
-                </div>
-              </div>
-
-              {/* Interact Section */}
-              <div className="px-2">
-                <h3 className="mb-2 px-2 text-lg font-semibold tracking-tight text-primary">Interact</h3>
-                <div>
-                  <Link href="/quiz" className="block p-2 text-sm text-foreground hover:bg-muted rounded-md" onClick={() => setIsOpen(false)}>Quiz</Link>
-                </div>
-              </div>
-
-              <div className="px-4">
-                <Link href="/about" className="block py-2 text-lg font-medium text-foreground hover:text-primary border-b border-border" onClick={() => setIsOpen(false)}>
-                  About
-                </Link>
-              </div>
+            {/* Desktop Navigation (Center) */}
+            <div className="hidden lg:flex items-center">
+              <Link href="/poems" className="vintage-exact-link text-sm xl:text-base whitespace-nowrap">{t('poems')}</Link>
+              <TitleSeparator />
+              <Link href="/shayari" className="vintage-exact-link text-sm xl:text-base whitespace-nowrap">{t('shayari')}</Link>
+              <TitleSeparator />
+              <Link href="/books" className="vintage-exact-link text-sm xl:text-base whitespace-nowrap">{t('books')}</Link>
+              <TitleSeparator />
+              <Link href="/blog" className="vintage-exact-link text-sm xl:text-base whitespace-nowrap">{t('blog')}</Link>
+              <TitleSeparator />
+              <Link href="/videos" className="vintage-exact-link text-sm xl:text-base whitespace-nowrap">{t('videos')}</Link>
+              <TitleSeparator />
+              <Link href="/about" className="vintage-exact-link text-sm xl:text-base whitespace-nowrap">{t('about')}</Link>
             </div>
 
-            <div className="px-4 py-4 space-y-3">
-              {loading ? (
-                <div className="w-20 h-8 bg-muted animate-pulse rounded"></div>
-              ) : user ? (
-                <>
-                  {user.isAdmin ? (
-                    <Link href="/admin" className="block py-2 text-foreground hover:text-primary font-medium" onClick={() => setIsOpen(false)}>
-                      {t('admin')}
-                    </Link>
+            {/* Controls on Right */}
+            <div className="flex items-center gap-2 sm:gap-3">
+              {mounted && <LanguageSelector />}
+              
+              {mounted && (
+                <button 
+                  onClick={toggleTheme}
+                  className="p-1.5 md:p-2 rounded-full bg-[#3c2a1e]/5 dark:bg-[#e6dfcd]/5 text-[#3c2a1e] dark:text-[#e6dfcd] hover:bg-[#3c2a1e]/10 dark:hover:bg-[#e6dfcd]/10 transition-colors"
+                  aria-label="Toggle theme"
+                >
+                  {resolvedTheme === "dark" ? (
+                    <Sun className="h-4 w-4 md:h-5 md:w-5" />
                   ) : (
-                    <Link href="/profile" className="block py-2 text-foreground hover:text-primary font-medium" onClick={() => setIsOpen(false)}>
-                      {t('profile')}
-                    </Link>
+                    <Moon className="h-4 w-4 md:h-5 md:w-5" />
                   )}
-                  <button onClick={() => { handleLogout(); setIsOpen(false); }} className="block w-full text-left py-2 text-red-500 hover:text-red-600 font-medium">
-                    {t('logout')}
-                  </button>
-                </>
-              ) : (
-                <div className="flex flex-col gap-2">
-                  <Link href="/login" className="block py-2 text-foreground hover:text-primary" onClick={() => setIsOpen(false)}>
-                    {t('login')}
-                  </Link>
-                  <Link href="/register" className="block py-2 text-primary font-bold" onClick={() => setIsOpen(false)}>
-                    {t('signUp')}
-                  </Link>
-                </div>
+                </button>
               )}
+
+              {/* Hamburger Menu Button */}
+              <button
+                onClick={() => setIsOpen(!isOpen)}
+                className="p-1.5 md:p-2 rounded bg-[#3c2a1e]/10 dark:bg-[#e6dfcd]/10 text-[#3c2a1e] dark:text-[#e6dfcd] hover:bg-[#3c2a1e]/20 transition-colors"
+                aria-label="Toggle Navigation Menu"
+              >
+                {isOpen ? <X className="h-5 w-5 md:h-6 md:w-6" /> : <Menu className="h-5 w-5 md:h-6 md:w-6" />}
+              </button>
             </div>
           </div>
-        )}
-      </div>
-    </nav>
+
+          {/* Hamburger Dropdown Menu - REDUCED PADDING */}
+          <AnimatePresence>
+            {isOpen && (
+              <motion.div
+                initial={{ opacity: 0, height: 0 }}
+                animate={{ opacity: 1, height: "auto" }}
+                exit={{ opacity: 0, height: 0 }}
+                transition={{ duration: 0.2 }}
+                className="w-full bg-[#f4e8d4] dark:bg-[#1f1a14] border-t border-[#3c2a1e]/10 dark:border-[#e6dfcd]/10 shadow-lg overflow-hidden"
+              >
+                <div className="max-w-[1400px] mx-auto p-3 md:p-4 md:px-12 grid grid-cols-1 md:grid-cols-3 gap-4 md:gap-6">
+                  {/* Category 1: Literature */}
+                  <div>
+                    <h3 className="mb-2 text-base font-serif font-bold tracking-tight text-[#3c2a1e] dark:text-[#e6dfcd] border-b border-[#3c2a1e]/20 pb-1">{t('literature') || 'Literature'}</h3>
+                    <div className="flex flex-col gap-1">
+                      <Link href="/poems" className="flex items-center gap-2 p-1.5 text-sm md:text-base text-[#3c2a1e] dark:text-[#e6dfcd] hover:bg-[#3c2a1e]/5 dark:hover:bg-[#e6dfcd]/5 rounded-md transition-colors"><Feather className="h-3.5 w-3.5" /> {t('poems')}</Link>
+                      <Link href="/books" className="flex items-center gap-2 p-1.5 text-sm md:text-base text-[#3c2a1e] dark:text-[#e6dfcd] hover:bg-[#3c2a1e]/5 dark:hover:bg-[#e6dfcd]/5 rounded-md transition-colors"><BookOpen className="h-3.5 w-3.5" /> {t('books')}</Link>
+                      <Link href="/shayari" className="flex items-center gap-2 p-1.5 text-sm md:text-base text-[#3c2a1e] dark:text-[#e6dfcd] hover:bg-[#3c2a1e]/5 dark:hover:bg-[#e6dfcd]/5 rounded-md transition-colors"><PenTool className="h-3.5 w-3.5" /> {t('shayari')}</Link>
+                      <Link href="/sher" className="flex items-center gap-2 p-1.5 text-sm md:text-base text-[#3c2a1e] dark:text-[#e6dfcd] hover:bg-[#3c2a1e]/5 dark:hover:bg-[#e6dfcd]/5 rounded-md transition-colors"><Feather className="h-3.5 w-3.5" /> {t('sher')}</Link>
+                    </div>
+                  </div>
+
+                  {/* Category 2: Media & Interact */}
+                  <div>
+                    <h3 className="mb-2 text-base font-serif font-bold tracking-tight text-[#3c2a1e] dark:text-[#e6dfcd] border-b border-[#3c2a1e]/20 pb-1">{t('media') || 'Media & Activities'}</h3>
+                    <div className="flex flex-col gap-1">
+                      <Link href="/videos" className="flex items-center gap-2 p-1.5 text-sm md:text-base text-[#3c2a1e] dark:text-[#e6dfcd] hover:bg-[#3c2a1e]/5 dark:hover:bg-[#e6dfcd]/5 rounded-md transition-colors"><Video className="h-3.5 w-3.5" /> {t('videos')}</Link>
+                      <Link href="/blog" className="flex items-center gap-2 p-1.5 text-sm md:text-base text-[#3c2a1e] dark:text-[#e6dfcd] hover:bg-[#3c2a1e]/5 dark:hover:bg-[#e6dfcd]/5 rounded-md transition-colors"><BookOpen className="h-3.5 w-3.5" /> {t('blog')}</Link>
+                      <Link href="/quiz" className="flex items-center gap-2 p-1.5 text-sm md:text-base text-[#3c2a1e] dark:text-[#e6dfcd] hover:bg-[#3c2a1e]/5 dark:hover:bg-[#e6dfcd]/5 rounded-md transition-colors"><HelpCircle className="h-3.5 w-3.5" /> {t('quiz')}</Link>
+                      <Link href="/about" className="flex items-center gap-2 p-1.5 text-sm md:text-base text-[#3c2a1e] dark:text-[#e6dfcd] hover:bg-[#3c2a1e]/5 dark:hover:bg-[#e6dfcd]/5 rounded-md transition-colors"><User className="h-3.5 w-3.5" /> {t('about')}</Link>
+                    </div>
+                  </div>
+
+                  {/* Category 3: Account */}
+                  <div>
+                    <h3 className="mb-2 text-base font-serif font-bold tracking-tight text-[#3c2a1e] dark:text-[#e6dfcd] border-b border-[#3c2a1e]/20 pb-1">{t('account') || 'Account'}</h3>
+                    <div className="flex flex-col gap-1">
+                      {loading ? (
+                        <div className="w-20 h-6 bg-[#3c2a1e]/10 dark:bg-[#e6dfcd]/10 animate-pulse rounded"></div>
+                      ) : user ? (
+                        <>
+                          {user.isAdmin ? (
+                            <Link href="/admin" className="p-1.5 text-sm md:text-base font-semibold text-[#3c2a1e] dark:text-[#e6dfcd] hover:bg-[#3c2a1e]/5 dark:hover:bg-[#e6dfcd]/5 rounded-md transition-colors">{t('admin')}</Link>
+                          ) : (
+                            <Link href="/profile" className="p-1.5 text-sm md:text-base font-semibold text-[#3c2a1e] dark:text-[#e6dfcd] hover:bg-[#3c2a1e]/5 dark:hover:bg-[#e6dfcd]/5 rounded-md transition-colors">{t('profile')}</Link>
+                          )}
+                          <button onClick={handleLogout} className="text-left p-1.5 text-sm md:text-base font-semibold text-red-600 dark:text-red-400 hover:bg-red-50 dark:hover:bg-red-900/10 rounded-md transition-colors">{t('logout')}</button>
+                        </>
+                      ) : (
+                        <>
+                          <Link href="/login" className="p-1.5 text-sm md:text-base font-semibold text-[#3c2a1e] dark:text-[#e6dfcd] hover:bg-[#3c2a1e]/5 dark:hover:bg-[#e6dfcd]/5 rounded-md transition-colors">{t('login')}</Link>
+                          <Link href="/register" className="p-1.5 text-sm md:text-base font-bold bg-[#3c2a1e] text-[#f4e8d4] dark:bg-[#e6dfcd] dark:text-[#1f1a14] hover:bg-[#523b2b] dark:hover:bg-[#fcf9f2] rounded-md transition-colors inline-block text-center mt-1 w-full max-w-[180px]">{t('signUp')}</Link>
+                        </>
+                      )}
+                    </div>
+                  </div>
+                </div>
+              </motion.div>
+            )}
+          </AnimatePresence>
+        </motion.nav>
+      )}
+    </AnimatePresence>
   )
 }
