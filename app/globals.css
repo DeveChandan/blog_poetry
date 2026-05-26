@@ -6,24 +6,24 @@
 
 :root {
   --font-yatra: 'Yatra One', cursive;
-  --background: oklch(0.98 0.01 70);
-  --foreground: oklch(0.15 0.02 250);
-  --card: oklch(1 0 0);
-  --card-foreground: oklch(0.15 0.02 250);
-  --popover: oklch(1 0 0);
-  --popover-foreground: oklch(0.15 0.02 250);
+  --background: #e6dfcd;
+  --foreground: #2c2518;
+  --card: #e6dfcd;
+  --card-foreground: #2c2518;
+  --popover: #e6dfcd;
+  --popover-foreground: #2c2518;
   --primary: oklch(0.35 0.15 40);
   --primary-foreground: oklch(0.98 0.01 70);
   --secondary: oklch(0.5 0.12 260);
   --secondary-foreground: oklch(0.98 0.01 70);
-  --muted: oklch(0.9 0.02 70);
-  --muted-foreground: oklch(0.5 0.05 250);
+  --muted: rgba(200, 189, 168, 0.4);
+  --muted-foreground: #81725b;
   --accent: oklch(0.65 0.18 20);
   --accent-foreground: oklch(0.98 0.01 70);
   --destructive: oklch(0.577 0.245 27.325);
   --destructive-foreground: oklch(0.98 0.01 70);
-  --border: oklch(0.92 0.01 70);
-  --input: oklch(0.95 0.01 70);
+  --border: #a49880;
+  --input: #a49880;
   --ring: oklch(0.35 0.15 40);
   --chart-1: oklch(0.646 0.222 41.116);
   --chart-2: oklch(0.6 0.118 184.704);
@@ -43,24 +43,24 @@
 }
 
 .dark {
-  --background: oklch(0.12 0.01 250);
-  --foreground: oklch(0.95 0.01 70);
-  --card: oklch(0.18 0.01 250);
-  --card-foreground: oklch(0.95 0.01 70);
-  --popover: oklch(0.18 0.01 250);
-  --popover-foreground: oklch(0.95 0.01 70);
+  --background: #1f1a14;
+  --foreground: #e6dfcd;
+  --card: #1f1a14;
+  --card-foreground: #e6dfcd;
+  --popover: #1f1a14;
+  --popover-foreground: #e6dfcd;
   --primary: oklch(0.75 0.18 40);
   --primary-foreground: oklch(0.12 0.01 250);
   --secondary: oklch(0.7 0.15 260);
   --secondary-foreground: oklch(0.12 0.01 250);
-  --muted: oklch(0.3 0.02 250);
-  --muted-foreground: oklch(0.7 0.05 250);
+  --muted: rgba(70, 60, 48, 0.4);
+  --muted-foreground: #a49880;
   --accent: oklch(0.8 0.2 20);
   --accent-foreground: oklch(0.12 0.01 250);
   --destructive: oklch(0.577 0.245 27.325);
   --destructive-foreground: oklch(0.95 0.01 70);
-  --border: oklch(0.25 0.01 250);
-  --input: oklch(0.25 0.01 250);
+  --border: #4d4435;
+  --input: #4d4435;
   --ring: oklch(0.75 0.18 40);
   --chart-1: oklch(0.646 0.222 41.116);
   --chart-2: oklch(0.6 0.118 184.704);
@@ -129,6 +129,9 @@
 
   body {
     @apply bg-background text-foreground;
+    background-image: 
+      radial-gradient(ellipse at center, transparent 0%, rgba(0,0,0,0.05) 100%),
+      url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)' opacity='0.05'/%3E%3C/svg%3E");
   }
 }
 

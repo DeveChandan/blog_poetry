@@ -127,12 +127,16 @@ __turbopack_context__.s([
     ()=>AdminSettingsPage
 ]);
 var __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__ = __turbopack_context__.i("[project]/node_modules/next/dist/compiled/react/jsx-dev-runtime.js [app-client] (ecmascript)");
-var __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__ = __turbopack_context__.i("[project]/node_modules/next/dist/compiled/react/index.js [app-client] (ecmascript)"); // Import useCallback
+var __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__ = __turbopack_context__.i("[project]/node_modules/next/dist/compiled/react/index.js [app-client] (ecmascript)");
 var __TURBOPACK__imported__module__$5b$project$5d2f$components$2f$ui$2f$button$2e$tsx__$5b$app$2d$client$5d$__$28$ecmascript$29$__ = __turbopack_context__.i("[project]/components/ui/button.tsx [app-client] (ecmascript)");
 var __TURBOPACK__imported__module__$5b$project$5d2f$components$2f$ui$2f$card$2e$tsx__$5b$app$2d$client$5d$__$28$ecmascript$29$__ = __turbopack_context__.i("[project]/components/ui/card.tsx [app-client] (ecmascript)");
+var __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f40$vercel$2f$blob$2f$dist$2f$client$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__$3c$locals$3e$__ = __turbopack_context__.i("[project]/node_modules/@vercel/blob/dist/client.js [app-client] (ecmascript) <locals>");
+var __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$lucide$2d$react$2f$dist$2f$esm$2f$icons$2f$cloud$2d$upload$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__$3c$export__default__as__UploadCloud$3e$__ = __turbopack_context__.i("[project]/node_modules/lucide-react/dist/esm/icons/cloud-upload.js [app-client] (ecmascript) <export default as UploadCloud>");
 ;
 var _s = __turbopack_context__.k.signature();
 "use client";
+;
+;
 ;
 ;
 ;
@@ -150,6 +154,8 @@ function AdminSettingsPage() {
     });
     const [loading, setLoading] = (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["useState"])(true);
     const [saving, setSaving] = (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["useState"])(false);
+    const [uploadingImage, setUploadingImage] = (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["useState"])(false);
+    const fileInputRef = (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["useRef"])(null);
     const fetchSettings = (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["useCallback"])({
         "AdminSettingsPage.useCallback[fetchSettings]": async ()=>{
             setLoading(true);
@@ -170,20 +176,39 @@ function AdminSettingsPage() {
                 setLoading(false);
             }
         }
-    }["AdminSettingsPage.useCallback[fetchSettings]"], []) // Empty dependency array for useCallback
-    ;
+    }["AdminSettingsPage.useCallback[fetchSettings]"], []);
     (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["useEffect"])({
         "AdminSettingsPage.useEffect": ()=>{
             fetchSettings();
         }
     }["AdminSettingsPage.useEffect"], [
         fetchSettings
-    ]); // Add fetchSettings to useEffect dependency array
+    ]);
     const handleChange = (e)=>{
         setFormData({
             ...formData,
             [e.target.name]: e.target.value
         });
+    };
+    const handleImageUpload = async (e)=>{
+        if (!e.target.files || e.target.files.length === 0) return;
+        const file = e.target.files[0];
+        setUploadingImage(true);
+        try {
+            const newBlob = await (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f40$vercel$2f$blob$2f$dist$2f$client$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__$3c$locals$3e$__["upload"])(file.name, file, {
+                access: 'public',
+                handleUploadUrl: '/api/upload'
+            });
+            setFormData((prev)=>({
+                    ...prev,
+                    authorImage: newBlob.url
+                }));
+        } catch (error) {
+            console.error("Error uploading image:", error);
+            alert("Failed to upload image. Please try again.");
+        } finally{
+            setUploadingImage(false);
+        }
     };
     const handleSubmit = async (e)=>{
         e.preventDefault();
@@ -198,7 +223,7 @@ function AdminSettingsPage() {
             });
             if (res.ok) {
                 alert("Settings saved successfully!");
-                await fetchSettings(); // Re-fetch settings after successful save
+                await fetchSettings();
             } else {
                 alert("Failed to save settings");
             }
@@ -216,12 +241,12 @@ function AdminSettingsPage() {
             children: "Loading..."
         }, void 0, false, {
             fileName: "[project]/app/admin/settings/page.tsx",
-            lineNumber: 77,
+            lineNumber: 99,
             columnNumber: 9
         }, this)
     }, void 0, false, {
         fileName: "[project]/app/admin/settings/page.tsx",
-        lineNumber: 76,
+        lineNumber: 98,
         columnNumber: 7
     }, this);
     return /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("main", {
@@ -235,12 +260,12 @@ function AdminSettingsPage() {
                             children: "About Section & Site Settings"
                         }, void 0, false, {
                             fileName: "[project]/app/admin/settings/page.tsx",
-                            lineNumber: 86,
+                            lineNumber: 108,
                             columnNumber: 13
                         }, this)
                     }, void 0, false, {
                         fileName: "[project]/app/admin/settings/page.tsx",
-                        lineNumber: 85,
+                        lineNumber: 107,
                         columnNumber: 11
                     }, this),
                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$components$2f$ui$2f$card$2e$tsx__$5b$app$2d$client$5d$__$28$ecmascript$29$__["CardContent"], {
@@ -255,25 +280,81 @@ function AdminSettingsPage() {
                                             children: "Author Image URL"
                                         }, void 0, false, {
                                             fileName: "[project]/app/admin/settings/page.tsx",
-                                            lineNumber: 91,
+                                            lineNumber: 113,
                                             columnNumber: 17
                                         }, this),
-                                        /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("input", {
-                                            type: "url",
-                                            name: "authorImage",
-                                            value: formData.authorImage,
-                                            onChange: handleChange,
-                                            className: "w-full px-3 py-2 rounded border border-border bg-background text-foreground",
-                                            placeholder: "https://..."
+                                        /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
+                                            className: "flex gap-2",
+                                            children: [
+                                                /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("input", {
+                                                    type: "url",
+                                                    name: "authorImage",
+                                                    value: formData.authorImage,
+                                                    onChange: handleChange,
+                                                    className: "flex-1 px-3 py-2 rounded border border-border bg-background text-foreground",
+                                                    placeholder: "https://..."
+                                                }, void 0, false, {
+                                                    fileName: "[project]/app/admin/settings/page.tsx",
+                                                    lineNumber: 115,
+                                                    columnNumber: 19
+                                                }, this),
+                                                /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("input", {
+                                                    type: "file",
+                                                    accept: "image/*",
+                                                    className: "hidden",
+                                                    ref: fileInputRef,
+                                                    onChange: handleImageUpload
+                                                }, void 0, false, {
+                                                    fileName: "[project]/app/admin/settings/page.tsx",
+                                                    lineNumber: 123,
+                                                    columnNumber: 19
+                                                }, this),
+                                                /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$components$2f$ui$2f$button$2e$tsx__$5b$app$2d$client$5d$__$28$ecmascript$29$__["Button"], {
+                                                    type: "button",
+                                                    variant: "outline",
+                                                    onClick: ()=>fileInputRef.current?.click(),
+                                                    disabled: uploadingImage,
+                                                    children: [
+                                                        /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$lucide$2d$react$2f$dist$2f$esm$2f$icons$2f$cloud$2d$upload$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__$3c$export__default__as__UploadCloud$3e$__["UploadCloud"], {
+                                                            className: "w-4 h-4 mr-2"
+                                                        }, void 0, false, {
+                                                            fileName: "[project]/app/admin/settings/page.tsx",
+                                                            lineNumber: 136,
+                                                            columnNumber: 21
+                                                        }, this),
+                                                        uploadingImage ? "Uploading..." : "Upload"
+                                                    ]
+                                                }, void 0, true, {
+                                                    fileName: "[project]/app/admin/settings/page.tsx",
+                                                    lineNumber: 130,
+                                                    columnNumber: 19
+                                                }, this)
+                                            ]
+                                        }, void 0, true, {
+                                            fileName: "[project]/app/admin/settings/page.tsx",
+                                            lineNumber: 114,
+                                            columnNumber: 17
+                                        }, this),
+                                        formData.authorImage && /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
+                                            className: "mt-2 h-20 w-20 rounded overflow-hidden border border-border",
+                                            children: /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("img", {
+                                                src: formData.authorImage,
+                                                alt: "Author Preview",
+                                                className: "w-full h-full object-cover"
+                                            }, void 0, false, {
+                                                fileName: "[project]/app/admin/settings/page.tsx",
+                                                lineNumber: 142,
+                                                columnNumber: 21
+                                            }, this)
                                         }, void 0, false, {
                                             fileName: "[project]/app/admin/settings/page.tsx",
-                                            lineNumber: 92,
-                                            columnNumber: 17
+                                            lineNumber: 141,
+                                            columnNumber: 19
                                         }, this)
                                     ]
                                 }, void 0, true, {
                                     fileName: "[project]/app/admin/settings/page.tsx",
-                                    lineNumber: 90,
+                                    lineNumber: 112,
                                     columnNumber: 15
                                 }, this),
                                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -283,7 +364,7 @@ function AdminSettingsPage() {
                                             children: "Featured Instagram Reel URL"
                                         }, void 0, false, {
                                             fileName: "[project]/app/admin/settings/page.tsx",
-                                            lineNumber: 103,
+                                            lineNumber: 148,
                                             columnNumber: 17
                                         }, this),
                                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("input", {
@@ -295,7 +376,7 @@ function AdminSettingsPage() {
                                             placeholder: "https://www.instagram.com/reel/..."
                                         }, void 0, false, {
                                             fileName: "[project]/app/admin/settings/page.tsx",
-                                            lineNumber: 104,
+                                            lineNumber: 149,
                                             columnNumber: 17
                                         }, this),
                                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("p", {
@@ -303,13 +384,13 @@ function AdminSettingsPage() {
                                             children: "This will be embedded on the vintage home screen."
                                         }, void 0, false, {
                                             fileName: "[project]/app/admin/settings/page.tsx",
-                                            lineNumber: 112,
+                                            lineNumber: 157,
                                             columnNumber: 17
                                         }, this)
                                     ]
                                 }, void 0, true, {
                                     fileName: "[project]/app/admin/settings/page.tsx",
-                                    lineNumber: 102,
+                                    lineNumber: 147,
                                     columnNumber: 15
                                 }, this),
                                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -320,7 +401,7 @@ function AdminSettingsPage() {
                                             children: "Social Media Profiles"
                                         }, void 0, false, {
                                             fileName: "[project]/app/admin/settings/page.tsx",
-                                            lineNumber: 116,
+                                            lineNumber: 161,
                                             columnNumber: 17
                                         }, this),
                                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -333,7 +414,7 @@ function AdminSettingsPage() {
                                                             children: "YouTube Channel URL"
                                                         }, void 0, false, {
                                                             fileName: "[project]/app/admin/settings/page.tsx",
-                                                            lineNumber: 119,
+                                                            lineNumber: 164,
                                                             columnNumber: 21
                                                         }, this),
                                                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("input", {
@@ -345,13 +426,13 @@ function AdminSettingsPage() {
                                                             placeholder: "https://youtube.com/channel/..."
                                                         }, void 0, false, {
                                                             fileName: "[project]/app/admin/settings/page.tsx",
-                                                            lineNumber: 120,
+                                                            lineNumber: 165,
                                                             columnNumber: 21
                                                         }, this)
                                                     ]
                                                 }, void 0, true, {
                                                     fileName: "[project]/app/admin/settings/page.tsx",
-                                                    lineNumber: 118,
+                                                    lineNumber: 163,
                                                     columnNumber: 19
                                                 }, this),
                                                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -361,7 +442,7 @@ function AdminSettingsPage() {
                                                             children: "Instagram URL"
                                                         }, void 0, false, {
                                                             fileName: "[project]/app/admin/settings/page.tsx",
-                                                            lineNumber: 130,
+                                                            lineNumber: 175,
                                                             columnNumber: 21
                                                         }, this),
                                                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("input", {
@@ -373,13 +454,13 @@ function AdminSettingsPage() {
                                                             placeholder: "https://instagram.com/..."
                                                         }, void 0, false, {
                                                             fileName: "[project]/app/admin/settings/page.tsx",
-                                                            lineNumber: 131,
+                                                            lineNumber: 176,
                                                             columnNumber: 21
                                                         }, this)
                                                     ]
                                                 }, void 0, true, {
                                                     fileName: "[project]/app/admin/settings/page.tsx",
-                                                    lineNumber: 129,
+                                                    lineNumber: 174,
                                                     columnNumber: 19
                                                 }, this),
                                                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -389,7 +470,7 @@ function AdminSettingsPage() {
                                                             children: "Facebook URL"
                                                         }, void 0, false, {
                                                             fileName: "[project]/app/admin/settings/page.tsx",
-                                                            lineNumber: 141,
+                                                            lineNumber: 186,
                                                             columnNumber: 21
                                                         }, this),
                                                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("input", {
@@ -401,13 +482,13 @@ function AdminSettingsPage() {
                                                             placeholder: "https://facebook.com/..."
                                                         }, void 0, false, {
                                                             fileName: "[project]/app/admin/settings/page.tsx",
-                                                            lineNumber: 142,
+                                                            lineNumber: 187,
                                                             columnNumber: 21
                                                         }, this)
                                                     ]
                                                 }, void 0, true, {
                                                     fileName: "[project]/app/admin/settings/page.tsx",
-                                                    lineNumber: 140,
+                                                    lineNumber: 185,
                                                     columnNumber: 19
                                                 }, this),
                                                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -417,7 +498,7 @@ function AdminSettingsPage() {
                                                             children: "Twitter/X URL"
                                                         }, void 0, false, {
                                                             fileName: "[project]/app/admin/settings/page.tsx",
-                                                            lineNumber: 152,
+                                                            lineNumber: 197,
                                                             columnNumber: 21
                                                         }, this),
                                                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("input", {
@@ -429,13 +510,13 @@ function AdminSettingsPage() {
                                                             placeholder: "https://twitter.com/..."
                                                         }, void 0, false, {
                                                             fileName: "[project]/app/admin/settings/page.tsx",
-                                                            lineNumber: 153,
+                                                            lineNumber: 198,
                                                             columnNumber: 21
                                                         }, this)
                                                     ]
                                                 }, void 0, true, {
                                                     fileName: "[project]/app/admin/settings/page.tsx",
-                                                    lineNumber: 151,
+                                                    lineNumber: 196,
                                                     columnNumber: 19
                                                 }, this),
                                                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -445,7 +526,7 @@ function AdminSettingsPage() {
                                                             children: "LinkedIn URL"
                                                         }, void 0, false, {
                                                             fileName: "[project]/app/admin/settings/page.tsx",
-                                                            lineNumber: 163,
+                                                            lineNumber: 208,
                                                             columnNumber: 21
                                                         }, this),
                                                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("input", {
@@ -457,13 +538,13 @@ function AdminSettingsPage() {
                                                             placeholder: "https://linkedin.com/in/..."
                                                         }, void 0, false, {
                                                             fileName: "[project]/app/admin/settings/page.tsx",
-                                                            lineNumber: 164,
+                                                            lineNumber: 209,
                                                             columnNumber: 21
                                                         }, this)
                                                     ]
                                                 }, void 0, true, {
                                                     fileName: "[project]/app/admin/settings/page.tsx",
-                                                    lineNumber: 162,
+                                                    lineNumber: 207,
                                                     columnNumber: 19
                                                 }, this),
                                                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -473,7 +554,7 @@ function AdminSettingsPage() {
                                                             children: "Email Address (Public)"
                                                         }, void 0, false, {
                                                             fileName: "[project]/app/admin/settings/page.tsx",
-                                                            lineNumber: 174,
+                                                            lineNumber: 219,
                                                             columnNumber: 21
                                                         }, this),
                                                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("input", {
@@ -485,25 +566,25 @@ function AdminSettingsPage() {
                                                             placeholder: "contact@example.com"
                                                         }, void 0, false, {
                                                             fileName: "[project]/app/admin/settings/page.tsx",
-                                                            lineNumber: 175,
+                                                            lineNumber: 220,
                                                             columnNumber: 21
                                                         }, this)
                                                     ]
                                                 }, void 0, true, {
                                                     fileName: "[project]/app/admin/settings/page.tsx",
-                                                    lineNumber: 173,
+                                                    lineNumber: 218,
                                                     columnNumber: 19
                                                 }, this)
                                             ]
                                         }, void 0, true, {
                                             fileName: "[project]/app/admin/settings/page.tsx",
-                                            lineNumber: 117,
+                                            lineNumber: 162,
                                             columnNumber: 17
                                         }, this)
                                     ]
                                 }, void 0, true, {
                                     fileName: "[project]/app/admin/settings/page.tsx",
-                                    lineNumber: 115,
+                                    lineNumber: 160,
                                     columnNumber: 15
                                 }, this),
                                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$components$2f$ui$2f$button$2e$tsx__$5b$app$2d$client$5d$__$28$ecmascript$29$__["Button"], {
@@ -512,38 +593,38 @@ function AdminSettingsPage() {
                                     children: saving ? "Saving..." : "Save Settings"
                                 }, void 0, false, {
                                     fileName: "[project]/app/admin/settings/page.tsx",
-                                    lineNumber: 187,
+                                    lineNumber: 232,
                                     columnNumber: 15
                                 }, this)
                             ]
                         }, void 0, true, {
                             fileName: "[project]/app/admin/settings/page.tsx",
-                            lineNumber: 89,
+                            lineNumber: 111,
                             columnNumber: 13
                         }, this)
                     }, void 0, false, {
                         fileName: "[project]/app/admin/settings/page.tsx",
-                        lineNumber: 88,
+                        lineNumber: 110,
                         columnNumber: 11
                     }, this)
                 ]
             }, void 0, true, {
                 fileName: "[project]/app/admin/settings/page.tsx",
-                lineNumber: 84,
+                lineNumber: 106,
                 columnNumber: 9
             }, this)
         }, void 0, false, {
             fileName: "[project]/app/admin/settings/page.tsx",
-            lineNumber: 83,
+            lineNumber: 105,
             columnNumber: 7
         }, this)
     }, void 0, false, {
         fileName: "[project]/app/admin/settings/page.tsx",
-        lineNumber: 82,
+        lineNumber: 104,
         columnNumber: 5
     }, this);
 }
-_s(AdminSettingsPage, "+tT822xNTouqTNdMB5dCIHY+GQ4=");
+_s(AdminSettingsPage, "GpTI6ppwTGIuKBbFBh2fE/g1NRI=");
 _c = AdminSettingsPage;
 var _c;
 __turbopack_context__.k.register(_c, "AdminSettingsPage");

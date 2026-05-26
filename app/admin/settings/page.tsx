@@ -1,10 +1,11 @@
 "use client"
 
 import type React from "react"
-
-import { useState, useEffect, useCallback } from "react" // Import useCallback
+import { useState, useEffect, useCallback, useRef } from "react"
 import { Button } from "@/components/ui/button"
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
+import { upload } from "@vercel/blob/client"
+import { UploadCloud } from "lucide-react"
 
 export default function AdminSettingsPage() {
   const [formData, setFormData] = useState({
@@ -19,8 +20,10 @@ export default function AdminSettingsPage() {
   })
   const [loading, setLoading] = useState(true)
   const [saving, setSaving] = useState(false)
+  const [uploadingImage, setUploadingImage] = useState(false)
+  const fileInputRef = useRef<HTMLInputElement>(null)
 
-  const fetchSettings = useCallback(async () => { // Wrap fetchSettings in useCallback
+  const fetchSettings = useCallback(async () => {
     setLoading(true)
     try {
       const res = await fetch("/api/settings")
@@ -33,17 +36,36 @@ export default function AdminSettingsPage() {
     } finally {
       setLoading(false)
     }
-  }, []) // Empty dependency array for useCallback
+  }, [])
 
   useEffect(() => {
     fetchSettings()
-  }, [fetchSettings]) // Add fetchSettings to useEffect dependency array
+  }, [fetchSettings])
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
     setFormData({
       ...formData,
       [e.target.name]: e.target.value,
     })
+  }
+
+  const handleImageUpload = async (e: React.ChangeEvent<HTMLInputElement>) => {
+    if (!e.target.files || e.target.files.length === 0) return
+    const file = e.target.files[0]
+    setUploadingImage(true)
+    
+    try {
+      const newBlob = await upload(file.name, file, {
+        access: 'public',
+        handleUploadUrl: '/api/upload',
+      })
+      setFormData(prev => ({ ...prev, authorImage: newBlob.url }))
+    } catch (error) {
+      console.error("Error uploading image:", error)
+      alert("Failed to upload image. Please try again.")
+    } finally {
+      setUploadingImage(false)
+    }
   }
 
   const handleSubmit = async (e: React.FormEvent) => {
@@ -59,7 +81,7 @@ export default function AdminSettingsPage() {
 
       if (res.ok) {
         alert("Settings saved successfully!")
-        await fetchSettings() // Re-fetch settings after successful save
+        await fetchSettings()
       } else {
         alert("Failed to save settings")
       }
@@ -89,14 +111,37 @@ export default function AdminSettingsPage() {
             <form onSubmit={handleSubmit} className="space-y-6">
               <div>
                 <label className="text-sm text-muted-foreground mb-2 block">Author Image URL</label>
-                <input
-                  type="url"
-                  name="authorImage"
-                  value={formData.authorImage}
-                  onChange={handleChange}
-                  className="w-full px-3 py-2 rounded border border-border bg-background text-foreground"
-                  placeholder="https://..."
-                />
+                <div className="flex gap-2">
+                  <input
+                    type="url"
+                    name="authorImage"
+                    value={formData.authorImage}
+                    onChange={handleChange}
+                    className="flex-1 px-3 py-2 rounded border border-border bg-background text-foreground"
+                    placeholder="https://..."
+                  />
+                  <input
+                    type="file"
+                    accept="image/*"
+                    className="hidden"
+                    ref={fileInputRef}
+                    onChange={handleImageUpload}
+                  />
+                  <Button 
+                    type="button" 
+                    variant="outline" 
+                    onClick={() => fileInputRef.current?.click()}
+                    disabled={uploadingImage}
+                  >
+                    <UploadCloud className="w-4 h-4 mr-2" />
+                    {uploadingImage ? "Uploading..." : "Upload"}
+                  </Button>
+                </div>
+                {formData.authorImage && (
+                  <div className="mt-2 h-20 w-20 rounded overflow-hidden border border-border">
+                    <img src={formData.authorImage} alt="Author Preview" className="w-full h-full object-cover" />
+                  </div>
+                )}
               </div>
 
               <div>

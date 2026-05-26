@@ -1,6 +1,8 @@
 // Static translations for UI elements
 // These don't require API calls - they're pre-defined
 
+import { MoreHorizontal } from "lucide-react"
+
 export const translations = {
     en: {
         // Navigation
@@ -70,7 +72,9 @@ export const translations = {
         myBooks: "My Books",
         poetryRay: "Poetry Ray",
         morePoems: "More poems...",
+        Reels:"Reels",
         moreBlogs: "More blogs...",
+        MoreVideos:"MoreVideos",
         pathsInWords: "Paths in Words",
         subscribeTitle: "Subscribe",
         subscribeSubtitle: "Express your feelings in words...",
@@ -124,6 +128,7 @@ export const translations = {
         literature: "साहित्य",
         media: "मीडिया",
         interact: "संवाद",
+        MoreVideos:"अधिक वीडियो",
 
         // Navigation descriptions
         poems_description: "हृदयस्पर्शी और मार्मिक कविताओं का विशाल संग्रह देखें।",
@@ -173,6 +178,7 @@ export const translations = {
         poemsSection: "कविताएं",
         myBooks: "मेरी किताबें",
         poetryRay: "काव्य किरण",
+        Reels:"रील्स",
         morePoems: "और चलिये...",
         moreBlogs: "और चलिये...",
         pathsInWords: "पादों मे रस्ते",

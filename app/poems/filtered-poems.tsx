@@ -4,6 +4,13 @@ import { useState, useEffect } from "react"
 import PoemCard from "@/components/poem-card"
 import { Input } from "@/components/ui/input"
 import { Button } from "@/components/ui/button"
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from "@/components/ui/select"
 import { useTranslations } from "@/lib/language-context"
 import { X } from "lucide-react"
 
@@ -76,36 +83,23 @@ export default function FilteredPoems({ poems }: { poems: Poem[] }) {
           className="max-w-md"
         />
 
-        {/* Tags Filter Bar */}
-        <div className="flex flex-wrap items-center gap-2">
-          <Button
-            variant={selectedTag === "All" ? "default" : "outline"}
-            size="sm"
-            onClick={() => setSelectedTag("All")}
-            className={`min-w-[50px] font-medium transition-all rounded-full ${
-              selectedTag === "All"
-                ? "bg-primary text-primary-foreground shadow-md hover:bg-primary/95"
-                : "hover:bg-primary/10 hover:border-primary text-muted-foreground hover:text-primary bg-transparent"
-            }`}
-          >
-            {t('all')}
-          </Button>
-
-          {tags.map((tag) => (
-            <Button
-              key={tag}
-              variant={selectedTag === tag ? "default" : "outline"}
-              size="sm"
-              onClick={() => setSelectedTag(tag)}
-              className={`font-medium transition-all rounded-full ${
-                selectedTag === tag
-                  ? "bg-primary text-primary-foreground shadow-md hover:bg-primary/95"
-                  : "hover:bg-primary/10 hover:border-primary text-muted-foreground hover:text-primary bg-transparent"
-              }`}
-            >
-              #{tag}
-            </Button>
-          ))}
+        {/* Tags Filter and Clear */}
+        <div className="flex flex-wrap items-center gap-4">
+          <div className="w-[200px]">
+            <Select value={selectedTag} onValueChange={setSelectedTag}>
+              <SelectTrigger>
+                <SelectValue placeholder="Filter by tag" />
+              </SelectTrigger>
+              <SelectContent>
+                <SelectItem value="All">{t('all')}</SelectItem>
+                {tags.map((tag) => (
+                  <SelectItem key={tag} value={tag}>
+                    #{tag}
+                  </SelectItem>
+                ))}
+              </SelectContent>
+            </Select>
+          </div>
 
           {/* Clear Filter Button */}
           {(selectedTag !== "All" || search) && (

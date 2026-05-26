@@ -349,7 +349,7 @@ const VintageCarousel = memo(function VintageCarousel({
                     </h4>
                     <div className="vintage-btn-wrapper-left">
                       <Link href="/videos" className="vintage-exact-btn-dark">
-                        {t("moreVideos")}
+                        {t("MoreVideos")}
                       </Link>
                     </div>
                   </div>
@@ -362,7 +362,7 @@ const VintageCarousel = memo(function VintageCarousel({
                     </p>
                     <div className="vintage-btn-wrapper-left">
                       <Link href="/blog" className="vintage-exact-btn-dark">
-                        {t("moreVideos")}
+                        {t("MoreVideos")}
                       </Link>
                     </div>
                   </>
@@ -376,7 +376,7 @@ const VintageCarousel = memo(function VintageCarousel({
             <div className="vintage-col h-full">
               <div className="vintage-col-header">
                 <span className="line"></span>
-                <h3>Reels</h3>
+                 <h3>{t("Reels")}</h3>
                 <span className="line"></span>
               </div>
               <div className="vintage-col-1-box h-full min-h-[450px] p-2 flex items-center justify-center">
@@ -546,7 +546,7 @@ const VintageCombinedFooter = memo(function VintageCombinedFooter({
             <span className="line"></span>
           </div>
 
-          <div className="bg-[#ebdcb9]/30 dark:bg-[#2c2317]/30 border border-[#3c2a1e]/15 dark:border-[#e6dfcd]/15 rounded-lg p-6 md:p-8 shadow-md relative overflow-hidden backdrop-blur-sm flex-grow flex flex-col justify-between">
+          <div className="bg-[#ebdcb9]/30 dark:bg-[#2c2317]/30 border border-[#3c2a1e]/15 dark:border-[#e6dfcd]/15 rounded-lg p-2 md:p-3 shadow-md relative overflow-hidden backdrop-blur-sm flex-grow flex flex-col justify-between">
             {/* Corner decorations */}
             <div className="absolute top-0 left-0 w-12 h-12 pointer-events-none opacity-10 border-t-2 border-l-2 border-[#3c2a1e] dark:border-[#e6dfcd] m-2"></div>
             <div className="absolute bottom-0 right-0 w-12 h-12 pointer-events-none opacity-10 border-b-2 border-r-2 border-[#3c2a1e] dark:border-[#e6dfcd] m-2"></div>
@@ -556,7 +556,7 @@ const VintageCombinedFooter = memo(function VintageCombinedFooter({
               <div className="flex flex-col items-center border-b border-[#3c2a1e]/10 dark:border-[#e6dfcd]/10">
                 <div className="relative h-18 w-46 overflow-hidden">
                   <Image
-                    src="/IMG_1779.PNG"
+                    src="/IMG_1790.PNG"
                     alt="Unkahi"
                     fill
                     sizes="560px"

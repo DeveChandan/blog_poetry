@@ -63,13 +63,13 @@ export default function PoemCard({ id, title, excerpt, tags, views }: PoemCardPr
           <p className="text-muted-foreground line-clamp-3 mb-4">{translatedExcerpt}</p>
           <div className="flex justify-between items-center text-sm">
             <div className="flex gap-2">
-              {tags.slice(0, 2).map((tag) => (
+              {tags && tags.slice(0, 2).map((tag) => (
                 <span key={tag} className="bg-primary/10 text-primary px-2 py-1 rounded">
                   {tag}
                 </span>
               ))}
             </div>
-            <span className="text-muted-foreground">{views} {t('views')}</span>
+            {views !== undefined && <span className="text-muted-foreground">{views} {t('views')}</span>}
           </div>
         </CardContent>
       </Card>
