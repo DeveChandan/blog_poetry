@@ -58,7 +58,7 @@ export default async function BooksPage() {
     <main className="min-h-screen bg-background py-12 px-4 sm:px-6 lg:px-8">
       <div className="max-w-6xl mx-auto">
         <h1 className="text-4xl font-bold text-foreground mb-8">Books & E-books</h1>
-        <FilteredBooks books={books} />
+        <FilteredBooks books={books as any} />
       </div>
     </main>
   )

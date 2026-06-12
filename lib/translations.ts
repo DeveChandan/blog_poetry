@@ -3,7 +3,7 @@
 
 import { MoreHorizontal } from "lucide-react"
 
-export const translations = {
+const rawTranslations = {
     en: {
         // Navigation
         poems: "Kavitayein",
@@ -22,6 +22,7 @@ export const translations = {
         literature: "Literature",
         media: "Media",
         interact: "Interact",
+        account: "Account",
 
         // Navigation descriptions
         poems_description: "Explore a vast collection of heartfelt and soul-stirring poetry.",
@@ -128,6 +129,7 @@ export const translations = {
         literature: "साहित्य",
         media: "मीडिया",
         interact: "संवाद",
+        account: "खाता",
         MoreVideos:"अधिक वीडियो",
 
         // Navigation descriptions
@@ -234,6 +236,7 @@ export const translations = {
         literature: "ادب",
         media: "میڈیا",
         interact: "بات چیت",
+        account: "اکاؤنٹ",
 
         // Navigation descriptions
         poems_description: "دل کو چھونے والی اور روح پرور شاعری کا وسیع ذخیرہ دریافت کریں۔",
@@ -338,6 +341,7 @@ export const translations = {
         literature: "সাহিত্য",
         media: "মিডিয়া",
         interact: "ইন্টারঅ্যাক্ট",
+        account: "অ্যাকাউন্ট",
 
         // Navigation descriptions
         poems_description: "হৃদয়স্পর্শী এবং আত্মার শিহরণ জাগানো কবিতার বিশাল সংগ্রহ অন্বেষণ করুন।",
@@ -442,6 +446,7 @@ export const translations = {
         literature: "Literatura",
         media: "Medios",
         interact: "Interactuar",
+        account: "Cuenta",
 
         // Navigation descriptions
         poems_description: "Explora una vasta colección de poesía sincera y conmovedora.",
@@ -529,8 +534,10 @@ export const translations = {
     }
 }
 
-export type TranslationKey = keyof typeof translations.en
-export type LanguageCode = keyof typeof translations
+export type LanguageCode = keyof typeof rawTranslations
+export type TranslationKey = keyof typeof rawTranslations.en
+
+export const translations = rawTranslations as unknown as Record<LanguageCode, Record<TranslationKey, string>>
 
 export function getTranslation(lang: LanguageCode, key: TranslationKey): string {
     return translations[lang]?.[key] || translations.en[key] || key

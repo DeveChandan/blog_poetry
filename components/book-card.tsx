@@ -35,7 +35,7 @@ export default function BookCard({ id, title, description, price, type, cover, a
             <div className="flex gap-2">
               <Badge>{type === "physical" ? "Paperback" : type === "ebook" ? "E-book" : "Both"}</Badge>
             </div>
-            <span className="text-lg font-bold text-primary">${price}</span>
+            <Badge variant="outline" className="text-sm font-semibold text-primary border-primary">Read Now</Badge>
           </div>
         </CardContent>
       </Card>

@@ -73,7 +73,7 @@ export default function PdfViewer({
   const [activeTab, setActiveTab] = useState<string>("viewer")
   
   const containerRef = useRef<HTMLDivElement>(null)
-  const hideControlsTimeoutRef = useRef<NodeJS.Timeout>()
+  const hideControlsTimeoutRef = useRef<NodeJS.Timeout | undefined>(undefined)
 
   // Auto-hide controls on mobile after 3 seconds
   useEffect(() => {
@@ -380,8 +380,8 @@ export default function PdfViewer({
                               size="sm"
                               className="h-10"
                               onClick={() => {
-                                goToPage(page)
-                                document.querySelector('[data-state="closed"]')?.click()
+                                goToPage(page);
+                                (document.querySelector('[data-state="closed"]') as any)?.click()
                               }}
                             >
                               {page}

@@ -135,8 +135,8 @@ function VintageHeader({ t }: { t: (key: any) => string }) {
         <div className="vintage-nav-lines">
           <Link href="/poems" className="vintage-exact-link">{t("poems")}</Link>
           <TitleSeparator />
-          <Link href="/shayari" className="vintage-exact-link">{t("shayari")}</Link>
-          <TitleSeparator />
+         {/* <Link href="/shayari" className="vintage-exact-link">{t("shayari")}</Link>
+          <TitleSeparator /> */}
           <Link href="/books" className="vintage-exact-link">{t("books")}</Link>
           <TitleSeparator />
           <Link href="/blog" className="vintage-exact-link">{t("blog")}</Link>
@@ -287,7 +287,7 @@ const VintageCarousel = memo(function VintageCarousel({
                   )}
                 </ul>
                 <div className="vintage-btn-wrapper-left">
-                  <Link href="/poems" className="vintage-exact-btn-dark">
+                  <Link href="/poems" className="vintage-exact-btn-light">
                     {t("morePoems")}
                   </Link>
                 </div>
@@ -311,7 +311,7 @@ const VintageCarousel = memo(function VintageCarousel({
                   </div>
                   <div className="vintage-books-actions mt-4">
                     <Link href="/books" className="vintage-exact-btn-light">{t("readMore")}</Link>
-                    <Link href="/books" className="vintage-exact-btn-dark">{t("buyNow")}</Link>
+                    <Link href="/books" className="vintage-exact-btn-light">{t("buyNow")}</Link>
                   </div>
                 </div>
               </div>
@@ -348,7 +348,7 @@ const VintageCarousel = memo(function VintageCarousel({
                       </Link>
                     </h4>
                     <div className="vintage-btn-wrapper-left">
-                      <Link href="/videos" className="vintage-exact-btn-dark">
+                      <Link href="/videos" className="vintage-exact-btn-light">
                         {t("MoreVideos")}
                       </Link>
                     </div>
@@ -361,7 +361,7 @@ const VintageCarousel = memo(function VintageCarousel({
                       नब नोरे गैटटं नब नद ह इरुष्ट दुतेऐजेन्द...
                     </p>
                     <div className="vintage-btn-wrapper-left">
-                      <Link href="/blog" className="vintage-exact-btn-dark">
+                      <Link href="/blog" className="vintage-exact-btn-light">
                         {t("MoreVideos")}
                       </Link>
                     </div>

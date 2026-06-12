@@ -162,7 +162,57 @@ const commonWordsMap: Record<string, string> = {
     'बताना': 'batana'
 };
 
-export function transliterateDevanagari(text: string): string {
+export async function transliterateDevanagari(text: string): Promise<string> {
+    if (!text) return '';
+
+    try {
+        const url = `https://translate.googleapis.com/translate_a/single?client=gtx&sl=hi&tl=en&dt=rm&q=${encodeURIComponent(text)}`;
+        const response = await fetch(url, {
+            headers: {
+                'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36'
+            },
+            signal: AbortSignal.timeout(5000)
+        });
+
+        if (!response.ok) {
+            throw new Error(`Google Translate API returned status: ${response.status}`);
+        }
+
+        const data = await response.json();
+        let transliteratedText = '';
+
+        if (data && data[0]) {
+            // Find the item containing the romanized text (usually first element is null, fourth is romanization string)
+            for (const item of data[0]) {
+                if (item && item[0] === null && typeof item[3] === 'string' && item[3]) {
+                    transliteratedText = item[3];
+                    break;
+                }
+            }
+            // Fallback: search any item that has a string at index 3
+            if (!transliteratedText) {
+                for (const item of data[0]) {
+                    if (item && typeof item[3] === 'string' && item[3]) {
+                        transliteratedText = item[3];
+                        break;
+                    }
+                }
+            }
+        }
+
+        if (transliteratedText) {
+            // Normalize Hindi purna viram (।) to period (.) and clean up capitalization
+            return postProcessHinglish(transliteratedText.replace(/।/g, '.'));
+        }
+
+        throw new Error('Could not find transliterated text in API response');
+    } catch (error) {
+        console.error('Google Transliteration error, falling back to local method:', error);
+        return transliterateDevanagariLocal(text);
+    }
+}
+
+function transliterateDevanagariLocal(text: string): string {
     if (!text) return '';
 
     const vowels = {
@@ -311,8 +361,13 @@ export function transliterateDevanagari(text: string): string {
         return processedTokens.join('');
     });
 
-    return processedLines.join('\n')
-        // Clean up capitalization beautifully
+    return postProcessHinglish(processedLines.join('\n'));
+}
+
+function postProcessHinglish(text: string): string {
+    if (!text) return '';
+    return text
+        // Clean up capitalization beautifully (capitalize start of sentences/lines)
         .replace(/(^\s*|[.!?]\s+|\n\s*)([a-z])/g, (m, p1, p2) => p1 + p2.toUpperCase())
         // Apply Hinglish specific lowercase formatting for prepositions
         .replace(/\bSe\b/g, 'se')

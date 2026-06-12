@@ -255,14 +255,22 @@ export default function BlogDetailPage() {
 
                     {/* Content */}
                     <div
-                        className={`prose prose-lg dark:prose-invert max-w-none ${isTranslating ? 'opacity-70' : ''}`}
+                        className={`blog-content max-w-none ${isTranslating ? 'opacity-70' : ''}`}
                         dir={currentLanguage.rtl ? 'rtl' : 'ltr'}
                     >
-                        {(translatedContent || blog.content).split('\n').map((paragraph, i) => (
-                            <p key={i} className="mb-4 leading-relaxed">
-                                {paragraph}
-                            </p>
-                        ))}
+                        {(() => {
+                            const rawContent = translatedContent || blog.content;
+                            const isHtml = /<\/?[a-z][\s\S]*>/i.test(rawContent);
+                            if (isHtml) {
+                                return <div dangerouslySetInnerHTML={{ __html: rawContent }} />;
+                            } else {
+                                return rawContent.split('\n').map((paragraph, i) => (
+                                    <p key={i} className="mb-4 leading-relaxed">
+                                        {paragraph}
+                                    </p>
+                                ));
+                            }
+                        })()}
                     </div>
 
                     {/* Actions */}

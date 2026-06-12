@@ -17,7 +17,7 @@ export async function POST(request: NextRequest) {
             if (/[\u0900-\u097F]/.test(text)) {
                 const { transliterateDevanagari } = await import("@/lib/transliterate");
                 return NextResponse.json({ 
-                    translatedText: transliterateDevanagari(text),
+                    translatedText: await transliterateDevanagari(text),
                     detectedLanguage: 'hi'
                 })
             }

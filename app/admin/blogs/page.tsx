@@ -9,6 +9,7 @@ import { Textarea } from "@/components/ui/textarea"
 import { AdminGuard } from "@/components/admin-guard"
 import { toast } from "sonner"
 import { Plus, Trash2, Edit, BookOpen, Eye } from "lucide-react"
+import { RichTextEditor } from "@/components/rich-text-editor"
 
 interface Blog {
     _id: string
@@ -34,6 +35,17 @@ function AdminBlogContent() {
     const [loading, setLoading] = useState(true)
     const [showForm, setShowForm] = useState(false)
     const [editingId, setEditingId] = useState<string | null>(null)
+    const [imageFile, setImageFile] = useState<File | null>(null)
+    const [uploadingImage, setUploadingImage] = useState(false)
+
+    const handleImageFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+        if (e.target.files && e.target.files[0]) {
+            setImageFile(e.target.files[0]);
+            setFormData(prev => ({ ...prev, image: "" }));
+        } else {
+            setImageFile(null);
+        }
+    }
 
     const initialFormState = {
         title: "",
@@ -67,6 +79,27 @@ function AdminBlogContent() {
     const handleSubmit = async (e: React.FormEvent) => {
         e.preventDefault()
 
+        let finalImageUrl = formData.image;
+
+        if (imageFile) {
+            setUploadingImage(true);
+            try {
+                const { upload } = await import('@vercel/blob/client');
+                const newBlob = await upload(imageFile.name, imageFile, {
+                    access: 'public',
+                    handleUploadUrl: '/api/upload',
+                });
+                finalImageUrl = newBlob.url;
+            } catch (error) {
+                console.error("Error uploading image:", error);
+                toast.error("Failed to upload image");
+                setUploadingImage(false);
+                return;
+            } finally {
+                setUploadingImage(false);
+            }
+        }
+
         try {
             const url = editingId ? `/api/blogs/${editingId}` : "/api/blogs"
             const method = editingId ? "PUT" : "POST"
@@ -76,6 +109,7 @@ function AdminBlogContent() {
                 headers: { "Content-Type": "application/json" },
                 body: JSON.stringify({
                     ...formData,
+                    image: finalImageUrl,
                     tags: formData.tags.split(",").map(t => t.trim()).filter(Boolean),
                 }),
             })
@@ -83,6 +117,7 @@ function AdminBlogContent() {
             if (res.ok) {
                 toast.success(editingId ? "Blog updated!" : "Blog published!")
                 setFormData(initialFormState)
+                setImageFile(null)
                 setShowForm(false)
                 setEditingId(null)
                 fetchBlogs()
@@ -171,23 +206,40 @@ function AdminBlogContent() {
                                     </div>
                                 </div>
 
-                                <div>
-                                    <label className="block text-sm font-medium mb-2">Image URL</label>
-                                    <Input
-                                        value={formData.image}
-                                        onChange={(e) => setFormData({ ...formData, image: e.target.value })}
-                                        placeholder="https://example.com/image.jpg"
-                                    />
+                                <div className="grid md:grid-cols-2 gap-4">
+                                    <div>
+                                        <label className="block text-sm font-medium mb-2">Upload Image File</label>
+                                        <Input
+                                            type="file"
+                                            accept="image/*"
+                                            onChange={handleImageFileChange}
+                                            className="cursor-pointer"
+                                        />
+                                        {imageFile && (
+                                            <p className="text-xs text-muted-foreground mt-1">
+                                                Selected file: {imageFile.name}
+                                            </p>
+                                        )}
+                                    </div>
+                                    <div>
+                                        <label className="block text-sm font-medium mb-2">Or Paste Image URL</label>
+                                        <Input
+                                            value={formData.image}
+                                            onChange={(e) => {
+                                                setFormData({ ...formData, image: e.target.value });
+                                                setImageFile(null);
+                                            }}
+                                            placeholder="https://example.com/image.jpg"
+                                        />
+                                    </div>
                                 </div>
 
                                 <div>
                                     <label className="block text-sm font-medium mb-2">Content *</label>
-                                    <Textarea
+                                    <RichTextEditor
                                         value={formData.content}
-                                        onChange={(e) => setFormData({ ...formData, content: e.target.value })}
+                                        onChange={(html) => setFormData({ ...formData, content: html })}
                                         placeholder="Write your article here..."
-                                        className="min-h-[300px]"
-                                        required
                                     />
                                 </div>
 
@@ -210,12 +262,14 @@ function AdminBlogContent() {
                                     />
                                 </div>
 
-                                <div className="flex gap-4">
-                                    <Button type="submit">{editingId ? "Update Article" : "Publish Article"}</Button>
-                                    <Button type="button" variant="outline" onClick={() => { setShowForm(false); setEditingId(null); }}>
-                                        Cancel
-                                    </Button>
-                                </div>
+                                 <div className="flex gap-4">
+                                     <Button type="submit" disabled={uploadingImage}>
+                                         {uploadingImage ? "Uploading Image..." : editingId ? "Update Article" : "Publish Article"}
+                                     </Button>
+                                     <Button type="button" variant="outline" onClick={() => { setShowForm(false); setEditingId(null); setImageFile(null); }}>
+                                         Cancel
+                                     </Button>
+                                 </div>
                             </form>
                         </CardContent>
                     </Card>

@@ -155,7 +155,7 @@ export default function BookDetailPage() {
   const [showFullCover, setShowFullCover] = useState(false)
   const [fileType, setFileType] = useState<string>("")
   const [viewerMode, setViewerMode] = useState<"pdf" | "document">("pdf")
-  const [hasPurchased, setHasPurchased] = useState(false)
+  const [hasPurchased, setHasPurchased] = useState(true)
   const [mounted, setMounted] = useState(false)
   const [isBookmarked, setIsBookmarked] = useState(false)
   const [isLiked, setIsLiked] = useState(false)
@@ -206,9 +206,8 @@ export default function BookDetailPage() {
           setViewerMode(extension === '.pdf' ? "pdf" : "document")
         }
 
-        // Client-side check for purchase status
-        const purchaseStatus = localStorage.getItem(`purchased_${id}`)
-        setHasPurchased(!!purchaseStatus)
+        // Default purchase status is true for direct reading
+        setHasPurchased(true)
 
         // Check bookmark status
         const bookmarkStatus = localStorage.getItem(`bookmark_${id}`)
@@ -577,7 +576,7 @@ export default function BookDetailPage() {
           <div className="flex items-center justify-between gap-2">
             <div className="flex-1">
               <div className="text-sm font-semibold truncate">{book?.title}</div>
-              <div className="text-lg font-bold text-primary">${book?.price.toFixed(2)}</div>
+              <div className="text-xs text-muted-foreground">Free to Read</div>
             </div>
             <div className="flex items-center gap-2">
               <Button
@@ -588,21 +587,16 @@ export default function BookDetailPage() {
               >
                 <Bookmark className={`h-4 w-4 ${isBookmarked ? 'fill-primary' : ''}`} />
               </Button>
-              <Button
-                size="sm"
-                className="h-10 px-4"
-                onClick={handleAddToCart}
-                disabled={isAddingToCart || (book?.stock === 0)}
-              >
-                {isAddingToCart ? (
-                  <Loader2 className="h-4 w-4 animate-spin" />
-                ) : (
-                  <>
-                    <ShoppingCart className="h-4 w-4 mr-2" />
-                    {book?.stock === 0 ? "Sold Out" : "Buy"}
-                  </>
-                )}
-              </Button>
+              {book?.filePath && (
+                <Button
+                  size="sm"
+                  className="h-10 px-4 bg-gradient-to-r from-primary to-secondary"
+                  onClick={handleReadPreview}
+                >
+                  <BookOpen className="h-4 w-4 mr-2" />
+                  Read
+                </Button>
+              )}
             </div>
           </div>
         </div>
@@ -942,26 +936,9 @@ export default function BookDetailPage() {
 
                 {/* Price - Mobile optimized */}
                 <div className="flex items-center justify-between md:justify-start md:gap-8">
-                  <div className="text-3xl md:text-5xl font-bold text-primary">
-                    ${book.price.toFixed(2)}
-                  </div>
-
-                  {book.stock !== undefined && (
-                    <div className="text-sm md:text-base">
-                      {book.stock > 0 ? (
-                        <span className="text-green-600 dark:text-green-400 flex items-center gap-1">
-                          <CheckCircle className="h-4 w-4" />
-                          In Stock
-                          {book.stock < 10 && <span className="text-amber-600"> ({book.stock} left)</span>}
-                        </span>
-                      ) : (
-                        <span className="text-red-600 dark:text-red-400 flex items-center gap-1">
-                          <X className="h-4 w-4" />
-                          Out of Stock
-                        </span>
-                      )}
-                    </div>
-                  )}
+                  <Badge className="text-sm font-bold bg-primary/10 text-primary border-primary/20 px-4 py-1.5 rounded-full">
+                    <BookOpen className="h-4 w-4 mr-2" /> Free Reading Access
+                  </Badge>
                 </div>
 
                 {/* Badges */}
@@ -1079,57 +1056,17 @@ export default function BookDetailPage() {
               </Tabs>
 
               {/* Action Buttons - Hidden on mobile (moved to bottom nav) */}
-              {!isMobile && (
+              {!isMobile && book.filePath && (
                 <div className="space-y-4">
-                  <div className="flex flex-col sm:flex-row gap-4">
+                  <div className="flex gap-4">
                     <Button
                       size="lg"
                       className="flex-1 h-14 text-lg shadow-lg hover:shadow-xl transition-all duration-300 bg-gradient-to-r from-primary to-secondary hover:from-primary/90 hover:to-secondary/90"
-                      onClick={handleAddToCart}
-                      disabled={isAddingToCart || (book.stock === 0)}
+                      onClick={handleReadPreview}
                     >
-                      {isAddingToCart ? (
-                        <Loader2 className="w-6 h-6 mr-3 animate-spin" />
-                      ) : (
-                        <ShoppingCart className="w-6 h-6 mr-3" />
-                      )}
-                      {book.stock === 0 ? (
-                        <span className="flex items-center gap-2">
-                          <X className="w-5 h-5" /> Out of Stock
-                        </span>
-                      ) : (
-                        <span className="flex items-center gap-2">
-                          Add to Cart • ${book.price.toFixed(2)}
-                        </span>
-                      )}
+                      <BookOpen className="w-6 h-6 mr-3" />
+                      Start Reading
                     </Button>
-
-                    {book.filePath && (
-                      <Button
-                        size="lg"
-                        variant="outline"
-                        className="flex-1 h-14 text-lg border-2 hover:border-primary hover:bg-primary/5 transition-all duration-300 group"
-                        onClick={handleReadPreview}
-                      >
-                        <Eye className="w-6 h-6 mr-3 group-hover:scale-110 transition-transform" />
-                        {hasPurchased ? "Read Now" : "Read Preview"}
-                      </Button>
-                    )}
-                  </div>
-
-                  <div className="flex flex-wrap items-center justify-center gap-3 md:gap-4 text-sm text-muted-foreground">
-                    <div className="flex items-center gap-1 md:gap-2">
-                      <Shield className="w-3 h-3 md:w-4 md:h-4" />
-                      <span>Secure Payment</span>
-                    </div>
-                    <div className="flex items-center gap-1 md:gap-2">
-                      <Truck className="w-3 h-3 md:w-4 md:h-4" />
-                      <span>Instant Delivery</span>
-                    </div>
-                    <div className="flex items-center gap-1 md:gap-2">
-                      <RotateCcw className="w-3 h-3 md:w-4 md:h-4" />
-                      <span>30-Day Return</span>
-                    </div>
                   </div>
                 </div>
               )}
@@ -1147,22 +1084,11 @@ export default function BookDetailPage() {
                   <div className="flex flex-col md:flex-row md:items-center justify-between mb-6 md:mb-8 gap-4">
                     <div>
                       <h2 className="text-xl md:text-3xl font-bold flex items-center gap-2 md:gap-3">
-                        {hasPurchased ? (
-                          <>
-                            <CheckCircle className="w-5 h-5 md:w-8 md:h-8 text-green-500" />
-                            Full Access: {getDocumentTypeName()}
-                          </>
-                        ) : (
-                          <>
-                            <Lock className="w-5 h-5 md:w-8 md:h-8 text-amber-500" />
-                            Preview (First {PDF_PREVIEW_LIMIT} pages)
-                          </>
-                        )}
+                        <CheckCircle className="w-5 h-5 md:w-8 md:h-8 text-green-500" />
+                        Full Access: {getDocumentTypeName()}
                       </h2>
                       <p className="text-sm md:text-base text-muted-foreground mt-1 md:mt-2">
-                        {hasPurchased
-                          ? "You have full access to this document"
-                          : "Purchase to unlock full access"}
+                        You have full access to this document
                       </p>
                     </div>
                     <div className="flex items-center gap-2">
@@ -1179,16 +1105,6 @@ export default function BookDetailPage() {
                           {isFullscreen ? "Exit Fullscreen" : "Fullscreen"}
                         </Button>
                       )}
-                      {!hasPurchased && (
-                        <Button
-                          onClick={() => setShowPurchaseModal(true)}
-                          size={isMobile ? "sm" : "default"}
-                          className="bg-gradient-to-r from-primary to-secondary"
-                        >
-                          <Sparkles className="w-4 h-4 mr-2" />
-                          Unlock Full Access
-                        </Button>
-                      )}
                     </div>
                   </div>
 
@@ -1198,9 +1114,9 @@ export default function BookDetailPage() {
                         {viewerMode === 'pdf' ? (
                           <PdfViewer
                             fileUrl={book.filePath}
-                            isPreview={!hasPurchased}
+                            isPreview={false}
                             previewLimit={PDF_PREVIEW_LIMIT}
-                            onRequirePurchase={() => setShowPurchaseModal(true)}
+                            onRequirePurchase={() => {}}
                             isMobile={isMobile}
                           />
                         ) : (
@@ -1209,38 +1125,11 @@ export default function BookDetailPage() {
                             fileName={book.title}
                             fileType={fileType}
                             bookId={book._id}
-                            isMobile={isMobile}
                           />
                         )}
                       </Suspense>
                     </div>
                   </div>
-
-                  {!hasPurchased && (
-                    <div className="mt-6 p-4 md:p-6 rounded-lg md:rounded-xl bg-gradient-to-r from-amber-50 to-yellow-50 dark:from-amber-900/20 dark:to-yellow-900/20 border border-amber-200 dark:border-amber-800">
-                      <div className="flex flex-col md:flex-row items-center justify-between gap-4">
-                        <div className="flex items-center gap-3 md:gap-4">
-                          <div className="p-2 md:p-3 rounded-full bg-amber-100 dark:bg-amber-900/50">
-                            <Lock className="w-4 h-4 md:w-6 md:h-6 text-amber-600 dark:text-amber-400" />
-                          </div>
-                          <div>
-                            <h3 className="font-semibold text-sm md:text-base">Want to read more?</h3>
-                            <p className="text-xs md:text-sm text-muted-foreground">
-                              Purchase the book to unlock all {book.pages || 'remaining'} pages
-                            </p>
-                          </div>
-                        </div>
-                        <Button
-                          size={isMobile ? "sm" : "default"}
-                          variant="default"
-                          onClick={() => setShowPurchaseModal(true)}
-                          className="bg-gradient-to-r from-amber-500 to-orange-500 hover:from-amber-600 hover:to-orange-600"
-                        >
-                          Unlock Now ${book.price.toFixed(2)}
-                        </Button>
-                      </div>
-                    </div>
-                  )}
                 </div>
               </div>
             </section>
@@ -1284,72 +1173,7 @@ export default function BookDetailPage() {
           </div>
         </motion.main>
 
-        {/* Purchase Modal - Mobile optimized */}
-        <Dialog open={showPurchaseModal} onOpenChange={setShowPurchaseModal}>
-          <DialogContent className="sm:max-w-md border-0 shadow-2xl max-h-[90vh] overflow-y-auto">
-            <div className="bg-gradient-to-b from-white to-gray-50 dark:from-gray-900 dark:to-gray-800 rounded-2xl p-4 md:p-6">
-              <DialogHeader>
-                <div className="flex items-center justify-center w-12 h-12 md:w-16 md:h-16 mx-auto mb-3 md:mb-4 rounded-full bg-gradient-to-r from-primary/20 to-secondary/20">
-                  <Lock className="w-6 h-6 md:w-8 md:h-8 text-primary" />
-                </div>
-                <DialogTitle className="text-xl md:text-2xl text-center">Unlock Full Access</DialogTitle>
-                <DialogDescription className="text-center text-sm md:text-base">
-                  Purchase this book to access all features
-                </DialogDescription>
-              </DialogHeader>
-
-              <div className="my-6 md:my-8 space-y-4 md:space-y-6">
-                <div className="text-center">
-                  <div className="text-3xl md:text-5xl font-bold text-primary">
-                    ${book.price.toFixed(2)}
-                  </div>
-                  <p className="text-muted-foreground mt-1 md:mt-2 text-sm md:text-base">One-time payment</p>
-                </div>
-
-                <div className="space-y-3">
-                  {[
-                    { icon: <CheckCircle className="w-4 h-4 md:w-5 md:h-5" />, text: "Full document access" },
-                    { icon: <Download className="w-4 h-4 md:w-5 md:h-5" />, text: "Download in multiple formats" },
-                    { icon: <Bookmark className="w-4 h-4 md:w-5 md:h-5" />, text: "Lifetime updates" },
-                    { icon: <Shield className="w-4 h-4 md:w-5 md:h-5" />, text: "Money-back guarantee" },
-                  ].map((feature, index) => (
-                    <div
-                      key={index}
-                      className="flex items-center gap-2 md:gap-3 p-2 md:p-3 rounded-lg bg-gradient-to-r from-gray-50 to-white dark:from-gray-800 dark:to-gray-900"
-                    >
-                      <div className="text-green-500">{feature.icon}</div>
-                      <span className="text-sm md:text-base">{feature.text}</span>
-                    </div>
-                  ))}
-                </div>
-              </div>
-
-              <DialogFooter className="flex flex-col sm:flex-row gap-2 md:gap-3 mt-4">
-                <Button
-                  variant="outline"
-                  onClick={() => setShowPurchaseModal(false)}
-                  className="w-full sm:flex-1"
-                  size={isMobile ? "sm" : "default"}
-                >
-                  Not Now
-                </Button>
-                <Button
-                  onClick={handlePurchase}
-                  disabled={isPurchasing}
-                  className="w-full sm:flex-1 bg-gradient-to-r from-primary to-secondary hover:from-primary/90 hover:to-secondary/90"
-                  size={isMobile ? "sm" : "default"}
-                >
-                  {isPurchasing ? (
-                    <Loader2 className="w-4 h-4 md:w-5 md:h-5 mr-2 animate-spin" />
-                  ) : (
-                    <ShoppingCart className="w-4 h-4 md:w-5 md:h-5 mr-2" />
-                  )}
-                  Purchase Now
-                </Button>
-              </DialogFooter>
-            </div>
-          </DialogContent>
-        </Dialog>
+        {/* Purchase dialog completely removed */}
 
         {/* Full Cover Modal - Mobile optimized */}
         {showFullCover && (

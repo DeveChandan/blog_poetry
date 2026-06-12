@@ -25,6 +25,7 @@ export async function POST(request: Request): Promise<NextResponse> {
             'image/webp',
             'image/svg+xml'
           ],
+          addRandomSuffix: true,
           tokenPayload: JSON.stringify({
             userId: session.userId,
           }),

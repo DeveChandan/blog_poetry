@@ -31,7 +31,9 @@ interface LanguageContextType {
 const LanguageContext = createContext<LanguageContextType | undefined>(undefined)
 
 export function LanguageProvider({ children }: { children: ReactNode }) {
-  const [currentLanguage, setCurrentLanguage] = useState<Language>(SUPPORTED_LANGUAGES[0])
+  const [currentLanguage, setCurrentLanguage] = useState<Language>(
+    SUPPORTED_LANGUAGES.find(l => l.code === 'hi') || SUPPORTED_LANGUAGES[0]
+  )
   const [isTranslating, setIsTranslating] = useState(false)
   const [translationCache] = useState<Map<string, string>>(new Map())
 

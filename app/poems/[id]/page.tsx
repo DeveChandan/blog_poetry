@@ -23,7 +23,6 @@ import {
   Clock,
   TrendingUp,
   Quote,
-  CornerDownRight,
   MoreVertical,
   User,
   Globe,
@@ -567,12 +566,7 @@ export default function PoemDetailPage() {
                     {line.trim() === '' ? (
                       <span className="block h-4"></span>
                     ) : (
-                      <>
-                        {index % 2 === 0 && !translatedContent && (
-                          <CornerDownRight className="inline w-4 h-4 mr-3 text-primary/50" />
-                        )}
-                        {line}
-                      </>
+                      line
                     )}
                   </motion.p>
                 ))}

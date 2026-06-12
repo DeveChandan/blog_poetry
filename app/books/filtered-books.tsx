@@ -75,9 +75,6 @@ export default function FilteredBooks({ books }: { books: Book[] }) {
               type={book.type}
               cover={book.cover}
               author={book.author}
-              // Pass other props if needed by BookCard
-              rating={book.rating}
-              publishedYear={book.publishedYear}
             />
           ))}
         </div>

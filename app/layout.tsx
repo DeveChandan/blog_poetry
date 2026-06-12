@@ -65,14 +65,14 @@ export default function RootLayout({
 }>) {
   return (
     <html
-      lang="en"
+      lang="hi"
       className={`${inter.variable} ${playfairDisplay.variable} ${dancingScript.variable}`}
       suppressHydrationWarning
     >
       <body className="font-sans antialiased">
         <ThemeProvider
           attribute="class"
-          defaultTheme="system"
+          defaultTheme="dark"
           enableSystem
           disableTransitionOnChange
         >

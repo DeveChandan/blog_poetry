@@ -1,180 +1,30 @@
-[00:00:38.348] Server  LOG      ○ Compiling middleware ...
-[00:00:38.676] Server  WARN     ⚠ The "middleware" file convention is deprecated. Please use "proxy" instead. Learn more: https://nextjs.org/docs/messages/middleware-to-proxy
-[00:00:45.187] Server  LOG      ✓ Ready in 29.5s
-[00:01:36.759] Server  LOG      ○ Compiling / ...
-[00:02:28.578] Browser INFO    %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold
-[00:02:32.804] Browser LOG     useSession: Raw response from /api/auth/session: {}
-[00:02:32.804] Browser LOG     useSession: Parsed data from /api/auth/session: {"user":null}
-[00:02:33.184] Browser LOG     %c[Vercel Web Analytics]%c Debug mode is enabled by default in development. No requests will be sent to the server. color: rgb(120, 120, 120) color: inherit
-[00:02:33.184] Browser LOG     %c[Vercel Web Analytics]%c Running queued event color: rgb(120, 120, 120) color: inherit pageview {"path":"/","route":"/"}
-[00:02:33.185] Browser LOG     %c[Vercel Web Analytics]%c [view] http://localhost:3000/ color: rgb(120, 120, 120) color: inherit {"dp":"/","o":"http://localhost:3000/","sdkn":"@vercel/analytics/next","sdkv":"1.6.1","sv":"0.1.3","ts":1779710067759} /_vercel/insights/view
-[00:03:03.296] Browser WARN    Image with src "https://www.typecalendar.com/wp-content/uploads/2023/06/Download-Cover-Page-Template.jpg?gid=122" has either width or height modified, but not the other. If you use CSS to change the size of your image, also include the styles 'width: "auto"' or 'height: "auto"' to maintain the aspect ratio.
-[00:04:36.384] Server  LOG      ✓ Compiled in 1402ms
-[00:04:39.645] Server  LOG      ✓ Compiled in 752ms
-[00:04:40.661] Server  LOG      ✓ Compiled in 1022ms
-[00:04:42.485] Server  LOG      ✓ Compiled in 826ms
-[00:04:44.818] Server  LOG      ✓ Compiled in 1076ms
-[00:04:53.049] Server  LOG      ✓ Compiled in 474ms
-[00:04:58.537] Server  LOG      ✓ Compiled in 365ms
-[00:05:00.452] Server  LOG      ✓ Compiled in 387ms
-[00:06:29.091] Server  LOG      ✓ Compiled in 887ms
-[00:06:32.561] Server  LOG      ○ Compiling /_not-found/page ...
-[00:09:38.246] Server  LOG      ✓ Compiled in 1611ms
-[00:09:41.707] Server  LOG      ✓ Compiled in 1950ms
-[00:09:44.268] Server  LOG      ✓ Compiled in 640ms
-[00:09:46.064] Server  LOG      ✓ Compiled in 567ms
-[00:09:47.869] Server  LOG      ✓ Compiled in 686ms
-[00:10:56.655] Server  LOG      ✓ Compiled in 1181ms
-[00:10:59.601] Server  LOG      ✓ Compiled in 413ms
-[00:11:01.504] Browser ERROR   ./lib/translations.ts:74:9
-Parsing ecmascript source code failed
-  72 |         morePoems: "More poems...",
-  73 |         Re
-> 74 |         moreBlogs: "More blogs...",
-     |         ^^^^^^^^^
-  75 |         pathsInWords: "Paths in Words",
-  76 |         subscribeTitle: "Subscribe",
-  77 |         subscribeSubtitle: "Express your feelings in words...",
-
-Unexpected token `moreBlogs`. Expected ... , *,  (, [, :, , ?, =, an identifier, public, protected, private, readonly, <.
-
-Import traces:
-  Client Component Browser:
-    ./lib/translations.ts [Client Component Browser]
-    ./lib/language-context.tsx [Client Component Browser]
-    ./lib/language-context.tsx [Server Component]
-    ./app/layout.tsx [Server Component]
-
-  Client Component SSR:
-    ./lib/translations.ts [Client Component SSR]
-    ./lib/language-context.tsx [Client Component SSR]
-    ./lib/language-context.tsx [Server Component]
-    ./app/layout.tsx [Server Component]
-[00:11:01.504] Browser ERROR   ./lib/translations.ts:74:9
-Parsing ecmascript source code failed
-  72 |         morePoems: "More poems...",
-  73 |         Ree
-> 74 |         moreBlogs: "More blogs...",
-     |         ^^^^^^^^^
-  75 |         pathsInWords: "Paths in Words",
-  76 |         subscribeTitle: "Subscribe",
-  77 |         subscribeSubtitle: "Express your feelings in words...",
-
-Unexpected token `moreBlogs`. Expected ... , *,  (, [, :, , ?, =, an identifier, public, protected, private, readonly, <.
-
-Import traces:
-  Client Component Browser:
-    ./lib/translations.ts [Client Component Browser]
-    ./lib/language-context.tsx [Client Component Browser]
-    ./lib/language-context.tsx [Server Component]
-    ./app/layout.tsx [Server Component]
-
-  Client Component SSR:
-    ./lib/translations.ts [Client Component SSR]
-    ./lib/language-context.tsx [Client Component SSR]
-    ./lib/language-context.tsx [Server Component]
-    ./app/layout.tsx [Server Component]
-[00:11:01.504] Browser ERROR   ./lib/translations.ts:74:9
-Parsing ecmascript source code failed
-  72 |         morePoems: "More poems...",
-  73 |         Reels
-> 74 |         moreBlogs: "More blogs...",
-     |         ^^^^^^^^^
-  75 |         pathsInWords: "Paths in Words",
-  76 |         subscribeTitle: "Subscribe",
-  77 |         subscribeSubtitle: "Express your feelings in words...",
-
-Unexpected token `moreBlogs`. Expected ... , *,  (, [, :, , ?, =, an identifier, public, protected, private, readonly, <.
-
-Import traces:
-  Client Component Browser:
-    ./lib/translations.ts [Client Component Browser]
-    ./lib/language-context.tsx [Client Component Browser]
-    ./lib/language-context.tsx [Server Component]
-    ./app/layout.tsx [Server Component]
-
-  Client Component SSR:
-    ./lib/translations.ts [Client Component SSR]
-    ./lib/language-context.tsx [Client Component SSR]
-    ./lib/language-context.tsx [Server Component]
-    ./app/layout.tsx [Server Component]
-[00:11:01.504] Browser ERROR   ./lib/translations.ts:74:18
-Parsing ecmascript source code failed
-  72 |         morePoems: "More poems...",
-  73 |         Reels:
-> 74 |         moreBlogs: "More blogs...",
-     |                  ^
-  75 |         pathsInWords: "Paths in Words",
-  76 |         subscribeTitle: "Subscribe",
-  77 |         subscribeSubtitle: "Express your feelings in words...",
-
-Expected ',', got ':'
-
-Import traces:
-  Client Component Browser:
-    ./lib/translations.ts [Client Component Browser]
-    ./lib/language-context.tsx [Client Component Browser]
-    ./lib/language-context.tsx [Server Component]
-    ./app/layout.tsx [Server Component]
-
-  Client Component SSR:
-    ./lib/translations.ts [Client Component SSR]
-    ./lib/language-context.tsx [Client Component SSR]
-    ./lib/language-context.tsx [Server Component]
-    ./app/layout.tsx [Server Component]
-[00:11:09.597] Server  LOG      ✓ Compiled in 300ms
-[00:11:10.172] Browser ERROR   ./lib/translations.ts:74:9
-Parsing ecmascript source code failed
-  72 |         morePoems: "More poems...",
-  73 |         Reels:""
-> 74 |         moreBlogs: "More blogs...",
-     |         ^^^^^^^^^
-  75 |         pathsInWords: "Paths in Words",
-  76 |         subscribeTitle: "Subscribe",
-  77 |         subscribeSubtitle: "Express your feelings in words...",
-
-Expected ',', got 'moreBlogs'
-
-Import traces:
-  Client Component Browser:
-    ./lib/translations.ts [Client Component Browser]
-    ./lib/language-context.tsx [Client Component Browser]
-    ./lib/language-context.tsx [Server Component]
-    ./app/layout.tsx [Server Component]
-
-  Client Component SSR:
-    ./lib/translations.ts [Client Component SSR]
-    ./lib/language-context.tsx [Client Component SSR]
-    ./lib/language-context.tsx [Server Component]
-    ./app/layout.tsx [Server Component]
-[00:11:12.028] Browser ERROR   ./lib/translations.ts:74:9
-Parsing ecmascript source code failed
-  72 |         morePoems: "More poems...",
-  73 |         Reels:"Re"
-> 74 |         moreBlogs: "More blogs...",
-     |         ^^^^^^^^^
-  75 |         pathsInWords: "Paths in Words",
-  76 |         subscribeTitle: "Subscribe",
-  77 |         subscribeSubtitle: "Express your feelings in words...",
-
-Expected ',', got 'moreBlogs'
-
-Import traces:
-  Client Component Browser:
-    ./lib/translations.ts [Client Component Browser]
-    ./lib/language-context.tsx [Client Component Browser]
-    ./lib/language-context.tsx [Server Component]
-    ./app/layout.tsx [Server Component]
-
-  Client Component SSR:
-    ./lib/translations.ts [Client Component SSR]
-    ./lib/language-context.tsx [Client Component SSR]
-    ./lib/language-context.tsx [Server Component]
-    ./app/layout.tsx [Server Component]
-[00:11:22.512] Server  LOG      ✓ Compiled in 349ms
-[00:11:23.301] Server  WARN     ⚠ Fast Refresh had to perform a full reload when ./lib/translations.ts changed. Read more: https://nextjs.org/docs/messages/fast-refresh-reload
-[00:11:29.864] Browser INFO    %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold
-[00:11:33.430] Browser ERROR   A tree hydrated but some attributes of the server rendered HTML didn't match the client properties. This won't be patched up. This can happen if a SSR-ed Client Component used:
+[00:00:03.112] Server  WARN     ⚠ The "middleware" file convention is deprecated. Please use "proxy" instead. Learn more: https://nextjs.org/docs/messages/middleware-to-proxy
+[00:00:03.572] Server  LOG      ✓ Ready in 2.7s
+[00:00:03.631] Browser ERROR   Translation error: {}
+[00:00:03.631] Browser ERROR   Translation error: {}
+[00:00:03.631] Browser ERROR   Translation error: {}
+[00:00:03.631] Browser ERROR   Translation error: {}
+[00:00:03.631] Browser ERROR   Translation error: {}
+[00:00:03.631] Browser ERROR   Translation error: {}
+[00:00:03.631] Browser ERROR   Translation error: {}
+[00:00:03.631] Browser ERROR   Translation error: {}
+[00:00:03.631] Browser ERROR   Translation error: {}
+[00:00:03.631] Browser ERROR   Translation error: {}
+[00:00:03.631] Browser ERROR   Translation error: {}
+[00:00:03.631] Browser ERROR   Translation error: {}
+[00:00:03.631] Browser ERROR   Translation error: {}
+[00:00:03.631] Browser ERROR   Translation error: {}
+[00:00:03.631] Browser ERROR   Translation error: {}
+[00:00:03.631] Browser ERROR   Translation error: {}
+[00:00:03.631] Browser ERROR   Translation error: {}
+[00:00:03.631] Browser ERROR   Translation error: {}
+[00:00:03.631] Browser ERROR   Translation error: {}
+[00:00:03.631] Browser ERROR   Translation error: {}
+[00:00:03.631] Browser ERROR   Translation error: {}
+[00:00:03.631] Browser ERROR   Translation error: {}
+[00:00:09.480] Server  LOG      ○ Compiling / ...
+[00:00:36.337] Browser INFO    %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold
+[00:00:38.622] Browser ERROR   A tree hydrated but some attributes of the server rendered HTML didn't match the client properties. This won't be patched up. This can happen if a SSR-ed Client Component used:
 
 - A server/client branch `if (typeof window !== 'undefined')`.
 - Variable input such as `Date.now()` or `Math.random()` which changes each time it's called.
@@ -210,96 +60,93 @@ It can also happen if the client has a browser extension installed which messes 
                         <html lang="en" className="inter_b299..." suppressHydrationWarning={true}>
                           <body
                             className="font-sans antialiased"
--                           data-new-gr-c-s-check-loaded="14.1295.0"
+-                           data-new-gr-c-s-check-loaded="14.1299.0"
 -                           data-gr-ext-installed=""
                           >
                   ...
 
-[00:11:35.500] Server  LOG     API /api/auth/session: Session status: null
-[00:11:37.132] Browser LOG     useSession: Raw response from /api/auth/session: {}
-[00:11:37.132] Browser LOG     useSession: Parsed data from /api/auth/session: {"user":null}
-[00:11:37.132] Browser LOG     %c[Vercel Web Analytics]%c Debug mode is enabled by default in development. No requests will be sent to the server. color: rgb(120, 120, 120) color: inherit
-[00:11:37.132] Browser LOG     %c[Vercel Web Analytics]%c Running queued event color: rgb(120, 120, 120) color: inherit pageview {"path":"/","route":"/"}
-[00:11:37.132] Browser LOG     %c[Vercel Web Analytics]%c [view] http://localhost:3000/ color: rgb(120, 120, 120) color: inherit {"dp":"/","o":"http://localhost:3000/","sdkn":"@vercel/analytics/next","sdkv":"1.6.1","sv":"0.1.3","ts":1779710611252} /_vercel/insights/view
-[00:11:55.531] Server  LOG      ✓ Compiled in 340ms
-[00:11:56.037] Browser ERROR   ./lib/translations.ts:178:9
-Parsing ecmascript source code failed
-  176 |         poetryRay: "काव्य किरण",
-  177 |         Reels
-> 178 |         morePoems: "और चलिये...",
-      |         ^^^^^^^^^
-  179 |         moreBlogs: "और चलिये...",
-  180 |         pathsInWords: "पादों मे रस्ते",
-  181 |         subscribeTitle: "हमसे जुड़ें",
-
-Unexpected token `morePoems`. Expected ... , *,  (, [, :, , ?, =, an identifier, public, protected, private, readonly, <.
-
-Import traces:
-  Client Component Browser:
-    ./lib/translations.ts [Client Component Browser]
-    ./lib/language-context.tsx [Client Component Browser]
-    ./lib/language-context.tsx [Server Component]
-    ./app/layout.tsx [Server Component]
-
-  Client Component SSR:
-    ./lib/translations.ts [Client Component SSR]
-    ./lib/language-context.tsx [Client Component SSR]
-    ./lib/language-context.tsx [Server Component]
-    ./app/layout.tsx [Server Component]
-[00:11:58.077] Server  LOG      ✓ Compiled in 500ms
-[00:11:59.034] Browser ERROR   ./lib/translations.ts:177:15
-Parsing ecmascript source code failed
-  175 |         myBooks: "मेरी किताबें",
-  176 |         poetryRay: "काव्य किरण",
-> 177 |         Reels:"
-      |               ^
-  178 |         morePoems: "और चलिये...",
-  179 |         moreBlogs: "और चलिये...",
-  180 |         pathsInWords: "पादों मे रस्ते",
-
-Unterminated string constant
-
-Import traces:
-  Client Component Browser:
-    ./lib/translations.ts [Client Component Browser]
-    ./lib/language-context.tsx [Client Component Browser]
-    ./lib/language-context.tsx [Server Component]
-    ./app/layout.tsx [Server Component]
-
-  Client Component SSR:
-    ./lib/translations.ts [Client Component SSR]
-    ./lib/language-context.tsx [Client Component SSR]
-    ./lib/language-context.tsx [Server Component]
-    ./app/layout.tsx [Server Component]
-[00:12:00.032] Browser ERROR   ./lib/translations.ts:177:15
-Parsing ecmascript source code failed
-  175 |         myBooks: "मेरी किताबें",
-  176 |         poetryRay: "काव्य किरण",
-> 177 |         Reels:"रील्स
-      |               ^^^^^^^^^^^^^^^^
-  178 |         morePoems: "और चलिये...",
-  179 |         moreBlogs: "और चलिये...",
-  180 |         pathsInWords: "पादों मे रस्ते",
-
-Unterminated string constant
-
-Import traces:
-  Client Component Browser:
-    ./lib/translations.ts [Client Component Browser]
-    ./lib/language-context.tsx [Client Component Browser]
-    ./lib/language-context.tsx [Server Component]
-    ./app/layout.tsx [Server Component]
-
-  Client Component SSR:
-    ./lib/translations.ts [Client Component SSR]
-    ./lib/language-context.tsx [Client Component SSR]
-    ./lib/language-context.tsx [Server Component]
-    ./app/layout.tsx [Server Component]
-[00:12:01.006] Server  LOG      ✓ Compiled in 361ms
-[00:12:01.761] Server  WARN     ⚠ Fast Refresh had to perform a full reload when ./lib/translations.ts changed. Read more: https://nextjs.org/docs/messages/fast-refresh-reload
-[00:12:11.440] Browser INFO    %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold
-[00:12:12.862] Server  LOG     API /api/auth/session: Session status: null
-[00:12:14.567] Browser ERROR   A tree hydrated but some attributes of the server rendered HTML didn't match the client properties. This won't be patched up. This can happen if a SSR-ed Client Component used:
+[00:00:38.637] Browser WARN    Image with src "https://www.typecalendar.com/wp-content/uploads/2023/06/Download-Cover-Page-Template.jpg?gid=122" has either width or height modified, but not the other. If you use CSS to change the size of your image, also include the styles 'width: "auto"' or 'height: "auto"' to maintain the aspect ratio.
+[00:00:38.637] Browser WARN    Image with src "http://localhost:3000/placeholder.jpg" has either width or height modified, but not the other. If you use CSS to change the size of your image, also include the styles 'width: "auto"' or 'height: "auto"' to maintain the aspect ratio.
+[00:00:40.676] Server  LOG     API /api/auth/session: Session status: null
+[00:00:40.862] Browser LOG     useSession: Raw response from /api/auth/session: {}
+[00:00:40.862] Browser LOG     useSession: Parsed data from /api/auth/session: {"user":null}
+[00:00:42.447] Browser LOG     %c[Vercel Web Analytics]%c Debug mode is enabled by default in development. No requests will be sent to the server. color: rgb(120, 120, 120) color: inherit
+[00:00:42.447] Browser LOG     %c[Vercel Web Analytics]%c Running queued event color: rgb(120, 120, 120) color: inherit pageview {"path":"/","route":"/"}
+[00:00:42.447] Browser LOG     %c[Vercel Web Analytics]%c [view] http://localhost:3000/ color: rgb(120, 120, 120) color: inherit {"dp":"/","o":"http://localhost:3000/","sdkn":"@vercel/analytics/next","sdkv":"1.6.1","sv":"0.1.3","ts":1781245715533} /_vercel/insights/view
+[00:00:42.752] Browser LOG     %c[Vercel Web Analytics]%c [view] http://localhost:3000/blog color: rgb(120, 120, 120) color: inherit {"dp":"/blog","o":"http://localhost:3000/blog","sdkn":"@vercel/analytics/next","sdkv":"1.6.1","sv":"0.1.3","ts":1781245715822} /_vercel/insights/view
+[00:00:50.500] Browser LOG     %c[Vercel Web Analytics]%c [view] http://localhost:3000/blog/artificial-intelligence-the-technology-transforming-our-future color: rgb(120, 120, 120) color: inherit {"dp":"/blog/[slug]","o":"http://localhost:3000/blog/artificial-intelligence-the-technology-transforming-our-future","sdkn":"@vercel/analytics/next","sdkv":"1.6.1","sv":"0.1.3","ts":1781245723580} /_vercel/insights/view
+[00:03:41.101] Browser LOG     %c[Vercel Web Analytics]%c [view] http://localhost:3000/books color: rgb(120, 120, 120) color: inherit {"dp":"/books","o":"http://localhost:3000/books","sdkn":"@vercel/analytics/next","sdkv":"1.6.1","sv":"0.1.3","ts":1781245894181} /_vercel/insights/view
+[00:03:46.685] Server  LOG      ○ Compiling /books/[id] ...
+[00:03:50.355] Browser LOG     %c[Vercel Web Analytics]%c [view] http://localhost:3000/books/694a40132665fde3d1f43e97 color: rgb(120, 120, 120) color: inherit {"dp":"/books/[id]","o":"http://localhost:3000/books/694a40132665fde3d1f43e97","sdkn":"@vercel/analytics/next","sdkv":"1.6.1","sv":"0.1.3","ts":1781245903414} /_vercel/insights/view
+[00:03:57.815] Browser WARN    You're attempting to animate multiple children within AnimatePresence, but its mode is set to "wait". This will lead to odd visual behaviour.
+[00:03:57.816] Browser WARN    You're attempting to animate multiple children within AnimatePresence, but its mode is set to "wait". This will lead to odd visual behaviour.
+[00:03:57.816] Browser ERROR   Encountered two children with the same key, `%s`. Keys should be unique so that components maintain their identity across updates. Non-unique keys may cause children to be duplicated and/or omitted — the behavior is unsupported and could change in a future version. 
+[00:04:21.727] Browser LOG     %c[Vercel Web Analytics]%c [view] http://localhost:3000/books color: rgb(120, 120, 120) color: inherit {"dp":"/books","o":"http://localhost:3000/books","sdkn":"@vercel/analytics/next","sdkv":"1.6.1","sv":"0.1.3","ts":1781245934677} /_vercel/insights/view
+[00:04:26.655] Browser LOG     %c[Vercel Web Analytics]%c [view] http://localhost:3000/books/694a40132665fde3d1f43e97 color: rgb(120, 120, 120) color: inherit {"dp":"/books/[id]","o":"http://localhost:3000/books/694a40132665fde3d1f43e97","sdkn":"@vercel/analytics/next","sdkv":"1.6.1","sv":"0.1.3","ts":1781245939659} /_vercel/insights/view
+[00:04:29.306] Browser WARN    You're attempting to animate multiple children within AnimatePresence, but its mode is set to "wait". This will lead to odd visual behaviour.
+[00:04:29.307] Browser WARN    You're attempting to animate multiple children within AnimatePresence, but its mode is set to "wait". This will lead to odd visual behaviour.
+[00:04:29.307] Browser ERROR   Encountered two children with the same key, `%s`. Keys should be unique so that components maintain their identity across updates. Non-unique keys may cause children to be duplicated and/or omitted — the behavior is unsupported and could change in a future version. 
+[00:04:40.777] Browser WARN    You're attempting to animate multiple children within AnimatePresence, but its mode is set to "wait". This will lead to odd visual behaviour.
+[00:04:40.778] Browser WARN    You're attempting to animate multiple children within AnimatePresence, but its mode is set to "wait". This will lead to odd visual behaviour.
+[00:04:40.778] Browser ERROR   Encountered two children with the same key, `%s`. Keys should be unique so that components maintain their identity across updates. Non-unique keys may cause children to be duplicated and/or omitted — the behavior is unsupported and could change in a future version. 
+[00:04:41.284] Browser WARN    You're attempting to animate multiple children within AnimatePresence, but its mode is set to "wait". This will lead to odd visual behaviour.
+[00:04:41.284] Browser WARN    You're attempting to animate multiple children within AnimatePresence, but its mode is set to "wait". This will lead to odd visual behaviour.
+[00:04:41.284] Browser ERROR   Encountered two children with the same key, `%s`. Keys should be unique so that components maintain their identity across updates. Non-unique keys may cause children to be duplicated and/or omitted — the behavior is unsupported and could change in a future version. 
+[00:04:42.108] Browser WARN    You're attempting to animate multiple children within AnimatePresence, but its mode is set to "wait". This will lead to odd visual behaviour.
+[00:04:42.108] Browser WARN    You're attempting to animate multiple children within AnimatePresence, but its mode is set to "wait". This will lead to odd visual behaviour.
+[00:04:42.108] Browser ERROR   Encountered two children with the same key, `%s`. Keys should be unique so that components maintain their identity across updates. Non-unique keys may cause children to be duplicated and/or omitted — the behavior is unsupported and could change in a future version. 
+[00:04:43.541] Browser WARN    You're attempting to animate multiple children within AnimatePresence, but its mode is set to "wait". This will lead to odd visual behaviour.
+[00:04:43.541] Browser WARN    You're attempting to animate multiple children within AnimatePresence, but its mode is set to "wait". This will lead to odd visual behaviour.
+[00:04:43.541] Browser ERROR   Encountered two children with the same key, `%s`. Keys should be unique so that components maintain their identity across updates. Non-unique keys may cause children to be duplicated and/or omitted — the behavior is unsupported and could change in a future version. 
+[00:05:24.112] Browser LOG     %c[Vercel Web Analytics]%c [view] http://localhost:3000/blog color: rgb(120, 120, 120) color: inherit {"dp":"/blog","o":"http://localhost:3000/blog","sdkn":"@vercel/analytics/next","sdkv":"1.6.1","sv":"0.1.3","ts":1781245997111} /_vercel/insights/view
+[00:05:27.083] Browser LOG     %c[Vercel Web Analytics]%c [view] http://localhost:3000/blog/artificial-intelligence-the-technology-transforming-our-future color: rgb(120, 120, 120) color: inherit {"dp":"/blog/[slug]","o":"http://localhost:3000/blog/artificial-intelligence-the-technology-transforming-our-future","sdkn":"@vercel/analytics/next","sdkv":"1.6.1","sv":"0.1.3","ts":1781246000159} /_vercel/insights/view
+[00:05:54.177] Browser LOG     %c[Vercel Web Analytics]%c [view] http://localhost:3000/about color: rgb(120, 120, 120) color: inherit {"dp":"/about","o":"http://localhost:3000/about","sdkn":"@vercel/analytics/next","sdkv":"1.6.1","sv":"0.1.3","ts":1781246027161} /_vercel/insights/view
+[00:05:58.537] Server  LOG      ○ Compiling /api/settings ...
+[00:06:04.015] Server  LOG     Processing videos from DB...
+[00:06:04.851] Server  LOG     Video 6979d3dc0f91cdd2dcff3b3d: {}
+[00:06:05.065] Server  LOG     Video 6979d37e8dd9033ee80a4750: {}
+[00:06:05.117] Server  LOG     Video 69771d7a2364bd908d7f0e21: {}
+[00:06:08.458] Server  LOG     Processing videos from DB...
+[00:06:08.463] Server  LOG     Video 6979d3dc0f91cdd2dcff3b3d: {}
+[00:06:08.475] Server  LOG     Video 6979d37e8dd9033ee80a4750: {}
+[00:06:08.479] Server  LOG     Video 69771d7a2364bd908d7f0e21: {}
+[00:06:18.459] Browser LOG     %c[Vercel Web Analytics]%c [view] http://localhost:3000/login color: rgb(120, 120, 120) color: inherit {"dp":"/login","o":"http://localhost:3000/login","sdkn":"@vercel/analytics/next","sdkv":"1.6.1","sv":"0.1.3","ts":1781246051164} /_vercel/insights/view
+[00:06:19.485] Server  LOG     API /api/auth/session: Session status: null
+[00:06:19.638] Browser LOG     useSession: Raw response from /api/auth/session: {}
+[00:06:19.638] Browser LOG     useSession: Parsed data from /api/auth/session: {"user":null}
+[00:06:19.641] Server  LOG     API /api/auth/session: Session status: null
+[00:06:19.770] Browser LOG     useSession: Raw response from /api/auth/session: {}
+[00:06:19.770] Browser LOG     useSession: Parsed data from /api/auth/session: {"user":null}
+[00:06:34.110] Server  LOG     API /api/auth/session: Session status: {}
+[00:06:34.407] Browser LOG     useSession: Raw response from /api/auth/session: {}
+[00:06:34.407] Browser LOG     useSession: Parsed data from /api/auth/session: {"user":{"exp":1781289267,"isAdmin":true,"type":"auth","userId":"6936a3e510ca4806bcd9c3a3"}}
+[00:06:34.490] Server  LOG     API /api/auth/session: Session status: {}
+[00:06:34.600] Browser LOG     useSession: Raw response from /api/auth/session: {}
+[00:06:34.600] Browser LOG     useSession: Parsed data from /api/auth/session: {"user":{"exp":1781289267,"isAdmin":true,"type":"auth","userId":"6936a3e510ca4806bcd9c3a3"}}
+[00:06:36.081] Browser LOG     %c[Vercel Web Analytics]%c [view] http://localhost:3000/admin color: rgb(120, 120, 120) color: inherit {"dp":"/admin","o":"http://localhost:3000/admin","sdkn":"@vercel/analytics/next","sdkv":"1.6.1","sv":"0.1.3","ts":1781246069147} /_vercel/insights/view
+[00:06:40.289] Server  LOG      ○ Compiling /api/orders ...
+[00:06:46.457] Server  LOG      ○ Compiling /admin/blogs ...
+[00:06:51.260] Browser LOG     %c[Vercel Web Analytics]%c [view] http://localhost:3000/admin/blogs color: rgb(120, 120, 120) color: inherit {"dp":"/admin/blogs","o":"http://localhost:3000/admin/blogs","sdkn":"@vercel/analytics/next","sdkv":"1.6.1","sv":"0.1.3","ts":1781246084280} /_vercel/insights/view
+[00:08:15.008] Browser LOG     %c[Vercel Web Analytics]%c [view] http://localhost:3000/poems color: rgb(120, 120, 120) color: inherit {"dp":"/poems","o":"http://localhost:3000/poems","sdkn":"@vercel/analytics/next","sdkv":"1.6.1","sv":"0.1.3","ts":1781246167924} /_vercel/insights/view
+[00:08:21.466] Server  LOG      ○ Compiling /poems/[id] ...
+[00:08:29.726] Browser LOG     %c[Vercel Web Analytics]%c [view] http://localhost:3000/poems/6a0b4c972d4f92d29ad9e91c color: rgb(120, 120, 120) color: inherit {"dp":"/poems/[id]","o":"http://localhost:3000/poems/6a0b4c972d4f92d29ad9e91c","sdkn":"@vercel/analytics/next","sdkv":"1.6.1","sv":"0.1.3","ts":1781246180115} /_vercel/insights/view
+[00:09:49.735] Browser LOG     %c[Vercel Web Analytics]%c [view] http://localhost:3000/poems color: rgb(120, 120, 120) color: inherit {"dp":"/poems","o":"http://localhost:3000/poems","sdkn":"@vercel/analytics/next","sdkv":"1.6.1","sv":"0.1.3","ts":1781246262544} /_vercel/insights/view
+[00:09:57.205] Browser LOG     %c[Vercel Web Analytics]%c [view] http://localhost:3000/ color: rgb(120, 120, 120) color: inherit {"dp":"/","o":"http://localhost:3000/","sdkn":"@vercel/analytics/next","sdkv":"1.6.1","sv":"0.1.3","ts":1781246270195} /_vercel/insights/view
+[00:14:06.236] Server  LOG      ✓ Compiled in 2.3s
+[00:14:07.795] Server  LOG      ✓ Compiled in 948ms
+[00:14:09.969] Server  LOG      ✓ Compiled in 587ms
+[00:14:47.463] Server  LOG      ✓ Compiled in 636ms
+[00:14:47.844] Server  LOG      ✓ Compiled in 293ms
+[00:14:48.544] Server  LOG      ✓ Compiled in 504ms
+[00:14:49.211] Server  LOG      ✓ Compiled in 513ms
+[00:14:59.908] Browser INFO    %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold
+[00:15:00.927] Server  LOG     API /api/auth/session: Session status: {}
+[00:15:03.226] Browser LOG     useSession: Raw response from /api/auth/session: {}
+[00:15:03.902] Browser LOG     useSession: Parsed data from /api/auth/session: {"user":{"exp":1781289267,"isAdmin":true,"type":"auth","userId":"6936a3e510ca4806bcd9c3a3"}}
+[00:15:03.902] Browser LOG     %c[Vercel Web Analytics]%c Debug mode is enabled by default in development. No requests will be sent to the server. color: rgb(120, 120, 120) color: inherit
+[00:15:03.902] Browser LOG     %c[Vercel Web Analytics]%c Running queued event color: rgb(120, 120, 120) color: inherit pageview {"path":"/","route":"/"}
+[00:15:03.902] Browser LOG     %c[Vercel Web Analytics]%c [view] http://localhost:3000/ color: rgb(120, 120, 120) color: inherit {"dp":"/","o":"http://localhost:3000/","sdkn":"@vercel/analytics/next","sdkv":"1.6.1","sv":"0.1.3","ts":1781246576458} /_vercel/insights/view
+[00:15:33.315] Browser ERROR   A tree hydrated but some attributes of the server rendered HTML didn't match the client properties. This won't be patched up. This can happen if a SSR-ed Client Component used:
 
 - A server/client branch `if (typeof window !== 'undefined')`.
 - Variable input such as `Date.now()` or `Math.random()` which changes each time it's called.
@@ -312,1288 +159,100 @@ It can also happen if the client has a browser extension installed which messes 
 %s%s https://react.dev/link/hydration-mismatch 
 
   ...
-    <HotReload globalError={[...]} webSocket={WebSocket} staticIndicatorState={{pathname:null, ...}}>
-      <AppDevOverlayErrorBoundary globalError={[...]}>
-        <ReplaySsrOnlyErrors>
-        <DevRootHTTPAccessFallbackBoundary>
-          <HTTPAccessFallbackBoundary notFound={<NotAllowedRootHTTPFallbackError>}>
-            <HTTPAccessFallbackErrorBoundary pathname="/" notFound={<NotAllowedRootHTTPFallbackError>} ...>
-              <RedirectBoundary>
-                <RedirectErrorBoundary router={{...}}>
-                  <Head>
-                  <__next_root_layout_boundary__>
-                    <SegmentViewNode type="layout" pagePath="layout.tsx">
-                      <SegmentTrieNode>
-                      <link>
-                      <script>
-                      <script>
-                      <script>
-                      <script>
-                      <script>
-                      <script>
-                      <RootLayout>
-                        <html lang="en" className="inter_b299..." suppressHydrationWarning={true}>
-                          <body
-                            className="font-sans antialiased"
--                           data-new-gr-c-s-check-loaded="14.1295.0"
--                           data-gr-ext-installed=""
-                          >
-                  ...
-
-[00:12:14.567] Browser LOG     useSession: Raw response from /api/auth/session: {}
-[00:12:14.567] Browser LOG     useSession: Parsed data from /api/auth/session: {"user":null}
-[00:12:16.053] Browser LOG     %c[Vercel Web Analytics]%c Debug mode is enabled by default in development. No requests will be sent to the server. color: rgb(120, 120, 120) color: inherit
-[00:12:16.054] Browser LOG     %c[Vercel Web Analytics]%c Running queued event color: rgb(120, 120, 120) color: inherit pageview {"path":"/","route":"/"}
-[00:12:16.054] Browser LOG     %c[Vercel Web Analytics]%c [view] http://localhost:3000/ color: rgb(120, 120, 120) color: inherit {"dp":"/","o":"http://localhost:3000/","sdkn":"@vercel/analytics/next","sdkv":"1.6.1","sv":"0.1.3","ts":1779710649864} /_vercel/insights/view
-[00:13:02.729] Server  LOG      ✓ Compiled in 714ms
-[00:13:05.041] Browser ERROR   ./lib/translations.ts:76:9
-Parsing ecmascript source code failed
-  74 |         moreBlogs: "More blogs...",
-  75 |         MO
-> 76 |         pathsInWords: "Paths in Words",
-     |         ^^^^^^^^^^^^
-  77 |         subscribeTitle: "Subscribe",
-  78 |         subscribeSubtitle: "Express your feelings in words...",
-  79 |         nameLabel: "Name",
-
-Unexpected token `pathsInWords`. Expected ... , *,  (, [, :, , ?, =, an identifier, public, protected, private, readonly, <.
-
-Import traces:
-  Client Component Browser:
-    ./lib/translations.ts [Client Component Browser]
-    ./lib/language-context.tsx [Client Component Browser]
-    ./lib/language-context.tsx [Server Component]
-    ./app/layout.tsx [Server Component]
-
-  Client Component SSR:
-    ./lib/translations.ts [Client Component SSR]
-    ./lib/language-context.tsx [Client Component SSR]
-    ./lib/language-context.tsx [Server Component]
-    ./app/layout.tsx [Server Component]
-[00:13:05.041] Browser ERROR   ./lib/translations.ts:76:9
-Parsing ecmascript source code failed
-  74 |         moreBlogs: "More blogs...",
-  75 |         Mo
-> 76 |         pathsInWords: "Paths in Words",
-     |         ^^^^^^^^^^^^
-  77 |         subscribeTitle: "Subscribe",
-  78 |         subscribeSubtitle: "Express your feelings in words...",
-  79 |         nameLabel: "Name",
-
-Unexpected token `pathsInWords`. Expected ... , *,  (, [, :, , ?, =, an identifier, public, protected, private, readonly, <.
-
-Import traces:
-  Client Component Browser:
-    ./lib/translations.ts [Client Component Browser]
-    ./lib/language-context.tsx [Client Component Browser]
-    ./lib/language-context.tsx [Server Component]
-    ./app/layout.tsx [Server Component]
-
-  Client Component SSR:
-    ./lib/translations.ts [Client Component SSR]
-    ./lib/language-context.tsx [Client Component SSR]
-    ./lib/language-context.tsx [Server Component]
-    ./app/layout.tsx [Server Component]
-[00:13:05.041] Browser ERROR   ./lib/translations.ts:76:9
-Parsing ecmascript source code failed
-  74 |         moreBlogs: "More blogs...",
-  75 |         More
-> 76 |         pathsInWords: "Paths in Words",
-     |         ^^^^^^^^^^^^
-  77 |         subscribeTitle: "Subscribe",
-  78 |         subscribeSubtitle: "Express your feelings in words...",
-  79 |         nameLabel: "Name",
-
-Unexpected token `pathsInWords`. Expected ... , *,  (, [, :, , ?, =, an identifier, public, protected, private, readonly, <.
-
-Import traces:
-  Client Component Browser:
-    ./lib/translations.ts [Client Component Browser]
-    ./lib/language-context.tsx [Client Component Browser]
-    ./lib/language-context.tsx [Server Component]
-    ./app/layout.tsx [Server Component]
-
-  Client Component SSR:
-    ./lib/translations.ts [Client Component SSR]
-    ./lib/language-context.tsx [Client Component SSR]
-    ./lib/language-context.tsx [Server Component]
-    ./app/layout.tsx [Server Component]
-[00:13:06.036] Browser ERROR   ./lib/translations.ts:76:9
-Parsing ecmascript source code failed
-  74 |         moreBlogs: "More blogs...",
-  75 |         MoreB
-> 76 |         pathsInWords: "Paths in Words",
-     |         ^^^^^^^^^^^^
-  77 |         subscribeTitle: "Subscribe",
-  78 |         subscribeSubtitle: "Express your feelings in words...",
-  79 |         nameLabel: "Name",
-
-Unexpected token `pathsInWords`. Expected ... , *,  (, [, :, , ?, =, an identifier, public, protected, private, readonly, <.
-
-Import traces:
-  Client Component Browser:
-    ./lib/translations.ts [Client Component Browser]
-    ./lib/language-context.tsx [Client Component Browser]
-    ./lib/language-context.tsx [Server Component]
-    ./app/layout.tsx [Server Component]
-
-  Client Component SSR:
-    ./lib/translations.ts [Client Component SSR]
-    ./lib/language-context.tsx [Client Component SSR]
-    ./lib/language-context.tsx [Server Component]
-    ./app/layout.tsx [Server Component]
-[00:13:07.471] Browser ERROR   ./lib/translations.ts:76:9
-Parsing ecmascript source code failed
-  74 |         moreBlogs: "More blogs...",
-  75 |         More
-> 76 |         pathsInWords: "Paths in Words",
-     |         ^^^^^^^^^^^^
-  77 |         subscribeTitle: "Subscribe",
-  78 |         subscribeSubtitle: "Express your feelings in words...",
-  79 |         nameLabel: "Name",
-
-Unexpected token `pathsInWords`. Expected ... , *,  (, [, :, , ?, =, an identifier, public, protected, private, readonly, <.
-
-Import traces:
-  Client Component Browser:
-    ./lib/translations.ts [Client Component Browser]
-    ./lib/language-context.tsx [Client Component Browser]
-    ./lib/language-context.tsx [Server Component]
-    ./app/layout.tsx [Server Component]
-
-  Client Component SSR:
-    ./lib/translations.ts [Client Component SSR]
-    ./lib/language-context.tsx [Client Component SSR]
-    ./lib/language-context.tsx [Server Component]
-    ./app/layout.tsx [Server Component]
-[00:13:08.454] Browser ERROR   ./lib/translations.ts:76:9
-Parsing ecmascript source code failed
-  74 |         moreBlogs: "More blogs...",
-  75 |         MoreV
-> 76 |         pathsInWords: "Paths in Words",
-     |         ^^^^^^^^^^^^
-  77 |         subscribeTitle: "Subscribe",
-  78 |         subscribeSubtitle: "Express your feelings in words...",
-  79 |         nameLabel: "Name",
-
-Unexpected token `pathsInWords`. Expected ... , *,  (, [, :, , ?, =, an identifier, public, protected, private, readonly, <.
-
-Import traces:
-  Client Component Browser:
-    ./lib/translations.ts [Client Component Browser]
-    ./lib/language-context.tsx [Client Component Browser]
-    ./lib/language-context.tsx [Server Component]
-    ./app/layout.tsx [Server Component]
-
-  Client Component SSR:
-    ./lib/translations.ts [Client Component SSR]
-    ./lib/language-context.tsx [Client Component SSR]
-    ./lib/language-context.tsx [Server Component]
-    ./app/layout.tsx [Server Component]
-[00:13:09.050] Browser ERROR   ./lib/translations.ts:76:9
-Parsing ecmascript source code failed
-  74 |         moreBlogs: "More blogs...",
-  75 |         MoreVideo
-> 76 |         pathsInWords: "Paths in Words",
-     |         ^^^^^^^^^^^^
-  77 |         subscribeTitle: "Subscribe",
-  78 |         subscribeSubtitle: "Express your feelings in words...",
-  79 |         nameLabel: "Name",
-
-Unexpected token `pathsInWords`. Expected ... , *,  (, [, :, , ?, =, an identifier, public, protected, private, readonly, <.
-
-Import traces:
-  Client Component Browser:
-    ./lib/translations.ts [Client Component Browser]
-    ./lib/language-context.tsx [Client Component Browser]
-    ./lib/language-context.tsx [Server Component]
-    ./app/layout.tsx [Server Component]
-
-  Client Component SSR:
-    ./lib/translations.ts [Client Component SSR]
-    ./lib/language-context.tsx [Client Component SSR]
-    ./lib/language-context.tsx [Server Component]
-    ./app/layout.tsx [Server Component]
-[00:13:09.906] Server  LOG      ✓ Compiled in 356ms
-[00:13:10.031] Browser ERROR   ./lib/translations.ts:76:21
-Parsing ecmascript source code failed
-  74 |         moreBlogs: "More blogs...",
-  75 |         MoreVideo:
-> 76 |         pathsInWords: "Paths in Words",
-     |                     ^
-  77 |         subscribeTitle: "Subscribe",
-  78 |         subscribeSubtitle: "Express your feelings in words...",
-  79 |         nameLabel: "Name",
-
-Expected ',', got ':'
-
-Import traces:
-  Client Component Browser:
-    ./lib/translations.ts [Client Component Browser]
-    ./lib/language-context.tsx [Client Component Browser]
-    ./lib/language-context.tsx [Server Component]
-    ./app/layout.tsx [Server Component]
-
-  Client Component SSR:
-    ./lib/translations.ts [Client Component SSR]
-    ./lib/language-context.tsx [Client Component SSR]
-    ./lib/language-context.tsx [Server Component]
-    ./app/layout.tsx [Server Component]
-[00:13:14.266] Server  LOG      ✓ Compiled in 348ms
-[00:13:15.076] Server  LOG      ✓ Compiled in 350ms
-[00:13:15.128] Browser ERROR   ./lib/translations.ts:76:9
-Parsing ecmascript source code failed
-  74 |         moreBlogs: "More blogs...",
-  75 |         MoreVideo:M
-> 76 |         pathsInWords: "Paths in Words",
-     |         ^^^^^^^^^^^^
-  77 |         subscribeTitle: "Subscribe",
-  78 |         subscribeSubtitle: "Express your feelings in words...",
-  79 |         nameLabel: "Name",
-
-Expected ',', got 'pathsInWords'
-
-Import traces:
-  Client Component Browser:
-    ./lib/translations.ts [Client Component Browser]
-    ./lib/language-context.tsx [Client Component Browser]
-    ./lib/language-context.tsx [Server Component]
-    ./app/layout.tsx [Server Component]
-
-  Client Component SSR:
-    ./lib/translations.ts [Client Component SSR]
-    ./lib/language-context.tsx [Client Component SSR]
-    ./lib/language-context.tsx [Server Component]
-    ./app/layout.tsx [Server Component]
-[00:13:15.522] Server  LOG      ✓ Compiled in 274ms
-[00:13:16.672] Browser ERROR   ./lib/translations.ts:76:21
-Parsing ecmascript source code failed
-  74 |         moreBlogs: "More blogs...",
-  75 |         MoreVideo:
-> 76 |         pathsInWords: "Paths in Words",
-     |                     ^
-  77 |         subscribeTitle: "Subscribe",
-  78 |         subscribeSubtitle: "Express your feelings in words...",
-  79 |         nameLabel: "Name",
-
-Expected ',', got ':'
-
-Import traces:
-  Client Component Browser:
-    ./lib/translations.ts [Client Component Browser]
-    ./lib/language-context.tsx [Client Component Browser]
-    ./lib/language-context.tsx [Server Component]
-    ./app/layout.tsx [Server Component]
-
-  Client Component SSR:
-    ./lib/translations.ts [Client Component SSR]
-    ./lib/language-context.tsx [Client Component SSR]
-    ./lib/language-context.tsx [Server Component]
-    ./app/layout.tsx [Server Component]
-[00:13:16.672] Browser ERROR   ./lib/translations.ts:76:9
-Parsing ecmascript source code failed
-  74 |         moreBlogs: "More blogs...",
-  75 |         MoreVideo:""
-> 76 |         pathsInWords: "Paths in Words",
-     |         ^^^^^^^^^^^^
-  77 |         subscribeTitle: "Subscribe",
-  78 |         subscribeSubtitle: "Express your feelings in words...",
-  79 |         nameLabel: "Name",
-
-Expected ',', got 'pathsInWords'
-
-Import traces:
-  Client Component Browser:
-    ./lib/translations.ts [Client Component Browser]
-    ./lib/language-context.tsx [Client Component Browser]
-    ./lib/language-context.tsx [Server Component]
-    ./app/layout.tsx [Server Component]
-
-  Client Component SSR:
-    ./lib/translations.ts [Client Component SSR]
-    ./lib/language-context.tsx [Client Component SSR]
-    ./lib/language-context.tsx [Server Component]
-    ./app/layout.tsx [Server Component]
-[00:13:17.043] Browser ERROR   ./lib/translations.ts:76:9
-Parsing ecmascript source code failed
-  74 |         moreBlogs: "More blogs...",
-  75 |         MoreVideo:"MO"
-> 76 |         pathsInWords: "Paths in Words",
-     |         ^^^^^^^^^^^^
-  77 |         subscribeTitle: "Subscribe",
-  78 |         subscribeSubtitle: "Express your feelings in words...",
-  79 |         nameLabel: "Name",
-
-Expected ',', got 'pathsInWords'
-
-Import traces:
-  Client Component Browser:
-    ./lib/translations.ts [Client Component Browser]
-    ./lib/language-context.tsx [Client Component Browser]
-    ./lib/language-context.tsx [Server Component]
-    ./app/layout.tsx [Server Component]
-
-  Client Component SSR:
-    ./lib/translations.ts [Client Component SSR]
-    ./lib/language-context.tsx [Client Component SSR]
-    ./lib/language-context.tsx [Server Component]
-    ./app/layout.tsx [Server Component]
-[00:13:18.106] Browser ERROR   ./lib/translations.ts:76:9
-Parsing ecmascript source code failed
-  74 |         moreBlogs: "More blogs...",
-  75 |         MoreVideo:"M"
-> 76 |         pathsInWords: "Paths in Words",
-     |         ^^^^^^^^^^^^
-  77 |         subscribeTitle: "Subscribe",
-  78 |         subscribeSubtitle: "Express your feelings in words...",
-  79 |         nameLabel: "Name",
-
-Expected ',', got 'pathsInWords'
-
-Import traces:
-  Client Component Browser:
-    ./lib/translations.ts [Client Component Browser]
-    ./lib/language-context.tsx [Client Component Browser]
-    ./lib/language-context.tsx [Server Component]
-    ./app/layout.tsx [Server Component]
-
-  Client Component SSR:
-    ./lib/translations.ts [Client Component SSR]
-    ./lib/language-context.tsx [Client Component SSR]
-    ./lib/language-context.tsx [Server Component]
-    ./app/layout.tsx [Server Component]
-[00:13:19.035] Browser ERROR   ./lib/translations.ts:76:9
-Parsing ecmascript source code failed
-  74 |         moreBlogs: "More blogs...",
-  75 |         MoreVideo:"Mor"
-> 76 |         pathsInWords: "Paths in Words",
-     |         ^^^^^^^^^^^^
-  77 |         subscribeTitle: "Subscribe",
-  78 |         subscribeSubtitle: "Express your feelings in words...",
-  79 |         nameLabel: "Name",
-
-Expected ',', got 'pathsInWords'
-
-Import traces:
-  Client Component Browser:
-    ./lib/translations.ts [Client Component Browser]
-    ./lib/language-context.tsx [Client Component Browser]
-    ./lib/language-context.tsx [Server Component]
-    ./app/layout.tsx [Server Component]
-
-  Client Component SSR:
-    ./lib/translations.ts [Client Component SSR]
-    ./lib/language-context.tsx [Client Component SSR]
-    ./lib/language-context.tsx [Server Component]
-    ./app/layout.tsx [Server Component]
-[00:13:19.035] Browser ERROR   ./lib/translations.ts:76:9
-Parsing ecmascript source code failed
-  74 |         moreBlogs: "More blogs...",
-  75 |         MoreVideo:"More"
-> 76 |         pathsInWords: "Paths in Words",
-     |         ^^^^^^^^^^^^
-  77 |         subscribeTitle: "Subscribe",
-  78 |         subscribeSubtitle: "Express your feelings in words...",
-  79 |         nameLabel: "Name",
-
-Expected ',', got 'pathsInWords'
-
-Import traces:
-  Client Component Browser:
-    ./lib/translations.ts [Client Component Browser]
-    ./lib/language-context.tsx [Client Component Browser]
-    ./lib/language-context.tsx [Server Component]
-    ./app/layout.tsx [Server Component]
-
-  Client Component SSR:
-    ./lib/translations.ts [Client Component SSR]
-    ./lib/language-context.tsx [Client Component SSR]
-    ./lib/language-context.tsx [Server Component]
-    ./app/layout.tsx [Server Component]
-[00:13:21.026] Browser ERROR   ./lib/translations.ts:76:9
-Parsing ecmascript source code failed
-  74 |         moreBlogs: "More blogs...",
-  75 |         MoreVideo:"MoreV"
-> 76 |         pathsInWords: "Paths in Words",
-     |         ^^^^^^^^^^^^
-  77 |         subscribeTitle: "Subscribe",
-  78 |         subscribeSubtitle: "Express your feelings in words...",
-  79 |         nameLabel: "Name",
-
-Expected ',', got 'pathsInWords'
-
-Import traces:
-  Client Component Browser:
-    ./lib/translations.ts [Client Component Browser]
-    ./lib/language-context.tsx [Client Component Browser]
-    ./lib/language-context.tsx [Server Component]
-    ./app/layout.tsx [Server Component]
-
-  Client Component SSR:
-    ./lib/translations.ts [Client Component SSR]
-    ./lib/language-context.tsx [Client Component SSR]
-    ./lib/language-context.tsx [Server Component]
-    ./app/layout.tsx [Server Component]
-[00:13:21.026] Browser ERROR   ./lib/translations.ts:76:9
-Parsing ecmascript source code failed
-  74 |         moreBlogs: "More blogs...",
-  75 |         MoreVideo:"MoreVi"
-> 76 |         pathsInWords: "Paths in Words",
-     |         ^^^^^^^^^^^^
-  77 |         subscribeTitle: "Subscribe",
-  78 |         subscribeSubtitle: "Express your feelings in words...",
-  79 |         nameLabel: "Name",
-
-Expected ',', got 'pathsInWords'
-
-Import traces:
-  Client Component Browser:
-    ./lib/translations.ts [Client Component Browser]
-    ./lib/language-context.tsx [Client Component Browser]
-    ./lib/language-context.tsx [Server Component]
-    ./app/layout.tsx [Server Component]
-
-  Client Component SSR:
-    ./lib/translations.ts [Client Component SSR]
-    ./lib/language-context.tsx [Client Component SSR]
-    ./lib/language-context.tsx [Server Component]
-    ./app/layout.tsx [Server Component]
-[00:13:22.040] Browser ERROR   ./lib/translations.ts:76:9
-Parsing ecmascript source code failed
-  74 |         moreBlogs: "More blogs...",
-  75 |         MoreVideo:"MoreVide"
-> 76 |         pathsInWords: "Paths in Words",
-     |         ^^^^^^^^^^^^
-  77 |         subscribeTitle: "Subscribe",
-  78 |         subscribeSubtitle: "Express your feelings in words...",
-  79 |         nameLabel: "Name",
-
-Expected ',', got 'pathsInWords'
-
-Import traces:
-  Client Component Browser:
-    ./lib/translations.ts [Client Component Browser]
-    ./lib/language-context.tsx [Client Component Browser]
-    ./lib/language-context.tsx [Server Component]
-    ./app/layout.tsx [Server Component]
-
-  Client Component SSR:
-    ./lib/translations.ts [Client Component SSR]
-    ./lib/language-context.tsx [Client Component SSR]
-    ./lib/language-context.tsx [Server Component]
-    ./app/layout.tsx [Server Component]
-[00:13:22.040] Browser ERROR   ./lib/translations.ts:76:9
-Parsing ecmascript source code failed
-  74 |         moreBlogs: "More blogs...",
-  75 |         MoreVideo:"MoreVideo"
-> 76 |         pathsInWords: "Paths in Words",
-     |         ^^^^^^^^^^^^
-  77 |         subscribeTitle: "Subscribe",
-  78 |         subscribeSubtitle: "Express your feelings in words...",
-  79 |         nameLabel: "Name",
-
-Expected ',', got 'pathsInWords'
-
-Import traces:
-  Client Component Browser:
-    ./lib/translations.ts [Client Component Browser]
-    ./lib/language-context.tsx [Client Component Browser]
-    ./lib/language-context.tsx [Server Component]
-    ./app/layout.tsx [Server Component]
-
-  Client Component SSR:
-    ./lib/translations.ts [Client Component SSR]
-    ./lib/language-context.tsx [Client Component SSR]
-    ./lib/language-context.tsx [Server Component]
-    ./app/layout.tsx [Server Component]
-[00:13:25.037] Browser ERROR   ./lib/translations.ts:76:9
-Parsing ecmascript source code failed
-  74 |         moreBlogs: "More blogs...",
-  75 |         MoreVideo:"MoreVideos"
-> 76 |         pathsInWords: "Paths in Words",
-     |         ^^^^^^^^^^^^
-  77 |         subscribeTitle: "Subscribe",
-  78 |         subscribeSubtitle: "Express your feelings in words...",
-  79 |         nameLabel: "Name",
-
-Expected ',', got 'pathsInWords'
-
-Import traces:
-  Client Component Browser:
-    ./lib/translations.ts [Client Component Browser]
-    ./lib/language-context.tsx [Client Component Browser]
-    ./lib/language-context.tsx [Server Component]
-    ./app/layout.tsx [Server Component]
-
-  Client Component SSR:
-    ./lib/translations.ts [Client Component SSR]
-    ./lib/language-context.tsx [Client Component SSR]
-    ./lib/language-context.tsx [Server Component]
-    ./app/layout.tsx [Server Component]
-[00:13:30.446] Server  LOG      ✓ Compiled in 329ms
-[00:13:31.141] Server  WARN     ⚠ Fast Refresh had to perform a full reload when ./lib/translations.ts changed. Read more: https://nextjs.org/docs/messages/fast-refresh-reload
-[00:13:36.909] Browser INFO    %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold
-[00:13:37.986] Server  LOG     API /api/auth/session: Session status: null
-[00:13:39.648] Browser LOG     useSession: Raw response from /api/auth/session: {}
-[00:13:39.648] Browser LOG     useSession: Parsed data from /api/auth/session: {"user":null}
-[00:13:41.028] Browser LOG     %c[Vercel Web Analytics]%c Debug mode is enabled by default in development. No requests will be sent to the server. color: rgb(120, 120, 120) color: inherit
-[00:13:41.028] Browser LOG     %c[Vercel Web Analytics]%c Running queued event color: rgb(120, 120, 120) color: inherit pageview {"path":"/","route":"/"}
-[00:13:41.028] Browser LOG     %c[Vercel Web Analytics]%c [view] http://localhost:3000/ color: rgb(120, 120, 120) color: inherit {"dp":"/","o":"http://localhost:3000/","sdkn":"@vercel/analytics/next","sdkv":"1.6.1","sv":"0.1.3","ts":1779710735355} /_vercel/insights/view
-[00:14:08.600] Server  LOG      ✓ Compiled in 403ms
-[00:14:09.098] Browser ERROR   ./lib/translations.ts:132:9
-Parsing ecmascript source code failed
-  130 |
-  131 |         // Navigation descriptions
-> 132 |         poems_description: "हृदयस्पर्शी और मार्मिक कविताओं का विशाल संग्रह देखें।",
-      |         ^^^^^^^^^^^^^^^^^
-  133 |         books_description: "प्रकाशित रचनाएँ और साहित्यिक संग्रह।",
-  134 |         shayari_description: "पारंपरिक उर्दू और हिंदी दोहे।",
-  135 |         sher_description: "संक्षिप्त, प्रभावशाली काव्य पंक्तियाँ।",
-
-Unexpected token `poems_description`. Expected ... , *,  (, [, :, , ?, =, an identifier, public, protected, private, readonly, <.
-
-Import traces:
-  Client Component Browser:
-    ./lib/translations.ts [Client Component Browser]
-    ./lib/language-context.tsx [Client Component Browser]
-    ./lib/language-context.tsx [Server Component]
-    ./app/layout.tsx [Server Component]
-
-  Client Component SSR:
-    ./lib/translations.ts [Client Component SSR]
-    ./lib/language-context.tsx [Client Component SSR]
-    ./lib/language-context.tsx [Server Component]
-    ./app/layout.tsx [Server Component]
-[00:14:10.038] Browser ERROR   ./lib/translations.ts:132:9
-Parsing ecmascript source code failed
-  130 |
-  131 |         // Navigation descriptions
-> 132 |         poems_description: "हृदयस्पर्शी और मार्मिक कविताओं का विशाल संग्रह देखें।",
-      |         ^^^^^^^^^^^^^^^^^
-  133 |         books_description: "प्रकाशित रचनाएँ और साहित्यिक संग्रह।",
-  134 |         shayari_description: "पारंपरिक उर्दू और हिंदी दोहे।",
-  135 |         sher_description: "संक्षिप्त, प्रभावशाली काव्य पंक्तियाँ।",
-
-Unexpected token `poems_description`. Expected ... , *,  (, [, :, , ?, =, an identifier, public, protected, private, readonly, <.
-
-Import traces:
-  Client Component Browser:
-    ./lib/translations.ts [Client Component Browser]
-    ./lib/language-context.tsx [Client Component Browser]
-    ./lib/language-context.tsx [Server Component]
-    ./app/layout.tsx [Server Component]
-
-  Client Component SSR:
-    ./lib/translations.ts [Client Component SSR]
-    ./lib/language-context.tsx [Client Component SSR]
-    ./lib/language-context.tsx [Server Component]
-    ./app/layout.tsx [Server Component]
-[00:14:12.197] Browser ERROR   ./lib/translations.ts:132:9
-Parsing ecmascript source code failed
-  130 |
-  131 |         // Navigation descriptions
-> 132 |         poems_description: "हृदयस्पर्शी और मार्मिक कविताओं का विशाल संग्रह देखें।",
-      |         ^^^^^^^^^^^^^^^^^
-  133 |         books_description: "प्रकाशित रचनाएँ और साहित्यिक संग्रह।",
-  134 |         shayari_description: "पारंपरिक उर्दू और हिंदी दोहे।",
-  135 |         sher_description: "संक्षिप्त, प्रभावशाली काव्य पंक्तियाँ।",
-
-Unexpected token `poems_description`. Expected ... , *,  (, [, :, , ?, =, an identifier, public, protected, private, readonly, <.
-
-Import traces:
-  Client Component Browser:
-    ./lib/translations.ts [Client Component Browser]
-    ./lib/language-context.tsx [Client Component Browser]
-    ./lib/language-context.tsx [Server Component]
-    ./app/layout.tsx [Server Component]
-
-  Client Component SSR:
-    ./lib/translations.ts [Client Component SSR]
-    ./lib/language-context.tsx [Client Component SSR]
-    ./lib/language-context.tsx [Server Component]
-    ./app/layout.tsx [Server Component]
-[00:14:13.436] Browser ERROR   ./lib/translations.ts:134:9
-Parsing ecmascript source code failed
-  132 |
-  133 |         // Navigation descriptions
-> 134 |         poems_description: "हृदयस्पर्शी और मार्मिक कविताओं का विशाल संग्रह देखें।",
-      |         ^^^^^^^^^^^^^^^^^
-  135 |         books_description: "प्रकाशित रचनाएँ और साहित्यिक संग्रह।",
-  136 |         shayari_description: "पारंपरिक उर्दू और हिंदी दोहे।",
-  137 |         sher_description: "संक्षिप्त, प्रभावशाली काव्य पंक्तियाँ।",
-
-Unexpected token `poems_description`. Expected ... , *,  (, [, :, , ?, =, an identifier, public, protected, private, readonly, <.
-
-Import traces:
-  Client Component Browser:
-    ./lib/translations.ts [Client Component Browser]
-    ./lib/language-context.tsx [Client Component Browser]
-    ./lib/language-context.tsx [Server Component]
-    ./app/layout.tsx [Server Component]
-
-  Client Component SSR:
-    ./lib/translations.ts [Client Component SSR]
-    ./lib/language-context.tsx [Client Component SSR]
-    ./lib/language-context.tsx [Server Component]
-    ./app/layout.tsx [Server Component]
-[00:14:14.505] Browser ERROR   ./lib/translations.ts:134:9
-Parsing ecmascript source code failed
-  132 |
-  133 |         // Navigation descriptions
-> 134 |         poems_description: "हृदयस्पर्शी और मार्मिक कविताओं का विशाल संग्रह देखें।",
-      |         ^^^^^^^^^^^^^^^^^
-  135 |         books_description: "प्रकाशित रचनाएँ और साहित्यिक संग्रह।",
-  136 |         shayari_description: "पारंपरिक उर्दू और हिंदी दोहे।",
-  137 |         sher_description: "संक्षिप्त, प्रभावशाली काव्य पंक्तियाँ।",
-
-Unexpected token `poems_description`. Expected ... , *,  (, [, :, , ?, =, an identifier, public, protected, private, readonly, <.
-
-Import traces:
-  Client Component Browser:
-    ./lib/translations.ts [Client Component Browser]
-    ./lib/language-context.tsx [Client Component Browser]
-    ./lib/language-context.tsx [Server Component]
-    ./app/layout.tsx [Server Component]
-
-  Client Component SSR:
-    ./lib/translations.ts [Client Component SSR]
-    ./lib/language-context.tsx [Client Component SSR]
-    ./lib/language-context.tsx [Server Component]
-    ./app/layout.tsx [Server Component]
-[00:14:15.037] Browser ERROR   ./lib/translations.ts:134:9
-Parsing ecmascript source code failed
-  132 |
-  133 |         // Navigation descriptions
-> 134 |         poems_description: "हृदयस्पर्शी और मार्मिक कविताओं का विशाल संग्रह देखें।",
-      |         ^^^^^^^^^^^^^^^^^
-  135 |         books_description: "प्रकाशित रचनाएँ और साहित्यिक संग्रह।",
-  136 |         shayari_description: "पारंपरिक उर्दू और हिंदी दोहे।",
-  137 |         sher_description: "संक्षिप्त, प्रभावशाली काव्य पंक्तियाँ।",
-
-Unexpected token `poems_description`. Expected ... , *,  (, [, :, , ?, =, an identifier, public, protected, private, readonly, <.
-
-Import traces:
-  Client Component Browser:
-    ./lib/translations.ts [Client Component Browser]
-    ./lib/language-context.tsx [Client Component Browser]
-    ./lib/language-context.tsx [Server Component]
-    ./app/layout.tsx [Server Component]
-
-  Client Component SSR:
-    ./lib/translations.ts [Client Component SSR]
-    ./lib/language-context.tsx [Client Component SSR]
-    ./lib/language-context.tsx [Server Component]
-    ./app/layout.tsx [Server Component]
-[00:14:16.049] Browser ERROR   ./lib/translations.ts:134:9
-Parsing ecmascript source code failed
-  132 |
-  133 |         // Navigation descriptions
-> 134 |         poems_description: "हृदयस्पर्शी और मार्मिक कविताओं का विशाल संग्रह देखें।",
-      |         ^^^^^^^^^^^^^^^^^
-  135 |         books_description: "प्रकाशित रचनाएँ और साहित्यिक संग्रह।",
-  136 |         shayari_description: "पारंपरिक उर्दू और हिंदी दोहे।",
-  137 |         sher_description: "संक्षिप्त, प्रभावशाली काव्य पंक्तियाँ।",
-
-Unexpected token `poems_description`. Expected ... , *,  (, [, :, , ?, =, an identifier, public, protected, private, readonly, <.
-
-Import traces:
-  Client Component Browser:
-    ./lib/translations.ts [Client Component Browser]
-    ./lib/language-context.tsx [Client Component Browser]
-    ./lib/language-context.tsx [Server Component]
-    ./app/layout.tsx [Server Component]
-
-  Client Component SSR:
-    ./lib/translations.ts [Client Component SSR]
-    ./lib/language-context.tsx [Client Component SSR]
-    ./lib/language-context.tsx [Server Component]
-    ./app/layout.tsx [Server Component]
-[00:14:22.031] Browser ERROR   ./lib/translations.ts:134:9
-Parsing ecmascript source code failed
-  132 |
-  133 |         // Navigation descriptions
-> 134 |         poems_description: "हृदयस्पर्शी और मार्मिक कविताओं का विशाल संग्रह देखें।",
-      |         ^^^^^^^^^^^^^^^^^
-  135 |         books_description: "प्रकाशित रचनाएँ और साहित्यिक संग्रह।",
-  136 |         shayari_description: "पारंपरिक उर्दू और हिंदी दोहे।",
-  137 |         sher_description: "संक्षिप्त, प्रभावशाली काव्य पंक्तियाँ।",
-
-Unexpected token `poems_description`. Expected ... , *,  (, [, :, , ?, =, an identifier, public, protected, private, readonly, <.
-
-Import traces:
-  Client Component Browser:
-    ./lib/translations.ts [Client Component Browser]
-    ./lib/language-context.tsx [Client Component Browser]
-    ./lib/language-context.tsx [Server Component]
-    ./app/layout.tsx [Server Component]
-
-  Client Component SSR:
-    ./lib/translations.ts [Client Component SSR]
-    ./lib/language-context.tsx [Client Component SSR]
-    ./lib/language-context.tsx [Server Component]
-    ./app/layout.tsx [Server Component]
-[00:14:22.031] Browser ERROR   ./lib/translations.ts:134:9
-Parsing ecmascript source code failed
-  132 |
-  133 |         // Navigation descriptions
-> 134 |         poems_description: "हृदयस्पर्शी और मार्मिक कविताओं का विशाल संग्रह देखें।",
-      |         ^^^^^^^^^^^^^^^^^
-  135 |         books_description: "प्रकाशित रचनाएँ और साहित्यिक संग्रह।",
-  136 |         shayari_description: "पारंपरिक उर्दू और हिंदी दोहे।",
-  137 |         sher_description: "संक्षिप्त, प्रभावशाली काव्य पंक्तियाँ।",
-
-Unexpected token `poems_description`. Expected ... , *,  (, [, :, , ?, =, an identifier, public, protected, private, readonly, <.
-
-Import traces:
-  Client Component Browser:
-    ./lib/translations.ts [Client Component Browser]
-    ./lib/language-context.tsx [Client Component Browser]
-    ./lib/language-context.tsx [Server Component]
-    ./app/layout.tsx [Server Component]
-
-  Client Component SSR:
-    ./lib/translations.ts [Client Component SSR]
-    ./lib/language-context.tsx [Client Component SSR]
-    ./lib/language-context.tsx [Server Component]
-    ./app/layout.tsx [Server Component]
-[00:14:22.031] Browser ERROR   ./lib/translations.ts:134:9
-Parsing ecmascript source code failed
-  132 |
-  133 |         // Navigation descriptions
-> 134 |         poems_description: "हृदयस्पर्शी और मार्मिक कविताओं का विशाल संग्रह देखें।",
-      |         ^^^^^^^^^^^^^^^^^
-  135 |         books_description: "प्रकाशित रचनाएँ और साहित्यिक संग्रह।",
-  136 |         shayari_description: "पारंपरिक उर्दू और हिंदी दोहे।",
-  137 |         sher_description: "संक्षिप्त, प्रभावशाली काव्य पंक्तियाँ।",
-
-Unexpected token `poems_description`. Expected ... , *,  (, [, :, , ?, =, an identifier, public, protected, private, readonly, <.
-
-Import traces:
-  Client Component Browser:
-    ./lib/translations.ts [Client Component Browser]
-    ./lib/language-context.tsx [Client Component Browser]
-    ./lib/language-context.tsx [Server Component]
-    ./app/layout.tsx [Server Component]
-
-  Client Component SSR:
-    ./lib/translations.ts [Client Component SSR]
-    ./lib/language-context.tsx [Client Component SSR]
-    ./lib/language-context.tsx [Server Component]
-    ./app/layout.tsx [Server Component]
-[00:14:22.481] Server  LOG      ✓ Compiled in 275ms
-[00:14:23.166] Browser ERROR   ./lib/translations.ts:134:26
-Parsing ecmascript source code failed
-  132 |
-  133 |         // Navigation descriptions
-> 134 |         poems_description: "हृदयस्पर्शी और मार्मिक कविताओं का विशाल संग्रह देखें।",
-      |                          ^
-  135 |         books_description: "प्रकाशित रचनाएँ और साहित्यिक संग्रह।",
-  136 |         shayari_description: "पारंपरिक उर्दू और हिंदी दोहे।",
-  137 |         sher_description: "संक्षिप्त, प्रभावशाली काव्य पंक्तियाँ।",
-
-Expected ',', got ':'
-
-Import traces:
-  Client Component Browser:
-    ./lib/translations.ts [Client Component Browser]
-    ./lib/language-context.tsx [Client Component Browser]
-    ./lib/language-context.tsx [Server Component]
-    ./app/layout.tsx [Server Component]
-
-  Client Component SSR:
-    ./lib/translations.ts [Client Component SSR]
-    ./lib/language-context.tsx [Client Component SSR]
-    ./lib/language-context.tsx [Server Component]
-    ./app/layout.tsx [Server Component]
-[00:14:23.446] Server  LOG      ✓ Compiled in 337ms
-[00:14:24.185] Browser ERROR   ./lib/translations.ts:134:9
-Parsing ecmascript source code failed
-  132 |
-  133 |         // Navigation descriptions
-> 134 |         poems_description: "हृदयस्पर्शी और मार्मिक कविताओं का विशाल संग्रह देखें।",
-      |         ^^^^^^^^^^^^^^^^^
-  135 |         books_description: "प्रकाशित रचनाएँ और साहित्यिक संग्रह।",
-  136 |         shayari_description: "पारंपरिक उर्दू और हिंदी दोहे।",
-  137 |         sher_description: "संक्षिप्त, प्रभावशाली काव्य पंक्तियाँ।",
-
-Expected ',', got 'poems_description'
-
-Import traces:
-  Client Component Browser:
-    ./lib/translations.ts [Client Component Browser]
-    ./lib/language-context.tsx [Client Component Browser]
-    ./lib/language-context.tsx [Server Component]
-    ./app/layout.tsx [Server Component]
-
-  Client Component SSR:
-    ./lib/translations.ts [Client Component SSR]
-    ./lib/language-context.tsx [Client Component SSR]
-    ./lib/language-context.tsx [Server Component]
-    ./app/layout.tsx [Server Component]
-[00:14:32.176] Browser ERROR   ./lib/translations.ts:134:9
-Parsing ecmascript source code failed
-  132 |
-  133 |         // Navigation descriptions
-> 134 |         poems_description: "हृदयस्पर्शी और मार्मिक कविताओं का विशाल संग्रह देखें।",
-      |         ^^^^^^^^^^^^^^^^^
-  135 |         books_description: "प्रकाशित रचनाएँ और साहित्यिक संग्रह।",
-  136 |         shayari_description: "पारंपरिक उर्दू और हिंदी दोहे।",
-  137 |         sher_description: "संक्षिप्त, प्रभावशाली काव्य पंक्तियाँ।",
-
-Expected ',', got 'poems_description'
-
-Import traces:
-  Client Component Browser:
-    ./lib/translations.ts [Client Component Browser]
-    ./lib/language-context.tsx [Client Component Browser]
-    ./lib/language-context.tsx [Server Component]
-    ./app/layout.tsx [Server Component]
-
-  Client Component SSR:
-    ./lib/translations.ts [Client Component SSR]
-    ./lib/language-context.tsx [Client Component SSR]
-    ./lib/language-context.tsx [Server Component]
-    ./app/layout.tsx [Server Component]
-[00:14:33.042] Browser ERROR   ./lib/translations.ts:134:9
-Parsing ecmascript source code failed
-  132 |
-  133 |         // Navigation descriptions
-> 134 |         poems_description: "हृदयस्पर्शी और मार्मिक कविताओं का विशाल संग्रह देखें।",
-      |         ^^^^^^^^^^^^^^^^^
-  135 |         books_description: "प्रकाशित रचनाएँ और साहित्यिक संग्रह।",
-  136 |         shayari_description: "पारंपरिक उर्दू और हिंदी दोहे।",
-  137 |         sher_description: "संक्षिप्त, प्रभावशाली काव्य पंक्तियाँ।",
-
-Expected ',', got 'poems_description'
-
-Import traces:
-  Client Component Browser:
-    ./lib/translations.ts [Client Component Browser]
-    ./lib/language-context.tsx [Client Component Browser]
-    ./lib/language-context.tsx [Server Component]
-    ./app/layout.tsx [Server Component]
-
-  Client Component SSR:
-    ./lib/translations.ts [Client Component SSR]
-    ./lib/language-context.tsx [Client Component SSR]
-    ./lib/language-context.tsx [Server Component]
-    ./app/layout.tsx [Server Component]
-[00:14:34.026] Browser ERROR   ./lib/translations.ts:134:9
-Parsing ecmascript source code failed
-  132 |
-  133 |         // Navigation descriptions
-> 134 |         poems_description: "हृदयस्पर्शी और मार्मिक कविताओं का विशाल संग्रह देखें।",
-      |         ^^^^^^^^^^^^^^^^^
-  135 |         books_description: "प्रकाशित रचनाएँ और साहित्यिक संग्रह।",
-  136 |         shayari_description: "पारंपरिक उर्दू और हिंदी दोहे।",
-  137 |         sher_description: "संक्षिप्त, प्रभावशाली काव्य पंक्तियाँ।",
-
-Expected ',', got 'poems_description'
-
-Import traces:
-  Client Component Browser:
-    ./lib/translations.ts [Client Component Browser]
-    ./lib/language-context.tsx [Client Component Browser]
-    ./lib/language-context.tsx [Server Component]
-    ./app/layout.tsx [Server Component]
-
-  Client Component SSR:
-    ./lib/translations.ts [Client Component SSR]
-    ./lib/language-context.tsx [Client Component SSR]
-    ./lib/language-context.tsx [Server Component]
-    ./app/layout.tsx [Server Component]
-[00:14:34.491] Server  LOG      ✓ Compiled in 269ms
-[00:14:35.207] Server  WARN     ⚠ Fast Refresh had to perform a full reload when ./lib/translations.ts changed. Read more: https://nextjs.org/docs/messages/fast-refresh-reload
-[00:14:41.198] Browser INFO    %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold
-[00:14:42.160] Server  LOG     API /api/auth/session: Session status: null
-[00:14:51.671] Browser LOG     useSession: Raw response from /api/auth/session: {}
-[00:14:51.671] Browser LOG     useSession: Parsed data from /api/auth/session: {"user":null}
-[00:14:52.071] Browser LOG     %c[Vercel Web Analytics]%c Debug mode is enabled by default in development. No requests will be sent to the server. color: rgb(120, 120, 120) color: inherit
-[00:14:52.071] Browser LOG     %c[Vercel Web Analytics]%c Running queued event color: rgb(120, 120, 120) color: inherit pageview {"path":"/","route":"/"}
-[00:14:52.071] Browser LOG     %c[Vercel Web Analytics]%c [view] http://localhost:3000/ color: rgb(120, 120, 120) color: inherit {"dp":"/","o":"http://localhost:3000/","sdkn":"@vercel/analytics/next","sdkv":"1.6.1","sv":"0.1.3","ts":1779710806787} /_vercel/insights/view
-[00:15:14.769] Browser WARN    Image with src "https://www.typecalendar.com/wp-content/uploads/2023/06/Download-Cover-Page-Template.jpg?gid=122" has either width or height modified, but not the other. If you use CSS to change the size of your image, also include the styles 'width: "auto"' or 'height: "auto"' to maintain the aspect ratio.
-[00:15:14.769] Browser WARN    Image with src "http://localhost:3000/placeholder.jpg" has either width or height modified, but not the other. If you use CSS to change the size of your image, also include the styles 'width: "auto"' or 'height: "auto"' to maintain the aspect ratio.
-[00:15:40.705] Server  LOG      ✓ Compiled in 752ms
-[00:15:40.711] Server  WARN     ⚠ Fast Refresh had to perform a full reload when ./lib/translations.ts changed. Read more: https://nextjs.org/docs/messages/fast-refresh-reload
-[00:15:46.273] Server  WARN     ⚠ Fast Refresh had to perform a full reload when ./lib/translations.ts changed. Read more: https://nextjs.org/docs/messages/fast-refresh-reload
-[00:15:46.451] Server  LOG      ✓ Compiled in 610ms
-[00:15:55.281] Browser INFO    %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold
-[00:15:57.276] Server  LOG     API /api/auth/session: Session status: null
-[00:15:58.943] Browser ERROR   A tree hydrated but some attributes of the server rendered HTML didn't match the client properties. This won't be patched up. This can happen if a SSR-ed Client Component used:
-
-- A server/client branch `if (typeof window !== 'undefined')`.
-- Variable input such as `Date.now()` or `Math.random()` which changes each time it's called.
-- Date formatting in a user's locale which doesn't match the server.
-- External changing data without sending a snapshot of it along with the HTML.
-- Invalid HTML tag nesting.
-
-It can also happen if the client has a browser extension installed which messes with the HTML before React loaded.
-
-%s%s https://react.dev/link/hydration-mismatch 
-
-  ...
-    <HotReload globalError={[...]} webSocket={WebSocket} staticIndicatorState={{pathname:null, ...}}>
-      <AppDevOverlayErrorBoundary globalError={[...]}>
-        <ReplaySsrOnlyErrors>
-        <DevRootHTTPAccessFallbackBoundary>
-          <HTTPAccessFallbackBoundary notFound={<NotAllowedRootHTTPFallbackError>}>
-            <HTTPAccessFallbackErrorBoundary pathname="/" notFound={<NotAllowedRootHTTPFallbackError>} ...>
-              <RedirectBoundary>
-                <RedirectErrorBoundary router={{...}}>
-                  <Head>
-                  <__next_root_layout_boundary__>
-                    <SegmentViewNode type="layout" pagePath="layout.tsx">
-                      <SegmentTrieNode>
-                      <link>
-                      <script>
-                      <script>
-                      <script>
-                      <script>
-                      <script>
-                      <script>
-                      <RootLayout>
-                        <html lang="en" className="inter_b299..." suppressHydrationWarning={true}>
-                          <body
-                            className="font-sans antialiased"
--                           data-new-gr-c-s-check-loaded="14.1295.0"
--                           data-gr-ext-installed=""
-                          >
-                  ...
-
-[00:15:58.943] Browser LOG     useSession: Raw response from /api/auth/session: {}
-[00:15:58.943] Browser LOG     useSession: Parsed data from /api/auth/session: {"user":null}
-[00:15:58.943] Browser WARN    Image with src "https://www.typecalendar.com/wp-content/uploads/2023/06/Download-Cover-Page-Template.jpg?gid=122" has either width or height modified, but not the other. If you use CSS to change the size of your image, also include the styles 'width: "auto"' or 'height: "auto"' to maintain the aspect ratio.
-[00:15:58.943] Browser WARN    Image with src "http://localhost:3000/placeholder.jpg" has either width or height modified, but not the other. If you use CSS to change the size of your image, also include the styles 'width: "auto"' or 'height: "auto"' to maintain the aspect ratio.
-[00:16:03.049] Browser LOG     %c[Vercel Web Analytics]%c Debug mode is enabled by default in development. No requests will be sent to the server. color: rgb(120, 120, 120) color: inherit
-[00:16:03.049] Browser LOG     %c[Vercel Web Analytics]%c Running queued event color: rgb(120, 120, 120) color: inherit pageview {"path":"/","route":"/"}
-[00:16:03.049] Browser LOG     %c[Vercel Web Analytics]%c [view] http://localhost:3000/ color: rgb(120, 120, 120) color: inherit {"dp":"/","o":"http://localhost:3000/","sdkn":"@vercel/analytics/next","sdkv":"1.6.1","sv":"0.1.3","ts":1779710877571} /_vercel/insights/view
-[00:16:38.330] Server  LOG      ✓ Compiled in 896ms
-[00:16:40.615] Server  LOG      ✓ Compiled in 628ms
-[00:21:15.210] Server  LOG      ✓ Compiled in 1120ms
-[00:21:17.809] Server  LOG      ✓ Compiled in 636ms
-[00:21:18.504] Server  LOG      ✓ Compiled in 763ms
-[00:21:42.184] Browser INFO    %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold
-[00:21:43.557] Browser WARN    Image with src "https://www.typecalendar.com/wp-content/uploads/2023/06/Download-Cover-Page-Template.jpg?gid=122" has either width or height modified, but not the other. If you use CSS to change the size of your image, also include the styles 'width: "auto"' or 'height: "auto"' to maintain the aspect ratio.
-[00:21:43.557] Browser WARN    Image with src "http://localhost:3000/placeholder.jpg" has either width or height modified, but not the other. If you use CSS to change the size of your image, also include the styles 'width: "auto"' or 'height: "auto"' to maintain the aspect ratio.
-[00:21:45.552] Server  LOG     API /api/auth/session: Session status: null
-[00:21:45.671] Browser LOG     useSession: Raw response from /api/auth/session: {}
-[00:21:45.671] Browser LOG     useSession: Parsed data from /api/auth/session: {"user":null}
-[00:21:51.042] Browser LOG     %c[Vercel Web Analytics]%c Debug mode is enabled by default in development. No requests will be sent to the server. color: rgb(120, 120, 120) color: inherit
-[00:21:51.042] Browser LOG     %c[Vercel Web Analytics]%c Running queued event color: rgb(120, 120, 120) color: inherit pageview {"path":"/","route":"/"}
-[00:21:51.042] Browser LOG     %c[Vercel Web Analytics]%c [view] http://localhost:3000/ color: rgb(120, 120, 120) color: inherit {"dp":"/","o":"http://localhost:3000/","sdkn":"@vercel/analytics/next","sdkv":"1.6.1","sv":"0.1.3","ts":1779711225311} /_vercel/insights/view
-[00:22:11.381] Server  LOG      ○ Compiling /poems ...
-[00:22:17.305] Browser LOG     %c[Vercel Web Analytics]%c [view] http://localhost:3000/poems color: rgb(120, 120, 120) color: inherit {"dp":"/poems","o":"http://localhost:3000/poems","sdkn":"@vercel/analytics/next","sdkv":"1.6.1","sv":"0.1.3","ts":1779711251873} /_vercel/insights/view
-[00:25:28.421] Server  LOG      ○ Compiling /poems/[id] ...
-[00:25:32.060] Browser LOG     %c[Vercel Web Analytics]%c [view] http://localhost:3000/poems/693bee6c0b60453feb5f75da color: rgb(120, 120, 120) color: inherit {"dp":"/poems/[id]","o":"http://localhost:3000/poems/693bee6c0b60453feb5f75da","sdkn":"@vercel/analytics/next","sdkv":"1.6.1","sv":"0.1.3","ts":1779711446789} /_vercel/insights/view
-[00:26:13.331] Server  LOG      ✓ Compiled in 1767ms
-[00:27:00.422] Browser LOG     %c[Vercel Web Analytics]%c [view] http://localhost:3000/poems color: rgb(120, 120, 120) color: inherit {"dp":"/poems","o":"http://localhost:3000/poems","sdkn":"@vercel/analytics/next","sdkv":"1.6.1","sv":"0.1.3","ts":1779711535046} /_vercel/insights/view
-[00:27:05.417] Browser LOG     %c[Vercel Web Analytics]%c [view] http://localhost:3000/poems/69ec8558f968e468a82765ed color: rgb(120, 120, 120) color: inherit {"dp":"/poems/[id]","o":"http://localhost:3000/poems/69ec8558f968e468a82765ed","sdkn":"@vercel/analytics/next","sdkv":"1.6.1","sv":"0.1.3","ts":1779711540164} /_vercel/insights/view
-[00:29:11.908] Browser LOG     %c[Vercel Web Analytics]%c [view] http://localhost:3000/poems color: rgb(120, 120, 120) color: inherit {"dp":"/poems","o":"http://localhost:3000/poems","sdkn":"@vercel/analytics/next","sdkv":"1.6.1","sv":"0.1.3","ts":1779711666513} /_vercel/insights/view
-[00:29:13.837] Browser LOG     %c[Vercel Web Analytics]%c [view] http://localhost:3000/poems/6a0b4c972d4f92d29ad9e91c color: rgb(120, 120, 120) color: inherit {"dp":"/poems/[id]","o":"http://localhost:3000/poems/6a0b4c972d4f92d29ad9e91c","sdkn":"@vercel/analytics/next","sdkv":"1.6.1","sv":"0.1.3","ts":1779711668541} /_vercel/insights/view
-[00:30:59.196] Browser LOG     %c[Vercel Web Analytics]%c [view] http://localhost:3000/poems color: rgb(120, 120, 120) color: inherit {"dp":"/poems","o":"http://localhost:3000/poems","sdkn":"@vercel/analytics/next","sdkv":"1.6.1","sv":"0.1.3","ts":1779711773828} /_vercel/insights/view
-[00:31:16.738] Browser LOG     %c[Vercel Web Analytics]%c [view] http://localhost:3000/poems/69ec8558f968e468a82765ed color: rgb(120, 120, 120) color: inherit {"dp":"/poems/[id]","o":"http://localhost:3000/poems/69ec8558f968e468a82765ed","sdkn":"@vercel/analytics/next","sdkv":"1.6.1","sv":"0.1.3","ts":1779711791442} /_vercel/insights/view
-[00:35:57.371] Server  LOG      ✓ Compiled in 1568ms
-[00:36:26.367] Server  LOG      ✓ Compiled in 600ms
-[00:37:28.175] Browser INFO    %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold
-[00:37:29.270] Server  LOG     API /api/auth/session: Session status: null
-[00:37:29.335] Browser LOG     %c[Vercel Web Analytics]%c Debug mode is enabled by default in development. No requests will be sent to the server. color: rgb(120, 120, 120) color: inherit
-[00:37:29.335] Browser LOG     %c[Vercel Web Analytics]%c Running queued event color: rgb(120, 120, 120) color: inherit pageview {"path":"/poems/69ec8558f968e468a82765ed","route":"/poems/[id]"}
-[00:37:29.335] Browser LOG     %c[Vercel Web Analytics]%c [view] http://localhost:3000/poems/69ec8558f968e468a82765ed color: rgb(120, 120, 120) color: inherit {"dp":"/poems/[id]","o":"http://localhost:3000/poems/69ec8558f968e468a82765ed","sdkn":"@vercel/analytics/next","sdkv":"1.6.1","sv":"0.1.3","ts":1779712163811} /_vercel/insights/view
-[00:37:29.556] Browser LOG     useSession: Raw response from /api/auth/session: {}
-[00:37:29.556] Browser LOG     useSession: Parsed data from /api/auth/session: {"user":null}
-[00:37:40.711] Browser LOG     %c[Vercel Web Analytics]%c [view] http://localhost:3000/poems color: rgb(120, 120, 120) color: inherit {"dp":"/poems","o":"http://localhost:3000/poems","sdkn":"@vercel/analytics/next","sdkv":"1.6.1","sv":"0.1.3","ts":1779712174532} /_vercel/insights/view
-[00:39:49.790] Server  LOG      ✓ Compiled in 792ms
-[00:39:56.919] Browser LOG     %c[Vercel Web Analytics]%c [view] http://localhost:3000/poems/6a0b4c972d4f92d29ad9e91c color: rgb(120, 120, 120) color: inherit {"dp":"/poems/[id]","o":"http://localhost:3000/poems/6a0b4c972d4f92d29ad9e91c","sdkn":"@vercel/analytics/next","sdkv":"1.6.1","sv":"0.1.3","ts":1779712310319} /_vercel/insights/view
-[00:39:57.017] Browser LOG     %c[Vercel Web Analytics]%c [view] http://localhost:3000/poems color: rgb(120, 120, 120) color: inherit {"dp":"/poems","o":"http://localhost:3000/poems","sdkn":"@vercel/analytics/next","sdkv":"1.6.1","sv":"0.1.3","ts":1779712311733} /_vercel/insights/view
-[00:40:14.591] Server  LOG      ✓ Compiled in 746ms
-[00:40:14.754] Browser ERROR   uncaughtError: ReferenceError: Select is not defined
-[00:40:24.453] Server  LOG      ✓ Compiled in 1091ms
-[00:40:24.541] Server  WARN     ⚠ Fast Refresh had to perform a full reload due to a runtime error.
-[00:40:26.125] Browser LOG     %c[Vercel Web Analytics]%c [view] http://localhost:3000/poems color: rgb(120, 120, 120) color: inherit {"dp":"/poems","o":"http://localhost:3000/poems","sdkn":"@vercel/analytics/next","sdkv":"1.6.1","sv":"0.1.3","ts":1779712339529} /_vercel/insights/view
-[00:40:26.969] Server  LOG     API /api/auth/session: Session status: null
-[00:40:28.037] Browser LOG     useSession: Raw response from /api/auth/session: {}
-[00:40:28.037] Browser LOG     useSession: Parsed data from /api/auth/session: {"user":null}
-[00:40:29.905] Browser INFO    %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold
-[00:40:30.653] Server  LOG     API /api/auth/session: Session status: null
-[00:40:32.035] Browser ERROR   A tree hydrated but some attributes of the server rendered HTML didn't match the client properties. This won't be patched up. This can happen if a SSR-ed Client Component used:
-
-- A server/client branch `if (typeof window !== 'undefined')`.
-- Variable input such as `Date.now()` or `Math.random()` which changes each time it's called.
-- Date formatting in a user's locale which doesn't match the server.
-- External changing data without sending a snapshot of it along with the HTML.
-- Invalid HTML tag nesting.
-
-It can also happen if the client has a browser extension installed which messes with the HTML before React loaded.
-
-%s%s https://react.dev/link/hydration-mismatch 
-
-  ...
-    <HotReload globalError={[...]} webSocket={WebSocket} staticIndicatorState={{pathname:null, ...}}>
-      <AppDevOverlayErrorBoundary globalError={[...]}>
-        <ReplaySsrOnlyErrors>
-        <DevRootHTTPAccessFallbackBoundary>
-          <HTTPAccessFallbackBoundary notFound={<NotAllowedRootHTTPFallbackError>}>
-            <HTTPAccessFallbackErrorBoundary pathname="/poems" notFound={<NotAllowedRootHTTPFallbackError>} ...>
-              <RedirectBoundary>
-                <RedirectErrorBoundary router={{...}}>
-                  <Head>
-                  <__next_root_layout_boundary__>
-                    <SegmentViewNode type="layout" pagePath="layout.tsx">
-                      <SegmentTrieNode>
-                      <link>
-                      <script>
-                      <script>
-                      <script>
-                      <script>
-                      <script>
-                      <script>
-                      <RootLayout>
-                        <html lang="en" className="inter_b299..." suppressHydrationWarning={true}>
-                          <body
-                            className="font-sans antialiased"
--                           data-new-gr-c-s-check-loaded="14.1295.0"
--                           data-gr-ext-installed=""
-                          >
-                            ...
-                              <Slot ref={function}>
-                                <SlotClone ref={function}>
-                                  <Primitive.button type="button" role="combobox" aria-controls="radix-_R_1..." ...>
-                                    <button
-                                      type="button"
-                                      role="combobox"
-                                      aria-controls="radix-_R_1j9bn5relb_"
-                                      aria-expanded={false}
-                                      aria-required={undefined}
-                                      aria-autocomplete="none"
-                                      dir="ltr"
-                                      data-state="closed"
-                                      disabled={false}
-                                      data-disabled={undefined}
-                                      data-placeholder={undefined}
-                                      data-slot="select-trigger"
-                                      data-size="default"
-                                      className={"border-input data-[placeholder]:text-muted-foreground [&_svg:not([c..."}
-                                      onClick={function handleEvent}
-                                      onPointerDown={function handleEvent}
-                                      onKeyDown={function handleEvent}
-                                      ref={function}
--                                     fdprocessedid="ag3re"
+    <HTTPAccessFallbackErrorBoundary pathname="/" notFound={<SegmentViewNode>} forbidden={undefined} ...>
+      <RedirectBoundary>
+        <RedirectErrorBoundary router={{...}}>
+          <InnerLayoutRouter url="/" tree={[...]} params={{}} cacheNode={{lazyData:null, ...}} segmentPath={[...]} ...>
+            <SegmentViewNode type="page" pagePath="page.tsx">
+              <SegmentTrieNode>
+              <Home>
+                <main className="min-h-screen">
+                  <Suspense fallback={<div>}>
+                    <VintageHome stats={{totalPoems:7, ...}} featuredPoems={[...]} recentBooks={[...]} ...>
+                      <div className="vintage-ma..." dir="ltr">
+                        ...
+                          <Primitive.button type="button" id="radix-_R_k..." aria-haspopup="menu" aria-expanded={false} ...>
+                            <Slot type="button" id="radix-_R_k..." aria-haspopup="menu" aria-expanded={false} ...>
+                              <SlotClone type="button" id="radix-_R_k..." aria-haspopup="menu" aria-expanded={false} ...>
+                                <Button variant="ghost" size="sm" className="gap-2 h-9 ..." disabled={false} ...>
+                                  <button
+                                    data-slot="dropdown-menu-trigger"
+                                    className={"inline-flex items-center justify-center whitespace-nowrap text-sm fon..."}
+                                    disabled={false}
+                                    type="button"
+                                    id="radix-_R_kclrelb_"
+                                    aria-haspopup="menu"
+                                    aria-expanded={false}
+                                    aria-controls={undefined}
+                                    data-state="closed"
+                                    data-disabled={undefined}
+                                    onPointerDown={function handleEvent}
+                                    onKeyDown={function handleEvent}
+                                    ref={function}
+-                                   fdprocessedid="27122w"
+                                  >
+                        <HeroSection>
+                        <div className="relative w...">
+                          <VintageCarousel poems={[...]} books={[...]} recentVideo={{_id:"6979d...", ...}} t={function t} ...>
+                            <div className="relative m...">
+                              <div>
+                              <button
+                                onClick={function scrollPrev}
+                                className="absolute left-2 top-1/2 -translate-y-1/2 z-30 p-2 rounded-full bg-[#f4e8d4]..."
+-                               fdprocessedid="t9y1w"
+                              >
+                              <button
+                                onClick={function scrollNext}
+                                className="absolute right-2 top-1/2 -translate-y-1/2 z-30 p-2 rounded-full bg-[#f4e8d4..."
+-                               fdprocessedid="pgo23k"
+                              >
+                        ...
+                          <div className="grid grid-...">
+                            <div className="flex flex-...">
+                              <div>
+                              <div className="bg-[#ebdcb...">
+                                <div>
+                                <div>
+                                <form className="w-full fle..." onSubmit={function handleSubmit}>
+                                  <div className="relative">
+                                    <input
+                                      type="text"
+                                      placeholder="Name"
+                                      className="w-full bg-[#fcf9f2] dark:bg-[#1a150f] border border-[#3c2a1e]/25 dark..."
+                                      value=""
+                                      onChange={function onChange}
+                                      required={true}
+-                                     fdprocessedid="emnsdo"
                                     >
-                  ...
+                                  <div className="relative">
+                                    <input
+                                      type="email"
+                                      placeholder="Email"
+                                      className="w-full bg-[#fcf9f2] dark:bg-[#1a150f] border border-[#3c2a1e]/25 dark..."
+                                      value=""
+                                      onChange={function onChange}
+                                      required={true}
+-                                     fdprocessedid="1smr0r"
+                                    >
+                                  <div>
+                                  <button
+                                    type="submit"
+                                    className="w-full py-3 bg-[#3c2a1e] text-[#f4e8d4] dark:bg-[#e6dfcd] dark:text-[#1..."
+                                    disabled={false}
+-                                   fdprocessedid="kqul1o"
+                                  >
++                                   Send
+                            ...
+            ...
+          ...
 
-[00:40:32.035] Browser LOG     useSession: Raw response from /api/auth/session: {}
-[00:40:32.035] Browser LOG     useSession: Parsed data from /api/auth/session: {"user":null}
-[00:40:32.035] Browser LOG     %c[Vercel Web Analytics]%c Debug mode is enabled by default in development. No requests will be sent to the server. color: rgb(120, 120, 120) color: inherit
-[00:40:32.035] Browser LOG     %c[Vercel Web Analytics]%c Running queued event color: rgb(120, 120, 120) color: inherit pageview {"path":"/poems","route":"/poems"}
-[00:40:32.035] Browser LOG     %c[Vercel Web Analytics]%c [view] http://localhost:3000/poems color: rgb(120, 120, 120) color: inherit {"dp":"/poems","o":"http://localhost:3000/poems","sdkn":"@vercel/analytics/next","sdkv":"1.6.1","sv":"0.1.3","ts":1779712346318} /_vercel/insights/view
-[00:40:55.032] Browser LOG     %c[Vercel Web Analytics]%c [view] http://localhost:3000/poems/6a0b4c972d4f92d29ad9e91c color: rgb(120, 120, 120) color: inherit {"dp":"/poems/[id]","o":"http://localhost:3000/poems/6a0b4c972d4f92d29ad9e91c","sdkn":"@vercel/analytics/next","sdkv":"1.6.1","sv":"0.1.3","ts":1779712369626} /_vercel/insights/view
-[00:44:25.796] Server  LOG      ✓ Compiled in 638ms
-[00:44:27.036] Browser ERROR   ./app/poems/[id]/page.tsx:766:5
-Parsing ecmascript source code failed
-  764 |
-  765 |       </div>
-> 766 |     </AnimatePresence>
-      |     ^
-  767 |   )
-  768 | }
-  769 |
-
-Expression expected
-
-Import traces:
-  Client Component Browser:
-    ./app/poems/[id]/page.tsx [Client Component Browser]
-    ./app/poems/[id]/page.tsx [Server Component]
-
-  Client Component SSR:
-    ./app/poems/[id]/page.tsx [Client Component SSR]
-    ./app/poems/[id]/page.tsx [Server Component]
-[00:44:27.036] Browser ERROR   ./app/poems/[id]/page.tsx:766:6
-Parsing ecmascript source code failed
-  764 |
-  765 |       </div>
-> 766 |     </AnimatePresence>
-      |      ^^^^^^^^^^^^^^^^^
-  767 |   )
-  768 | }
-  769 |
-
-Unterminated regexp literal
-
-Import traces:
-  Client Component Browser:
-    ./app/poems/[id]/page.tsx [Client Component Browser]
-    ./app/poems/[id]/page.tsx [Server Component]
-
-  Client Component SSR:
-    ./app/poems/[id]/page.tsx [Client Component SSR]
-    ./app/poems/[id]/page.tsx [Server Component]
-[00:45:49.238] Server  LOG      ✓ Compiled in 707ms
-[00:46:11.120] Browser LOG     %c[Vercel Web Analytics]%c [view] http://localhost:3000/shayari color: rgb(120, 120, 120) color: inherit {"dp":"/shayari","o":"http://localhost:3000/shayari","sdkn":"@vercel/analytics/next","sdkv":"1.6.1","sv":"0.1.3","ts":1779712685880} /_vercel/insights/view
-[00:46:15.640] Browser LOG     %c[Vercel Web Analytics]%c [view] http://localhost:3000/books color: rgb(120, 120, 120) color: inherit {"dp":"/books","o":"http://localhost:3000/books","sdkn":"@vercel/analytics/next","sdkv":"1.6.1","sv":"0.1.3","ts":1779712690392} /_vercel/insights/view
-[00:46:27.662] Server  LOG      ○ Compiling /books/[id] ...
-[00:46:29.876] Browser LOG     %c[Vercel Web Analytics]%c [view] http://localhost:3000/books/694a40132665fde3d1f43e97 color: rgb(120, 120, 120) color: inherit {"dp":"/books/[id]","o":"http://localhost:3000/books/694a40132665fde3d1f43e97","sdkn":"@vercel/analytics/next","sdkv":"1.6.1","sv":"0.1.3","ts":1779712704628} /_vercel/insights/view
-[00:46:33.037] Browser WARN    You're attempting to animate multiple children within AnimatePresence, but its mode is set to "wait". This will lead to odd visual behaviour.
-[00:46:33.037] Browser WARN    You're attempting to animate multiple children within AnimatePresence, but its mode is set to "wait". This will lead to odd visual behaviour.
-[00:46:33.037] Browser ERROR   Encountered two children with the same key, `%s`. Keys should be unique so that components maintain their identity across updates. Non-unique keys may cause children to be duplicated and/or omitted — the behavior is unsupported and could change in a future version. 
-[00:46:33.037] Browser ERROR   Encountered two children with the same key, `%s`. Keys should be unique so that components maintain their identity across updates. Non-unique keys may cause children to be duplicated and/or omitted — the behavior is unsupported and could change in a future version. 
-[00:46:45.344] Browser LOG     %c[Vercel Web Analytics]%c [view] http://localhost:3000/books color: rgb(120, 120, 120) color: inherit {"dp":"/books","o":"http://localhost:3000/books","sdkn":"@vercel/analytics/next","sdkv":"1.6.1","sv":"0.1.3","ts":1779712720047} /_vercel/insights/view
-[00:46:46.331] Browser LOG     %c[Vercel Web Analytics]%c [view] http://localhost:3000/books/694a40132665fde3d1f43e97 color: rgb(120, 120, 120) color: inherit {"dp":"/books/[id]","o":"http://localhost:3000/books/694a40132665fde3d1f43e97","sdkn":"@vercel/analytics/next","sdkv":"1.6.1","sv":"0.1.3","ts":1779712721072} /_vercel/insights/view
-[00:46:46.715] Browser WARN    You're attempting to animate multiple children within AnimatePresence, but its mode is set to "wait". This will lead to odd visual behaviour.
-[00:46:46.715] Browser WARN    You're attempting to animate multiple children within AnimatePresence, but its mode is set to "wait". This will lead to odd visual behaviour.
-[00:46:46.715] Browser ERROR   Encountered two children with the same key, `%s`. Keys should be unique so that components maintain their identity across updates. Non-unique keys may cause children to be duplicated and/or omitted — the behavior is unsupported and could change in a future version. 
-[00:46:46.715] Browser ERROR   Encountered two children with the same key, `%s`. Keys should be unique so that components maintain their identity across updates. Non-unique keys may cause children to be duplicated and/or omitted — the behavior is unsupported and could change in a future version. 
-[00:46:51.242] Browser LOG     %c[Vercel Web Analytics]%c [view] http://localhost:3000/blog color: rgb(120, 120, 120) color: inherit {"dp":"/blog","o":"http://localhost:3000/blog","sdkn":"@vercel/analytics/next","sdkv":"1.6.1","sv":"0.1.3","ts":1779712725899} /_vercel/insights/view
-[00:46:56.613] Browser LOG     %c[Vercel Web Analytics]%c [view] http://localhost:3000/blog/- color: rgb(120, 120, 120) color: inherit {"dp":"/blog/[slug]","o":"http://localhost:3000/blog/-","sdkn":"@vercel/analytics/next","sdkv":"1.6.1","sv":"0.1.3","ts":1779712731370} /_vercel/insights/view
-[00:47:05.525] Browser LOG     %c[Vercel Web Analytics]%c [view] http://localhost:3000/blog color: rgb(120, 120, 120) color: inherit {"dp":"/blog","o":"http://localhost:3000/blog","sdkn":"@vercel/analytics/next","sdkv":"1.6.1","sv":"0.1.3","ts":1779712740254} /_vercel/insights/view
-[00:47:10.330] Browser LOG     %c[Vercel Web Analytics]%c [view] http://localhost:3000/videos color: rgb(120, 120, 120) color: inherit {"dp":"/videos","o":"http://localhost:3000/videos","sdkn":"@vercel/analytics/next","sdkv":"1.6.1","sv":"0.1.3","ts":1779712745070} /_vercel/insights/view
-[00:47:11.109] Server  LOG     Processing videos from DB...
-[00:47:11.112] Server  LOG     Video 6979d3dc0f91cdd2dcff3b3d: {}
-[00:47:11.112] Server  LOG     Video 6979d37e8dd9033ee80a4750: {}
-[00:47:11.113] Server  LOG     Video 69771d7a2364bd908d7f0e21: {}
-[00:47:11.237] Server  LOG     Processing videos from DB...
-[00:47:11.238] Server  LOG     Video 6979d3dc0f91cdd2dcff3b3d: {}
-[00:47:11.239] Server  LOG     Video 6979d37e8dd9033ee80a4750: {}
-[00:47:11.240] Server  LOG     Video 69771d7a2364bd908d7f0e21: {}
-[00:47:11.260] Browser LOG     Fetched videos: 3
-[00:47:11.521] Browser LOG     Fetched videos: 3
-[00:47:11.521] Browser WARN    You are trying to animate color from "rgb(44, 37, 24)" to "hsl(var(--foreground))". "hsl(var(--foreground))" is not an animatable value.. For more information and steps for solving, visit https://motion.dev/troubleshooting/value-not-animatable
-[00:47:11.521] Browser WARN    You are trying to animate color from "rgb(44, 37, 24)" to "hsl(var(--foreground))". "hsl(var(--foreground))" is not an animatable value.. For more information and steps for solving, visit https://motion.dev/troubleshooting/value-not-animatable
-[00:47:11.521] Browser WARN    You are trying to animate color from "rgb(44, 37, 24)" to "hsl(var(--foreground))". "hsl(var(--foreground))" is not an animatable value.. For more information and steps for solving, visit https://motion.dev/troubleshooting/value-not-animatable
-[00:47:18.963] Browser LOG     %c[Vercel Web Analytics]%c [view] http://localhost:3000/about color: rgb(120, 120, 120) color: inherit {"dp":"/about","o":"http://localhost:3000/about","sdkn":"@vercel/analytics/next","sdkv":"1.6.1","sv":"0.1.3","ts":1779712753691} /_vercel/insights/view
-[00:47:19.088] Server  LOG     Processing videos from DB...
-[00:47:19.095] Server  LOG     Video 6979d3dc0f91cdd2dcff3b3d: {}
-[00:47:19.102] Server  LOG     Video 6979d37e8dd9033ee80a4750: {}
-[00:47:19.108] Server  LOG     Video 69771d7a2364bd908d7f0e21: {}
-[00:47:19.283] Server  LOG     Processing videos from DB...
-[00:47:19.284] Server  LOG     Video 6979d3dc0f91cdd2dcff3b3d: {}
-[00:47:19.285] Server  LOG     Video 6979d37e8dd9033ee80a4750: {}
-[00:47:19.286] Server  LOG     Video 69771d7a2364bd908d7f0e21: {}
-[00:47:29.149] Browser LOG     %c[Vercel Web Analytics]%c [view] http://localhost:3000/poems color: rgb(120, 120, 120) color: inherit {"dp":"/poems","o":"http://localhost:3000/poems","sdkn":"@vercel/analytics/next","sdkv":"1.6.1","sv":"0.1.3","ts":1779712763786} /_vercel/insights/view
-[00:47:33.060] Browser LOG     %c[Vercel Web Analytics]%c [view] http://localhost:3000/ color: rgb(120, 120, 120) color: inherit {"dp":"/","o":"http://localhost:3000/","sdkn":"@vercel/analytics/next","sdkv":"1.6.1","sv":"0.1.3","ts":1779712767792} /_vercel/insights/view
-[00:47:34.011] Browser WARN    Image with src "http://localhost:3000/placeholder.jpg" has either width or height modified, but not the other. If you use CSS to change the size of your image, also include the styles 'width: "auto"' or 'height: "auto"' to maintain the aspect ratio.
-[00:48:47.467] Browser LOG     %c[Vercel Web Analytics]%c [view] http://localhost:3000/about color: rgb(120, 120, 120) color: inherit {"dp":"/about","o":"http://localhost:3000/about","sdkn":"@vercel/analytics/next","sdkv":"1.6.1","sv":"0.1.3","ts":1779712842161} /_vercel/insights/view
-[00:48:47.509] Server  LOG     Processing videos from DB...
-[00:48:47.510] Server  LOG     Video 6979d3dc0f91cdd2dcff3b3d: {}
-[00:48:47.511] Server  LOG     Video 6979d37e8dd9033ee80a4750: {}
-[00:48:47.512] Server  LOG     Video 69771d7a2364bd908d7f0e21: {}
-[00:48:48.307] Server  LOG     Processing videos from DB...
-[00:48:48.308] Server  LOG     Video 6979d3dc0f91cdd2dcff3b3d: {}
-[00:48:48.311] Server  LOG     Video 6979d37e8dd9033ee80a4750: {}
-[00:48:48.312] Server  LOG     Video 69771d7a2364bd908d7f0e21: {}
-[00:49:21.164] Browser LOG     %c[Vercel Web Analytics]%c [view] http://localhost:3000/poems color: rgb(120, 120, 120) color: inherit {"dp":"/poems","o":"http://localhost:3000/poems","sdkn":"@vercel/analytics/next","sdkv":"1.6.1","sv":"0.1.3","ts":1779712875795} /_vercel/insights/view
-[00:49:24.374] Browser LOG     %c[Vercel Web Analytics]%c [view] http://localhost:3000/videos color: rgb(120, 120, 120) color: inherit {"dp":"/videos","o":"http://localhost:3000/videos","sdkn":"@vercel/analytics/next","sdkv":"1.6.1","sv":"0.1.3","ts":1779712879051} /_vercel/insights/view
-[00:49:24.456] Server  LOG     Processing videos from DB...
-[00:49:24.457] Server  LOG     Video 6979d3dc0f91cdd2dcff3b3d: {}
-[00:49:24.457] Server  LOG     Video 6979d37e8dd9033ee80a4750: {}
-[00:49:24.458] Server  LOG     Video 69771d7a2364bd908d7f0e21: {}
-[00:49:24.696] Browser LOG     Fetched videos: 3
-[00:49:24.877] Server  LOG     Processing videos from DB...
-[00:49:24.880] Server  LOG     Video 6979d3dc0f91cdd2dcff3b3d: {}
-[00:49:24.902] Server  LOG     Video 6979d37e8dd9033ee80a4750: {}
-[00:49:24.903] Server  LOG     Video 69771d7a2364bd908d7f0e21: {}
-[00:49:25.016] Browser WARN    You are trying to animate color from "rgb(44, 37, 24)" to "hsl(var(--foreground))". "hsl(var(--foreground))" is not an animatable value.. For more information and steps for solving, visit https://motion.dev/troubleshooting/value-not-animatable
-[00:49:25.016] Browser WARN    You are trying to animate color from "rgb(44, 37, 24)" to "hsl(var(--foreground))". "hsl(var(--foreground))" is not an animatable value.. For more information and steps for solving, visit https://motion.dev/troubleshooting/value-not-animatable
-[00:49:25.016] Browser WARN    You are trying to animate color from "rgb(44, 37, 24)" to "hsl(var(--foreground))". "hsl(var(--foreground))" is not an animatable value.. For more information and steps for solving, visit https://motion.dev/troubleshooting/value-not-animatable
-[00:49:25.016] Browser LOG     Fetched videos: 3
-[00:50:25.426] Server  LOG     Processing videos from DB...
-[00:50:25.426] Server  LOG     Video 6979d3dc0f91cdd2dcff3b3d: {}
-[00:50:25.427] Server  LOG     Video 6979d37e8dd9033ee80a4750: {}
-[00:50:25.427] Server  LOG     Video 69771d7a2364bd908d7f0e21: {}
-[00:50:25.584] Browser LOG     Fetched videos: 3
-[00:50:26.786] Server  LOG     Processing videos from DB...
-[00:50:26.787] Server  LOG     Video 6979d3dc0f91cdd2dcff3b3d: {}
-[00:50:26.789] Server  LOG     Video 6979d37e8dd9033ee80a4750: {}
-[00:50:26.799] Server  LOG     Video 69771d7a2364bd908d7f0e21: {}
-[00:50:26.936] Browser LOG     Fetched videos: 3
-[00:50:29.939] Browser LOG     %c[Vercel Web Analytics]%c [view] http://localhost:3000/poems color: rgb(120, 120, 120) color: inherit {"dp":"/poems","o":"http://localhost:3000/poems","sdkn":"@vercel/analytics/next","sdkv":"1.6.1","sv":"0.1.3","ts":1779712944586} /_vercel/insights/view
-[00:50:32.903] Browser LOG     %c[Vercel Web Analytics]%c [view] http://localhost:3000/about color: rgb(120, 120, 120) color: inherit {"dp":"/about","o":"http://localhost:3000/about","sdkn":"@vercel/analytics/next","sdkv":"1.6.1","sv":"0.1.3","ts":1779712947638} /_vercel/insights/view
-[00:50:32.966] Server  LOG     Processing videos from DB...
-[00:50:32.966] Server  LOG     Video 6979d3dc0f91cdd2dcff3b3d: {}
-[00:50:32.967] Server  LOG     Video 6979d37e8dd9033ee80a4750: {}
-[00:50:32.968] Server  LOG     Video 69771d7a2364bd908d7f0e21: {}
-[00:50:33.077] Server  LOG     Processing videos from DB...
-[00:50:33.104] Server  LOG     Video 6979d3dc0f91cdd2dcff3b3d: {}
-[00:50:33.105] Server  LOG     Video 6979d37e8dd9033ee80a4750: {}
-[00:50:33.106] Server  LOG     Video 69771d7a2364bd908d7f0e21: {}
-[00:51:18.196] Browser LOG     %c[Vercel Web Analytics]%c [view] http://localhost:3000/login color: rgb(120, 120, 120) color: inherit {"dp":"/login","o":"http://localhost:3000/login","sdkn":"@vercel/analytics/next","sdkv":"1.6.1","sv":"0.1.3","ts":1779712992732} /_vercel/insights/view
-[00:51:18.372] Server  LOG     API /api/auth/session: Session status: null
-[00:51:18.449] Server  LOG     API /api/auth/session: Session status: null
-[00:51:18.572] Browser LOG     useSession: Raw response from /api/auth/session: {}
-[00:51:18.572] Browser LOG     useSession: Parsed data from /api/auth/session: {"user":null}
-[00:51:18.572] Browser LOG     useSession: Raw response from /api/auth/session: {}
-[00:51:18.572] Browser LOG     useSession: Parsed data from /api/auth/session: {"user":null}
-[00:52:33.408] Server  LOG     API /api/auth/session: Session status: {}
-[00:52:33.639] Server  LOG     API /api/auth/session: Session status: {}
-[00:52:33.642] Browser LOG     useSession: Raw response from /api/auth/session: {}
-[00:52:33.642] Browser LOG     useSession: Parsed data from /api/auth/session: {"user":{"exp":1779756268,"isAdmin":true,"type":"auth","userId":"6936a3e510ca4806bcd9c3a3"}}
-[00:52:33.753] Browser LOG     useSession: Raw response from /api/auth/session: {}
-[00:52:33.753] Browser LOG     useSession: Parsed data from /api/auth/session: {"user":{"exp":1779756268,"isAdmin":true,"type":"auth","userId":"6936a3e510ca4806bcd9c3a3"}}
-[00:52:35.248] Browser LOG     %c[Vercel Web Analytics]%c [view] http://localhost:3000/admin color: rgb(120, 120, 120) color: inherit {"dp":"/admin","o":"http://localhost:3000/admin","sdkn":"@vercel/analytics/next","sdkv":"1.6.1","sv":"0.1.3","ts":1779713070002} /_vercel/insights/view
-[00:53:26.933] Browser LOG     %c[Vercel Web Analytics]%c [view] http://localhost:3000/admin/settings color: rgb(120, 120, 120) color: inherit {"dp":"/admin/settings","o":"http://localhost:3000/admin/settings","sdkn":"@vercel/analytics/next","sdkv":"1.6.1","sv":"0.1.3","ts":1779713121688} /_vercel/insights/view
-[00:54:57.686] Browser LOG     %c[Vercel Web Analytics]%c [view] http://localhost:3000/about color: rgb(120, 120, 120) color: inherit {"dp":"/about","o":"http://localhost:3000/about","sdkn":"@vercel/analytics/next","sdkv":"1.6.1","sv":"0.1.3","ts":1779713212436} /_vercel/insights/view
-[00:54:57.774] Server  LOG     Processing videos from DB...
-[00:54:57.776] Server  LOG     Video 6979d3dc0f91cdd2dcff3b3d: {}
-[00:54:57.785] Server  LOG     Video 6979d37e8dd9033ee80a4750: {}
-[00:54:57.787] Server  LOG     Video 69771d7a2364bd908d7f0e21: {}
-[00:54:57.991] Server  LOG     Processing videos from DB...
-[00:54:57.992] Server  LOG     Video 6979d3dc0f91cdd2dcff3b3d: {}
-[00:54:58.051] Server  LOG     Video 6979d37e8dd9033ee80a4750: {}
-[00:54:58.052] Server  LOG     Video 69771d7a2364bd908d7f0e21: {}
-[00:57:32.322] Browser LOG     %c[Vercel Web Analytics]%c [view] http://localhost:3000/admin color: rgb(120, 120, 120) color: inherit {"dp":"/admin","o":"http://localhost:3000/admin","sdkn":"@vercel/analytics/next","sdkv":"1.6.1","sv":"0.1.3","ts":1779713366845} /_vercel/insights/view
-[00:57:36.083] Browser LOG     %c[Vercel Web Analytics]%c [view] http://localhost:3000/admin/settings color: rgb(120, 120, 120) color: inherit {"dp":"/admin/settings","o":"http://localhost:3000/admin/settings","sdkn":"@vercel/analytics/next","sdkv":"1.6.1","sv":"0.1.3","ts":1779713370831} /_vercel/insights/view
-[00:57:49.238] Browser LOG     %c[Vercel Web Analytics]%c [view] http://localhost:3000/about color: rgb(120, 120, 120) color: inherit {"dp":"/about","o":"http://localhost:3000/about","sdkn":"@vercel/analytics/next","sdkv":"1.6.1","sv":"0.1.3","ts":1779713383990} /_vercel/insights/view
-[00:57:49.318] Server  LOG     Processing videos from DB...
-[00:57:49.319] Server  LOG     Video 6979d3dc0f91cdd2dcff3b3d: {}
-[00:57:49.320] Server  LOG     Video 6979d37e8dd9033ee80a4750: {}
-[00:57:49.325] Server  LOG     Video 69771d7a2364bd908d7f0e21: {}
-[00:57:49.500] Server  LOG     Processing videos from DB...
-[00:57:49.501] Server  LOG     Video 6979d3dc0f91cdd2dcff3b3d: {}
-[00:57:49.501] Server  LOG     Video 6979d37e8dd9033ee80a4750: {}
-[00:57:49.501] Server  LOG     Video 69771d7a2364bd908d7f0e21: {}
-[01:01:10.722] Server  LOG      ✓ Compiled in 5.1s
-[01:01:36.133] Browser INFO    %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold
-[01:01:36.492] Server  LOG     API /api/auth/session: Session status: {}
-[01:01:36.512] Browser LOG     %c[Vercel Web Analytics]%c Debug mode is enabled by default in development. No requests will be sent to the server. color: rgb(120, 120, 120) color: inherit
-[01:01:36.512] Browser LOG     %c[Vercel Web Analytics]%c Running queued event color: rgb(120, 120, 120) color: inherit pageview {"path":"/about","route":"/about"}
-[01:01:36.512] Browser LOG     %c[Vercel Web Analytics]%c [view] http://localhost:3000/about color: rgb(120, 120, 120) color: inherit {"dp":"/about","o":"http://localhost:3000/about","sdkn":"@vercel/analytics/next","sdkv":"1.6.1","sv":"0.1.3","ts":1779713611254} /_vercel/insights/view
-[01:01:36.628] Browser LOG     useSession: Raw response from /api/auth/session: {}
-[01:01:36.628] Browser LOG     useSession: Parsed data from /api/auth/session: {"user":{"exp":1779756268,"isAdmin":true,"type":"auth","userId":"6936a3e510ca4806bcd9c3a3"}}
-[01:01:36.655] Server  LOG     Processing videos from DB...
-[01:01:36.657] Server  LOG     Video 6979d3dc0f91cdd2dcff3b3d: {}
-[01:01:36.664] Server  LOG     Video 6979d37e8dd9033ee80a4750: {}
-[01:01:36.665] Server  LOG     Video 69771d7a2364bd908d7f0e21: {}
-[01:01:56.869] Browser LOG     %c[Vercel Web Analytics]%c [view] http://localhost:3000/admin color: rgb(120, 120, 120) color: inherit {"dp":"/admin","o":"http://localhost:3000/admin","sdkn":"@vercel/analytics/next","sdkv":"1.6.1","sv":"0.1.3","ts":1779713631596} /_vercel/insights/view
-[01:02:01.626] Browser LOG     %c[Vercel Web Analytics]%c [view] http://localhost:3000/admin/settings color: rgb(120, 120, 120) color: inherit {"dp":"/admin/settings","o":"http://localhost:3000/admin/settings","sdkn":"@vercel/analytics/next","sdkv":"1.6.1","sv":"0.1.3","ts":1779713636329} /_vercel/insights/view
-[01:02:13.428] Browser LOG     %c[Vercel Web Analytics]%c [view] http://localhost:3000/about color: rgb(120, 120, 120) color: inherit {"dp":"/about","o":"http://localhost:3000/about","sdkn":"@vercel/analytics/next","sdkv":"1.6.1","sv":"0.1.3","ts":1779713648157} /_vercel/insights/view
-[01:02:13.523] Server  LOG     Processing videos from DB...
-[01:02:13.526] Server  LOG     Video 6979d3dc0f91cdd2dcff3b3d: {}
-[01:02:13.528] Server  LOG     Video 6979d37e8dd9033ee80a4750: {}
-[01:02:13.530] Server  LOG     Video 69771d7a2364bd908d7f0e21: {}
-[01:02:13.912] Server  LOG     Processing videos from DB...
-[01:02:13.913] Server  LOG     Video 6979d3dc0f91cdd2dcff3b3d: {}
-[01:02:13.915] Server  LOG     Video 6979d37e8dd9033ee80a4750: {}
-[01:02:13.916] Server  LOG     Video 69771d7a2364bd908d7f0e21: {}
-[01:02:32.139] Browser LOG     %c[Vercel Web Analytics]%c [view] http://localhost:3000/ color: rgb(120, 120, 120) color: inherit {"dp":"/","o":"http://localhost:3000/","sdkn":"@vercel/analytics/next","sdkv":"1.6.1","sv":"0.1.3","ts":1779713666899} /_vercel/insights/view
-[01:02:34.585] Browser WARN    Image with src "http://localhost:3000/placeholder.jpg" has either width or height modified, but not the other. If you use CSS to change the size of your image, also include the styles 'width: "auto"' or 'height: "auto"' to maintain the aspect ratio.
-[01:38:01.494] Browser LOG     %c[Vercel Web Analytics]%c [view] http://localhost:3000/poems color: rgb(120, 120, 120) color: inherit {"dp":"/poems","o":"http://localhost:3000/poems","sdkn":"@vercel/analytics/next","sdkv":"1.6.1","sv":"0.1.3","ts":1779715791669} /_vercel/insights/view
-[01:39:03.208] Browser LOG     %c[Vercel Web Analytics]%c [view] http://localhost:3000/about color: rgb(120, 120, 120) color: inherit {"dp":"/about","o":"http://localhost:3000/about","sdkn":"@vercel/analytics/next","sdkv":"1.6.1","sv":"0.1.3","ts":1779715857696} /_vercel/insights/view
-[01:39:11.373] Server  LOG     Processing videos from DB...
-[01:39:11.576] Server  LOG     Video 6979d3dc0f91cdd2dcff3b3d: {}
-[01:39:11.592] Server  LOG     Video 6979d37e8dd9033ee80a4750: {}
-[01:39:11.641] Server  LOG     Video 69771d7a2364bd908d7f0e21: {}
-[01:39:15.455] Server  LOG     Processing videos from DB...
-[01:39:15.606] Server  LOG     Video 6979d3dc0f91cdd2dcff3b3d: {}
-[01:39:15.746] Server  LOG     Video 6979d37e8dd9033ee80a4750: {}
-[01:39:16.087] Server  LOG     Video 69771d7a2364bd908d7f0e21: {}
-[01:39:31.255] Browser LOG     %c[Vercel Web Analytics]%c [view] http://localhost:3000/admin color: rgb(120, 120, 120) color: inherit {"dp":"/admin","o":"http://localhost:3000/admin","sdkn":"@vercel/analytics/next","sdkv":"1.6.1","sv":"0.1.3","ts":1779715885544} /_vercel/insights/view
-[01:40:12.581] Browser LOG     %c[Vercel Web Analytics]%c [view] http://localhost:3000/admin/settings color: rgb(120, 120, 120) color: inherit {"dp":"/admin/settings","o":"http://localhost:3000/admin/settings","sdkn":"@vercel/analytics/next","sdkv":"1.6.1","sv":"0.1.3","ts":1779715927211} /_vercel/insights/view
-[01:40:31.483] Browser LOG     %c[Vercel Web Analytics]%c [view] http://localhost:3000/about color: rgb(120, 120, 120) color: inherit {"dp":"/about","o":"http://localhost:3000/about","sdkn":"@vercel/analytics/next","sdkv":"1.6.1","sv":"0.1.3","ts":1779715945530} /_vercel/insights/view
-[01:40:34.414] Server  LOG     Processing videos from DB...
-[01:40:34.448] Server  LOG     Video 6979d3dc0f91cdd2dcff3b3d: {}
-[01:40:34.546] Server  LOG     Video 6979d37e8dd9033ee80a4750: {}
-[01:40:34.579] Server  LOG     Video 69771d7a2364bd908d7f0e21: {}
-[01:40:37.306] Server  LOG     Processing videos from DB...
-[01:40:37.312] Server  LOG     Video 6979d3dc0f91cdd2dcff3b3d: {}
-[01:40:37.316] Server  LOG     Video 6979d37e8dd9033ee80a4750: {}
-[01:40:37.320] Server  LOG     Video 69771d7a2364bd908d7f0e21: {}
+[00:15:33.315] Browser WARN    Image with src "https://www.typecalendar.com/wp-content/uploads/2023/06/Download-Cover-Page-Template.jpg?gid=122" has either width or height modified, but not the other. If you use CSS to change the size of your image, also include the styles 'width: "auto"' or 'height: "auto"' to maintain the aspect ratio.
+[00:15:33.315] Browser WARN    Image with src "http://localhost:3000/placeholder.jpg" has either width or height modified, but not the other. If you use CSS to change the size of your image, also include the styles 'width: "auto"' or 'height: "auto"' to maintain the aspect ratio.
+[00:15:49.189] Server  LOG      ✓ Compiled in 1779ms
+[00:15:51.763] Server  LOG      ✓ Compiled in 1022ms
+[00:16:00.028] Server  LOG      ✓ Compiled in 282ms
+[00:16:06.078] Server  LOG      ✓ Compiled in 471ms
+[00:16:07.510] Server  LOG      ✓ Compiled in 206ms
+[00:16:09.283] Server  LOG      ✓ Compiled in 189ms
+[00:16:11.677] Server  LOG      ✓ Compiled in 242ms
+[00:17:35.771] Browser LOG     %c[Vercel Web Analytics]%c [view] http://localhost:3000/poems color: rgb(120, 120, 120) color: inherit {"dp":"/poems","o":"http://localhost:3000/poems","sdkn":"@vercel/analytics/next","sdkv":"1.6.1","sv":"0.1.3","ts":1781246728515} /_vercel/insights/view

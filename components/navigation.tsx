@@ -116,8 +116,10 @@ export default function Navigation() {
             <div className="hidden lg:flex items-center">
               <Link href="/poems" className="vintage-exact-link text-sm xl:text-base whitespace-nowrap">{t('poems')}</Link>
               <TitleSeparator />
-              <Link href="/shayari" className="vintage-exact-link text-sm xl:text-base whitespace-nowrap">{t('shayari')}</Link>
+             {/* <Link href="/shayari" className="vintage-exact-link text-sm xl:text-base whitespace-nowrap">{t('shayari')}</Link>
               <TitleSeparator />
+              <Link href="/sher" className="vintage-exact-link text-sm xl:text-base whitespace-nowrap">{t('sher')}</Link>
+              <TitleSeparator /> */}
               <Link href="/books" className="vintage-exact-link text-sm xl:text-base whitespace-nowrap">{t('books')}</Link>
               <TitleSeparator />
               <Link href="/blog" className="vintage-exact-link text-sm xl:text-base whitespace-nowrap">{t('blog')}</Link>
@@ -173,8 +175,9 @@ export default function Navigation() {
                     <div className="flex flex-col gap-1">
                       <Link href="/poems" className="flex items-center gap-2 p-1.5 text-sm md:text-base text-[#3c2a1e] dark:text-[#e6dfcd] hover:bg-[#3c2a1e]/5 dark:hover:bg-[#e6dfcd]/5 rounded-md transition-colors"><Feather className="h-3.5 w-3.5" /> {t('poems')}</Link>
                       <Link href="/books" className="flex items-center gap-2 p-1.5 text-sm md:text-base text-[#3c2a1e] dark:text-[#e6dfcd] hover:bg-[#3c2a1e]/5 dark:hover:bg-[#e6dfcd]/5 rounded-md transition-colors"><BookOpen className="h-3.5 w-3.5" /> {t('books')}</Link>
-                      <Link href="/shayari" className="flex items-center gap-2 p-1.5 text-sm md:text-base text-[#3c2a1e] dark:text-[#e6dfcd] hover:bg-[#3c2a1e]/5 dark:hover:bg-[#e6dfcd]/5 rounded-md transition-colors"><PenTool className="h-3.5 w-3.5" /> {t('shayari')}</Link>
-                      <Link href="/sher" className="flex items-center gap-2 p-1.5 text-sm md:text-base text-[#3c2a1e] dark:text-[#e6dfcd] hover:bg-[#3c2a1e]/5 dark:hover:bg-[#e6dfcd]/5 rounded-md transition-colors"><Feather className="h-3.5 w-3.5" /> {t('sher')}</Link>
+                       <Link href="/about" className="flex items-center gap-2 p-1.5 text-sm md:text-base text-[#3c2a1e] dark:text-[#e6dfcd] hover:bg-[#3c2a1e]/5 dark:hover:bg-[#e6dfcd]/5 rounded-md transition-colors"><User className="h-3.5 w-3.5" /> {t('about')}</Link>
+                      {/*<Link href="/shayari" className="flex items-center gap-2 p-1.5 text-sm md:text-base text-[#3c2a1e] dark:text-[#e6dfcd] hover:bg-[#3c2a1e]/5 dark:hover:bg-[#e6dfcd]/5 rounded-md transition-colors"><PenTool className="h-3.5 w-3.5" /> {t('shayari')}</Link>
+                      <Link href="/sher" className="flex items-center gap-2 p-1.5 text-sm md:text-base text-[#3c2a1e] dark:text-[#e6dfcd] hover:bg-[#3c2a1e]/5 dark:hover:bg-[#e6dfcd]/5 rounded-md transition-colors"><Feather className="h-3.5 w-3.5" /> {t('sher')}</Link>*/}
                     </div>
                   </div>
 
@@ -185,7 +188,7 @@ export default function Navigation() {
                       <Link href="/videos" className="flex items-center gap-2 p-1.5 text-sm md:text-base text-[#3c2a1e] dark:text-[#e6dfcd] hover:bg-[#3c2a1e]/5 dark:hover:bg-[#e6dfcd]/5 rounded-md transition-colors"><Video className="h-3.5 w-3.5" /> {t('videos')}</Link>
                       <Link href="/blog" className="flex items-center gap-2 p-1.5 text-sm md:text-base text-[#3c2a1e] dark:text-[#e6dfcd] hover:bg-[#3c2a1e]/5 dark:hover:bg-[#e6dfcd]/5 rounded-md transition-colors"><BookOpen className="h-3.5 w-3.5" /> {t('blog')}</Link>
                       <Link href="/quiz" className="flex items-center gap-2 p-1.5 text-sm md:text-base text-[#3c2a1e] dark:text-[#e6dfcd] hover:bg-[#3c2a1e]/5 dark:hover:bg-[#e6dfcd]/5 rounded-md transition-colors"><HelpCircle className="h-3.5 w-3.5" /> {t('quiz')}</Link>
-                      <Link href="/about" className="flex items-center gap-2 p-1.5 text-sm md:text-base text-[#3c2a1e] dark:text-[#e6dfcd] hover:bg-[#3c2a1e]/5 dark:hover:bg-[#e6dfcd]/5 rounded-md transition-colors"><User className="h-3.5 w-3.5" /> {t('about')}</Link>
+                     
                     </div>
                   </div>
 
