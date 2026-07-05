@@ -5,7 +5,7 @@ import Image from "next/image"
 import { usePathname, useRouter } from "next/navigation"
 import { useState, useEffect, useCallback } from "react"
 import { useTheme } from "next-themes"
-import { Moon, Sun, Feather, BookOpen, Video, PenTool, HelpCircle, Menu, X, User } from "lucide-react"
+import { Moon, Sun, Feather, BookOpen, Video, PenTool, HelpCircle, Menu, X, User, Quote } from "lucide-react"
 import { useSession } from "@/hooks/use-session"
 import eventBus from "@/lib/event-bus"
 import LanguageSelector from "@/components/language-selector"
@@ -48,17 +48,19 @@ export default function Navigation() {
       return
     }
 
+    let lastShowNav = window.scrollY > 200
+    setShowNav(lastShowNav)
+
     const handleScroll = () => {
-      if (window.scrollY > 200) {
-        setShowNav(true)
-      } else {
-        setShowNav(false)
-        setIsOpen(false)
+      const shouldShow = window.scrollY > 200
+      if (shouldShow !== lastShowNav) {
+        lastShowNav = shouldShow
+        setShowNav(shouldShow)
+        if (!shouldShow) {
+          setIsOpen(false)
+        }
       }
     }
-    
-    // Initial check
-    handleScroll()
     
     window.addEventListener("scroll", handleScroll)
     return () => window.removeEventListener("scroll", handleScroll)
@@ -122,6 +124,8 @@ export default function Navigation() {
               <TitleSeparator /> */}
               <Link href="/books" className="vintage-exact-link text-sm xl:text-base whitespace-nowrap">{t('books')}</Link>
               <TitleSeparator />
+              <Link href="/quotes" className="vintage-exact-link text-sm xl:text-base whitespace-nowrap">{t('quotes') || 'Quotes'}</Link>
+              <TitleSeparator />
               <Link href="/blog" className="vintage-exact-link text-sm xl:text-base whitespace-nowrap">{t('blog')}</Link>
               <TitleSeparator />
               <Link href="/videos" className="vintage-exact-link text-sm xl:text-base whitespace-nowrap">{t('videos')}</Link>
@@ -162,10 +166,10 @@ export default function Navigation() {
           <AnimatePresence>
             {isOpen && (
               <motion.div
-                initial={{ opacity: 0, height: 0 }}
-                animate={{ opacity: 1, height: "auto" }}
-                exit={{ opacity: 0, height: 0 }}
-                transition={{ duration: 0.2 }}
+                initial={{ opacity: 0, y: -10 }}
+                animate={{ opacity: 1, y: 0 }}
+                exit={{ opacity: 0, y: -10 }}
+                transition={{ duration: 0.15, ease: "easeOut" }}
                 className="w-full bg-[#f4e8d4] dark:bg-[#1f1a14] border-t border-[#3c2a1e]/10 dark:border-[#e6dfcd]/10 shadow-lg overflow-hidden"
               >
                 <div className="max-w-[1400px] mx-auto p-3 md:p-4 md:px-12 grid grid-cols-1 md:grid-cols-3 gap-4 md:gap-6">
@@ -175,6 +179,7 @@ export default function Navigation() {
                     <div className="flex flex-col gap-1">
                       <Link href="/poems" className="flex items-center gap-2 p-1.5 text-sm md:text-base text-[#3c2a1e] dark:text-[#e6dfcd] hover:bg-[#3c2a1e]/5 dark:hover:bg-[#e6dfcd]/5 rounded-md transition-colors"><Feather className="h-3.5 w-3.5" /> {t('poems')}</Link>
                       <Link href="/books" className="flex items-center gap-2 p-1.5 text-sm md:text-base text-[#3c2a1e] dark:text-[#e6dfcd] hover:bg-[#3c2a1e]/5 dark:hover:bg-[#e6dfcd]/5 rounded-md transition-colors"><BookOpen className="h-3.5 w-3.5" /> {t('books')}</Link>
+                      <Link href="/quotes" className="flex items-center gap-2 p-1.5 text-sm md:text-base text-[#3c2a1e] dark:text-[#e6dfcd] hover:bg-[#3c2a1e]/5 dark:hover:bg-[#e6dfcd]/5 rounded-md transition-colors"><Quote className="h-3.5 w-3.5" /> {t('quotes') || 'Quotes'}</Link>
                        <Link href="/about" className="flex items-center gap-2 p-1.5 text-sm md:text-base text-[#3c2a1e] dark:text-[#e6dfcd] hover:bg-[#3c2a1e]/5 dark:hover:bg-[#e6dfcd]/5 rounded-md transition-colors"><User className="h-3.5 w-3.5" /> {t('about')}</Link>
                       {/*<Link href="/shayari" className="flex items-center gap-2 p-1.5 text-sm md:text-base text-[#3c2a1e] dark:text-[#e6dfcd] hover:bg-[#3c2a1e]/5 dark:hover:bg-[#e6dfcd]/5 rounded-md transition-colors"><PenTool className="h-3.5 w-3.5" /> {t('shayari')}</Link>
                       <Link href="/sher" className="flex items-center gap-2 p-1.5 text-sm md:text-base text-[#3c2a1e] dark:text-[#e6dfcd] hover:bg-[#3c2a1e]/5 dark:hover:bg-[#e6dfcd]/5 rounded-md transition-colors"><Feather className="h-3.5 w-3.5" /> {t('sher')}</Link>*/}

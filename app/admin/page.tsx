@@ -20,17 +20,19 @@ function AdminDashboardContent() {
     books: 0,
     orders: 0,
     reviews: 0,
+    quotes: 0,
   })
   const [loading, setLoading] = useState(true)
 
   useEffect(() => {
     async function fetchStats() {
       try {
-        const [poemsRes, booksRes, ordersRes, reviewsRes] = await Promise.all([
+        const [poemsRes, booksRes, ordersRes, reviewsRes, quotesRes] = await Promise.all([
           fetch("/api/poems"),
           fetch("/api/books"),
           fetch("/api/orders"),
           fetch("/api/reviews"),
+          fetch("/api/quotes"),
         ])
 
         if (poemsRes.ok && booksRes.ok && ordersRes.ok && reviewsRes.ok) {
@@ -38,12 +40,14 @@ function AdminDashboardContent() {
           const books = await booksRes.json()
           const orders = await ordersRes.json()
           const reviews = await reviewsRes.json()
+          const quotes = quotesRes.ok ? await quotesRes.json() : []
 
           setStats({
             poems: poems.length,
             books: books.length,
             orders: orders.length,
             reviews: reviews.length,
+            quotes: quotes.length,
           })
         }
       } catch (error) {
@@ -66,9 +70,9 @@ function AdminDashboardContent() {
         </div>
 
         {/* Stats Grid */}
-        <div className="grid md:grid-cols-4 gap-6 mb-12">
+        <div className="grid md:grid-cols-5 gap-4 mb-12">
           <Card>
-            <CardHeader>
+            <CardHeader className="pb-2">
               <CardTitle className="text-sm text-muted-foreground">Total Poems</CardTitle>
             </CardHeader>
             <CardContent>
@@ -77,7 +81,7 @@ function AdminDashboardContent() {
           </Card>
 
           <Card>
-            <CardHeader>
+            <CardHeader className="pb-2">
               <CardTitle className="text-sm text-muted-foreground">Total Books</CardTitle>
             </CardHeader>
             <CardContent>
@@ -86,7 +90,7 @@ function AdminDashboardContent() {
           </Card>
 
           <Card>
-            <CardHeader>
+            <CardHeader className="pb-2">
               <CardTitle className="text-sm text-muted-foreground">Total Orders</CardTitle>
             </CardHeader>
             <CardContent>
@@ -95,11 +99,20 @@ function AdminDashboardContent() {
           </Card>
 
           <Card>
-            <CardHeader>
+            <CardHeader className="pb-2">
               <CardTitle className="text-sm text-muted-foreground">Total Reviews</CardTitle>
             </CardHeader>
             <CardContent>
               <p className="text-3xl font-bold text-primary">{stats.reviews}</p>
+            </CardContent>
+          </Card>
+
+          <Card>
+            <CardHeader className="pb-2">
+              <CardTitle className="text-sm text-muted-foreground">Total Quotes</CardTitle>
+            </CardHeader>
+            <CardContent>
+              <p className="text-3xl font-bold text-primary">{stats.quotes}</p>
             </CardContent>
           </Card>
         </div>
@@ -188,6 +201,9 @@ function AdminDashboardContent() {
               </Button>
               <Button asChild variant="outline" className="w-full bg-transparent">
                 <Link href="/admin/sher">Manage Sher</Link>
+              </Button>
+              <Button asChild variant="outline" className="w-full bg-transparent">
+                <Link href="/admin/quotes">Manage Quotes</Link>
               </Button>
               <Button asChild variant="outline" className="w-full bg-transparent">
                 <Link href="/admin/blogs">Manage Blogs</Link>

@@ -6,6 +6,7 @@ import { useEffect, useState } from "react"
 import { useParams, useRouter } from "next/navigation"
 import { Button } from "@/components/ui/button"
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
+import RichTextEditor from "@/components/rich-text-editor"
 
 export default function EditPoemPage() {
   const params = useParams()
@@ -111,13 +112,12 @@ export default function EditPoemPage() {
               </div>
 
               <div>
-                <label className="text-sm text-muted-foreground mb-2 block">Content</label>
-                <textarea
-                  name="content"
+                <label className="text-sm text-muted-foreground mb-2 block">Content (Rich Text / MS Word Style)</label>
+                <RichTextEditor
                   value={formData.content}
-                  onChange={handleChange}
-                  required
-                  className="w-full px-3 py-2 rounded border border-border bg-background text-foreground min-h-40"
+                  onChange={(val) => setFormData(prev => ({ ...prev, content: val }))}
+                  placeholder="Enter full poem content. You can copy and paste rich text here."
+                  minHeight="min-h-[300px]"
                 />
               </div>
 

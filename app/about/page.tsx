@@ -23,6 +23,7 @@ import {
 import { Button } from "@/components/ui/button"
 import Link from "next/link"
 import { useTranslations } from "@/lib/language-context"
+import ContentRenderer from "@/components/content-renderer"
 
 interface DataItem {
   _id: string
@@ -146,17 +147,23 @@ export default function AboutPage() {
               <div className="h-1 w-20 bg-primary rounded-full"></div>
             </div>
 
-            <div className="prose prose-lg dark:prose-invert text-muted-foreground">
-              <p className="lead text-xl text-foreground font-medium">
-                {t("about_p1")}
-              </p>
-              <p>{t("about_p2")}</p>
-              <p>{t("about_p3")}</p>
-              <p>{t("about_p4")}</p>
-              <p>{t("about_p5")}</p>
-              <p className="font-medium text-foreground italic">
-                {t("about_p6")}
-              </p>
+            <div className="prose prose-lg dark:prose-invert text-muted-foreground font-serif">
+              {settings.aboutDescription ? (
+                <ContentRenderer content={settings.aboutDescription} />
+              ) : (
+                <>
+                  <p className="lead text-xl text-foreground font-medium">
+                    {t("about_p1")}
+                  </p>
+                  <p>{t("about_p2")}</p>
+                  <p>{t("about_p3")}</p>
+                  <p>{t("about_p4")}</p>
+                  <p>{t("about_p5")}</p>
+                  <p className="font-medium text-foreground italic">
+                    {t("about_p6")}
+                  </p>
+                </>
+              )}
             </div>
 
             <div className="flex flex-wrap gap-4 pt-4">

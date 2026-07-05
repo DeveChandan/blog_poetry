@@ -27,7 +27,6 @@ export default function BookCard({ id, title, description, price, type, cover, a
         </div>
         <CardHeader>
           <CardTitle className="line-clamp-2">{title}</CardTitle>
-          {author && <p className="text-muted-foreground text-sm">by {author}</p>}
         </CardHeader>
         <CardContent className="flex-1 flex flex-col justify-between">
           <p className="text-muted-foreground line-clamp-2 mb-4">{description}</p>

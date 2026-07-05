@@ -59,6 +59,7 @@ import { Slider } from "@/components/ui/slider"
 import { Alert, AlertDescription } from "@/components/ui/alert"
 import { toast } from "sonner"
 import { useLanguage } from "@/lib/language-context"
+import { parseFormatting } from "@/components/content-renderer"
 
 interface Poem {
   _id: string
@@ -555,21 +556,28 @@ export default function PoemDetailPage() {
 
               {/* Content Lines */}
               <div className={`relative pl-8 md:pl-12 ${currentTranslateLang === 'ur' ? 'text-right' : ''}`} dir={currentTranslateLang === 'ur' ? 'rtl' : 'ltr'}>
-                {(translatedContent || poem.content).split('\n').map((line, index) => (
-                  <motion.p
-                    key={index}
-                    initial={{ opacity: 0, x: -20 }}
-                    animate={{ opacity: 1, x: 0 }}
-                    transition={{ delay: 0.1 * index }}
-                    className={`mb-4 ${line.trim() === '' ? 'h-6' : ''}`}
-                  >
-                    {line.trim() === '' ? (
-                      <span className="block h-4"></span>
-                    ) : (
-                      line
-                    )}
-                  </motion.p>
-                ))}
+                {/<[a-z][\s\S]*>/i.test(translatedContent || poem.content) ? (
+                  <div 
+                    className="prose dark:prose-invert max-w-none font-serif leading-relaxed text-foreground"
+                    dangerouslySetInnerHTML={{ __html: translatedContent || poem.content }}
+                  />
+                ) : (
+                  (translatedContent || poem.content).split('\n').map((line, index) => (
+                    <motion.p
+                      key={index}
+                      initial={{ opacity: 0, x: -20 }}
+                      animate={{ opacity: 1, x: 0 }}
+                      transition={{ delay: 0.1 * index }}
+                      className={`mb-4 ${line.trim() === '' ? 'h-6' : ''}`}
+                    >
+                      {line.trim() === '' ? (
+                        <span className="block h-4"></span>
+                      ) : (
+                        parseFormatting(line)
+                      )}
+                    </motion.p>
+                  ))
+                )}
               </div>
             </motion.div>
 

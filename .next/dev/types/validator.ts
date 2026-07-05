@@ -164,6 +164,15 @@ type RouteHandlerConfig<Route extends AppRouteHandlerRoutes = AppRouteHandlerRou
   type __Unused = __Check
 }
 
+// Validate ../../../app/admin/quotes/page.tsx
+{
+  type __IsExpected<Specific extends AppPageConfig<"/admin/quotes">> = Specific
+  const handler = {} as typeof import("../../../app/admin/quotes/page.js")
+  type __Check = __IsExpected<typeof handler>
+  // @ts-ignore
+  type __Unused = __Check
+}
+
 // Validate ../../../app/admin/reviews/page.tsx
 {
   type __IsExpected<Specific extends AppPageConfig<"/admin/reviews">> = Specific
@@ -339,6 +348,15 @@ type RouteHandlerConfig<Route extends AppRouteHandlerRoutes = AppRouteHandlerRou
 {
   type __IsExpected<Specific extends AppPageConfig<"/quiz">> = Specific
   const handler = {} as typeof import("../../../app/quiz/page.js")
+  type __Check = __IsExpected<typeof handler>
+  // @ts-ignore
+  type __Unused = __Check
+}
+
+// Validate ../../../app/quotes/page.tsx
+{
+  type __IsExpected<Specific extends AppPageConfig<"/quotes">> = Specific
+  const handler = {} as typeof import("../../../app/quotes/page.js")
   type __Check = __IsExpected<typeof handler>
   // @ts-ignore
   type __Unused = __Check
@@ -627,6 +645,24 @@ type RouteHandlerConfig<Route extends AppRouteHandlerRoutes = AppRouteHandlerRou
 {
   type __IsExpected<Specific extends RouteHandlerConfig<"/api/quiz">> = Specific
   const handler = {} as typeof import("../../../app/api/quiz/route.js")
+  type __Check = __IsExpected<typeof handler>
+  // @ts-ignore
+  type __Unused = __Check
+}
+
+// Validate ../../../app/api/quotes/[id]/route.ts
+{
+  type __IsExpected<Specific extends RouteHandlerConfig<"/api/quotes/[id]">> = Specific
+  const handler = {} as typeof import("../../../app/api/quotes/[id]/route.js")
+  type __Check = __IsExpected<typeof handler>
+  // @ts-ignore
+  type __Unused = __Check
+}
+
+// Validate ../../../app/api/quotes/route.ts
+{
+  type __IsExpected<Specific extends RouteHandlerConfig<"/api/quotes">> = Specific
+  const handler = {} as typeof import("../../../app/api/quotes/route.js")
   type __Check = __IsExpected<typeof handler>
   // @ts-ignore
   type __Unused = __Check

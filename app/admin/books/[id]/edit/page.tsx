@@ -6,6 +6,7 @@ import { useEffect, useState } from "react"
 import { useParams, useRouter } from "next/navigation"
 import { Button } from "@/components/ui/button"
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
+import { UploadCloud } from "lucide-react"
 
 export default function EditBookPage() {
   const params = useParams()
@@ -23,9 +24,11 @@ export default function EditBookPage() {
     filePath: "",
   })
   const [selectedFile, setSelectedFile] = useState<File | null>(null)
+  const [selectedCoverFile, setSelectedCoverFile] = useState<File | null>(null)
   const [loading, setLoading] = useState(true)
   const [saving, setSaving] = useState(false)
   const [uploading, setUploading] = useState(false)
+  const [uploadingCover, setUploadingCover] = useState(false)
 
   useEffect(() => {
     async function fetchBook() {
@@ -69,9 +72,37 @@ export default function EditBookPage() {
     }
   }
 
+  const handleCoverChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    if (e.target.files && e.target.files[0]) {
+      setSelectedCoverFile(e.target.files[0])
+    } else {
+      setSelectedCoverFile(null)
+    }
+  }
+
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault()
     setSaving(true)
+
+    let uploadedCover = formData.cover
+    if (selectedCoverFile) {
+      setUploadingCover(true)
+      try {
+        const { upload } = await import('@vercel/blob/client');
+        const newBlob = await upload(selectedCoverFile.name, selectedCoverFile, {
+          access: 'public',
+          handleUploadUrl: '/api/upload',
+        });
+        uploadedCover = newBlob.url
+        setUploadingCover(false)
+      } catch (error) {
+        console.error("Error uploading cover image:", error)
+        alert("Error uploading cover image")
+        setUploadingCover(false)
+        setSaving(false)
+        return
+      }
+    }
 
     let uploadedFilePath = formData.filePath
     if (selectedFile) {
@@ -99,6 +130,7 @@ export default function EditBookPage() {
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
           ...formData,
+          cover: uploadedCover,
           filePath: uploadedFilePath, // Use the uploaded file path
           price: Number.parseFloat(formData.price),
           stock: formData.stock ? Number.parseInt(formData.stock) : undefined,
@@ -207,14 +239,47 @@ export default function EditBookPage() {
               </div>
 
               <div>
-                <label className="text-sm text-muted-foreground mb-2 block">Cover Image URL</label>
-                <input
-                  type="url"
-                  name="cover"
-                  value={formData.cover}
-                  onChange={handleChange}
-                  className="w-full px-3 py-2 rounded border border-border bg-background text-foreground"
-                />
+                <label className="text-sm text-muted-foreground mb-2 block">Cover Image</label>
+                <div className="flex gap-2">
+                  <input
+                    type="url"
+                    name="cover"
+                    value={formData.cover}
+                    onChange={handleChange}
+                    className="flex-1 px-3 py-2 rounded border border-border bg-background text-foreground"
+                    placeholder="https://... or upload local image"
+                  />
+                  <input
+                    type="file"
+                    accept="image/*"
+                    id="cover-upload"
+                    className="hidden"
+                    onChange={handleCoverChange}
+                  />
+                  <Button
+                    type="button"
+                    variant="outline"
+                    className="bg-transparent text-foreground hover:bg-muted"
+                    onClick={() => document.getElementById("cover-upload")?.click()}
+                  >
+                    <UploadCloud className="w-4 h-4 mr-2" />
+                    Upload
+                  </Button>
+                </div>
+                {selectedCoverFile && (
+                  <p className="text-sm text-muted-foreground mt-1">
+                    Selected cover file: {selectedCoverFile.name} (will be uploaded on save)
+                  </p>
+                )}
+                {(selectedCoverFile || formData.cover) && (
+                  <div className="mt-2 h-20 w-20 rounded overflow-hidden border border-border bg-muted">
+                    <img
+                      src={selectedCoverFile ? URL.createObjectURL(selectedCoverFile) : formData.cover}
+                      alt="Cover Preview"
+                      className="w-full h-full object-cover"
+                    />
+                  </div>
+                )}
               </div>
 
               <div>
@@ -243,10 +308,10 @@ export default function EditBookPage() {
               </div>
 
               <div className="flex gap-4">
-                <Button type="submit" disabled={saving || uploading}>
-                  {saving ? "Saving..." : uploading ? "Uploading File..." : "Save Changes"}
+                <Button type="submit" disabled={saving || uploading || uploadingCover}>
+                  {uploadingCover ? "Uploading Cover..." : uploading ? "Uploading E-book..." : saving ? "Saving..." : "Save Changes"}
                 </Button>
-                <Button type="button" variant="outline" onClick={() => router.back()} className="bg-transparent">
+                <Button type="button" variant="outline" onClick={() => router.back()} className="bg-transparent text-foreground hover:bg-muted">
                   Cancel
                 </Button>
               </div>

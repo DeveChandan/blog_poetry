@@ -1,30 +1,243 @@
-[00:00:03.112] Server  WARN     ⚠ The "middleware" file convention is deprecated. Please use "proxy" instead. Learn more: https://nextjs.org/docs/messages/middleware-to-proxy
-[00:00:03.572] Server  LOG      ✓ Ready in 2.7s
-[00:00:03.631] Browser ERROR   Translation error: {}
-[00:00:03.631] Browser ERROR   Translation error: {}
-[00:00:03.631] Browser ERROR   Translation error: {}
-[00:00:03.631] Browser ERROR   Translation error: {}
-[00:00:03.631] Browser ERROR   Translation error: {}
-[00:00:03.631] Browser ERROR   Translation error: {}
-[00:00:03.631] Browser ERROR   Translation error: {}
-[00:00:03.631] Browser ERROR   Translation error: {}
-[00:00:03.631] Browser ERROR   Translation error: {}
-[00:00:03.631] Browser ERROR   Translation error: {}
-[00:00:03.631] Browser ERROR   Translation error: {}
-[00:00:03.631] Browser ERROR   Translation error: {}
-[00:00:03.631] Browser ERROR   Translation error: {}
-[00:00:03.631] Browser ERROR   Translation error: {}
-[00:00:03.631] Browser ERROR   Translation error: {}
-[00:00:03.631] Browser ERROR   Translation error: {}
-[00:00:03.631] Browser ERROR   Translation error: {}
-[00:00:03.631] Browser ERROR   Translation error: {}
-[00:00:03.631] Browser ERROR   Translation error: {}
-[00:00:03.631] Browser ERROR   Translation error: {}
-[00:00:03.631] Browser ERROR   Translation error: {}
-[00:00:03.631] Browser ERROR   Translation error: {}
-[00:00:09.480] Server  LOG      ○ Compiling / ...
-[00:00:36.337] Browser INFO    %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold
-[00:00:38.622] Browser ERROR   A tree hydrated but some attributes of the server rendered HTML didn't match the client properties. This won't be patched up. This can happen if a SSR-ed Client Component used:
+[00:00:06.966] Server  WARN     ⚠ The "middleware" file convention is deprecated. Please use "proxy" instead. Learn more: https://nextjs.org/docs/messages/middleware-to-proxy
+[00:00:08.610] Server  LOG      ✓ Ready in 6.3s
+[00:01:37.505] Server  LOG      ○ Compiling /poems ...
+[00:01:48.228] Browser INFO    %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold
+[00:01:49.149] Browser LOG     %c[Vercel Web Analytics]%c Debug mode is enabled by default in development. No requests will be sent to the server. color: rgb(120, 120, 120) color: inherit
+[00:01:49.149] Browser LOG     %c[Vercel Web Analytics]%c Running queued event color: rgb(120, 120, 120) color: inherit pageview {"path":"/poems","route":"/poems"}
+[00:01:49.149] Browser LOG     %c[Vercel Web Analytics]%c [view] http://localhost:3000/poems color: rgb(120, 120, 120) color: inherit {"dp":"/poems","o":"http://localhost:3000/poems","sdkn":"@vercel/analytics/next","sdkv":"1.6.1","sv":"0.1.3","ts":1783149658771} /_vercel/insights/view
+[00:01:52.205] Server  LOG     API /api/auth/session: Session status: null
+[00:01:52.321] Browser LOG     useSession: Raw response from /api/auth/session: {}
+[00:01:52.321] Browser LOG     useSession: Parsed data from /api/auth/session: {"user":null}
+[00:02:23.140] Browser LOG     %c[Vercel Web Analytics]%c [view] http://localhost:3000/books color: rgb(120, 120, 120) color: inherit {"dp":"/books","o":"http://localhost:3000/books","sdkn":"@vercel/analytics/next","sdkv":"1.6.1","sv":"0.1.3","ts":1783149692699} /_vercel/insights/view
+[00:02:27.606] Browser LOG     %c[Vercel Web Analytics]%c [view] http://localhost:3000/about color: rgb(120, 120, 120) color: inherit {"dp":"/about","o":"http://localhost:3000/about","sdkn":"@vercel/analytics/next","sdkv":"1.6.1","sv":"0.1.3","ts":1783149697211} /_vercel/insights/view
+[00:02:29.943] Server  LOG     Processing videos from DB...
+[00:02:29.956] Server  LOG     Video 6979d3dc0f91cdd2dcff3b3d: {}
+[00:02:29.958] Server  LOG     Video 6979d37e8dd9033ee80a4750: {}
+[00:02:29.959] Server  LOG     Video 69771d7a2364bd908d7f0e21: {}
+[00:02:30.051] Server  LOG     Processing videos from DB...
+[00:02:30.052] Server  LOG     Video 6979d3dc0f91cdd2dcff3b3d: {}
+[00:02:30.053] Server  LOG     Video 6979d37e8dd9033ee80a4750: {}
+[00:02:30.053] Server  LOG     Video 69771d7a2364bd908d7f0e21: {}
+[00:02:43.315] Browser LOG     %c[Vercel Web Analytics]%c [view] http://localhost:3000/login color: rgb(120, 120, 120) color: inherit {"dp":"/login","o":"http://localhost:3000/login","sdkn":"@vercel/analytics/next","sdkv":"1.6.1","sv":"0.1.3","ts":1783149712816} /_vercel/insights/view
+[00:02:43.623] Server  LOG     API /api/auth/session: Session status: null
+[00:02:43.835] Browser LOG     useSession: Raw response from /api/auth/session: {}
+[00:02:43.835] Browser LOG     useSession: Parsed data from /api/auth/session: {"user":null}
+[00:02:43.852] Server  LOG     API /api/auth/session: Session status: null
+[00:02:43.963] Browser LOG     useSession: Raw response from /api/auth/session: {}
+[00:02:43.963] Browser LOG     useSession: Parsed data from /api/auth/session: {"user":null}
+[00:02:55.338] Server  LOG     API /api/auth/session: Session status: {}
+[00:02:55.581] Server  LOG     API /api/auth/session: Session status: {}
+[00:02:55.592] Browser LOG     useSession: Raw response from /api/auth/session: {}
+[00:02:55.593] Browser LOG     useSession: Parsed data from /api/auth/session: {"user":{"exp":1783192925,"isAdmin":true,"type":"auth","userId":"6936a3e510ca4806bcd9c3a3"}}
+[00:02:55.686] Browser LOG     useSession: Raw response from /api/auth/session: {}
+[00:02:55.686] Browser LOG     useSession: Parsed data from /api/auth/session: {"user":{"exp":1783192925,"isAdmin":true,"type":"auth","userId":"6936a3e510ca4806bcd9c3a3"}}
+[00:02:57.065] Browser LOG     %c[Vercel Web Analytics]%c [view] http://localhost:3000/admin color: rgb(120, 120, 120) color: inherit {"dp":"/admin","o":"http://localhost:3000/admin","sdkn":"@vercel/analytics/next","sdkv":"1.6.1","sv":"0.1.3","ts":1783149726686} /_vercel/insights/view
+[00:03:03.332] Browser LOG     %c[Vercel Web Analytics]%c [view] http://localhost:3000/admin/poems/create color: rgb(120, 120, 120) color: inherit {"dp":"/admin/poems/create","o":"http://localhost:3000/admin/poems/create","sdkn":"@vercel/analytics/next","sdkv":"1.6.1","sv":"0.1.3","ts":1783149732952} /_vercel/insights/view
+[00:07:17.371] Browser LOG     %c[Vercel Web Analytics]%c [view] http://localhost:3000/admin/poems color: rgb(120, 120, 120) color: inherit {"dp":"/admin/poems","o":"http://localhost:3000/admin/poems","sdkn":"@vercel/analytics/next","sdkv":"1.6.1","sv":"0.1.3","ts":1783149986979} /_vercel/insights/view
+[00:07:34.744] Browser LOG     %c[Vercel Web Analytics]%c [view] http://localhost:3000/admin/poems/create color: rgb(120, 120, 120) color: inherit {"dp":"/admin/poems/create","o":"http://localhost:3000/admin/poems/create","sdkn":"@vercel/analytics/next","sdkv":"1.6.1","sv":"0.1.3","ts":1783150004290} /_vercel/insights/view
+[00:07:36.204] Browser LOG     %c[Vercel Web Analytics]%c [view] http://localhost:3000/admin color: rgb(120, 120, 120) color: inherit {"dp":"/admin","o":"http://localhost:3000/admin","sdkn":"@vercel/analytics/next","sdkv":"1.6.1","sv":"0.1.3","ts":1783150005736} /_vercel/insights/view
+[00:07:41.132] Browser LOG     %c[Vercel Web Analytics]%c [view] http://localhost:3000/admin/books color: rgb(120, 120, 120) color: inherit {"dp":"/admin/books","o":"http://localhost:3000/admin/books","sdkn":"@vercel/analytics/next","sdkv":"1.6.1","sv":"0.1.3","ts":1783150010749} /_vercel/insights/view
+[00:07:42.927] Browser LOG     %c[Vercel Web Analytics]%c [view] http://localhost:3000/admin color: rgb(120, 120, 120) color: inherit {"dp":"/admin","o":"http://localhost:3000/admin","sdkn":"@vercel/analytics/next","sdkv":"1.6.1","sv":"0.1.3","ts":1783150012519} /_vercel/insights/view
+[00:07:46.389] Browser LOG     %c[Vercel Web Analytics]%c [view] http://localhost:3000/admin/books/create color: rgb(120, 120, 120) color: inherit {"dp":"/admin/books/create","o":"http://localhost:3000/admin/books/create","sdkn":"@vercel/analytics/next","sdkv":"1.6.1","sv":"0.1.3","ts":1783150016004} /_vercel/insights/view
+[00:09:31.461] Server  WARN    onUploadCompleted provided but no callbackUrl could be determined. Please provide a callbackUrl in onBeforeGenerateToken or set the VERCEL_BLOB_CALLBACK_URL environment variable.
+[00:09:34.482] Server  WARN    onUploadCompleted provided but no callbackUrl could be determined. Please provide a callbackUrl in onBeforeGenerateToken or set the VERCEL_BLOB_CALLBACK_URL environment variable.
+[00:09:38.121] Browser LOG     %c[Vercel Web Analytics]%c [view] http://localhost:3000/admin/books color: rgb(120, 120, 120) color: inherit {"dp":"/admin/books","o":"http://localhost:3000/admin/books","sdkn":"@vercel/analytics/next","sdkv":"1.6.1","sv":"0.1.3","ts":1783150127742} /_vercel/insights/view
+[00:09:42.297] Browser LOG     %c[Vercel Web Analytics]%c [view] http://localhost:3000/books color: rgb(120, 120, 120) color: inherit {"dp":"/books","o":"http://localhost:3000/books","sdkn":"@vercel/analytics/next","sdkv":"1.6.1","sv":"0.1.3","ts":1783150131910} /_vercel/insights/view
+[00:09:53.966] Browser LOG     %c[Vercel Web Analytics]%c [view] http://localhost:3000/books/6a48b62f20f699eb592263a8 color: rgb(120, 120, 120) color: inherit {"dp":"/books/[id]","o":"http://localhost:3000/books/6a48b62f20f699eb592263a8","sdkn":"@vercel/analytics/next","sdkv":"1.6.1","sv":"0.1.3","ts":1783150143573} /_vercel/insights/view
+[00:09:58.147] Browser WARN    You're attempting to animate multiple children within AnimatePresence, but its mode is set to "wait". This will lead to odd visual behaviour.
+[00:09:58.147] Browser WARN    You're attempting to animate multiple children within AnimatePresence, but its mode is set to "wait". This will lead to odd visual behaviour.
+[00:09:58.147] Browser ERROR   Encountered two children with the same key, `%s`. Keys should be unique so that components maintain their identity across updates. Non-unique keys may cause children to be duplicated and/or omitted — the behavior is unsupported and could change in a future version. 
+[00:11:00.727] Browser LOG     %c[Vercel Web Analytics]%c [view] http://localhost:3000/admin color: rgb(120, 120, 120) color: inherit {"dp":"/admin","o":"http://localhost:3000/admin","sdkn":"@vercel/analytics/next","sdkv":"1.6.1","sv":"0.1.3","ts":1783150210129} /_vercel/insights/view
+[00:11:05.845] Browser LOG     %c[Vercel Web Analytics]%c [view] http://localhost:3000/admin/books/create color: rgb(120, 120, 120) color: inherit {"dp":"/admin/books/create","o":"http://localhost:3000/admin/books/create","sdkn":"@vercel/analytics/next","sdkv":"1.6.1","sv":"0.1.3","ts":1783150215464} /_vercel/insights/view
+[00:12:37.129] Server  LOG      ✓ Compiled in 611ms
+[00:12:39.937] Server  LOG      ✓ Compiled in 204ms
+[00:13:29.596] Browser LOG     %c[Vercel Web Analytics]%c [view] http://localhost:3000/books color: rgb(120, 120, 120) color: inherit {"dp":"/books","o":"http://localhost:3000/books","sdkn":"@vercel/analytics/next","sdkv":"1.6.1","sv":"0.1.3","ts":1783150359192} /_vercel/insights/view
+[00:13:34.160] Browser LOG     %c[Vercel Web Analytics]%c [view] http://localhost:3000/books/6a48b62f20f699eb592263a8 color: rgb(120, 120, 120) color: inherit {"dp":"/books/[id]","o":"http://localhost:3000/books/6a48b62f20f699eb592263a8","sdkn":"@vercel/analytics/next","sdkv":"1.6.1","sv":"0.1.3","ts":1783150363722} /_vercel/insights/view
+[00:13:35.766] Browser WARN    You're attempting to animate multiple children within AnimatePresence, but its mode is set to "wait". This will lead to odd visual behaviour.
+[00:13:35.766] Browser WARN    You're attempting to animate multiple children within AnimatePresence, but its mode is set to "wait". This will lead to odd visual behaviour.
+[00:13:35.768] Browser ERROR   Encountered two children with the same key, `%s`. Keys should be unique so that components maintain their identity across updates. Non-unique keys may cause children to be duplicated and/or omitted — the behavior is unsupported and could change in a future version. 
+[00:13:43.210] Browser LOG     %c[Vercel Web Analytics]%c [view] http://localhost:3000/poems color: rgb(120, 120, 120) color: inherit {"dp":"/poems","o":"http://localhost:3000/poems","sdkn":"@vercel/analytics/next","sdkv":"1.6.1","sv":"0.1.3","ts":1783150372751} /_vercel/insights/view
+[00:13:49.818] Browser LOG     %c[Vercel Web Analytics]%c [view] http://localhost:3000/poems/6a48b5a020f699eb592263a7 color: rgb(120, 120, 120) color: inherit {"dp":"/poems/[id]","o":"http://localhost:3000/poems/6a48b5a020f699eb592263a7","sdkn":"@vercel/analytics/next","sdkv":"1.6.1","sv":"0.1.3","ts":1783150377762} /_vercel/insights/view
+[00:15:18.905] Browser LOG     %c[Vercel Web Analytics]%c [view] http://localhost:3000/about color: rgb(120, 120, 120) color: inherit {"dp":"/about","o":"http://localhost:3000/about","sdkn":"@vercel/analytics/next","sdkv":"1.6.1","sv":"0.1.3","ts":1783150468326} /_vercel/insights/view
+[00:15:19.038] Server  LOG     Processing videos from DB...
+[00:15:19.040] Server  LOG     Video 6979d3dc0f91cdd2dcff3b3d: {}
+[00:15:19.046] Server  LOG     Video 6979d37e8dd9033ee80a4750: {}
+[00:15:19.049] Server  LOG     Video 69771d7a2364bd908d7f0e21: {}
+[00:15:19.270] Server  LOG     Processing videos from DB...
+[00:15:19.272] Server  LOG     Video 6979d3dc0f91cdd2dcff3b3d: {}
+[00:15:19.273] Server  LOG     Video 6979d37e8dd9033ee80a4750: {}
+[00:15:19.275] Server  LOG     Video 69771d7a2364bd908d7f0e21: {}
+[00:15:30.842] Browser LOG     %c[Vercel Web Analytics]%c [view] http://localhost:3000/admin color: rgb(120, 120, 120) color: inherit {"dp":"/admin","o":"http://localhost:3000/admin","sdkn":"@vercel/analytics/next","sdkv":"1.6.1","sv":"0.1.3","ts":1783150480442} /_vercel/insights/view
+[00:16:00.975] Browser LOG     %c[Vercel Web Analytics]%c [view] http://localhost:3000/admin/settings color: rgb(120, 120, 120) color: inherit {"dp":"/admin/settings","o":"http://localhost:3000/admin/settings","sdkn":"@vercel/analytics/next","sdkv":"1.6.1","sv":"0.1.3","ts":1783150510549} /_vercel/insights/view
+[00:16:28.417] Browser LOG     %c[Vercel Web Analytics]%c [view] http://localhost:3000/about color: rgb(120, 120, 120) color: inherit {"dp":"/about","o":"http://localhost:3000/about","sdkn":"@vercel/analytics/next","sdkv":"1.6.1","sv":"0.1.3","ts":1783150538012} /_vercel/insights/view
+[00:16:28.430] Server  LOG     Processing videos from DB...
+[00:16:28.432] Server  LOG     Video 6979d3dc0f91cdd2dcff3b3d: {}
+[00:16:28.433] Server  LOG     Video 6979d37e8dd9033ee80a4750: {}
+[00:16:28.434] Server  LOG     Video 69771d7a2364bd908d7f0e21: {}
+[00:16:28.638] Server  LOG     Processing videos from DB...
+[00:16:28.649] Server  LOG     Video 6979d3dc0f91cdd2dcff3b3d: {}
+[00:16:28.650] Server  LOG     Video 6979d37e8dd9033ee80a4750: {}
+[00:16:28.653] Server  LOG     Video 69771d7a2364bd908d7f0e21: {}
+[00:16:51.317] Browser LOG     %c[Vercel Web Analytics]%c [view] http://localhost:3000/admin/settings color: rgb(120, 120, 120) color: inherit {"dp":"/admin/settings","o":"http://localhost:3000/admin/settings","sdkn":"@vercel/analytics/next","sdkv":"1.6.1","sv":"0.1.3","ts":1783150560919} /_vercel/insights/view
+[00:17:44.621] Browser LOG     %c[Vercel Web Analytics]%c [view] http://localhost:3000/about color: rgb(120, 120, 120) color: inherit {"dp":"/about","o":"http://localhost:3000/about","sdkn":"@vercel/analytics/next","sdkv":"1.6.1","sv":"0.1.3","ts":1783150614235} /_vercel/insights/view
+[00:17:44.726] Server  LOG     Processing videos from DB...
+[00:17:44.728] Server  LOG     Video 6979d3dc0f91cdd2dcff3b3d: {}
+[00:17:44.731] Server  LOG     Video 6979d37e8dd9033ee80a4750: {}
+[00:17:44.732] Server  LOG     Video 69771d7a2364bd908d7f0e21: {}
+[00:17:44.815] Server  LOG     Processing videos from DB...
+[00:17:44.817] Server  LOG     Video 6979d3dc0f91cdd2dcff3b3d: {}
+[00:17:44.817] Server  LOG     Video 6979d37e8dd9033ee80a4750: {}
+[00:17:44.819] Server  LOG     Video 69771d7a2364bd908d7f0e21: {}
+[00:21:22.788] Server  LOG      ✓ Compiled in 1469ms
+[00:21:25.309] Server  LOG      ✓ Compiled in 408ms
+[00:21:29.968] Server  LOG      ✓ Compiled in 814ms
+[00:21:34.475] Server  LOG      ✓ Compiled in 514ms
+[00:21:39.096] Server  LOG      ✓ Compiled in 294ms
+[00:21:43.674] Server  LOG      ✓ Compiled in 320ms
+[00:21:48.328] Server  LOG      ✓ Compiled in 313ms
+[00:22:02.969] Server  LOG      ✓ Compiled in 281ms
+[00:25:04.018] Server  LOG      ✓ Compiled in 421ms
+[00:25:04.715] Browser ERROR   ./app/admin/poems/create/page.tsx:9:1
+Export default doesn't exist in target module
+   7 | import { Button } from "@/components/ui/button"
+   8 | import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
+>  9 | import RichTextEditor from "@/components/rich-text-editor"
+     | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  10 |
+  11 | export default function CreatePoemPage() {
+  12 |   const router = useRouter()
+
+The export default was not found in module [project]/components/rich-text-editor.tsx [app-client] (ecmascript).
+Did you mean to import RichTextEditor?
+All exports of the module are statically known (It doesn't have dynamic exports). So it's known statically that the requested export doesn't exist.
+
+Import traces:
+  Client Component Browser:
+    ./app/admin/poems/create/page.tsx [Client Component Browser]
+    ./app/admin/poems/create/page.tsx [Server Component]
+
+  Client Component SSR:
+    ./app/admin/poems/create/page.tsx [Client Component SSR]
+    ./app/admin/poems/create/page.tsx [Server Component]
+[00:25:04.715] Browser ERROR   ./app/admin/poems/create/page.tsx:9:1
+Export default doesn't exist in target module
+   7 | import { Button } from "@/components/ui/button"
+   8 | import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
+>  9 | import RichTextEditor from "@/components/rich-text-editor"
+     | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  10 |
+  11 | export default function CreatePoemPage() {
+  12 |   const router = useRouter()
+
+The export default was not found in module [project]/components/rich-text-editor.tsx [app-ssr] (ecmascript).
+Did you mean to import RichTextEditor?
+All exports of the module are statically known (It doesn't have dynamic exports). So it's known statically that the requested export doesn't exist.
+
+Import traces:
+  Client Component Browser:
+    ./app/admin/poems/create/page.tsx [Client Component Browser]
+    ./app/admin/poems/create/page.tsx [Server Component]
+
+  Client Component SSR:
+    ./app/admin/poems/create/page.tsx [Client Component SSR]
+    ./app/admin/poems/create/page.tsx [Server Component]
+[00:25:04.715] Browser ERROR   ./app/admin/settings/page.tsx:9:1
+Export default doesn't exist in target module
+   7 | import { upload } from "@vercel/blob/client"
+   8 | import { UploadCloud } from "lucide-react"
+>  9 | import RichTextEditor from "@/components/rich-text-editor"
+     | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  10 |
+  11 | export default function AdminSettingsPage() {
+  12 |   const [formData, setFormData] = useState({
+
+The export default was not found in module [project]/components/rich-text-editor.tsx [app-client] (ecmascript).
+Did you mean to import RichTextEditor?
+All exports of the module are statically known (It doesn't have dynamic exports). So it's known statically that the requested export doesn't exist.
+
+Import traces:
+  Client Component Browser:
+    ./app/admin/settings/page.tsx [Client Component Browser]
+    ./app/admin/settings/page.tsx [Server Component]
+
+  Client Component SSR:
+    ./app/admin/settings/page.tsx [Client Component SSR]
+    ./app/admin/settings/page.tsx [Server Component]
+[00:25:04.715] Browser ERROR   ./app/admin/settings/page.tsx:9:1
+Export default doesn't exist in target module
+   7 | import { upload } from "@vercel/blob/client"
+   8 | import { UploadCloud } from "lucide-react"
+>  9 | import RichTextEditor from "@/components/rich-text-editor"
+     | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  10 |
+  11 | export default function AdminSettingsPage() {
+  12 |   const [formData, setFormData] = useState({
+
+The export default was not found in module [project]/components/rich-text-editor.tsx [app-ssr] (ecmascript).
+Did you mean to import RichTextEditor?
+All exports of the module are statically known (It doesn't have dynamic exports). So it's known statically that the requested export doesn't exist.
+
+Import traces:
+  Client Component Browser:
+    ./app/admin/settings/page.tsx [Client Component Browser]
+    ./app/admin/settings/page.tsx [Server Component]
+
+  Client Component SSR:
+    ./app/admin/settings/page.tsx [Client Component SSR]
+    ./app/admin/settings/page.tsx [Server Component]
+[00:25:06.788] Server  LOG      ✓ Compiled in 274ms
+[00:27:04.230] Browser LOG     %c[Vercel Web Analytics]%c [view] http://localhost:3000/admin color: rgb(120, 120, 120) color: inherit {"dp":"/admin","o":"http://localhost:3000/admin","sdkn":"@vercel/analytics/next","sdkv":"1.6.1","sv":"0.1.3","ts":1783151173596} /_vercel/insights/view
+[00:27:08.868] Browser LOG     %c[Vercel Web Analytics]%c [view] http://localhost:3000/admin/settings color: rgb(120, 120, 120) color: inherit {"dp":"/admin/settings","o":"http://localhost:3000/admin/settings","sdkn":"@vercel/analytics/next","sdkv":"1.6.1","sv":"0.1.3","ts":1783151178482} /_vercel/insights/view
+[00:29:36.354] Browser LOG     %c[Vercel Web Analytics]%c [view] http://localhost:3000/about color: rgb(120, 120, 120) color: inherit {"dp":"/about","o":"http://localhost:3000/about","sdkn":"@vercel/analytics/next","sdkv":"1.6.1","sv":"0.1.3","ts":1783151325911} /_vercel/insights/view
+[00:29:36.360] Server  LOG     Processing videos from DB...
+[00:29:36.362] Server  LOG     Video 6979d3dc0f91cdd2dcff3b3d: {}
+[00:29:36.363] Server  LOG     Video 6979d37e8dd9033ee80a4750: {}
+[00:29:36.364] Server  LOG     Video 69771d7a2364bd908d7f0e21: {}
+[00:29:36.469] Server  LOG     Processing videos from DB...
+[00:29:36.470] Server  LOG     Video 6979d3dc0f91cdd2dcff3b3d: {}
+[00:29:36.471] Server  LOG     Video 6979d37e8dd9033ee80a4750: {}
+[00:29:36.478] Server  LOG     Video 69771d7a2364bd908d7f0e21: {}
+[00:30:04.057] Browser LOG     %c[Vercel Web Analytics]%c [view] http://localhost:3000/admin color: rgb(120, 120, 120) color: inherit {"dp":"/admin","o":"http://localhost:3000/admin","sdkn":"@vercel/analytics/next","sdkv":"1.6.1","sv":"0.1.3","ts":1783151353431} /_vercel/insights/view
+[00:30:07.451] Browser LOG     %c[Vercel Web Analytics]%c [view] http://localhost:3000/admin/settings color: rgb(120, 120, 120) color: inherit {"dp":"/admin/settings","o":"http://localhost:3000/admin/settings","sdkn":"@vercel/analytics/next","sdkv":"1.6.1","sv":"0.1.3","ts":1783151357056} /_vercel/insights/view
+[00:30:24.359] Browser LOG     %c[Vercel Web Analytics]%c [view] http://localhost:3000/about color: rgb(120, 120, 120) color: inherit {"dp":"/about","o":"http://localhost:3000/about","sdkn":"@vercel/analytics/next","sdkv":"1.6.1","sv":"0.1.3","ts":1783151373935} /_vercel/insights/view
+[00:30:24.360] Server  LOG     Processing videos from DB...
+[00:30:24.361] Server  LOG     Video 6979d3dc0f91cdd2dcff3b3d: {}
+[00:30:24.363] Server  LOG     Video 6979d37e8dd9033ee80a4750: {}
+[00:30:24.366] Server  LOG     Video 69771d7a2364bd908d7f0e21: {}
+[00:30:24.443] Server  LOG     Processing videos from DB...
+[00:30:24.444] Server  LOG     Video 6979d3dc0f91cdd2dcff3b3d: {}
+[00:30:24.444] Server  LOG     Video 6979d37e8dd9033ee80a4750: {}
+[00:30:24.450] Server  LOG     Video 69771d7a2364bd908d7f0e21: {}
+[00:37:46.211] Server  LOG      ✓ Compiled in 1517ms
+[00:37:50.003] Server  LOG      ✓ Compiled in 457ms
+[00:37:59.641] Server  LOG      ✓ Compiled in 671ms
+[00:38:04.505] Server  LOG      ✓ Compiled in 280ms
+[00:38:13.162] Server  LOG      ✓ Compiled in 347ms
+[00:38:13.170] Server  WARN     ⚠ Fast Refresh had to perform a full reload when ./lib/translations.ts changed. Read more: https://nextjs.org/docs/messages/fast-refresh-reload
+[00:38:14.871] Browser INFO    %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold
+[00:38:16.020] Server  LOG     API /api/auth/session: Session status: {}
+[00:38:16.707] Browser LOG     useSession: Raw response from /api/auth/session: {}
+[00:38:16.707] Browser LOG     useSession: Parsed data from /api/auth/session: {"user":{"exp":1783192925,"isAdmin":true,"type":"auth","userId":"6936a3e510ca4806bcd9c3a3"}}
+[00:38:16.825] Server  LOG     Processing videos from DB...
+[00:38:16.826] Server  LOG     Video 6979d3dc0f91cdd2dcff3b3d: {}
+[00:38:16.827] Server  LOG     Video 6979d37e8dd9033ee80a4750: {}
+[00:38:16.827] Server  LOG     Video 69771d7a2364bd908d7f0e21: {}
+[00:38:17.720] Browser LOG     %c[Vercel Web Analytics]%c Debug mode is enabled by default in development. No requests will be sent to the server. color: rgb(120, 120, 120) color: inherit
+[00:38:17.720] Browser LOG     %c[Vercel Web Analytics]%c Running queued event color: rgb(120, 120, 120) color: inherit pageview {"path":"/about","route":"/about"}
+[00:38:17.720] Browser LOG     %c[Vercel Web Analytics]%c [view] http://localhost:3000/about color: rgb(120, 120, 120) color: inherit {"dp":"/about","o":"http://localhost:3000/about","sdkn":"@vercel/analytics/next","sdkv":"1.6.1","sv":"0.1.3","ts":1783151846605} /_vercel/insights/view
+[00:38:29.289] Server  LOG      ✓ Compiled in 341ms
+[00:38:29.345] Server  LOG     API /api/auth/session: Session status: {}
+[00:38:29.719] Browser LOG     useSession: Raw response from /api/auth/session: {}
+[00:38:29.719] Browser LOG     useSession: Parsed data from /api/auth/session: {"user":{"exp":1783192925,"isAdmin":true,"type":"auth","userId":"6936a3e510ca4806bcd9c3a3"}}
+[00:38:47.847] Server  LOG      ✓ Compiled in 2.7s
+[00:38:48.553] Server  LOG     API /api/auth/session: Session status: {}
+[00:38:49.714] Browser INFO    %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold
+[00:38:50.136] Server  LOG     API /api/auth/session: Session status: {}
+[00:38:50.270] Server  LOG     Processing videos from DB...
+[00:38:50.275] Server  LOG     Video 6979d3dc0f91cdd2dcff3b3d: {}
+[00:38:50.278] Server  LOG     Video 6979d37e8dd9033ee80a4750: {}
+[00:38:50.285] Server  LOG     Video 69771d7a2364bd908d7f0e21: {}
+[00:38:50.724] Browser ERROR   A tree hydrated but some attributes of the server rendered HTML didn't match the client properties. This won't be patched up. This can happen if a SSR-ed Client Component used:
 
 - A server/client branch `if (typeof window !== 'undefined')`.
 - Variable input such as `Date.now()` or `Math.random()` which changes each time it's called.
@@ -42,7 +255,7 @@ It can also happen if the client has a browser extension installed which messes 
         <ReplaySsrOnlyErrors>
         <DevRootHTTPAccessFallbackBoundary>
           <HTTPAccessFallbackBoundary notFound={<NotAllowedRootHTTPFallbackError>}>
-            <HTTPAccessFallbackErrorBoundary pathname="/" notFound={<NotAllowedRootHTTPFallbackError>} ...>
+            <HTTPAccessFallbackErrorBoundary pathname="/about" notFound={<NotAllowedRootHTTPFallbackError>} ...>
               <RedirectBoundary>
                 <RedirectErrorBoundary router={{...}}>
                   <Head>
@@ -57,202 +270,44 @@ It can also happen if the client has a browser extension installed which messes 
                       <script>
                       <script>
                       <RootLayout>
-                        <html lang="en" className="inter_b299..." suppressHydrationWarning={true}>
+                        <html lang="hi" className="inter_b299..." suppressHydrationWarning={true}>
                           <body
                             className="font-sans antialiased"
--                           data-new-gr-c-s-check-loaded="14.1299.0"
+-                           data-new-gr-c-s-check-loaded="14.1307.0"
 -                           data-gr-ext-installed=""
                           >
                   ...
 
-[00:00:38.637] Browser WARN    Image with src "https://www.typecalendar.com/wp-content/uploads/2023/06/Download-Cover-Page-Template.jpg?gid=122" has either width or height modified, but not the other. If you use CSS to change the size of your image, also include the styles 'width: "auto"' or 'height: "auto"' to maintain the aspect ratio.
-[00:00:38.637] Browser WARN    Image with src "http://localhost:3000/placeholder.jpg" has either width or height modified, but not the other. If you use CSS to change the size of your image, also include the styles 'width: "auto"' or 'height: "auto"' to maintain the aspect ratio.
-[00:00:40.676] Server  LOG     API /api/auth/session: Session status: null
-[00:00:40.862] Browser LOG     useSession: Raw response from /api/auth/session: {}
-[00:00:40.862] Browser LOG     useSession: Parsed data from /api/auth/session: {"user":null}
-[00:00:42.447] Browser LOG     %c[Vercel Web Analytics]%c Debug mode is enabled by default in development. No requests will be sent to the server. color: rgb(120, 120, 120) color: inherit
-[00:00:42.447] Browser LOG     %c[Vercel Web Analytics]%c Running queued event color: rgb(120, 120, 120) color: inherit pageview {"path":"/","route":"/"}
-[00:00:42.447] Browser LOG     %c[Vercel Web Analytics]%c [view] http://localhost:3000/ color: rgb(120, 120, 120) color: inherit {"dp":"/","o":"http://localhost:3000/","sdkn":"@vercel/analytics/next","sdkv":"1.6.1","sv":"0.1.3","ts":1781245715533} /_vercel/insights/view
-[00:00:42.752] Browser LOG     %c[Vercel Web Analytics]%c [view] http://localhost:3000/blog color: rgb(120, 120, 120) color: inherit {"dp":"/blog","o":"http://localhost:3000/blog","sdkn":"@vercel/analytics/next","sdkv":"1.6.1","sv":"0.1.3","ts":1781245715822} /_vercel/insights/view
-[00:00:50.500] Browser LOG     %c[Vercel Web Analytics]%c [view] http://localhost:3000/blog/artificial-intelligence-the-technology-transforming-our-future color: rgb(120, 120, 120) color: inherit {"dp":"/blog/[slug]","o":"http://localhost:3000/blog/artificial-intelligence-the-technology-transforming-our-future","sdkn":"@vercel/analytics/next","sdkv":"1.6.1","sv":"0.1.3","ts":1781245723580} /_vercel/insights/view
-[00:03:41.101] Browser LOG     %c[Vercel Web Analytics]%c [view] http://localhost:3000/books color: rgb(120, 120, 120) color: inherit {"dp":"/books","o":"http://localhost:3000/books","sdkn":"@vercel/analytics/next","sdkv":"1.6.1","sv":"0.1.3","ts":1781245894181} /_vercel/insights/view
-[00:03:46.685] Server  LOG      ○ Compiling /books/[id] ...
-[00:03:50.355] Browser LOG     %c[Vercel Web Analytics]%c [view] http://localhost:3000/books/694a40132665fde3d1f43e97 color: rgb(120, 120, 120) color: inherit {"dp":"/books/[id]","o":"http://localhost:3000/books/694a40132665fde3d1f43e97","sdkn":"@vercel/analytics/next","sdkv":"1.6.1","sv":"0.1.3","ts":1781245903414} /_vercel/insights/view
-[00:03:57.815] Browser WARN    You're attempting to animate multiple children within AnimatePresence, but its mode is set to "wait". This will lead to odd visual behaviour.
-[00:03:57.816] Browser WARN    You're attempting to animate multiple children within AnimatePresence, but its mode is set to "wait". This will lead to odd visual behaviour.
-[00:03:57.816] Browser ERROR   Encountered two children with the same key, `%s`. Keys should be unique so that components maintain their identity across updates. Non-unique keys may cause children to be duplicated and/or omitted — the behavior is unsupported and could change in a future version. 
-[00:04:21.727] Browser LOG     %c[Vercel Web Analytics]%c [view] http://localhost:3000/books color: rgb(120, 120, 120) color: inherit {"dp":"/books","o":"http://localhost:3000/books","sdkn":"@vercel/analytics/next","sdkv":"1.6.1","sv":"0.1.3","ts":1781245934677} /_vercel/insights/view
-[00:04:26.655] Browser LOG     %c[Vercel Web Analytics]%c [view] http://localhost:3000/books/694a40132665fde3d1f43e97 color: rgb(120, 120, 120) color: inherit {"dp":"/books/[id]","o":"http://localhost:3000/books/694a40132665fde3d1f43e97","sdkn":"@vercel/analytics/next","sdkv":"1.6.1","sv":"0.1.3","ts":1781245939659} /_vercel/insights/view
-[00:04:29.306] Browser WARN    You're attempting to animate multiple children within AnimatePresence, but its mode is set to "wait". This will lead to odd visual behaviour.
-[00:04:29.307] Browser WARN    You're attempting to animate multiple children within AnimatePresence, but its mode is set to "wait". This will lead to odd visual behaviour.
-[00:04:29.307] Browser ERROR   Encountered two children with the same key, `%s`. Keys should be unique so that components maintain their identity across updates. Non-unique keys may cause children to be duplicated and/or omitted — the behavior is unsupported and could change in a future version. 
-[00:04:40.777] Browser WARN    You're attempting to animate multiple children within AnimatePresence, but its mode is set to "wait". This will lead to odd visual behaviour.
-[00:04:40.778] Browser WARN    You're attempting to animate multiple children within AnimatePresence, but its mode is set to "wait". This will lead to odd visual behaviour.
-[00:04:40.778] Browser ERROR   Encountered two children with the same key, `%s`. Keys should be unique so that components maintain their identity across updates. Non-unique keys may cause children to be duplicated and/or omitted — the behavior is unsupported and could change in a future version. 
-[00:04:41.284] Browser WARN    You're attempting to animate multiple children within AnimatePresence, but its mode is set to "wait". This will lead to odd visual behaviour.
-[00:04:41.284] Browser WARN    You're attempting to animate multiple children within AnimatePresence, but its mode is set to "wait". This will lead to odd visual behaviour.
-[00:04:41.284] Browser ERROR   Encountered two children with the same key, `%s`. Keys should be unique so that components maintain their identity across updates. Non-unique keys may cause children to be duplicated and/or omitted — the behavior is unsupported and could change in a future version. 
-[00:04:42.108] Browser WARN    You're attempting to animate multiple children within AnimatePresence, but its mode is set to "wait". This will lead to odd visual behaviour.
-[00:04:42.108] Browser WARN    You're attempting to animate multiple children within AnimatePresence, but its mode is set to "wait". This will lead to odd visual behaviour.
-[00:04:42.108] Browser ERROR   Encountered two children with the same key, `%s`. Keys should be unique so that components maintain their identity across updates. Non-unique keys may cause children to be duplicated and/or omitted — the behavior is unsupported and could change in a future version. 
-[00:04:43.541] Browser WARN    You're attempting to animate multiple children within AnimatePresence, but its mode is set to "wait". This will lead to odd visual behaviour.
-[00:04:43.541] Browser WARN    You're attempting to animate multiple children within AnimatePresence, but its mode is set to "wait". This will lead to odd visual behaviour.
-[00:04:43.541] Browser ERROR   Encountered two children with the same key, `%s`. Keys should be unique so that components maintain their identity across updates. Non-unique keys may cause children to be duplicated and/or omitted — the behavior is unsupported and could change in a future version. 
-[00:05:24.112] Browser LOG     %c[Vercel Web Analytics]%c [view] http://localhost:3000/blog color: rgb(120, 120, 120) color: inherit {"dp":"/blog","o":"http://localhost:3000/blog","sdkn":"@vercel/analytics/next","sdkv":"1.6.1","sv":"0.1.3","ts":1781245997111} /_vercel/insights/view
-[00:05:27.083] Browser LOG     %c[Vercel Web Analytics]%c [view] http://localhost:3000/blog/artificial-intelligence-the-technology-transforming-our-future color: rgb(120, 120, 120) color: inherit {"dp":"/blog/[slug]","o":"http://localhost:3000/blog/artificial-intelligence-the-technology-transforming-our-future","sdkn":"@vercel/analytics/next","sdkv":"1.6.1","sv":"0.1.3","ts":1781246000159} /_vercel/insights/view
-[00:05:54.177] Browser LOG     %c[Vercel Web Analytics]%c [view] http://localhost:3000/about color: rgb(120, 120, 120) color: inherit {"dp":"/about","o":"http://localhost:3000/about","sdkn":"@vercel/analytics/next","sdkv":"1.6.1","sv":"0.1.3","ts":1781246027161} /_vercel/insights/view
-[00:05:58.537] Server  LOG      ○ Compiling /api/settings ...
-[00:06:04.015] Server  LOG     Processing videos from DB...
-[00:06:04.851] Server  LOG     Video 6979d3dc0f91cdd2dcff3b3d: {}
-[00:06:05.065] Server  LOG     Video 6979d37e8dd9033ee80a4750: {}
-[00:06:05.117] Server  LOG     Video 69771d7a2364bd908d7f0e21: {}
-[00:06:08.458] Server  LOG     Processing videos from DB...
-[00:06:08.463] Server  LOG     Video 6979d3dc0f91cdd2dcff3b3d: {}
-[00:06:08.475] Server  LOG     Video 6979d37e8dd9033ee80a4750: {}
-[00:06:08.479] Server  LOG     Video 69771d7a2364bd908d7f0e21: {}
-[00:06:18.459] Browser LOG     %c[Vercel Web Analytics]%c [view] http://localhost:3000/login color: rgb(120, 120, 120) color: inherit {"dp":"/login","o":"http://localhost:3000/login","sdkn":"@vercel/analytics/next","sdkv":"1.6.1","sv":"0.1.3","ts":1781246051164} /_vercel/insights/view
-[00:06:19.485] Server  LOG     API /api/auth/session: Session status: null
-[00:06:19.638] Browser LOG     useSession: Raw response from /api/auth/session: {}
-[00:06:19.638] Browser LOG     useSession: Parsed data from /api/auth/session: {"user":null}
-[00:06:19.641] Server  LOG     API /api/auth/session: Session status: null
-[00:06:19.770] Browser LOG     useSession: Raw response from /api/auth/session: {}
-[00:06:19.770] Browser LOG     useSession: Parsed data from /api/auth/session: {"user":null}
-[00:06:34.110] Server  LOG     API /api/auth/session: Session status: {}
-[00:06:34.407] Browser LOG     useSession: Raw response from /api/auth/session: {}
-[00:06:34.407] Browser LOG     useSession: Parsed data from /api/auth/session: {"user":{"exp":1781289267,"isAdmin":true,"type":"auth","userId":"6936a3e510ca4806bcd9c3a3"}}
-[00:06:34.490] Server  LOG     API /api/auth/session: Session status: {}
-[00:06:34.600] Browser LOG     useSession: Raw response from /api/auth/session: {}
-[00:06:34.600] Browser LOG     useSession: Parsed data from /api/auth/session: {"user":{"exp":1781289267,"isAdmin":true,"type":"auth","userId":"6936a3e510ca4806bcd9c3a3"}}
-[00:06:36.081] Browser LOG     %c[Vercel Web Analytics]%c [view] http://localhost:3000/admin color: rgb(120, 120, 120) color: inherit {"dp":"/admin","o":"http://localhost:3000/admin","sdkn":"@vercel/analytics/next","sdkv":"1.6.1","sv":"0.1.3","ts":1781246069147} /_vercel/insights/view
-[00:06:40.289] Server  LOG      ○ Compiling /api/orders ...
-[00:06:46.457] Server  LOG      ○ Compiling /admin/blogs ...
-[00:06:51.260] Browser LOG     %c[Vercel Web Analytics]%c [view] http://localhost:3000/admin/blogs color: rgb(120, 120, 120) color: inherit {"dp":"/admin/blogs","o":"http://localhost:3000/admin/blogs","sdkn":"@vercel/analytics/next","sdkv":"1.6.1","sv":"0.1.3","ts":1781246084280} /_vercel/insights/view
-[00:08:15.008] Browser LOG     %c[Vercel Web Analytics]%c [view] http://localhost:3000/poems color: rgb(120, 120, 120) color: inherit {"dp":"/poems","o":"http://localhost:3000/poems","sdkn":"@vercel/analytics/next","sdkv":"1.6.1","sv":"0.1.3","ts":1781246167924} /_vercel/insights/view
-[00:08:21.466] Server  LOG      ○ Compiling /poems/[id] ...
-[00:08:29.726] Browser LOG     %c[Vercel Web Analytics]%c [view] http://localhost:3000/poems/6a0b4c972d4f92d29ad9e91c color: rgb(120, 120, 120) color: inherit {"dp":"/poems/[id]","o":"http://localhost:3000/poems/6a0b4c972d4f92d29ad9e91c","sdkn":"@vercel/analytics/next","sdkv":"1.6.1","sv":"0.1.3","ts":1781246180115} /_vercel/insights/view
-[00:09:49.735] Browser LOG     %c[Vercel Web Analytics]%c [view] http://localhost:3000/poems color: rgb(120, 120, 120) color: inherit {"dp":"/poems","o":"http://localhost:3000/poems","sdkn":"@vercel/analytics/next","sdkv":"1.6.1","sv":"0.1.3","ts":1781246262544} /_vercel/insights/view
-[00:09:57.205] Browser LOG     %c[Vercel Web Analytics]%c [view] http://localhost:3000/ color: rgb(120, 120, 120) color: inherit {"dp":"/","o":"http://localhost:3000/","sdkn":"@vercel/analytics/next","sdkv":"1.6.1","sv":"0.1.3","ts":1781246270195} /_vercel/insights/view
-[00:14:06.236] Server  LOG      ✓ Compiled in 2.3s
-[00:14:07.795] Server  LOG      ✓ Compiled in 948ms
-[00:14:09.969] Server  LOG      ✓ Compiled in 587ms
-[00:14:47.463] Server  LOG      ✓ Compiled in 636ms
-[00:14:47.844] Server  LOG      ✓ Compiled in 293ms
-[00:14:48.544] Server  LOG      ✓ Compiled in 504ms
-[00:14:49.211] Server  LOG      ✓ Compiled in 513ms
-[00:14:59.908] Browser INFO    %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold
-[00:15:00.927] Server  LOG     API /api/auth/session: Session status: {}
-[00:15:03.226] Browser LOG     useSession: Raw response from /api/auth/session: {}
-[00:15:03.902] Browser LOG     useSession: Parsed data from /api/auth/session: {"user":{"exp":1781289267,"isAdmin":true,"type":"auth","userId":"6936a3e510ca4806bcd9c3a3"}}
-[00:15:03.902] Browser LOG     %c[Vercel Web Analytics]%c Debug mode is enabled by default in development. No requests will be sent to the server. color: rgb(120, 120, 120) color: inherit
-[00:15:03.902] Browser LOG     %c[Vercel Web Analytics]%c Running queued event color: rgb(120, 120, 120) color: inherit pageview {"path":"/","route":"/"}
-[00:15:03.902] Browser LOG     %c[Vercel Web Analytics]%c [view] http://localhost:3000/ color: rgb(120, 120, 120) color: inherit {"dp":"/","o":"http://localhost:3000/","sdkn":"@vercel/analytics/next","sdkv":"1.6.1","sv":"0.1.3","ts":1781246576458} /_vercel/insights/view
-[00:15:33.315] Browser ERROR   A tree hydrated but some attributes of the server rendered HTML didn't match the client properties. This won't be patched up. This can happen if a SSR-ed Client Component used:
-
-- A server/client branch `if (typeof window !== 'undefined')`.
-- Variable input such as `Date.now()` or `Math.random()` which changes each time it's called.
-- Date formatting in a user's locale which doesn't match the server.
-- External changing data without sending a snapshot of it along with the HTML.
-- Invalid HTML tag nesting.
-
-It can also happen if the client has a browser extension installed which messes with the HTML before React loaded.
-
-%s%s https://react.dev/link/hydration-mismatch 
-
-  ...
-    <HTTPAccessFallbackErrorBoundary pathname="/" notFound={<SegmentViewNode>} forbidden={undefined} ...>
-      <RedirectBoundary>
-        <RedirectErrorBoundary router={{...}}>
-          <InnerLayoutRouter url="/" tree={[...]} params={{}} cacheNode={{lazyData:null, ...}} segmentPath={[...]} ...>
-            <SegmentViewNode type="page" pagePath="page.tsx">
-              <SegmentTrieNode>
-              <Home>
-                <main className="min-h-screen">
-                  <Suspense fallback={<div>}>
-                    <VintageHome stats={{totalPoems:7, ...}} featuredPoems={[...]} recentBooks={[...]} ...>
-                      <div className="vintage-ma..." dir="ltr">
-                        ...
-                          <Primitive.button type="button" id="radix-_R_k..." aria-haspopup="menu" aria-expanded={false} ...>
-                            <Slot type="button" id="radix-_R_k..." aria-haspopup="menu" aria-expanded={false} ...>
-                              <SlotClone type="button" id="radix-_R_k..." aria-haspopup="menu" aria-expanded={false} ...>
-                                <Button variant="ghost" size="sm" className="gap-2 h-9 ..." disabled={false} ...>
-                                  <button
-                                    data-slot="dropdown-menu-trigger"
-                                    className={"inline-flex items-center justify-center whitespace-nowrap text-sm fon..."}
-                                    disabled={false}
-                                    type="button"
-                                    id="radix-_R_kclrelb_"
-                                    aria-haspopup="menu"
-                                    aria-expanded={false}
-                                    aria-controls={undefined}
-                                    data-state="closed"
-                                    data-disabled={undefined}
-                                    onPointerDown={function handleEvent}
-                                    onKeyDown={function handleEvent}
-                                    ref={function}
--                                   fdprocessedid="27122w"
-                                  >
-                        <HeroSection>
-                        <div className="relative w...">
-                          <VintageCarousel poems={[...]} books={[...]} recentVideo={{_id:"6979d...", ...}} t={function t} ...>
-                            <div className="relative m...">
-                              <div>
-                              <button
-                                onClick={function scrollPrev}
-                                className="absolute left-2 top-1/2 -translate-y-1/2 z-30 p-2 rounded-full bg-[#f4e8d4]..."
--                               fdprocessedid="t9y1w"
-                              >
-                              <button
-                                onClick={function scrollNext}
-                                className="absolute right-2 top-1/2 -translate-y-1/2 z-30 p-2 rounded-full bg-[#f4e8d4..."
--                               fdprocessedid="pgo23k"
-                              >
-                        ...
-                          <div className="grid grid-...">
-                            <div className="flex flex-...">
-                              <div>
-                              <div className="bg-[#ebdcb...">
-                                <div>
-                                <div>
-                                <form className="w-full fle..." onSubmit={function handleSubmit}>
-                                  <div className="relative">
-                                    <input
-                                      type="text"
-                                      placeholder="Name"
-                                      className="w-full bg-[#fcf9f2] dark:bg-[#1a150f] border border-[#3c2a1e]/25 dark..."
-                                      value=""
-                                      onChange={function onChange}
-                                      required={true}
--                                     fdprocessedid="emnsdo"
-                                    >
-                                  <div className="relative">
-                                    <input
-                                      type="email"
-                                      placeholder="Email"
-                                      className="w-full bg-[#fcf9f2] dark:bg-[#1a150f] border border-[#3c2a1e]/25 dark..."
-                                      value=""
-                                      onChange={function onChange}
-                                      required={true}
--                                     fdprocessedid="1smr0r"
-                                    >
-                                  <div>
-                                  <button
-                                    type="submit"
-                                    className="w-full py-3 bg-[#3c2a1e] text-[#f4e8d4] dark:bg-[#e6dfcd] dark:text-[#1..."
-                                    disabled={false}
--                                   fdprocessedid="kqul1o"
-                                  >
-+                                   Send
-                            ...
-            ...
-          ...
-
-[00:15:33.315] Browser WARN    Image with src "https://www.typecalendar.com/wp-content/uploads/2023/06/Download-Cover-Page-Template.jpg?gid=122" has either width or height modified, but not the other. If you use CSS to change the size of your image, also include the styles 'width: "auto"' or 'height: "auto"' to maintain the aspect ratio.
-[00:15:33.315] Browser WARN    Image with src "http://localhost:3000/placeholder.jpg" has either width or height modified, but not the other. If you use CSS to change the size of your image, also include the styles 'width: "auto"' or 'height: "auto"' to maintain the aspect ratio.
-[00:15:49.189] Server  LOG      ✓ Compiled in 1779ms
-[00:15:51.763] Server  LOG      ✓ Compiled in 1022ms
-[00:16:00.028] Server  LOG      ✓ Compiled in 282ms
-[00:16:06.078] Server  LOG      ✓ Compiled in 471ms
-[00:16:07.510] Server  LOG      ✓ Compiled in 206ms
-[00:16:09.283] Server  LOG      ✓ Compiled in 189ms
-[00:16:11.677] Server  LOG      ✓ Compiled in 242ms
-[00:17:35.771] Browser LOG     %c[Vercel Web Analytics]%c [view] http://localhost:3000/poems color: rgb(120, 120, 120) color: inherit {"dp":"/poems","o":"http://localhost:3000/poems","sdkn":"@vercel/analytics/next","sdkv":"1.6.1","sv":"0.1.3","ts":1781246728515} /_vercel/insights/view
+[00:38:50.724] Browser LOG     useSession: Raw response from /api/auth/session: {}
+[00:38:50.724] Browser LOG     useSession: Parsed data from /api/auth/session: {"user":{"exp":1783192925,"isAdmin":true,"type":"auth","userId":"6936a3e510ca4806bcd9c3a3"}}
+[00:38:50.724] Browser LOG     %c[Vercel Web Analytics]%c Debug mode is enabled by default in development. No requests will be sent to the server. color: rgb(120, 120, 120) color: inherit
+[00:38:50.724] Browser LOG     %c[Vercel Web Analytics]%c Running queued event color: rgb(120, 120, 120) color: inherit pageview {"path":"/about","route":"/about"}
+[00:38:50.724] Browser LOG     %c[Vercel Web Analytics]%c [view] http://localhost:3000/about color: rgb(120, 120, 120) color: inherit {"dp":"/about","o":"http://localhost:3000/about","sdkn":"@vercel/analytics/next","sdkv":"1.6.1","sv":"0.1.3","ts":1783151880206} /_vercel/insights/view
+[00:38:52.872] Server  LOG      ✓ Compiled in 1013ms
+[00:40:17.300] Server  LOG      ○ Compiling /quotes ...
+[00:40:20.726] Browser LOG     %c[Vercel Web Analytics]%c [view] http://localhost:3000/quotes color: rgb(120, 120, 120) color: inherit {"dp":"/quotes","o":"http://localhost:3000/quotes","sdkn":"@vercel/analytics/next","sdkv":"1.6.1","sv":"0.1.3","ts":1783151970330} /_vercel/insights/view
+[00:40:41.455] Browser LOG     %c[Vercel Web Analytics]%c [view] http://localhost:3000/admin color: rgb(120, 120, 120) color: inherit {"dp":"/admin","o":"http://localhost:3000/admin","sdkn":"@vercel/analytics/next","sdkv":"1.6.1","sv":"0.1.3","ts":1783151990990} /_vercel/insights/view
+[00:40:50.036] Browser LOG     %c[Vercel Web Analytics]%c [view] http://localhost:3000/admin/quotes color: rgb(120, 120, 120) color: inherit {"dp":"/admin/quotes","o":"http://localhost:3000/admin/quotes","sdkn":"@vercel/analytics/next","sdkv":"1.6.1","sv":"0.1.3","ts":1783151999652} /_vercel/insights/view
+[00:42:46.976] Browser LOG     %c[Vercel Web Analytics]%c [view] http://localhost:3000/quotes color: rgb(120, 120, 120) color: inherit {"dp":"/quotes","o":"http://localhost:3000/quotes","sdkn":"@vercel/analytics/next","sdkv":"1.6.1","sv":"0.1.3","ts":1783152116583} /_vercel/insights/view
+[00:42:58.785] Browser LOG     %c[Vercel Web Analytics]%c [view] http://localhost:3000/admin color: rgb(120, 120, 120) color: inherit {"dp":"/admin","o":"http://localhost:3000/admin","sdkn":"@vercel/analytics/next","sdkv":"1.6.1","sv":"0.1.3","ts":1783152128315} /_vercel/insights/view
+[00:43:03.919] Browser LOG     %c[Vercel Web Analytics]%c [view] http://localhost:3000/admin/quotes color: rgb(120, 120, 120) color: inherit {"dp":"/admin/quotes","o":"http://localhost:3000/admin/quotes","sdkn":"@vercel/analytics/next","sdkv":"1.6.1","sv":"0.1.3","ts":1783152133524} /_vercel/insights/view
+[00:44:27.663] Browser LOG     %c[Vercel Web Analytics]%c [view] http://localhost:3000/quotes color: rgb(120, 120, 120) color: inherit {"dp":"/quotes","o":"http://localhost:3000/quotes","sdkn":"@vercel/analytics/next","sdkv":"1.6.1","sv":"0.1.3","ts":1783152217269} /_vercel/insights/view
+[00:49:09.577] Browser LOG     %c[Vercel Web Analytics]%c [view] http://localhost:3000/admin color: rgb(120, 120, 120) color: inherit {"dp":"/admin","o":"http://localhost:3000/admin","sdkn":"@vercel/analytics/next","sdkv":"1.6.1","sv":"0.1.3","ts":1783152499072} /_vercel/insights/view
+[00:49:14.068] Browser LOG     %c[Vercel Web Analytics]%c [view] http://localhost:3000/admin/quotes color: rgb(120, 120, 120) color: inherit {"dp":"/admin/quotes","o":"http://localhost:3000/admin/quotes","sdkn":"@vercel/analytics/next","sdkv":"1.6.1","sv":"0.1.3","ts":1783152503675} /_vercel/insights/view
+[00:49:41.876] Browser LOG     %c[Vercel Web Analytics]%c [view] http://localhost:3000/quotes color: rgb(120, 120, 120) color: inherit {"dp":"/quotes","o":"http://localhost:3000/quotes","sdkn":"@vercel/analytics/next","sdkv":"1.6.1","sv":"0.1.3","ts":1783152531477} /_vercel/insights/view
+[01:40:51.886] Browser LOG     %c[Vercel Web Analytics]%c [view] http://localhost:3000/poems color: rgb(120, 120, 120) color: inherit {"dp":"/poems","o":"http://localhost:3000/poems","sdkn":"@vercel/analytics/next","sdkv":"1.6.1","sv":"0.1.3","ts":1783155601094} /_vercel/insights/view
+[01:42:38.308] Server  LOG      ✓ Compiled in 1264ms
+[01:42:38.639] Server  LOG     API /api/auth/session: Session status: {}
+[01:43:11.690] Browser LOG     useSession: Raw response from /api/auth/session: {}
+[01:43:11.842] Browser LOG     useSession: Parsed data from /api/auth/session: {"user":{"exp":1783192925,"isAdmin":true,"type":"auth","userId":"6936a3e510ca4806bcd9c3a3"}}
+[01:44:17.816] Browser LOG     %c[Vercel Web Analytics]%c [view] http://localhost:3000/poems/6a48b5a020f699eb592263a7 color: rgb(120, 120, 120) color: inherit {"dp":"/poems/[id]","o":"http://localhost:3000/poems/6a48b5a020f699eb592263a7","sdkn":"@vercel/analytics/next","sdkv":"1.6.1","sv":"0.1.3","ts":1783155806894} /_vercel/insights/view
+[01:52:09.177] Browser LOG     %c[Vercel Web Analytics]%c [view] http://localhost:3000/poems color: rgb(120, 120, 120) color: inherit {"dp":"/poems","o":"http://localhost:3000/poems","sdkn":"@vercel/analytics/next","sdkv":"1.6.1","sv":"0.1.3","ts":1783156278689} /_vercel/insights/view
+[01:52:14.888] Server  LOG      ○ Compiling / ...
+[01:52:16.841] Browser LOG     %c[Vercel Web Analytics]%c [view] http://localhost:3000/ color: rgb(120, 120, 120) color: inherit {"dp":"/","o":"http://localhost:3000/","sdkn":"@vercel/analytics/next","sdkv":"1.6.1","sv":"0.1.3","ts":1783156286444} /_vercel/insights/view
+[01:52:18.613] Server  LOG     API /api/auth/session: Session status: {}
+[01:52:19.877] Browser LOG     useSession: Raw response from /api/auth/session: {}
+[01:52:19.877] Browser LOG     useSession: Parsed data from /api/auth/session: {"user":{"exp":1783192925,"isAdmin":true,"type":"auth","userId":"6936a3e510ca4806bcd9c3a3"}}
+[01:52:20.179] Server  LOG     API /api/auth/session: Session status: {}
+[01:52:20.988] Browser LOG     useSession: Raw response from /api/auth/session: {}
+[01:52:20.988] Browser LOG     useSession: Parsed data from /api/auth/session: {"user":{"exp":1783192925,"isAdmin":true,"type":"auth","userId":"6936a3e510ca4806bcd9c3a3"}}
+[01:54:27.611] Browser LOG     %c[Vercel Web Analytics]%c [view] http://localhost:3000/quotes color: rgb(120, 120, 120) color: inherit {"dp":"/quotes","o":"http://localhost:3000/quotes","sdkn":"@vercel/analytics/next","sdkv":"1.6.1","sv":"0.1.3","ts":1783156417183} /_vercel/insights/view

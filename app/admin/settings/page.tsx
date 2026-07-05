@@ -6,10 +6,12 @@ import { Button } from "@/components/ui/button"
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
 import { upload } from "@vercel/blob/client"
 import { UploadCloud } from "lucide-react"
+import RichTextEditor from "@/components/rich-text-editor"
 
 export default function AdminSettingsPage() {
   const [formData, setFormData] = useState({
     authorImage: "",
+    aboutDescription: "",
     featuredInstagramReel: "",
     youtube: "",
     instagram: "",
@@ -142,6 +144,16 @@ export default function AdminSettingsPage() {
                     <img src={formData.authorImage} alt="Author Preview" className="w-full h-full object-cover" />
                   </div>
                 )}
+              </div>
+
+              <div>
+                <label className="text-sm text-muted-foreground mb-2 block">About Biography (Rich Text/MS Word Style)</label>
+                <RichTextEditor
+                  value={formData.aboutDescription || ""}
+                  onChange={(val) => setFormData(prev => ({ ...prev, aboutDescription: val }))}
+                  placeholder="Tell your readers about yourself. You can copy and paste rich text here."
+                  minHeight="min-h-[250px]"
+                />
               </div>
 
               <div>

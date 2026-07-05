@@ -927,11 +927,6 @@ export default function BookDetailPage() {
                   <h1 className={`text-2xl md:text-4xl lg:text-5xl font-bold tracking-tight ${isTranslating ? 'opacity-70' : ''}`}>
                     {translatedTitle || book.title}
                   </h1>
-                  {book.author && (
-                    <p className="text-base md:text-xl text-muted-foreground mt-2">
-                      By <span className="font-semibold text-foreground">{book.author}</span>
-                    </p>
-                  )}
                 </div>
 
                 {/* Price - Mobile optimized */}

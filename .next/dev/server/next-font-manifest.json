@@ -10,7 +10,12 @@
       "static/media/2a65768255d6b625-s.p.d19752fb.woff2",
       "static/media/406d3fc8d5ec9f59-s.p.3f4cab70.woff2"
     ],
-    "[project]/app/admin/blogs/page": [
+    "[project]/app/admin/books/create/page": [
+      "static/media/83afe278b6a6bb3c-s.p.3a6ba036.woff2",
+      "static/media/2a65768255d6b625-s.p.d19752fb.woff2",
+      "static/media/406d3fc8d5ec9f59-s.p.3f4cab70.woff2"
+    ],
+    "[project]/app/admin/books/page": [
       "static/media/83afe278b6a6bb3c-s.p.3a6ba036.woff2",
       "static/media/2a65768255d6b625-s.p.d19752fb.woff2",
       "static/media/406d3fc8d5ec9f59-s.p.3f4cab70.woff2"
@@ -20,12 +25,22 @@
       "static/media/2a65768255d6b625-s.p.d19752fb.woff2",
       "static/media/406d3fc8d5ec9f59-s.p.3f4cab70.woff2"
     ],
-    "[project]/app/blog/[slug]/page": [
+    "[project]/app/admin/poems/create/page": [
       "static/media/83afe278b6a6bb3c-s.p.3a6ba036.woff2",
       "static/media/2a65768255d6b625-s.p.d19752fb.woff2",
       "static/media/406d3fc8d5ec9f59-s.p.3f4cab70.woff2"
     ],
-    "[project]/app/blog/page": [
+    "[project]/app/admin/poems/page": [
+      "static/media/83afe278b6a6bb3c-s.p.3a6ba036.woff2",
+      "static/media/2a65768255d6b625-s.p.d19752fb.woff2",
+      "static/media/406d3fc8d5ec9f59-s.p.3f4cab70.woff2"
+    ],
+    "[project]/app/admin/quotes/page": [
+      "static/media/83afe278b6a6bb3c-s.p.3a6ba036.woff2",
+      "static/media/2a65768255d6b625-s.p.d19752fb.woff2",
+      "static/media/406d3fc8d5ec9f59-s.p.3f4cab70.woff2"
+    ],
+    "[project]/app/admin/settings/page": [
       "static/media/83afe278b6a6bb3c-s.p.3a6ba036.woff2",
       "static/media/2a65768255d6b625-s.p.d19752fb.woff2",
       "static/media/406d3fc8d5ec9f59-s.p.3f4cab70.woff2"
@@ -56,6 +71,11 @@
       "static/media/406d3fc8d5ec9f59-s.p.3f4cab70.woff2"
     ],
     "[project]/app/poems/page": [
+      "static/media/83afe278b6a6bb3c-s.p.3a6ba036.woff2",
+      "static/media/2a65768255d6b625-s.p.d19752fb.woff2",
+      "static/media/406d3fc8d5ec9f59-s.p.3f4cab70.woff2"
+    ],
+    "[project]/app/quotes/page": [
       "static/media/83afe278b6a6bb3c-s.p.3a6ba036.woff2",
       "static/media/2a65768255d6b625-s.p.d19752fb.woff2",
       "static/media/406d3fc8d5ec9f59-s.p.3f4cab70.woff2"
