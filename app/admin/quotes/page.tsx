@@ -16,6 +16,7 @@ interface QuoteItem {
     author: string
     tags: string[]
     backgroundImage?: string
+    fontSize?: number
     views: number
 }
 
@@ -40,6 +41,7 @@ function AdminQuotesContent() {
         author: "Dr. Rupesh Kumar Singh",
         tags: "",
         backgroundImage: "",
+        fontSize: "24",
     })
 
     const [imagePreviewUrl, setImagePreviewUrl] = useState<string>("")
@@ -124,7 +126,7 @@ function AdminQuotesContent() {
 
             if (res.ok) {
                 toast.success(editingId ? "Quote updated!" : "Quote created!")
-                setFormData({ content: "", author: "Dr. Rupesh Kumar Singh", tags: "", backgroundImage: "" })
+                setFormData({ content: "", author: "Dr. Rupesh Kumar Singh", tags: "", backgroundImage: "", fontSize: "24" })
                 setSelectedImageFile(null)
                 setShowForm(false)
                 setEditingId(null)
@@ -146,6 +148,7 @@ function AdminQuotesContent() {
             author: quote.author,
             tags: quote.tags?.join(", ") || "",
             backgroundImage: quote.backgroundImage || "",
+            fontSize: quote.fontSize?.toString() || "24",
         })
         setSelectedImageFile(null)
         setEditingId(quote._id)
@@ -178,7 +181,7 @@ function AdminQuotesContent() {
                     </div>
                     {!showForm && (
                         <Button onClick={() => {
-                            setFormData({ content: "", author: "Dr. Rupesh Kumar Singh", tags: "", backgroundImage: "" })
+                            setFormData({ content: "", author: "Dr. Rupesh Kumar Singh", tags: "", backgroundImage: "", fontSize: "24" })
                             setSelectedImageFile(null)
                             setEditingId(null)
                             setShowForm(true)
@@ -269,43 +272,84 @@ function AdminQuotesContent() {
                                     {/* Preview Column */}
                                     <div className="flex flex-col justify-start">
                                         <span className="text-sm text-muted-foreground mb-2 block">Card Live Preview Check</span>
-                                        <div className="border border-border/80 rounded-xl overflow-hidden shadow-sm aspect-square relative bg-muted flex flex-col justify-between p-6">
+                                        <div className={`border border-border/80 rounded-xl overflow-hidden shadow-sm relative bg-muted flex flex-col justify-between ${!imagePreviewUrl ? 'aspect-[4/3] p-6' : 'p-0'}`}>
                                             {imagePreviewUrl ? (
-                                                <div 
-                                                    className="absolute inset-0 bg-cover bg-center transition-all duration-300"
-                                                    style={{ backgroundImage: `url(${imagePreviewUrl})` }}
-                                                />
-                                            ) : (
-                                                <div className="absolute inset-0 bg-gradient-to-br from-[#f4e8d4] to-[#e8d5b5] dark:from-[#2e261d] dark:to-[#1a140f] opacity-80" />
-                                            )}
-                                            
-                                            {/* Dark overlay for readability when image exists */}
-                                            {imagePreviewUrl && (
-                                                <div className="absolute inset-0 bg-black/40 backdrop-blur-[0.5px]" />
-                                            )}
-
-                                            <div className="relative z-10 w-full flex-1 flex flex-col justify-center text-center">
-                                                <Quote className="w-8 h-8 opacity-20 mx-auto mb-2 text-foreground" style={imagePreviewUrl ? { color: '#ffffff', opacity: 0.3 } : {}} />
-                                                <div 
-                                                    className="font-serif text-base sm:text-lg leading-relaxed max-h-[160px] overflow-y-auto px-2"
-                                                    style={imagePreviewUrl ? { color: '#ffffff', textShadow: '0 2px 4px rgba(0,0,0,0.8)' } : { color: 'var(--foreground)' }}
-                                                >
-                                                    {formData.content ? (
-                                                        <ContentRenderer content={formData.content} />
-                                                    ) : (
-                                                        <p className="italic opacity-40">Your quote text will appear here...</p>
-                                                    )}
+                                                <div className="relative w-full overflow-hidden flex flex-col">
+                                                    <img 
+                                                        src={imagePreviewUrl} 
+                                                        alt="Quote Background Preview"
+                                                        className="w-full h-auto block object-contain"
+                                                    />
+                                                    {/* Dark overlay for readability */}
+                                                    <div className="absolute inset-0 bg-black/50" />
+                                                    
+                                                    {/* Overlay Content placed absolutely over the full-size image */}
+                                                    <div className="absolute inset-0 flex flex-col justify-between p-6 z-10">
+                                                        <div className="flex-1 flex flex-col justify-center text-center">
+                                                            <Quote className="w-8 h-8 opacity-30 mx-auto mb-2 text-white" />
+                                                            <div 
+                                                                className="font-serif leading-relaxed max-h-[70%] overflow-y-auto px-2 text-white"
+                                                                style={{
+                                                                    fontSize: `${formData.fontSize || 24}px`,
+                                                                    textShadow: '0 2px 4px rgba(0,0,0,0.8)'
+                                                                }}
+                                                            >
+                                                                {formData.content ? (
+                                                                    <ContentRenderer content={formData.content} />
+                                                                ) : (
+                                                                    <p className="italic opacity-40">Your quote text will appear here...</p>
+                                                                )}
+                                                            </div>
+                                                        </div>
+                                                        <div className="text-center pt-2 border-t border-white/15">
+                                                            <p className="font-serif italic text-xs text-white/90">
+                                                                — {formData.author || "Dr. Rupesh Kumar Singh"}
+                                                            </p>
+                                                        </div>
+                                                    </div>
                                                 </div>
-                                            </div>
+                                            ) : (
+                                                <>
+                                                    <div className="absolute inset-0 bg-gradient-to-br from-[#f4e8d4] to-[#e8d5b5] dark:from-[#2e261d] dark:to-[#1a140f] opacity-80" />
+                                                    <div className="relative z-10 w-full flex-1 flex flex-col justify-center text-center">
+                                                        <Quote className="w-8 h-8 opacity-20 mx-auto mb-2 text-foreground" />
+                                                        <div 
+                                                            className="font-serif leading-relaxed max-h-[160px] overflow-y-auto px-2"
+                                                            style={{
+                                                                fontSize: `${formData.fontSize || 24}px`,
+                                                                color: 'var(--foreground)'
+                                                            }}
+                                                        >
+                                                            {formData.content ? (
+                                                                <ContentRenderer content={formData.content} />
+                                                            ) : (
+                                                                <p className="italic opacity-40">Your quote text will appear here...</p>
+                                                            )}
+                                                        </div>
+                                                    </div>
+                                                    <div className="relative z-10 w-full text-center mt-3 pt-2 border-t border-foreground/10">
+                                                        <p className="font-serif italic text-xs text-foreground">
+                                                            — {formData.author || "Dr. Rupesh Kumar Singh"}
+                                                        </p>
+                                                    </div>
+                                                </>
+                                            )}
+                                        </div>
 
-                                            <div className="relative z-10 w-full text-center mt-3 pt-2 border-t border-foreground/10" style={imagePreviewUrl ? { borderColor: 'rgba(255,255,255,0.15)' } : {}}>
-                                                <p 
-                                                    className="font-serif italic text-xs"
-                                                    style={imagePreviewUrl ? { color: '#ffffff', textShadow: '0 1px 2px rgba(0,0,0,0.8)' } : { color: 'var(--foreground)' }}
-                                                >
-                                                    — {formData.author || "Dr. Rupesh Kumar Singh"}
-                                                </p>
+                                        <div className="mt-4 space-y-2 border-t pt-4">
+                                            <div className="flex justify-between items-center">
+                                                <label className="text-xs font-semibold text-muted-foreground block">Quote Text Font Size</label>
+                                                <span className="text-xs font-bold text-primary">{formData.fontSize || 24}px</span>
                                             </div>
+                                            <input
+                                                type="range"
+                                                min="16"
+                                                max="48"
+                                                step="2"
+                                                value={formData.fontSize || "24"}
+                                                onChange={(e) => setFormData(prev => ({ ...prev, fontSize: e.target.value }))}
+                                                className="w-full h-1.5 bg-muted rounded-lg appearance-none cursor-pointer accent-primary"
+                                            />
                                         </div>
                                     </div>
                                 </div>

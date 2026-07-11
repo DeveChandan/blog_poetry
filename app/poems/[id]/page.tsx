@@ -179,21 +179,30 @@ export default function PoemDetailPage() {
   useEffect(() => {
     if (!poem) return
 
-    if (currentLanguage.code === 'en') {
-      // If the original poem is in Devanagari (Hindi), translate/transliterate it to English/Hinglish
-      if (/[\u0900-\u097F]/.test(poem.content)) {
-        handleTranslate('en')
-      } else {
-        // Reset to original
+    const isOriginalHindi = /[\u0900-\u097F]/.test(poem.content)
+
+    if (isOriginalHindi) {
+      if (currentLanguage.code === 'hi') {
+        // Original is Hindi, selected is Hindi -> Show original Hindi (preserves multiline formatting)
         setTranslatedContent(null)
         setTranslatedTitle(null)
         setCurrentTranslateLang(null)
+      } else {
+        // Original is Hindi, selected is English (transliterates to Hinglish) or other -> translate
+        handleTranslate(currentLanguage.code)
       }
     } else {
-      // Auto-translate to selected navbar language
-      handleTranslate(currentLanguage.code)
+      if (currentLanguage.code === 'en') {
+        // Original is English, selected is English -> Show original
+        setTranslatedContent(null)
+        setTranslatedTitle(null)
+        setCurrentTranslateLang(null)
+      } else {
+        // Original is English, selected is Hindi or other -> translate
+        handleTranslate(currentLanguage.code)
+      }
     }
-  }, [currentLanguage.code, poem?._id])
+  }, [currentLanguage.code, poem?._id, poem?.content])
 
   useEffect(() => {
     // Check if speech synthesis is supported

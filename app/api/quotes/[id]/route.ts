@@ -51,6 +51,10 @@ export async function PUT(
         // Remove immutable fields from update payload
         const { _id, createdAt, ...updateFields } = updates
 
+        if (updateFields.fontSize !== undefined) {
+            updateFields.fontSize = Number.parseInt(updateFields.fontSize.toString())
+        }
+
         await db.collection("quotes").updateOne(
             { _id: new ObjectId(id) },
             { $set: { ...updateFields, updatedAt: new Date() } }

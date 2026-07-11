@@ -16,9 +16,9 @@ export default function BookCard({ id, title, description, price, type, cover, a
   return (
     <Link href={`/books/${id}`}>
       <Card className="hover:border-primary hover:shadow-lg hover:-translate-y-1 transition duration-300 ease-in-out cursor-pointer h-full flex flex-col">
-        <div className="aspect-video bg-muted overflow-hidden rounded-t-lg">
+        <div className="aspect-[3/4] bg-muted overflow-hidden rounded-t-lg flex items-center justify-center p-2 relative">
           {cover ? (
-            <img src={cover || "/placeholder.svg"} alt={title} className="w-full h-full object-cover" />
+            <img src={cover || "/placeholder.svg"} alt={title} className="max-w-full max-h-full object-contain transition-transform duration-500 hover:scale-105" />
           ) : (
             <div className="w-full h-full flex items-center justify-center bg-primary/10">
               <span className="text-muted-foreground">No Cover</span>

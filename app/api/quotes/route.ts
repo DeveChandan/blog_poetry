@@ -24,7 +24,7 @@ export async function POST(request: NextRequest) {
             return NextResponse.json({ error: "Unauthorized" }, { status: 403 })
         }
 
-        const { content, author, tags, backgroundImage } = await request.json()
+        const { content, author, tags, backgroundImage, fontSize } = await request.json()
 
         if (!content) {
             return NextResponse.json({ error: "Content is required" }, { status: 400 })
@@ -36,6 +36,7 @@ export async function POST(request: NextRequest) {
             author: author || "Dr. Rupesh Kumar Singh",
             tags: tags || [],
             backgroundImage: backgroundImage || "",
+            fontSize: fontSize ? Number.parseInt(fontSize.toString()) : 24,
             views: 0,
             likes: 0,
             createdAt: new Date(),

@@ -20,12 +20,16 @@ export default function CreateBookPage() {
     tags: "",
     cover: "",
     filePath: "",
+    ziffybeesLink: "",
+    amazonLink: "",
+    flipkartLink: "",
   })
   const [selectedFile, setSelectedFile] = useState<File | null>(null)
   const [selectedCoverFile, setSelectedCoverFile] = useState<File | null>(null)
   const [loading, setLoading] = useState(false)
   const [uploading, setUploading] = useState(false)
   const [uploadingCover, setUploadingCover] = useState(false)
+  const [fileInputKey, setFileInputKey] = useState(0)
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) => {
     setFormData({
@@ -246,12 +250,27 @@ export default function CreateBookPage() {
                   </p>
                 )}
                 {(selectedCoverFile || formData.cover) && (
-                  <div className="mt-2 h-20 w-20 rounded overflow-hidden border border-border bg-muted">
-                    <img
-                      src={selectedCoverFile ? URL.createObjectURL(selectedCoverFile) : formData.cover}
-                      alt="Cover Preview"
-                      className="w-full h-full object-cover"
-                    />
+                  <div className="flex items-center gap-3 mt-2">
+                    <div className="h-20 w-20 rounded overflow-hidden border border-border bg-muted">
+                      <img
+                        src={selectedCoverFile ? URL.createObjectURL(selectedCoverFile) : formData.cover}
+                        alt="Cover Preview"
+                        className="w-full h-full object-cover"
+                      />
+                    </div>
+                    <Button
+                      type="button"
+                      variant="destructive"
+                      size="sm"
+                      onClick={() => {
+                        setSelectedCoverFile(null);
+                        setFormData(prev => ({ ...prev, cover: "" }));
+                        const input = document.getElementById("cover-upload") as HTMLInputElement;
+                        if (input) input.value = "";
+                      }}
+                    >
+                      Remove Cover
+                    </Button>
                   </div>
                 )}
               </div>
@@ -259,6 +278,7 @@ export default function CreateBookPage() {
               <div>
                 <label className="text-sm text-muted-foreground mb-2 block">E-book File</label>
                 <input
+                  key={fileInputKey}
                   type="file"
                   name="file"
                   onChange={handleFileChange}
@@ -267,8 +287,62 @@ export default function CreateBookPage() {
                 />
                 {selectedFile && <p className="text-sm text-muted-foreground mt-1">Selected: {selectedFile.name}</p>}
                 {formData.filePath && !selectedFile && (
-                  <p className="text-sm text-muted-foreground mt-1">Current file path: {formData.filePath}</p>
+                  <p className="text-sm text-muted-foreground mt-1 flex items-center gap-2">
+                    <span>Current file:</span>
+                    <a href={formData.filePath} target="_blank" rel="noopener noreferrer" className="text-primary hover:underline truncate max-w-xs">{formData.filePath}</a>
+                  </p>
                 )}
+                {(selectedFile || formData.filePath) && (
+                  <Button
+                    type="button"
+                    variant="destructive"
+                    size="sm"
+                    className="mt-2"
+                    onClick={() => {
+                      setSelectedFile(null);
+                      setFormData(prev => ({ ...prev, filePath: "" }));
+                      setFileInputKey(prev => prev + 1);
+                    }}
+                  >
+                    Remove E-book File
+                  </Button>
+                )}
+              </div>
+
+              <div className="grid md:grid-cols-3 gap-4">
+                <div>
+                  <label className="text-sm text-muted-foreground mb-2 block">ZiffyBees Buy Link</label>
+                  <input
+                    type="url"
+                    name="ziffybeesLink"
+                    value={formData.ziffybeesLink}
+                    onChange={handleChange}
+                    className="w-full px-3 py-2 rounded border border-border bg-background text-foreground"
+                    placeholder="https://ziffybees.com/..."
+                  />
+                </div>
+                <div>
+                  <label className="text-sm text-muted-foreground mb-2 block">Amazon Buy Link</label>
+                  <input
+                    type="url"
+                    name="amazonLink"
+                    value={formData.amazonLink}
+                    onChange={handleChange}
+                    className="w-full px-3 py-2 rounded border border-border bg-background text-foreground"
+                    placeholder="https://www.amazon.in/..."
+                  />
+                </div>
+                <div>
+                  <label className="text-sm text-muted-foreground mb-2 block">Flipkart Buy Link</label>
+                  <input
+                    type="url"
+                    name="flipkartLink"
+                    value={formData.flipkartLink}
+                    onChange={handleChange}
+                    className="w-full px-3 py-2 rounded border border-border bg-background text-foreground"
+                    placeholder="https://www.flipkart.com/..."
+                  />
+                </div>
               </div>
 
               <div>

@@ -2,7 +2,7 @@
 
 import { useEffect, useState } from "react"
 import { motion, AnimatePresence } from "framer-motion"
-import { Quote, Search, Copy, Share2, Sparkles, Check, RefreshCw, Heart, Download, Eye, MoreHorizontal, MessageSquare } from "lucide-react"
+import { Quote, Search, Copy, Share2, Sparkles, Check, RefreshCw, Heart, Download, Eye, MoreHorizontal, MessageSquare, ChevronDown } from "lucide-react"
 import { Card, CardContent, CardHeader } from "@/components/ui/card"
 import { Input } from "@/components/ui/input"
 import { Button } from "@/components/ui/button"
@@ -16,6 +16,7 @@ interface QuoteItem {
   author: string
   tags: string[]
   backgroundImage?: string
+  fontSize?: number
   views: number
   likes?: number
   createdAt: string
@@ -26,9 +27,7 @@ function TranslatedQuote({ content, targetLang }: { content: string; targetLang:
   const [loading, setLoading] = useState(false)
 
   useEffect(() => {
-    console.log("TranslatedQuote: targetLang =", targetLang, "original content =", content.slice(0, 30))
     if (targetLang === 'hi' || targetLang === 'en') {
-      console.log("TranslatedQuote: Bypassing translation for hi/en")
       setTranslatedText(content)
       return
     }
@@ -37,7 +36,6 @@ function TranslatedQuote({ content, targetLang }: { content: string; targetLang:
     const doTranslate = async () => {
       setLoading(true)
       try {
-        console.log("TranslatedQuote: Triggering translation for", targetLang)
         const response = await fetch('/api/translate', {
           method: 'POST',
           headers: { 'Content-Type': 'application/json' },
@@ -45,7 +43,6 @@ function TranslatedQuote({ content, targetLang }: { content: string; targetLang:
         })
         if (response.ok) {
           const data = await response.json()
-          console.log("TranslatedQuote: Translation result =", data.translatedText?.slice(0, 30))
           if (active && data.translatedText) {
             setTranslatedText(data.translatedText)
           }
@@ -81,6 +78,11 @@ export default function QuotesPage() {
   const [likedQuotes, setLikedQuotes] = useState<string[]>([])
   const [copiedId, setCopiedId] = useState<string | null>(null)
   const [downloadingId, setDownloadingId] = useState<string | null>(null)
+  const [visibleCount, setVisibleCount] = useState(10)
+
+  useEffect(() => {
+    setVisibleCount(10)
+  }, [search, selectedTag])
   const { t, lang } = useTranslations()
 
   const fetchQuotes = async () => {
@@ -294,10 +296,9 @@ export default function QuotesPage() {
       ctx.textAlign = "center"
       ctx.textBaseline = "middle"
       
-      // Calculate font size dynamically based on length
-      let fontSize = 44
-      if (textContent.length > 200) fontSize = 36
-      if (textContent.length > 350) fontSize = 30
+      // Calculate font size dynamically based on admin preference
+      const baseFontSize = quote.fontSize || 24
+      const fontSize = Math.round(baseFontSize * 1.83)
       
       ctx.font = `italic ${fontSize}px Georgia, serif`
       
@@ -484,12 +485,12 @@ export default function QuotesPage() {
           </div>
         ) : (
           <div className="space-y-6">
-            {filteredQuotes.map((quote) => {
+            {filteredQuotes.slice(0, visibleCount).map((quote) => {
               const isLiked = likedQuotes.includes(quote._id)
               return (
-                <div key={quote._id}>
+                <div key={quote._id} style={{ contentVisibility: 'auto', containIntrinsicSize: '0 500px' }}>
                     {/* Facebook Feed Like Card */}
-                    <Card className="overflow-hidden border border-[#3c2a1e]/10 dark:border-[#e6dfcd]/10 bg-card shadow-sm hover:shadow-md transition duration-300">
+                    <Card className="overflow-hidden border border-[#3c2a1e]/10 dark:border-[#e6dfcd]/10 bg-card shadow-sm hover:shadow-md transition duration-300 transform-gpu will-change-transform">
                       
                       {/* Post Header */}
                       <CardHeader className="p-4 flex flex-row items-center justify-between space-y-0 pb-3">
@@ -510,42 +511,64 @@ export default function QuotesPage() {
                         </div>
                       
                       </CardHeader>
-
+ 
                       {/* Post Content Area */}
-                      <div className="relative aspect-video sm:aspect-[4/3] w-full bg-muted flex flex-col justify-between p-6 sm:p-8">
+                      <div className={`relative w-full bg-muted flex flex-col justify-between ${!quote.backgroundImage ? 'aspect-video sm:aspect-[4/3] p-6 sm:p-8' : 'p-0'}`}>
                         {quote.backgroundImage ? (
-                          <div 
-                            className="absolute inset-0 bg-cover bg-center transition-opacity duration-300"
-                            style={{ backgroundImage: `url(${quote.backgroundImage})` }}
-                          />
-                        ) : (
-                          <div className="absolute inset-0 bg-gradient-to-br from-[#f4e8d4] to-[#e8d5b5] dark:from-[#2a221a] dark:to-[#171310]" />
-                        )}
+                          <div className="relative w-full overflow-hidden flex flex-col">
+                            <img 
+                              src={quote.backgroundImage} 
+                              alt="Quote background"
+                              className="w-full h-auto block object-contain transition-opacity duration-300"
+                              loading="lazy"
+                              decoding="async"
+                            />
+                            {/* Dark overlay for readability */}
+                            <div className="absolute inset-0 bg-black/50" />
 
-                        {/* Dark overlay for readability */}
-                        {quote.backgroundImage && (
-                          <div className="absolute inset-0 bg-black/50" />
-                        )}
-
-                        <div className="relative z-10 w-full flex-1 flex flex-col justify-center text-center">
-                          <Quote className="w-8 h-8 opacity-20 mx-auto mb-2 text-foreground" style={quote.backgroundImage ? { color: '#ffffff', opacity: 0.3 } : {}} />
-                          <div 
-                            className="font-serif text-base sm:text-xl leading-relaxed max-h-[180px] overflow-y-auto px-4"
-                            style={quote.backgroundImage ? { color: '#ffffff', textShadow: '0 2px 4px rgba(0,0,0,0.8)' } : { color: 'var(--foreground)' }}
-                          >
-                            <TranslatedQuote content={quote.content} targetLang={lang} />
+                            {/* Text content placed absolutely over the full-size image */}
+                            <div className="absolute inset-0 flex flex-col justify-between p-6 sm:p-8 z-10">
+                              <div className="relative z-10 w-full flex-1 flex flex-col justify-center text-center">
+                                <Quote className="w-8 h-8 opacity-30 mx-auto mb-2 text-white" />
+                                <div 
+                                  className="font-serif leading-relaxed max-h-[75%] overflow-y-auto px-4 text-white"
+                                  style={{
+                                    fontSize: `${quote.fontSize || 24}px`,
+                                    textShadow: '0 2px 4px rgba(0,0,0,0.8)'
+                                  }}
+                                >
+                                  <TranslatedQuote content={quote.content} targetLang={lang} />
+                                </div>
+                              </div>
+                              <div className="relative z-10 w-full text-center mt-3 pt-2 border-t border-white/15">
+                                <p className="font-serif italic text-xs text-white">
+                                  — {quote.author}
+                                </p>
+                              </div>
+                            </div>
                           </div>
-                        </div>
-
-                        {/* Small Author stamp inside card for sharing downloads */}
-                        <div className="relative z-10 w-full text-center mt-3 pt-2 border-t border-foreground/10" style={quote.backgroundImage ? { borderColor: 'rgba(255,255,255,0.15)' } : {}}>
-                          <p 
-                            className="font-serif italic text-xs"
-                            style={quote.backgroundImage ? { color: '#ffffff', textShadow: '0 1px 2px rgba(0,0,0,0.8)' } : { color: 'var(--foreground)' }}
-                          >
-                            — {quote.author}
-                          </p>
-                        </div>
+                        ) : (
+                          <>
+                            <div className="absolute inset-0 bg-gradient-to-br from-[#f4e8d4] to-[#e8d5b5] dark:from-[#2a221a] dark:to-[#171310]" />
+                            <div className="relative z-10 w-full flex-1 flex flex-col justify-center text-center">
+                              <Quote className="w-8 h-8 opacity-20 mx-auto mb-2 text-foreground" />
+                              <div 
+                                className="font-serif leading-relaxed max-h-[180px] overflow-y-auto px-4"
+                                style={{
+                                  fontSize: `${quote.fontSize || 24}px`,
+                                  color: 'var(--foreground)'
+                                }}
+                              >
+                                <TranslatedQuote content={quote.content} targetLang={lang} />
+                              </div>
+                            </div>
+                            <div className="relative z-10 w-full text-center mt-3 pt-2 border-t border-foreground/10">
+                              <p className="font-serif italic text-xs text-foreground">
+                                — {quote.author}
+                              </p>
+                            </div>
+                          </>
+                        )}
                       </div>
 
                       {/* Tags and Stats Indicators */}
@@ -619,6 +642,18 @@ export default function QuotesPage() {
                   </div>
                 )
               })}
+            
+            {filteredQuotes.length > visibleCount && (
+              <div className="flex justify-center pt-6 pb-12">
+                <Button 
+                  onClick={() => setVisibleCount(prev => prev + 10)}
+                  className="bg-primary hover:bg-primary/90 text-primary-foreground font-semibold px-6 py-5 rounded-xl flex items-center gap-2 shadow-md hover:shadow-lg transition-all"
+                >
+                  <ChevronDown className="w-4 h-4 animate-bounce" />
+                  Load More Quotes ({filteredQuotes.length - visibleCount} remaining)
+                </Button>
+              </div>
+            )}
           </div>
         )}
       </div>

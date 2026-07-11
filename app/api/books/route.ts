@@ -25,7 +25,7 @@ export async function POST(request: NextRequest) {
       return NextResponse.json({ error: "Unauthorized: Admin access required" }, { status: 403 })
     }
 
-    const { title, description, isbn, cover, price, type, filePath, stock, tags } = await request.json()
+    const { title, description, isbn, cover, price, type, filePath, stock, tags, ziffybeesLink, amazonLink, flipkartLink } = await request.json()
 
     if (!title || !description || !price) {
       return NextResponse.json({ error: "Title, description, and price required" }, { status: 400 })
@@ -44,6 +44,9 @@ export async function POST(request: NextRequest) {
       filePath: type !== "physical" ? filePath : undefined,
       stock: type !== "ebook" ? stock : undefined,
       tags: tags || [],
+      ziffybeesLink: ziffybeesLink || "",
+      amazonLink: amazonLink || "",
+      flipkartLink: flipkartLink || "",
       createdAt: new Date(),
       updatedAt: new Date(),
     })

@@ -122,6 +122,9 @@ interface Book {
   totalReviews?: number
   downloadCount?: number
   viewCount?: number
+  ziffybeesLink?: string
+  amazonLink?: string
+  flipkartLink?: string
 }
 
 const PDF_PREVIEW_LIMIT = 30
@@ -647,124 +650,23 @@ export default function BookDetailPage() {
         {/* Mobile Bottom Navigation */}
         {mounted && isMobile && <MobileBottomNav />}
 
-        {/* Header with back button - Mobile optimized */}
-        <div className="sticky top-0 z-40 bg-white/80 dark:bg-gray-900/80 backdrop-blur-lg border-b">
-          <div className="container mx-auto px-4 py-3">
-            <div className="flex items-center justify-between">
-              <Button
-                variant="ghost"
-                size="sm"
-                onClick={() => router.back()}
-                className="-ml-2"
-              >
-                <ChevronLeft className="h-5 w-5 mr-1" />
-                <span className="hidden sm:inline">Back</span>
-              </Button>
-
-              <div className="flex-1 max-w-xs mx-4">
-                <h1 className="text-sm font-semibold truncate text-center">{book.title}</h1>
-              </div>
-
-              <div className="flex items-center gap-1">
-                <TooltipProvider>
-                  <Tooltip>
-                    <TooltipTrigger asChild>
-                      <Button
-                        variant="ghost"
-                        size="icon"
-                        className="h-9 w-9"
-                        onClick={shareBook}
-                      >
-                        <Share2 className="h-4 w-4" />
-                      </Button>
-                    </TooltipTrigger>
-                    <TooltipContent>
-                      <p>Share</p>
-                    </TooltipContent>
-                  </Tooltip>
-                </TooltipProvider>
-
-                <Sheet>
-                  <SheetTrigger asChild>
-                    <Button variant="ghost" size="icon" className="h-9 w-9">
-                      <Menu className="h-4 w-4" />
-                    </Button>
-                  </SheetTrigger>
-                  <SheetContent side="right" className="w-[300px] sm:w-[400px]">
-                    <div className="mt-6 space-y-6">
-                      <div className="space-y-2">
-                        <h3 className="font-semibold">Quick Actions</h3>
-                        <div className="grid grid-cols-2 gap-2">
-                          <Button variant="outline" size="sm" onClick={toggleBookmark}>
-                            <Bookmark className={`h-4 w-4 mr-2 ${isBookmarked ? 'fill-primary' : ''}`} />
-                            {isBookmarked ? 'Saved' : 'Save'}
-                          </Button>
-                          <Button variant="outline" size="sm" onClick={toggleLike}>
-                            <Heart className={`h-4 w-4 mr-2 ${isLiked ? 'fill-red-500' : ''}`} />
-                            Like
-                          </Button>
-                        </div>
-                      </div>
-
-                      <Separator />
-
-                      <div className="space-y-2">
-                        <h3 className="font-semibold">Book Details</h3>
-                        <div className="space-y-1 text-sm">
-                          <div className="flex justify-between">
-                            <span className="text-muted-foreground">Format:</span>
-                            <span>{book.format || 'Digital'}</span>
-                          </div>
-                          <div className="flex justify-between">
-                            <span className="text-muted-foreground">Pages:</span>
-                            <span>{book.pages || 'N/A'}</span>
-                          </div>
-                          <div className="flex justify-between">
-                            <span className="text-muted-foreground">Language:</span>
-                            <span>{book.language || 'English'}</span>
-                          </div>
-                        </div>
-                      </div>
-
-                      <Separator />
-
-                      <div className="space-y-3">
-                        <h3 className="font-semibold">Reading Options</h3>
-                        <div className="space-y-2">
-                          <Button
-                            className="w-full justify-start"
-                            variant="outline"
-                            onClick={handleReadPreview}
-                          >
-                            <Eye className="h-4 w-4 mr-2" />
-                            Read {hasPurchased ? 'Now' : 'Preview'}
-                          </Button>
-                          {hasPurchased && (
-                            <Button
-                              className="w-full justify-start"
-                              variant="outline"
-                              onClick={handleDownload}
-                            >
-                              <Download className="h-4 w-4 mr-2" />
-                              Download
-                            </Button>
-                          )}
-                        </div>
-                      </div>
-                    </div>
-                  </SheetContent>
-                </Sheet>
-              </div>
-            </div>
-          </div>
-        </div>
-
         <motion.main
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           exit={{ opacity: 0 }}
-          className="pb-20 md:pb-12 px-4 container mx-auto max-w-7xl"
+          className="pb-20 md:pb-12 px-4 container mx-auto max-w-7xl pt-6"
         >
+          <div className="mb-6">
+            <Button
+              variant="ghost"
+              size="sm"
+              onClick={() => router.push("/books")}
+              className="-ml-2 text-muted-foreground hover:text-foreground"
+            >
+              <ChevronLeft className="h-4 w-4 mr-1" />
+              Back to Books
+            </Button>
+          </div>
           {/* Main Content Grid - Responsive */}
           <div className="grid lg:grid-cols-3 gap-6 md:gap-8 mb-12 md:mb-16">
             {/* Cover Section - Mobile optimized */}
@@ -775,11 +677,11 @@ export default function BookDetailPage() {
                   className="relative group cursor-pointer rounded-2xl md:rounded-3xl overflow-hidden shadow-lg md:shadow-2xl"
                   onClick={() => setShowFullCover(true)}
                 >
-                  <div className="aspect-[3/4] relative overflow-hidden">
+                  <div className="aspect-[3/4] relative overflow-hidden bg-muted flex items-center justify-center p-4">
                     <img
                       src={book.cover || '/placeholder.jpg'}
                       alt={book.title}
-                      className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
+                      className="max-h-full max-w-full object-contain transition-transform duration-700 group-hover:scale-105"
                       loading="eager"
                     />
                     <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
@@ -980,7 +882,7 @@ export default function BookDetailPage() {
                   <BookOpen className="w-5 h-5 md:w-6 md:h-6" />
                   About This Book
                 </h3>
-                <p className="text-sm md:text-lg leading-relaxed">{book.description}</p>
+                <p className="text-sm md:text-lg leading-relaxed">{translatedDescription || book.description}</p>
               </div>
 
               {/* Tabs - Mobile optimized */}
@@ -1062,6 +964,39 @@ export default function BookDetailPage() {
                       <BookOpen className="w-6 h-6 mr-3" />
                       Start Reading
                     </Button>
+                  </div>
+                </div>
+              )}
+
+              {/* Buy Links Section */}
+              {(book.ziffybeesLink || book.amazonLink || book.flipkartLink) && (
+                <div className="mt-6 space-y-3">
+                  <h3 className="font-semibold text-lg">Purchase Options</h3>
+                  <div className="grid grid-cols-1 sm:grid-cols-3 gap-3">
+                    {book.ziffybeesLink && (
+                      <a href={book.ziffybeesLink} target="_blank" rel="noopener noreferrer" className="block w-full">
+                        <Button className="w-full bg-[#f4a100] hover:bg-[#e09400] text-black font-semibold h-11 flex items-center justify-center gap-2">
+                          <ShoppingCart className="w-4 h-4" />
+                          ZiffyBees
+                        </Button>
+                      </a>
+                    )}
+                    {book.amazonLink && (
+                      <a href={book.amazonLink} target="_blank" rel="noopener noreferrer" className="block w-full">
+                        <Button className="w-full bg-[#FF9900] hover:bg-[#e68a00] text-black font-semibold h-11 flex items-center justify-center gap-2">
+                          <ShoppingCart className="w-4 h-4" />
+                          Amazon
+                        </Button>
+                      </a>
+                    )}
+                    {book.flipkartLink && (
+                      <a href={book.flipkartLink} target="_blank" rel="noopener noreferrer" className="block w-full">
+                        <Button className="w-full bg-[#2874F0] hover:bg-[#1a5ebf] text-white font-semibold h-11 flex items-center justify-center gap-2">
+                          <ShoppingCart className="w-4 h-4" />
+                          Flipkart
+                        </Button>
+                      </a>
+                    )}
                   </div>
                 </div>
               )}

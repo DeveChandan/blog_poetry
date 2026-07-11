@@ -199,7 +199,7 @@ async function POST(request) {
                 status: 403
             });
         }
-        const { title, description, isbn, cover, price, type, filePath, stock, tags } = await request.json();
+        const { title, description, isbn, cover, price, type, filePath, stock, tags, ziffybeesLink, amazonLink, flipkartLink } = await request.json();
         if (!title || !description || !price) {
             return __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$server$2e$js__$5b$app$2d$route$5d$__$28$ecmascript$29$__["NextResponse"].json({
                 error: "Title, description, and price required"
@@ -219,6 +219,9 @@ async function POST(request) {
             filePath: type !== "physical" ? filePath : undefined,
             stock: type !== "ebook" ? stock : undefined,
             tags: tags || [],
+            ziffybeesLink: ziffybeesLink || "",
+            amazonLink: amazonLink || "",
+            flipkartLink: flipkartLink || "",
             createdAt: new Date(),
             updatedAt: new Date()
         });

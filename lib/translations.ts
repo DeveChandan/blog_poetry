@@ -131,7 +131,7 @@ const rawTranslations = {
         media: "मीडिया",
         interact: "संवाद",
         account: "खाता",
-        quotes: "सुविचार",
+        quotes: "कोट्स",
         MoreVideos:"अधिक वीडियो",
 
         // Navigation descriptions
