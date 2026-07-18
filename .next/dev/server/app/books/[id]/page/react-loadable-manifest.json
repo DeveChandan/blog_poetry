@@ -4,7 +4,7 @@
     "files": [
       "static/chunks/components_d5a1d968._.js",
       "static/chunks/node_modules_e57a8d3d._.js",
-      "static/chunks/components_pdf-viewer_tsx_11e462a1._.js"
+      "static/chunks/components_pdf-viewer_tsx_0846bcbb._.js"
     ]
   },
   "[project]/components/document-viewer.tsx [app-client] (ecmascript, next/dynamic entry)": {
@@ -12,7 +12,7 @@
     "files": [
       "static/chunks/components_386098ac._.js",
       "static/chunks/node_modules_4b47ca66._.js",
-      "static/chunks/components_document-viewer_tsx_11e462a1._.js"
+      "static/chunks/components_document-viewer_tsx_0846bcbb._.js"
     ]
   }
 }

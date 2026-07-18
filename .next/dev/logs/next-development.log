@@ -1,545 +1,78 @@
-[00:00:23.347] Server  WARN     ⚠ The "middleware" file convention is deprecated. Please use "proxy" instead. Learn more: https://nextjs.org/docs/messages/middleware-to-proxy
-[00:00:25.297] Server  LOG      ✓ Ready in 19.4s
-[00:00:28.865] Server  LOG      ○ Compiling / ...
-[00:00:42.829] Browser INFO    %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold
-[00:00:45.168] Browser LOG     %c[Vercel Web Analytics]%c Debug mode is enabled by default in development. No requests will be sent to the server. color: rgb(120, 120, 120) color: inherit
-[00:00:45.168] Browser LOG     %c[Vercel Web Analytics]%c Running queued event color: rgb(120, 120, 120) color: inherit pageview {"path":"/","route":"/"}
-[00:00:45.168] Browser LOG     %c[Vercel Web Analytics]%c [view] http://localhost:3000/ color: rgb(120, 120, 120) color: inherit {"dp":"/","o":"http://localhost:3000/","r":"","sdkn":"@vercel/analytics/next","sdkv":"1.6.1","sv":"0.1.3","ts":1783777819615} /_vercel/insights/view
-[00:00:45.683] Server  LOG     API /api/auth/session: Session status: null
-[00:00:46.998] Browser LOG     useSession: Raw response from /api/auth/session: {}
-[00:00:46.998] Browser LOG     useSession: Parsed data from /api/auth/session: {"user":null}
-[00:00:52.567] Browser WARN    Image with src "https://7l3slzqzrwbxftjs.public.blob.vercel-storage.com/Sritiyon%20Ki%20Roshni%20-%20Front-Twr71wlyf5xTB50RM175UamC7xQQgV.png" has either width or height modified, but not the other. If you use CSS to change the size of your image, also include the styles 'width: "auto"' or 'height: "auto"' to maintain the aspect ratio.
-[00:00:59.733] Server  LOG      ○ Compiling /api/visit ...
-[00:00:59.759] Browser WARN    Image with src "http://localhost:3000/placeholder.jpg" has either width or height modified, but not the other. If you use CSS to change the size of your image, also include the styles 'width: "auto"' or 'height: "auto"' to maintain the aspect ratio.
-[00:01:04.205] Browser LOG     %c[Vercel Web Analytics]%c [view] http://localhost:3000/quotes color: rgb(120, 120, 120) color: inherit {"dp":"/quotes","o":"http://localhost:3000/quotes","sdkn":"@vercel/analytics/next","sdkv":"1.6.1","sv":"0.1.3","ts":1783777839490} /_vercel/insights/view
-[00:01:05.501] Browser LOG     TranslatedQuote: targetLang = hi original content = .
-[00:01:05.501] Browser LOG     TranslatedQuote: Bypassing translation for hi/en
-[00:01:05.501] Browser LOG     TranslatedQuote: targetLang = hi original content = <div>कोट्स</div><div>&nbsp; &n
-[00:01:05.501] Browser LOG     TranslatedQuote: Bypassing translation for hi/en
-[00:01:05.501] Browser LOG     TranslatedQuote: targetLang = hi original content = <div style="text-align: center
-[00:01:05.501] Browser LOG     TranslatedQuote: Bypassing translation for hi/en
-[00:01:05.501] Browser LOG     TranslatedQuote: targetLang = hi original content = .
-[00:01:05.501] Browser LOG     TranslatedQuote: Bypassing translation for hi/en
-[00:01:05.501] Browser LOG     TranslatedQuote: targetLang = hi original content = <div>कोट्स</div><div>&nbsp; &n
-[00:01:05.501] Browser LOG     TranslatedQuote: Bypassing translation for hi/en
-[00:01:05.501] Browser LOG     TranslatedQuote: targetLang = hi original content = <div style="text-align: center
-[00:01:05.501] Browser LOG     TranslatedQuote: Bypassing translation for hi/en
-[00:01:28.421] Browser LOG     %c[Vercel Web Analytics]%c [view] http://localhost:3000/poems color: rgb(120, 120, 120) color: inherit {"dp":"/poems","o":"http://localhost:3000/poems","sdkn":"@vercel/analytics/next","sdkv":"1.6.1","sv":"0.1.3","ts":1783777863651} /_vercel/insights/view
-[00:01:40.086] Browser LOG     %c[Vercel Web Analytics]%c [view] http://localhost:3000/poems/6a51f7ed28922d34ef0ad1c7 color: rgb(120, 120, 120) color: inherit {"dp":"/poems/[id]","o":"http://localhost:3000/poems/6a51f7ed28922d34ef0ad1c7","sdkn":"@vercel/analytics/next","sdkv":"1.6.1","sv":"0.1.3","ts":1783777874987} /_vercel/insights/view
-[00:01:43.964] Server  LOG      ○ Compiling /api/poems/[id] ...
-[00:02:33.226] Browser INFO    %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold
-[00:02:33.549] Server  LOG     API /api/auth/session: Session status: null
-[00:02:33.685] Browser LOG     %c[Vercel Web Analytics]%c Debug mode is enabled by default in development. No requests will be sent to the server. color: rgb(120, 120, 120) color: inherit
-[00:02:33.685] Browser LOG     %c[Vercel Web Analytics]%c Running queued event color: rgb(120, 120, 120) color: inherit pageview {"path":"/poems/6a51f7ed28922d34ef0ad1c7","route":"/poems/[id]"}
-[00:02:33.685] Browser LOG     %c[Vercel Web Analytics]%c [view] http://localhost:3000/poems/6a51f7ed28922d34ef0ad1c7 color: rgb(120, 120, 120) color: inherit {"dp":"/poems/[id]","o":"http://localhost:3000/poems/6a51f7ed28922d34ef0ad1c7","r":"","sdkn":"@vercel/analytics/next","sdkv":"1.6.1","sv":"0.1.3","ts":1783777928913} /_vercel/insights/view
-[00:02:33.685] Browser LOG     useSession: Raw response from /api/auth/session: {}
-[00:02:33.685] Browser LOG     useSession: Parsed data from /api/auth/session: {"user":null}
-[00:02:56.903] Server  ERROR   D:\Web Project\Poemsite\blog_poetry\.next\dev\server\chunks\lib_transliterate_ts_edf927e1._.js: Invalid source map. Only conformant source maps can be used to find the original code. Cause: Error: sourceMapURL could not be parsed
-[00:02:56.913] Server  ERROR   D:\Web Project\Poemsite\blog_poetry\.next\dev\server\chunks\[root-of-the-server]__9ac2da5c._.js: Invalid source map. Only conformant source maps can be used to find the original code. Cause: Error: sourceMapURL could not be parsed
-[00:02:56.956] Server  ERROR   D:\Web Project\Poemsite\blog_poetry\node_modules\next\dist\compiled\next-server\app-route-turbo.runtime.dev.js: Invalid source map. Only conformant source maps can be used to find the original code. Cause: Error: sourceMapURL could not be parsed
-[00:02:57.000] Server  ERROR   D:\Web Project\Poemsite\blog_poetry\.next\dev\server\chunks\node_modules_next_b5ebf0d4._.js: Invalid source map. Only conformant source maps can be used to find the original code. Cause: Error: sourceMapURL could not be parsed
-[00:02:57.009] Server  ERROR   D:\Web Project\Poemsite\blog_poetry\node_modules\next\dist\server\base-server.js: Invalid source map. Only conformant source maps can be used to find the original code. Cause: Error: sourceMapURL could not be parsed
-[00:02:57.013] Server  ERROR   D:\Web Project\Poemsite\blog_poetry\node_modules\next\dist\server\next-server.js: Invalid source map. Only conformant source maps can be used to find the original code. Cause: Error: sourceMapURL could not be parsed
-[00:02:57.024] Server  ERROR   D:\Web Project\Poemsite\blog_poetry\node_modules\next\dist\server\dev\next-dev-server.js: Invalid source map. Only conformant source maps can be used to find the original code. Cause: Error: sourceMapURL could not be parsed
-[00:02:57.026] Server  ERROR   D:\Web Project\Poemsite\blog_poetry\node_modules\next\dist\trace\trace.js: Invalid source map. Only conformant source maps can be used to find the original code. Cause: Error: sourceMapURL could not be parsed
-[00:02:57.028] Server  ERROR   D:\Web Project\Poemsite\blog_poetry\node_modules\next\dist\server\lib\router-server.js: Invalid source map. Only conformant source maps can be used to find the original code. Cause: Error: sourceMapURL could not be parsed
-[00:02:57.030] Server  ERROR   D:\Web Project\Poemsite\blog_poetry\node_modules\next\dist\server\lib\start-server.js: Invalid source map. Only conformant source maps can be used to find the original code. Cause: Error: sourceMapURL could not be parsed
-[00:02:57.037] Server  ERROR   Google Transliteration error, falling back to local method: Error: Could not find transliterated text in API response
-[00:03:12.365] Browser LOG     %c[Vercel Web Analytics]%c [view] http://localhost:3000/poems color: rgb(120, 120, 120) color: inherit {"dp":"/poems","o":"http://localhost:3000/poems","sdkn":"@vercel/analytics/next","sdkv":"1.6.1","sv":"0.1.3","ts":1783777967566} /_vercel/insights/view
-[00:03:24.517] Browser LOG     %c[Vercel Web Analytics]%c [view] http://localhost:3000/books color: rgb(120, 120, 120) color: inherit {"dp":"/books","o":"http://localhost:3000/books","sdkn":"@vercel/analytics/next","sdkv":"1.6.1","sv":"0.1.3","ts":1783777979777} /_vercel/insights/view
-[00:03:39.453] Browser LOG     %c[Vercel Web Analytics]%c [view] http://localhost:3000/books/694a40132665fde3d1f43e97 color: rgb(120, 120, 120) color: inherit {"dp":"/books/[id]","o":"http://localhost:3000/books/694a40132665fde3d1f43e97","sdkn":"@vercel/analytics/next","sdkv":"1.6.1","sv":"0.1.3","ts":1783777994759} /_vercel/insights/view
-[00:03:43.478] Browser WARN    You're attempting to animate multiple children within AnimatePresence, but its mode is set to "wait". This will lead to odd visual behaviour.
-[00:03:43.478] Browser WARN    You're attempting to animate multiple children within AnimatePresence, but its mode is set to "wait". This will lead to odd visual behaviour.
-[00:03:43.478] Browser ERROR   Encountered two children with the same key, `%s`. Keys should be unique so that components maintain their identity across updates. Non-unique keys may cause children to be duplicated and/or omitted — the behavior is unsupported and could change in a future version. 
-[00:03:47.949] Browser WARN    You're attempting to animate multiple children within AnimatePresence, but its mode is set to "wait". This will lead to odd visual behaviour.
-[00:03:47.949] Browser WARN    You're attempting to animate multiple children within AnimatePresence, but its mode is set to "wait". This will lead to odd visual behaviour.
-[00:03:47.949] Browser ERROR   Encountered two children with the same key, `%s`. Keys should be unique so that components maintain their identity across updates. Non-unique keys may cause children to be duplicated and/or omitted — the behavior is unsupported and could change in a future version. 
-[00:03:47.949] Browser ERROR   Encountered two children with the same key, `%s`. Keys should be unique so that components maintain their identity across updates. Non-unique keys may cause children to be duplicated and/or omitted — the behavior is unsupported and could change in a future version. 
-[00:03:56.348] Browser LOG     %c[Vercel Web Analytics]%c [view] http://localhost:3000/books color: rgb(120, 120, 120) color: inherit {"dp":"/books","o":"http://localhost:3000/books","sdkn":"@vercel/analytics/next","sdkv":"1.6.1","sv":"0.1.3","ts":1783778011636} /_vercel/insights/view
-[00:04:00.100] Browser LOG     %c[Vercel Web Analytics]%c [view] http://localhost:3000/books/694a40132665fde3d1f43e97 color: rgb(120, 120, 120) color: inherit {"dp":"/books/[id]","o":"http://localhost:3000/books/694a40132665fde3d1f43e97","sdkn":"@vercel/analytics/next","sdkv":"1.6.1","sv":"0.1.3","ts":1783778015385} /_vercel/insights/view
-[00:04:00.899] Browser WARN    You're attempting to animate multiple children within AnimatePresence, but its mode is set to "wait". This will lead to odd visual behaviour.
-[00:04:00.899] Browser WARN    You're attempting to animate multiple children within AnimatePresence, but its mode is set to "wait". This will lead to odd visual behaviour.
-[00:04:00.899] Browser ERROR   Encountered two children with the same key, `%s`. Keys should be unique so that components maintain their identity across updates. Non-unique keys may cause children to be duplicated and/or omitted — the behavior is unsupported and could change in a future version. 
-[00:04:01.330] Browser WARN    You're attempting to animate multiple children within AnimatePresence, but its mode is set to "wait". This will lead to odd visual behaviour.
-[00:04:01.330] Browser WARN    You're attempting to animate multiple children within AnimatePresence, but its mode is set to "wait". This will lead to odd visual behaviour.
-[00:04:01.330] Browser ERROR   Encountered two children with the same key, `%s`. Keys should be unique so that components maintain their identity across updates. Non-unique keys may cause children to be duplicated and/or omitted — the behavior is unsupported and could change in a future version. 
-[00:04:21.755] Browser WARN    You're attempting to animate multiple children within AnimatePresence, but its mode is set to "wait". This will lead to odd visual behaviour.
-[00:04:21.755] Browser WARN    You're attempting to animate multiple children within AnimatePresence, but its mode is set to "wait". This will lead to odd visual behaviour.
-[00:04:21.755] Browser ERROR   Encountered two children with the same key, `%s`. Keys should be unique so that components maintain their identity across updates. Non-unique keys may cause children to be duplicated and/or omitted — the behavior is unsupported and could change in a future version. 
-[00:04:22.683] Browser WARN    You're attempting to animate multiple children within AnimatePresence, but its mode is set to "wait". This will lead to odd visual behaviour.
-[00:04:22.683] Browser WARN    You're attempting to animate multiple children within AnimatePresence, but its mode is set to "wait". This will lead to odd visual behaviour.
-[00:04:22.683] Browser ERROR   Encountered two children with the same key, `%s`. Keys should be unique so that components maintain their identity across updates. Non-unique keys may cause children to be duplicated and/or omitted — the behavior is unsupported and could change in a future version. 
-[00:04:23.518] Browser WARN    You're attempting to animate multiple children within AnimatePresence, but its mode is set to "wait". This will lead to odd visual behaviour.
-[00:04:23.518] Browser WARN    You're attempting to animate multiple children within AnimatePresence, but its mode is set to "wait". This will lead to odd visual behaviour.
-[00:04:23.518] Browser ERROR   Encountered two children with the same key, `%s`. Keys should be unique so that components maintain their identity across updates. Non-unique keys may cause children to be duplicated and/or omitted — the behavior is unsupported and could change in a future version. 
-[00:04:25.145] Browser WARN    You're attempting to animate multiple children within AnimatePresence, but its mode is set to "wait". This will lead to odd visual behaviour.
-[00:04:25.145] Browser WARN    You're attempting to animate multiple children within AnimatePresence, but its mode is set to "wait". This will lead to odd visual behaviour.
-[00:04:25.145] Browser ERROR   Encountered two children with the same key, `%s`. Keys should be unique so that components maintain their identity across updates. Non-unique keys may cause children to be duplicated and/or omitted — the behavior is unsupported and could change in a future version. 
-[00:04:28.430] Browser LOG     %c[Vercel Web Analytics]%c [view] http://localhost:3000/books color: rgb(120, 120, 120) color: inherit {"dp":"/books","o":"http://localhost:3000/books","sdkn":"@vercel/analytics/next","sdkv":"1.6.1","sv":"0.1.3","ts":1783778043732} /_vercel/insights/view
-[00:04:29.262] Browser LOG     %c[Vercel Web Analytics]%c [view] http://localhost:3000/books/694a40132665fde3d1f43e97 color: rgb(120, 120, 120) color: inherit {"dp":"/books/[id]","o":"http://localhost:3000/books/694a40132665fde3d1f43e97","sdkn":"@vercel/analytics/next","sdkv":"1.6.1","sv":"0.1.3","ts":1783778044570} /_vercel/insights/view
-[00:04:29.758] Browser WARN    You're attempting to animate multiple children within AnimatePresence, but its mode is set to "wait". This will lead to odd visual behaviour.
-[00:04:29.758] Browser WARN    You're attempting to animate multiple children within AnimatePresence, but its mode is set to "wait". This will lead to odd visual behaviour.
-[00:04:29.758] Browser ERROR   Encountered two children with the same key, `%s`. Keys should be unique so that components maintain their identity across updates. Non-unique keys may cause children to be duplicated and/or omitted — the behavior is unsupported and could change in a future version. 
-[00:04:30.353] Browser WARN    You're attempting to animate multiple children within AnimatePresence, but its mode is set to "wait". This will lead to odd visual behaviour.
-[00:04:30.353] Browser WARN    You're attempting to animate multiple children within AnimatePresence, but its mode is set to "wait". This will lead to odd visual behaviour.
-[00:04:30.353] Browser ERROR   Encountered two children with the same key, `%s`. Keys should be unique so that components maintain their identity across updates. Non-unique keys may cause children to be duplicated and/or omitted — the behavior is unsupported and could change in a future version. 
-[00:05:38.461] Server  LOG      ✓ Compiled in 831ms
-[00:05:40.723] Browser INFO    %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold
-[00:05:41.436] Server  LOG     API /api/auth/session: Session status: null
-[00:05:45.530] Browser LOG     useSession: Raw response from /api/auth/session: {}
-[00:05:45.531] Browser LOG     useSession: Parsed data from /api/auth/session: {"user":null}
-[00:05:45.531] Browser LOG     %c[Vercel Web Analytics]%c Debug mode is enabled by default in development. No requests will be sent to the server. color: rgb(120, 120, 120) color: inherit
-[00:05:45.531] Browser LOG     %c[Vercel Web Analytics]%c Running queued event color: rgb(120, 120, 120) color: inherit pageview {"path":"/books/694a40132665fde3d1f43e97","route":"/books/[id]"}
-[00:05:45.531] Browser LOG     %c[Vercel Web Analytics]%c [view] http://localhost:3000/books/694a40132665fde3d1f43e97 color: rgb(120, 120, 120) color: inherit {"dp":"/books/[id]","o":"http://localhost:3000/books/694a40132665fde3d1f43e97","sdkn":"@vercel/analytics/next","sdkv":"1.6.1","sv":"0.1.3","ts":1783778117170} /_vercel/insights/view
-[00:07:08.594] Browser WARN    You're attempting to animate multiple children within AnimatePresence, but its mode is set to "wait". This will lead to odd visual behaviour.
-[00:07:08.597] Browser WARN    You're attempting to animate multiple children within AnimatePresence, but its mode is set to "wait". This will lead to odd visual behaviour.
-[00:07:08.598] Browser ERROR   Encountered two children with the same key, `%s`. Keys should be unique so that components maintain their identity across updates. Non-unique keys may cause children to be duplicated and/or omitted — the behavior is unsupported and could change in a future version. 
-[00:07:11.228] Browser LOG     %c[Vercel Web Analytics]%c [view] http://localhost:3000/books color: rgb(120, 120, 120) color: inherit {"dp":"/books","o":"http://localhost:3000/books","sdkn":"@vercel/analytics/next","sdkv":"1.6.1","sv":"0.1.3","ts":1783778206513} /_vercel/insights/view
-[00:07:15.869] Browser LOG     %c[Vercel Web Analytics]%c [view] http://localhost:3000/books/694a40132665fde3d1f43e97 color: rgb(120, 120, 120) color: inherit {"dp":"/books/[id]","o":"http://localhost:3000/books/694a40132665fde3d1f43e97","sdkn":"@vercel/analytics/next","sdkv":"1.6.1","sv":"0.1.3","ts":1783778211137} /_vercel/insights/view
-[00:07:17.914] Browser LOG     %c[Vercel Web Analytics]%c [view] http://localhost:3000/books color: rgb(120, 120, 120) color: inherit {"dp":"/books","o":"http://localhost:3000/books","sdkn":"@vercel/analytics/next","sdkv":"1.6.1","sv":"0.1.3","ts":1783778213155} /_vercel/insights/view
-[00:07:19.509] Browser LOG     %c[Vercel Web Analytics]%c [view] http://localhost:3000/books/694a40132665fde3d1f43e97 color: rgb(120, 120, 120) color: inherit {"dp":"/books/[id]","o":"http://localhost:3000/books/694a40132665fde3d1f43e97","sdkn":"@vercel/analytics/next","sdkv":"1.6.1","sv":"0.1.3","ts":1783778214756} /_vercel/insights/view
-[00:07:59.822] Server  LOG      ✓ Compiled in 1359ms
-[00:08:44.487] Browser INFO    %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold
-[00:08:45.361] Browser ERROR   A tree hydrated but some attributes of the server rendered HTML didn't match the client properties. This won't be patched up. This can happen if a SSR-ed Client Component used:
-
-- A server/client branch `if (typeof window !== 'undefined')`.
-- Variable input such as `Date.now()` or `Math.random()` which changes each time it's called.
-- Date formatting in a user's locale which doesn't match the server.
-- External changing data without sending a snapshot of it along with the HTML.
-- Invalid HTML tag nesting.
-
-It can also happen if the client has a browser extension installed which messes with the HTML before React loaded.
-
-%s%s https://react.dev/link/hydration-mismatch 
-
-  ...
-    <HotReload globalError={[...]} webSocket={WebSocket} staticIndicatorState={{pathname:null, ...}}>
-      <AppDevOverlayErrorBoundary globalError={[...]}>
-        <ReplaySsrOnlyErrors>
-        <DevRootHTTPAccessFallbackBoundary>
-          <HTTPAccessFallbackBoundary notFound={<NotAllowedRootHTTPFallbackError>}>
-            <HTTPAccessFallbackErrorBoundary pathname="/books/694..." notFound={<NotAllowedRootHTTPFallbackError>} ...>
-              <RedirectBoundary>
-                <RedirectErrorBoundary router={{...}}>
-                  <Head>
-                  <__next_root_layout_boundary__>
-                    <SegmentViewNode type="layout" pagePath="layout.tsx">
-                      <SegmentTrieNode>
-                      <link>
-                      <script>
-                      <script>
-                      <script>
-                      <script>
-                      <script>
-                      <script>
-                      <RootLayout>
-                        <html lang="hi" className="inter_b299..." suppressHydrationWarning={true}>
-                          <body
-                            className="font-sans antialiased"
--                           data-new-gr-c-s-check-loaded="14.1310.0"
--                           data-gr-ext-installed=""
-                          >
-                  ...
-
-[00:08:45.361] Browser LOG     %c[Vercel Web Analytics]%c Debug mode is enabled by default in development. No requests will be sent to the server. color: rgb(120, 120, 120) color: inherit
-[00:08:45.361] Browser LOG     %c[Vercel Web Analytics]%c Running queued event color: rgb(120, 120, 120) color: inherit pageview {"path":"/books/694a40132665fde3d1f43e97","route":"/books/[id]"}
-[00:08:45.361] Browser LOG     %c[Vercel Web Analytics]%c [view] http://localhost:3000/books/694a40132665fde3d1f43e97 color: rgb(120, 120, 120) color: inherit {"dp":"/books/[id]","o":"http://localhost:3000/books/694a40132665fde3d1f43e97","sdkn":"@vercel/analytics/next","sdkv":"1.6.1","sv":"0.1.3","ts":1783778300546} /_vercel/insights/view
-[00:08:45.884] Server  LOG     API /api/auth/session: Session status: null
-[00:08:46.097] Browser LOG     useSession: Raw response from /api/auth/session: {}
-[00:08:46.097] Browser LOG     useSession: Parsed data from /api/auth/session: {"user":null}
-[00:09:30.509] Browser WARN    You're attempting to animate multiple children within AnimatePresence, but its mode is set to "wait". This will lead to odd visual behaviour.
-[00:09:30.509] Browser WARN    You're attempting to animate multiple children within AnimatePresence, but its mode is set to "wait". This will lead to odd visual behaviour.
-[00:09:30.509] Browser ERROR   Encountered two children with the same key, `%s`. Keys should be unique so that components maintain their identity across updates. Non-unique keys may cause children to be duplicated and/or omitted — the behavior is unsupported and could change in a future version. 
-[00:09:30.509] Browser WARN    You're attempting to animate multiple children within AnimatePresence, but its mode is set to "wait". This will lead to odd visual behaviour.
-[00:09:30.509] Browser WARN    You're attempting to animate multiple children within AnimatePresence, but its mode is set to "wait". This will lead to odd visual behaviour.
-[00:09:30.509] Browser ERROR   Encountered two children with the same key, `%s`. Keys should be unique so that components maintain their identity across updates. Non-unique keys may cause children to be duplicated and/or omitted — the behavior is unsupported and could change in a future version. 
-[00:09:46.786] Browser INFO    %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold
-[00:09:47.444] Browser ERROR   A tree hydrated but some attributes of the server rendered HTML didn't match the client properties. This won't be patched up. This can happen if a SSR-ed Client Component used:
-
-- A server/client branch `if (typeof window !== 'undefined')`.
-- Variable input such as `Date.now()` or `Math.random()` which changes each time it's called.
-- Date formatting in a user's locale which doesn't match the server.
-- External changing data without sending a snapshot of it along with the HTML.
-- Invalid HTML tag nesting.
-
-It can also happen if the client has a browser extension installed which messes with the HTML before React loaded.
-
-%s%s https://react.dev/link/hydration-mismatch 
-
-  ...
-    <HotReload globalError={[...]} webSocket={WebSocket} staticIndicatorState={{pathname:null, ...}}>
-      <AppDevOverlayErrorBoundary globalError={[...]}>
-        <ReplaySsrOnlyErrors>
-        <DevRootHTTPAccessFallbackBoundary>
-          <HTTPAccessFallbackBoundary notFound={<NotAllowedRootHTTPFallbackError>}>
-            <HTTPAccessFallbackErrorBoundary pathname="/books/694..." notFound={<NotAllowedRootHTTPFallbackError>} ...>
-              <RedirectBoundary>
-                <RedirectErrorBoundary router={{...}}>
-                  <Head>
-                  <__next_root_layout_boundary__>
-                    <SegmentViewNode type="layout" pagePath="layout.tsx">
-                      <SegmentTrieNode>
-                      <link>
-                      <script>
-                      <script>
-                      <script>
-                      <script>
-                      <script>
-                      <script>
-                      <RootLayout>
-                        <html lang="hi" className="inter_b299..." suppressHydrationWarning={true}>
-                          <body
-                            className="font-sans antialiased"
--                           data-new-gr-c-s-check-loaded="14.1310.0"
--                           data-gr-ext-installed=""
-                          >
-                  ...
-
-[00:09:47.520] Server  LOG     API /api/auth/session: Session status: null
-[00:09:47.822] Browser LOG     useSession: Raw response from /api/auth/session: {}
-[00:09:47.822] Browser LOG     useSession: Parsed data from /api/auth/session: {"user":null}
-[00:09:48.338] Browser LOG     %c[Vercel Web Analytics]%c Debug mode is enabled by default in development. No requests will be sent to the server. color: rgb(120, 120, 120) color: inherit
-[00:09:48.338] Browser LOG     %c[Vercel Web Analytics]%c Running queued event color: rgb(120, 120, 120) color: inherit pageview {"path":"/books/694a40132665fde3d1f43e97","route":"/books/[id]"}
-[00:09:48.338] Browser LOG     %c[Vercel Web Analytics]%c [view] http://localhost:3000/books/694a40132665fde3d1f43e97 color: rgb(120, 120, 120) color: inherit {"dp":"/books/[id]","o":"http://localhost:3000/books/694a40132665fde3d1f43e97","sdkn":"@vercel/analytics/next","sdkv":"1.6.1","sv":"0.1.3","ts":1783778363600} /_vercel/insights/view
-[00:09:48.696] Browser WARN    You're attempting to animate multiple children within AnimatePresence, but its mode is set to "wait". This will lead to odd visual behaviour.
-[00:09:48.696] Browser WARN    You're attempting to animate multiple children within AnimatePresence, but its mode is set to "wait". This will lead to odd visual behaviour.
-[00:09:48.696] Browser ERROR   Encountered two children with the same key, `%s`. Keys should be unique so that components maintain their identity across updates. Non-unique keys may cause children to be duplicated and/or omitted — the behavior is unsupported and could change in a future version. 
-[00:09:48.837] Browser WARN    You're attempting to animate multiple children within AnimatePresence, but its mode is set to "wait". This will lead to odd visual behaviour.
-[00:09:48.837] Browser WARN    You're attempting to animate multiple children within AnimatePresence, but its mode is set to "wait". This will lead to odd visual behaviour.
-[00:09:48.837] Browser ERROR   Encountered two children with the same key, `%s`. Keys should be unique so that components maintain their identity across updates. Non-unique keys may cause children to be duplicated and/or omitted — the behavior is unsupported and could change in a future version. 
-[00:13:21.334] Browser INFO    %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold
-[00:13:22.128] Server  LOG     API /api/auth/session: Session status: null
-[00:13:22.308] Browser LOG     %c[Vercel Web Analytics]%c Debug mode is enabled by default in development. No requests will be sent to the server. color: rgb(120, 120, 120) color: inherit
-[00:13:22.308] Browser LOG     %c[Vercel Web Analytics]%c Running queued event color: rgb(120, 120, 120) color: inherit pageview {"path":"/books/694a40132665fde3d1f43e97","route":"/books/[id]"}
-[00:13:22.308] Browser LOG     %c[Vercel Web Analytics]%c [view] http://localhost:3000/books/694a40132665fde3d1f43e97 color: rgb(120, 120, 120) color: inherit {"dp":"/books/[id]","o":"http://localhost:3000/books/694a40132665fde3d1f43e97","sdkn":"@vercel/analytics/next","sdkv":"1.6.1","sv":"0.1.3","ts":1783778577432} /_vercel/insights/view
-[00:13:22.366] Browser LOG     useSession: Raw response from /api/auth/session: {}
-[00:13:22.366] Browser LOG     useSession: Parsed data from /api/auth/session: {"user":null}
-[00:17:48.159] Browser INFO    %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold
-[00:17:50.972] Browser ERROR   A tree hydrated but some attributes of the server rendered HTML didn't match the client properties. This won't be patched up. This can happen if a SSR-ed Client Component used:
-
-- A server/client branch `if (typeof window !== 'undefined')`.
-- Variable input such as `Date.now()` or `Math.random()` which changes each time it's called.
-- Date formatting in a user's locale which doesn't match the server.
-- External changing data without sending a snapshot of it along with the HTML.
-- Invalid HTML tag nesting.
-
-It can also happen if the client has a browser extension installed which messes with the HTML before React loaded.
-
-%s%s https://react.dev/link/hydration-mismatch 
-
-  ...
-    <HotReload globalError={[...]} webSocket={WebSocket} staticIndicatorState={{pathname:null, ...}}>
-      <AppDevOverlayErrorBoundary globalError={[...]}>
-        <ReplaySsrOnlyErrors>
-        <DevRootHTTPAccessFallbackBoundary>
-          <HTTPAccessFallbackBoundary notFound={<NotAllowedRootHTTPFallbackError>}>
-            <HTTPAccessFallbackErrorBoundary pathname="/books/694..." notFound={<NotAllowedRootHTTPFallbackError>} ...>
-              <RedirectBoundary>
-                <RedirectErrorBoundary router={{...}}>
-                  <Head>
-                  <__next_root_layout_boundary__>
-                    <SegmentViewNode type="layout" pagePath="layout.tsx">
-                      <SegmentTrieNode>
-                      <link>
-                      <script>
-                      <script>
-                      <script>
-                      <script>
-                      <script>
-                      <script>
-                      <RootLayout>
-                        <html lang="hi" className="inter_b299..." suppressHydrationWarning={true}>
-                          <body
-                            className="font-sans antialiased"
--                           data-new-gr-c-s-check-loaded="14.1310.0"
--                           data-gr-ext-installed=""
-                          >
-                  ...
-
-[00:17:50.978] Browser LOG     %c[Vercel Web Analytics]%c Debug mode is enabled by default in development. No requests will be sent to the server. color: rgb(120, 120, 120) color: inherit
-[00:17:50.978] Browser LOG     %c[Vercel Web Analytics]%c Running queued event color: rgb(120, 120, 120) color: inherit pageview {"path":"/books/694a40132665fde3d1f43e97","route":"/books/[id]"}
-[00:17:50.978] Browser LOG     %c[Vercel Web Analytics]%c [view] http://localhost:3000/books/694a40132665fde3d1f43e97 color: rgb(120, 120, 120) color: inherit {"dp":"/books/[id]","o":"http://localhost:3000/books/694a40132665fde3d1f43e97","sdkn":"@vercel/analytics/next","sdkv":"1.6.1","sv":"0.1.3","ts":1783778845789} /_vercel/insights/view
-[00:17:51.284] Server  LOG     API /api/auth/session: Session status: null
-[00:17:51.460] Browser LOG     useSession: Raw response from /api/auth/session: {}
-[00:17:51.460] Browser LOG     useSession: Parsed data from /api/auth/session: {"user":null}
-[00:18:15.741] Server  LOG      ○ Compiling /login ...
-[00:18:22.647] Browser LOG     %c[Vercel Web Analytics]%c [view] http://localhost:3000/login color: rgb(120, 120, 120) color: inherit {"dp":"/login","o":"http://localhost:3000/login","sdkn":"@vercel/analytics/next","sdkv":"1.6.1","sv":"0.1.3","ts":1783778877821} /_vercel/insights/view
-[00:18:22.735] Server  LOG     API /api/auth/session: Session status: null
-[00:18:22.805] Server  LOG     API /api/auth/session: Session status: null
-[00:18:22.936] Browser LOG     useSession: Raw response from /api/auth/session: {}
-[00:18:22.936] Browser LOG     useSession: Parsed data from /api/auth/session: {"user":null}
-[00:18:22.936] Browser LOG     useSession: Raw response from /api/auth/session: {}
-[00:18:22.936] Browser LOG     useSession: Parsed data from /api/auth/session: {"user":null}
-[00:18:32.248] Server  LOG     API /api/auth/session: Session status: {}
-[00:18:32.445] Server  LOG     API /api/auth/session: Session status: {}
-[00:18:32.562] Browser LOG     useSession: Raw response from /api/auth/session: {}
-[00:18:32.562] Browser LOG     useSession: Parsed data from /api/auth/session: {"user":{"exp":1783822087,"isAdmin":true,"type":"auth","userId":"6936a3e510ca4806bcd9c3a3"}}
-[00:18:32.562] Browser LOG     useSession: Raw response from /api/auth/session: {}
-[00:18:32.562] Browser LOG     useSession: Parsed data from /api/auth/session: {"user":{"exp":1783822087,"isAdmin":true,"type":"auth","userId":"6936a3e510ca4806bcd9c3a3"}}
-[00:18:34.064] Browser LOG     %c[Vercel Web Analytics]%c [view] http://localhost:3000/admin color: rgb(120, 120, 120) color: inherit {"dp":"/admin","o":"http://localhost:3000/admin","sdkn":"@vercel/analytics/next","sdkv":"1.6.1","sv":"0.1.3","ts":1783778889348} /_vercel/insights/view
-[00:18:41.074] Browser LOG     %c[Vercel Web Analytics]%c [view] http://localhost:3000/admin/books color: rgb(120, 120, 120) color: inherit {"dp":"/admin/books","o":"http://localhost:3000/admin/books","sdkn":"@vercel/analytics/next","sdkv":"1.6.1","sv":"0.1.3","ts":1783778896367} /_vercel/insights/view
-[00:18:46.338] Browser LOG     %c[Vercel Web Analytics]%c [view] http://localhost:3000/admin/books/694a40132665fde3d1f43e97/edit color: rgb(120, 120, 120) color: inherit {"dp":"/admin/books/[id]/edit","o":"http://localhost:3000/admin/books/694a40132665fde3d1f43e97/edit","sdkn":"@vercel/analytics/next","sdkv":"1.6.1","sv":"0.1.3","ts":1783778901628} /_vercel/insights/view
-[00:19:07.949] Browser LOG     %c[Vercel Web Analytics]%c [view] http://localhost:3000/admin/books color: rgb(120, 120, 120) color: inherit {"dp":"/admin/books","o":"http://localhost:3000/admin/books","sdkn":"@vercel/analytics/next","sdkv":"1.6.1","sv":"0.1.3","ts":1783778923245} /_vercel/insights/view
-[00:19:12.835] Browser LOG     %c[Vercel Web Analytics]%c [view] http://localhost:3000/poems color: rgb(120, 120, 120) color: inherit {"dp":"/poems","o":"http://localhost:3000/poems","sdkn":"@vercel/analytics/next","sdkv":"1.6.1","sv":"0.1.3","ts":1783778928011} /_vercel/insights/view
-[00:19:20.078] Browser LOG     %c[Vercel Web Analytics]%c [view] http://localhost:3000/books color: rgb(120, 120, 120) color: inherit {"dp":"/books","o":"http://localhost:3000/books","sdkn":"@vercel/analytics/next","sdkv":"1.6.1","sv":"0.1.3","ts":1783778935353} /_vercel/insights/view
-[00:19:22.591] Browser LOG     %c[Vercel Web Analytics]%c [view] http://localhost:3000/books/694a40132665fde3d1f43e97 color: rgb(120, 120, 120) color: inherit {"dp":"/books/[id]","o":"http://localhost:3000/books/694a40132665fde3d1f43e97","sdkn":"@vercel/analytics/next","sdkv":"1.6.1","sv":"0.1.3","ts":1783778937863} /_vercel/insights/view
-[00:20:33.911] Server  LOG      ✓ Compiled in 668ms
-[00:21:51.419] Browser LOG     %c[Vercel Web Analytics]%c [view] http://localhost:3000/books color: rgb(120, 120, 120) color: inherit {"dp":"/books","o":"http://localhost:3000/books","sdkn":"@vercel/analytics/next","sdkv":"1.6.1","sv":"0.1.3","ts":1783779086685} /_vercel/insights/view
-[00:22:09.556] Browser LOG     %c[Vercel Web Analytics]%c [view] http://localhost:3000/ color: rgb(120, 120, 120) color: inherit {"dp":"/","o":"http://localhost:3000/","sdkn":"@vercel/analytics/next","sdkv":"1.6.1","sv":"0.1.3","ts":1783779104478} /_vercel/insights/view
-[00:22:09.556] Browser WARN    Image with src "https://7l3slzqzrwbxftjs.public.blob.vercel-storage.com/Sritiyon%20Ki%20Roshni%20-%20Front-Twr71wlyf5xTB50RM175UamC7xQQgV.png" has either width or height modified, but not the other. If you use CSS to change the size of your image, also include the styles 'width: "auto"' or 'height: "auto"' to maintain the aspect ratio.
-[00:22:10.068] Browser WARN    Image with src "http://localhost:3000/placeholder.jpg" has either width or height modified, but not the other. If you use CSS to change the size of your image, also include the styles 'width: "auto"' or 'height: "auto"' to maintain the aspect ratio.
-[00:22:12.441] Browser LOG     %c[Vercel Web Analytics]%c [view] http://localhost:3000/quotes color: rgb(120, 120, 120) color: inherit {"dp":"/quotes","o":"http://localhost:3000/quotes","sdkn":"@vercel/analytics/next","sdkv":"1.6.1","sv":"0.1.3","ts":1783779107448} /_vercel/insights/view
-[00:22:12.441] Browser LOG     TranslatedQuote: targetLang = hi original content = .
-[00:22:12.442] Browser LOG     TranslatedQuote: Bypassing translation for hi/en
-[00:22:12.442] Browser LOG     TranslatedQuote: targetLang = hi original content = <div>कोट्स</div><div>&nbsp; &n
-[00:22:12.442] Browser LOG     TranslatedQuote: Bypassing translation for hi/en
-[00:22:12.442] Browser LOG     TranslatedQuote: targetLang = hi original content = <div style="text-align: center
-[00:22:12.442] Browser LOG     TranslatedQuote: Bypassing translation for hi/en
-[00:22:12.442] Browser LOG     TranslatedQuote: targetLang = hi original content = .
-[00:22:12.442] Browser LOG     TranslatedQuote: Bypassing translation for hi/en
-[00:22:12.442] Browser LOG     TranslatedQuote: targetLang = hi original content = <div>कोट्स</div><div>&nbsp; &n
-[00:22:12.442] Browser LOG     TranslatedQuote: Bypassing translation for hi/en
-[00:22:12.442] Browser LOG     TranslatedQuote: targetLang = hi original content = <div style="text-align: center
-[00:22:12.442] Browser LOG     TranslatedQuote: Bypassing translation for hi/en
-[00:29:12.007] Server  LOG      ✓ Compiled in 1143ms
-[00:29:22.447] Server  LOG      ✓ Compiled in 1161ms
-[00:29:27.370] Server  LOG      ✓ Compiled in 362ms
-[00:29:34.530] Server  LOG      ✓ Compiled in 1117ms
-[00:30:10.054] Browser LOG     TranslatedQuote: targetLang = hi original content = .
-[00:30:10.058] Browser LOG     TranslatedQuote: Bypassing translation for hi/en
-[00:30:10.058] Browser LOG     TranslatedQuote: targetLang = hi original content = <div>कोट्स</div><div>&nbsp; &n
-[00:30:10.058] Browser LOG     TranslatedQuote: Bypassing translation for hi/en
-[00:30:10.058] Browser LOG     TranslatedQuote: targetLang = hi original content = <div style="text-align: center
-[00:30:10.058] Browser LOG     TranslatedQuote: Bypassing translation for hi/en
-[00:30:10.058] Browser LOG     TranslatedQuote: targetLang = hi original content = .
-[00:30:10.058] Browser LOG     TranslatedQuote: Bypassing translation for hi/en
-[00:30:10.058] Browser LOG     TranslatedQuote: targetLang = hi original content = <div>कोट्स</div><div>&nbsp; &n
-[00:30:10.058] Browser LOG     TranslatedQuote: Bypassing translation for hi/en
-[00:30:10.058] Browser LOG     TranslatedQuote: targetLang = hi original content = <div style="text-align: center
-[00:30:10.058] Browser LOG     TranslatedQuote: Bypassing translation for hi/en
-[00:32:32.636] Server  LOG      ✓ Compiled in 1131ms
-[00:32:40.453] Server  LOG      ✓ Compiled in 1647ms
-[00:32:40.666] Browser ERROR   ./app/quotes/page.tsx:484:69
-Parsing ecmascript source code failed
-  482 |           <div className="space-y-6">
-  483 |             {filteredQuotes.map((quote) => {
-> 484 |               const isLiked = likedQuotes.includes(quo              return (
-      |                                                                     ^^^^^^
-  485 |                 <div key={quote._id} style={{ contentVisibility: 'auto', containIntrinsicSize: '0 500px' }}>
-  486 |                     {/* Facebook Feed Like Card */}
-  487 |                     <Card className="overflow-hidden border border-[#3c2a1e]/10 dark:border-[#e6dfcd]/10 bg-card shadow-sm hover:shadow-md transition duration-300 transform-gpu will-change-transform">
-
-Expected '</', got 'return'
-
-Import traces:
-  Client Component Browser:
-    ./app/quotes/page.tsx [Client Component Browser]
-    ./app/quotes/page.tsx [Server Component]
-
-  Client Component SSR:
-    ./app/quotes/page.tsx [Client Component SSR]
-    ./app/quotes/page.tsx [Server Component]
-[00:32:44.785] Server  LOG      ✓ Compiled in 329ms
-[00:35:13.027] Server  LOG      ✓ Compiled in 1369ms
-[00:35:13.995] Browser ERROR   ./app/quotes/page.tsx:647:13
-Parsing ecmascript source code failed
-  645 |             </div>
-  646 |             
-> 647 |             {filteredQuotes.length > visibleCount && (
-      |             ^
-  648 |               <div className="flex justify-center pt-6 pb-12">
-  649 |                 <Button 
-  650 |                   onClick={() => setVisibleCount(prev => prev + 10)}
-
-Expected '</', got '{'
-
-Import traces:
-  Client Component Browser:
-    ./app/quotes/page.tsx [Client Component Browser]
-    ./app/quotes/page.tsx [Server Component]
-
-  Client Component SSR:
-    ./app/quotes/page.tsx [Client Component SSR]
-    ./app/quotes/page.tsx [Server Component]
-[00:35:21.003] Browser ERROR   ./app/quotes/page.tsx:647:13
-Parsing ecmascript source code failed
-  645 |             </div>
-  646 |             
-> 647 |             {filteredQuotes.length > visibleCount && (
-      |             ^
-  648 |               <div className="flex justify-center pt-6 pb-12">
-  649 |                 <Button 
-  650 |                   onClick={() => setVisibleCount(prev => prev + 10)}
-
-Expected '</', got '{'
-
-Import traces:
-  Client Component Browser:
-    ./app/quotes/page.tsx [Client Component Browser]
-    ./app/quotes/page.tsx [Server Component]
-
-  Client Component SSR:
-    ./app/quotes/page.tsx [Client Component SSR]
-    ./app/quotes/page.tsx [Server Component]
-[00:35:21.993] Browser ERROR   ./app/quotes/page.tsx:647:13
-Parsing ecmascript source code failed
-  645 |             </div>
-  646 |             
-> 647 |             {filteredQuotes.length > visibleCount && (
-      |             ^
-  648 |               <div className="flex justify-center pt-6 pb-12">
-  649 |                 <Button 
-  650 |                   onClick={() => setVisibleCount(prev => prev + 10)}
-
-Expected '</', got '{'
-
-Import traces:
-  Client Component Browser:
-    ./app/quotes/page.tsx [Client Component Browser]
-    ./app/quotes/page.tsx [Server Component]
-
-  Client Component SSR:
-    ./app/quotes/page.tsx [Client Component SSR]
-    ./app/quotes/page.tsx [Server Component]
-[00:35:21.993] Browser ERROR   ./app/quotes/page.tsx:647:13
-Parsing ecmascript source code failed
-  645 |             </div>
-  646 |             
-> 647 |             {filteredQuotes.length > visibleCount && (
-      |             ^
-  648 |               <div className="flex justify-center pt-6 pb-12">
-  649 |                 <Button 
-  650 |                   onClick={() => setVisibleCount(prev => prev + 10)}
-
-Expected '</', got '{'
-
-Import traces:
-  Client Component Browser:
-    ./app/quotes/page.tsx [Client Component Browser]
-    ./app/quotes/page.tsx [Server Component]
-
-  Client Component SSR:
-    ./app/quotes/page.tsx [Client Component SSR]
-    ./app/quotes/page.tsx [Server Component]
-[00:35:21.993] Browser ERROR   ./app/quotes/page.tsx:647:13
-Parsing ecmascript source code failed
-  645 |             </div>
-  646 |             
-> 647 |             {filteredQuotes.length > visibleCount && (
-      |             ^
-  648 |               <div className="flex justify-center pt-6 pb-12">
-  649 |                 <Button 
-  650 |                   onClick={() => setVisibleCount(prev => prev + 10)}
-
-Expected '</', got '{'
-
-Import traces:
-  Client Component Browser:
-    ./app/quotes/page.tsx [Client Component Browser]
-    ./app/quotes/page.tsx [Server Component]
-
-  Client Component SSR:
-    ./app/quotes/page.tsx [Client Component SSR]
-    ./app/quotes/page.tsx [Server Component]
-[00:35:32.170] Browser ERROR   ./app/quotes/page.tsx:647:13
-Parsing ecmascript source code failed
-  645 |             </div>
-  646 |             
-> 647 |             {filteredQuotes.length > visibleCount && (
-      |             ^
-  648 |               <div className="flex justify-center pt-6 pb-12">
-  649 |                 <Button 
-  650 |                   onClick={() => setVisibleCount(prev => prev + 10)}
-
-Expected '</', got '{'
-
-Import traces:
-  Client Component Browser:
-    ./app/quotes/page.tsx [Client Component Browser]
-    ./app/quotes/page.tsx [Server Component]
-
-  Client Component SSR:
-    ./app/quotes/page.tsx [Client Component SSR]
-    ./app/quotes/page.tsx [Server Component]
-[00:36:10.687] Server  LOG      ✓ Compiled in 891ms
-[00:36:17.837] Browser ERROR   ./app/quotes/page.tsx:647:13
-Parsing ecmascript source code failed
-  645 |             </div>
-  646 |             
-> 647 |             {filteredQuotes.length > visibleCount && (
-      |             ^
-  648 |               <div className="flex justify-center pt-6 pb-12">
-  649 |                 <Button 
-  650 |                   onClick={() => setVisibleCount(prev => prev + 10)}
-
-Expected '</', got '{'
-
-Import traces:
-  Client Component Browser:
-    ./app/quotes/page.tsx [Client Component Browser]
-    ./app/quotes/page.tsx [Server Component]
-
-  Client Component SSR:
-    ./app/quotes/page.tsx [Client Component SSR]
-    ./app/quotes/page.tsx [Server Component]
-[00:36:17.837] Browser ERROR   ./app/quotes/page.tsx:647:13
-Parsing ecmascript source code failed
-  645 |             </div>
-  646 |             
-> 647 |             {filteredQuotes.length > visibleCount && (
-      |             ^
-  648 |               <div className="flex justify-center pt-6 pb-12">
-  649 |                 <Button 
-  650 |                   onClick={() => setVisibleCount(prev => prev + 10)}
-
-Expected '</', got '{'
-
-Import traces:
-  Client Component Browser:
-    ./app/quotes/page.tsx [Client Component Browser]
-    ./app/quotes/page.tsx [Server Component]
-
-  Client Component SSR:
-    ./app/quotes/page.tsx [Client Component SSR]
-    ./app/quotes/page.tsx [Server Component]
-[00:36:17.837] Browser ERROR   ./app/quotes/page.tsx:647:13
-Parsing ecmascript source code failed
-  645 |             </div>
-  646 |             
-> 647 |             {filteredQuotes.length > visibleCount && (
-      |             ^
-  648 |               <div className="flex justify-center pt-6 pb-12">
-  649 |                 <Button 
-  650 |                   onClick={() => setVisibleCount(prev => prev + 10)}
-
-Expected '</', got '{'
-
-Import traces:
-  Client Component Browser:
-    ./app/quotes/page.tsx [Client Component Browser]
-    ./app/quotes/page.tsx [Server Component]
-
-  Client Component SSR:
-    ./app/quotes/page.tsx [Client Component SSR]
-    ./app/quotes/page.tsx [Server Component]
-[00:36:17.837] Browser ERROR   ./app/quotes/page.tsx:647:13
-Parsing ecmascript source code failed
-  645 |             </div>
-  646 |             
-> 647 |             {filteredQuotes.length > visibleCount && (
-      |             ^
-  648 |               <div className="flex justify-center pt-6 pb-12">
-  649 |                 <Button 
-  650 |                   onClick={() => setVisibleCount(prev => prev + 10)}
-
-Expected '</', got '{'
-
-Import traces:
-  Client Component Browser:
-    ./app/quotes/page.tsx [Client Component Browser]
-    ./app/quotes/page.tsx [Server Component]
-
-  Client Component SSR:
-    ./app/quotes/page.tsx [Client Component SSR]
-    ./app/quotes/page.tsx [Server Component]
-[00:36:35.953] Server  LOG      ○ Compiling /api/quotes/[id] ...
+[00:00:08.973] Server  WARN     ⚠ The "middleware" file convention is deprecated. Please use "proxy" instead. Learn more: https://nextjs.org/docs/messages/middleware-to-proxy
+[00:00:11.028] Server  LOG      ✓ Ready in 8.4s
+[00:00:33.937] Server  LOG      ○ Compiling /quotes ...
+[00:00:55.918] Browser INFO    %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold
+[00:01:03.919] Server  LOG     API /api/auth/session: Session status: null
+[00:01:03.944] Browser LOG     %c[Vercel Web Analytics]%c Debug mode is enabled by default in development. No requests will be sent to the server. color: rgb(120, 120, 120) color: inherit
+[00:01:03.944] Browser LOG     %c[Vercel Web Analytics]%c Running queued event color: rgb(120, 120, 120) color: inherit pageview {"path":"/quotes","route":"/quotes"}
+[00:01:03.944] Browser LOG     %c[Vercel Web Analytics]%c [view] http://localhost:3000/quotes color: rgb(120, 120, 120) color: inherit {"dp":"/quotes","o":"http://localhost:3000/quotes","sdkn":"@vercel/analytics/next","sdkv":"1.6.1","sv":"0.1.3","ts":1784350983106} /_vercel/insights/view
+[00:01:04.039] Browser LOG     useSession: Raw response from /api/auth/session: {}
+[00:01:04.039] Browser LOG     useSession: Parsed data from /api/auth/session: {"user":null}
+[00:01:11.400] Browser LOG     %c[Vercel Web Analytics]%c [view] http://localhost:3000/ color: rgb(120, 120, 120) color: inherit {"dp":"/","o":"http://localhost:3000/","sdkn":"@vercel/analytics/next","sdkv":"1.6.1","sv":"0.1.3","ts":1784350996493} /_vercel/insights/view
+[00:01:17.755] Browser WARN    Image with src "http://localhost:3000/placeholder.jpg" has either width or height modified, but not the other. If you use CSS to change the size of your image, also include the styles 'width: "auto"' or 'height: "auto"' to maintain the aspect ratio.
+[00:01:29.478] Browser LOG     %c[Vercel Web Analytics]%c [view] http://localhost:3000/gallery color: rgb(120, 120, 120) color: inherit {"dp":"/gallery","o":"http://localhost:3000/gallery","sdkn":"@vercel/analytics/next","sdkv":"1.6.1","sv":"0.1.3","ts":1784351014635} /_vercel/insights/view
+[00:01:41.807] Server  LOG     API /api/auth/session: Session status: null
+[00:01:41.854] Browser LOG     %c[Vercel Web Analytics]%c [view] http://localhost:3000/login color: rgb(120, 120, 120) color: inherit {"dp":"/login","o":"http://localhost:3000/login","sdkn":"@vercel/analytics/next","sdkv":"1.6.1","sv":"0.1.3","ts":1784351026905} /_vercel/insights/view
+[00:01:41.949] Server  LOG     API /api/auth/session: Session status: null
+[00:01:41.955] Browser LOG     useSession: Raw response from /api/auth/session: {}
+[00:01:41.955] Browser LOG     useSession: Parsed data from /api/auth/session: {"user":null}
+[00:01:42.066] Browser LOG     useSession: Raw response from /api/auth/session: {}
+[00:01:42.066] Browser LOG     useSession: Parsed data from /api/auth/session: {"user":null}
+[00:01:52.049] Server  LOG     API /api/auth/session: Session status: {}
+[00:01:52.422] Browser LOG     useSession: Raw response from /api/auth/session: {}
+[00:01:52.422] Browser LOG     useSession: Parsed data from /api/auth/session: {"user":{"exp":1784394237,"isAdmin":true,"type":"auth","userId":"6936a3e510ca4806bcd9c3a3"}}
+[00:01:52.443] Server  LOG     API /api/auth/session: Session status: {}
+[00:01:52.558] Browser LOG     useSession: Raw response from /api/auth/session: {}
+[00:01:52.558] Browser LOG     useSession: Parsed data from /api/auth/session: {"user":{"exp":1784394237,"isAdmin":true,"type":"auth","userId":"6936a3e510ca4806bcd9c3a3"}}
+[00:01:53.803] Browser LOG     %c[Vercel Web Analytics]%c [view] http://localhost:3000/admin color: rgb(120, 120, 120) color: inherit {"dp":"/admin","o":"http://localhost:3000/admin","sdkn":"@vercel/analytics/next","sdkv":"1.6.1","sv":"0.1.3","ts":1784351038982} /_vercel/insights/view
+[00:02:05.550] Browser LOG     %c[Vercel Web Analytics]%c [view] http://localhost:3000/admin/gallery color: rgb(120, 120, 120) color: inherit {"dp":"/admin/gallery","o":"http://localhost:3000/admin/gallery","sdkn":"@vercel/analytics/next","sdkv":"1.6.1","sv":"0.1.3","ts":1784351050726} /_vercel/insights/view
+[00:04:29.947] Browser LOG     %c[Vercel Web Analytics]%c [view] http://localhost:3000/gallery color: rgb(120, 120, 120) color: inherit {"dp":"/gallery","o":"http://localhost:3000/gallery","sdkn":"@vercel/analytics/next","sdkv":"1.6.1","sv":"0.1.3","ts":1784351195115} /_vercel/insights/view
+[00:05:14.123] Browser LOG     %c[Vercel Web Analytics]%c [view] http://localhost:3000/ color: rgb(120, 120, 120) color: inherit {"dp":"/","o":"http://localhost:3000/","sdkn":"@vercel/analytics/next","sdkv":"1.6.1","sv":"0.1.3","ts":1784351239112} /_vercel/insights/view
+[00:06:41.391] Server  LOG      ✓ Compiled in 741ms
+[00:06:44.224] Server  LOG      ✓ Compiled in 468ms
+[00:06:54.450] Server  LOG      ✓ Compiled in 629ms
+[00:06:54.777] Server  LOG      ✓ Compiled in 397ms
+[00:06:55.186] Server  LOG      ✓ Compiled in 244ms
+[00:06:55.923] Server  LOG      ✓ Compiled in 611ms
+[00:06:56.360] Server  LOG      ✓ Compiled in 318ms
+[00:07:20.381] Browser INFO    %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold
+[00:07:22.357] Browser LOG     %c[Vercel Web Analytics]%c Debug mode is enabled by default in development. No requests will be sent to the server. color: rgb(120, 120, 120) color: inherit
+[00:07:22.357] Browser LOG     %c[Vercel Web Analytics]%c Running queued event color: rgb(120, 120, 120) color: inherit pageview {"path":"/","route":"/"}
+[00:07:22.357] Browser LOG     %c[Vercel Web Analytics]%c [view] http://localhost:3000/ color: rgb(120, 120, 120) color: inherit {"dp":"/","o":"http://localhost:3000/","sdkn":"@vercel/analytics/next","sdkv":"1.6.1","sv":"0.1.3","ts":1784351367100} /_vercel/insights/view
+[00:07:22.357] Browser WARN    Image with src "https://7l3slzqzrwbxftjs.public.blob.vercel-storage.com/Jul%2011%2C%202026%2C%2009_26_00%20PM-gspzg005H8KbOuaAiqLsByjO2MRlLE.png" has either width or height modified, but not the other. If you use CSS to change the size of your image, also include the styles 'width: "auto"' or 'height: "auto"' to maintain the aspect ratio.
+[00:07:22.357] Browser WARN    Image with src "http://localhost:3000/placeholder.jpg" has either width or height modified, but not the other. If you use CSS to change the size of your image, also include the styles 'width: "auto"' or 'height: "auto"' to maintain the aspect ratio.
+[00:07:22.624] Server  LOG     API /api/auth/session: Session status: {}
+[00:07:23.107] Browser LOG     useSession: Raw response from /api/auth/session: {}
+[00:07:23.107] Browser LOG     useSession: Parsed data from /api/auth/session: {"user":{"exp":1784394237,"isAdmin":true,"type":"auth","userId":"6936a3e510ca4806bcd9c3a3"}}
+[00:07:27.694] Browser LOG     %c[Vercel Web Analytics]%c [view] http://localhost:3000/gallery color: rgb(120, 120, 120) color: inherit {"dp":"/gallery","o":"http://localhost:3000/gallery","sdkn":"@vercel/analytics/next","sdkv":"1.6.1","sv":"0.1.3","ts":1784351372839} /_vercel/insights/view
+[00:20:10.603] Browser LOG     %c[Vercel Web Analytics]%c [view] http://localhost:3000/admin color: rgb(120, 120, 120) color: inherit {"dp":"/admin","o":"http://localhost:3000/admin","sdkn":"@vercel/analytics/next","sdkv":"1.6.1","sv":"0.1.3","ts":1784352135759} /_vercel/insights/view
+[00:20:14.432] Browser LOG     %c[Vercel Web Analytics]%c [view] http://localhost:3000/admin/gallery color: rgb(120, 120, 120) color: inherit {"dp":"/admin/gallery","o":"http://localhost:3000/admin/gallery","sdkn":"@vercel/analytics/next","sdkv":"1.6.1","sv":"0.1.3","ts":1784352139592} /_vercel/insights/view
+[00:24:14.370] Browser LOG     %c[Vercel Web Analytics]%c [view] http://localhost:3000/gallery color: rgb(120, 120, 120) color: inherit {"dp":"/gallery","o":"http://localhost:3000/gallery","sdkn":"@vercel/analytics/next","sdkv":"1.6.1","sv":"0.1.3","ts":1784352379546} /_vercel/insights/view
+[00:25:24.072] Browser LOG     %c[Vercel Web Analytics]%c [view] http://localhost:3000/ color: rgb(120, 120, 120) color: inherit {"dp":"/","o":"http://localhost:3000/","sdkn":"@vercel/analytics/next","sdkv":"1.6.1","sv":"0.1.3","ts":1784352449127} /_vercel/insights/view
+[00:26:11.297] Server  LOG      ○ Compiling /poems ...
+[00:26:15.938] Browser LOG     %c[Vercel Web Analytics]%c [view] http://localhost:3000/poems color: rgb(120, 120, 120) color: inherit {"dp":"/poems","o":"http://localhost:3000/poems","sdkn":"@vercel/analytics/next","sdkv":"1.6.1","sv":"0.1.3","ts":1784352500928} /_vercel/insights/view
+[00:26:54.304] Server  LOG      ○ Compiling /poems/[id] ...
+[00:26:59.643] Browser LOG     %c[Vercel Web Analytics]%c [view] http://localhost:3000/poems/6a5367db128e9f9e07a73d7a color: rgb(120, 120, 120) color: inherit {"dp":"/poems/[id]","o":"http://localhost:3000/poems/6a5367db128e9f9e07a73d7a","sdkn":"@vercel/analytics/next","sdkv":"1.6.1","sv":"0.1.3","ts":1784352544792} /_vercel/insights/view
+[00:27:02.853] Server  LOG      ○ Compiling /api/poems/[id] ...
+[00:27:18.520] Server  ERROR   D:\Web Project\Poemsite\blog_poetry\.next\dev\server\chunks\lib_transliterate_ts_edf927e1._.js: Invalid source map. Only conformant source maps can be used to find the original code. Cause: Error: sourceMapURL could not be parsed
+[00:27:18.558] Server  ERROR   D:\Web Project\Poemsite\blog_poetry\.next\dev\server\chunks\[root-of-the-server]__9ac2da5c._.js: Invalid source map. Only conformant source maps can be used to find the original code. Cause: Error: sourceMapURL could not be parsed
+[00:27:18.635] Server  ERROR   D:\Web Project\Poemsite\blog_poetry\node_modules\next\dist\compiled\next-server\app-route-turbo.runtime.dev.js: Invalid source map. Only conformant source maps can be used to find the original code. Cause: Error: sourceMapURL could not be parsed
+[00:27:18.668] Server  ERROR   D:\Web Project\Poemsite\blog_poetry\.next\dev\server\chunks\node_modules_next_b5ebf0d4._.js: Invalid source map. Only conformant source maps can be used to find the original code. Cause: Error: sourceMapURL could not be parsed
+[00:27:18.682] Server  ERROR   D:\Web Project\Poemsite\blog_poetry\node_modules\next\dist\server\base-server.js: Invalid source map. Only conformant source maps can be used to find the original code. Cause: Error: sourceMapURL could not be parsed
+[00:27:18.699] Server  ERROR   D:\Web Project\Poemsite\blog_poetry\node_modules\next\dist\server\next-server.js: Invalid source map. Only conformant source maps can be used to find the original code. Cause: Error: sourceMapURL could not be parsed
+[00:27:18.721] Server  ERROR   D:\Web Project\Poemsite\blog_poetry\node_modules\next\dist\server\dev\next-dev-server.js: Invalid source map. Only conformant source maps can be used to find the original code. Cause: Error: sourceMapURL could not be parsed
+[00:27:18.734] Server  ERROR   D:\Web Project\Poemsite\blog_poetry\node_modules\next\dist\trace\trace.js: Invalid source map. Only conformant source maps can be used to find the original code. Cause: Error: sourceMapURL could not be parsed
+[00:27:18.738] Server  ERROR   D:\Web Project\Poemsite\blog_poetry\node_modules\next\dist\server\lib\router-server.js: Invalid source map. Only conformant source maps can be used to find the original code. Cause: Error: sourceMapURL could not be parsed
+[00:27:18.741] Server  ERROR   D:\Web Project\Poemsite\blog_poetry\node_modules\next\dist\server\lib\start-server.js: Invalid source map. Only conformant source maps can be used to find the original code. Cause: Error: sourceMapURL could not be parsed
+[00:27:18.752] Server  ERROR   Google Transliteration error, falling back to local method: Error: Could not find transliterated text in API response
+[00:27:35.448] Browser LOG     %c[Vercel Web Analytics]%c [view] http://localhost:3000/ color: rgb(120, 120, 120) color: inherit {"dp":"/","o":"http://localhost:3000/","sdkn":"@vercel/analytics/next","sdkv":"1.6.1","sv":"0.1.3","ts":1784352580372} /_vercel/insights/view
+[00:29:29.676] Browser LOG     %c[Vercel Web Analytics]%c [view] http://localhost:3000/books color: rgb(120, 120, 120) color: inherit {"dp":"/books","o":"http://localhost:3000/books","sdkn":"@vercel/analytics/next","sdkv":"1.6.1","sv":"0.1.3","ts":1784352694789} /_vercel/insights/view
+[00:29:36.169] Server  LOG      ○ Compiling /books/[id] ...
+[00:29:37.791] Browser LOG     %c[Vercel Web Analytics]%c [view] http://localhost:3000/books/694a40132665fde3d1f43e97 color: rgb(120, 120, 120) color: inherit {"dp":"/books/[id]","o":"http://localhost:3000/books/694a40132665fde3d1f43e97","sdkn":"@vercel/analytics/next","sdkv":"1.6.1","sv":"0.1.3","ts":1784352702964} /_vercel/insights/view
+[00:29:49.143] Browser WARN    You're attempting to animate multiple children within AnimatePresence, but its mode is set to "wait". This will lead to odd visual behaviour.
+[00:29:49.143] Browser WARN    You're attempting to animate multiple children within AnimatePresence, but its mode is set to "wait". This will lead to odd visual behaviour.
+[00:29:49.143] Browser ERROR   Encountered two children with the same key, `%s`. Keys should be unique so that components maintain their identity across updates. Non-unique keys may cause children to be duplicated and/or omitted — the behavior is unsupported and could change in a future version. 
+[00:30:33.235] Browser LOG     %c[Vercel Web Analytics]%c [view] http://localhost:3000/ color: rgb(120, 120, 120) color: inherit {"dp":"/","o":"http://localhost:3000/","sdkn":"@vercel/analytics/next","sdkv":"1.6.1","sv":"0.1.3","ts":1784352758202} /_vercel/insights/view
+[00:30:41.932] Browser LOG     %c[Vercel Web Analytics]%c [view] http://localhost:3000/gallery color: rgb(120, 120, 120) color: inherit {"dp":"/gallery","o":"http://localhost:3000/gallery","sdkn":"@vercel/analytics/next","sdkv":"1.6.1","sv":"0.1.3","ts":1784352767071} /_vercel/insights/view
+[00:31:30.830] Browser LOG     %c[Vercel Web Analytics]%c [view] http://localhost:3000/poems color: rgb(120, 120, 120) color: inherit {"dp":"/poems","o":"http://localhost:3000/poems","sdkn":"@vercel/analytics/next","sdkv":"1.6.1","sv":"0.1.3","ts":1784352815892} /_vercel/insights/view
+[00:31:34.683] Browser LOG     %c[Vercel Web Analytics]%c [view] http://localhost:3000/ color: rgb(120, 120, 120) color: inherit {"dp":"/","o":"http://localhost:3000/","sdkn":"@vercel/analytics/next","sdkv":"1.6.1","sv":"0.1.3","ts":1784352819106} /_vercel/insights/view

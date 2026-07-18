@@ -5,7 +5,7 @@ import Image from "next/image"
 import { usePathname, useRouter } from "next/navigation"
 import { useState, useEffect, useCallback } from "react"
 import { useTheme } from "next-themes"
-import { Moon, Sun, Feather, BookOpen, Video, PenTool, HelpCircle, Menu, X, User, Quote } from "lucide-react"
+import { Moon, Sun, Feather, BookOpen, Video, PenTool, HelpCircle, Menu, X, User, Quote, Image as ImageIcon } from "lucide-react"
 import { useSession } from "@/hooks/use-session"
 import eventBus from "@/lib/event-bus"
 import LanguageSelector from "@/components/language-selector"
@@ -130,6 +130,8 @@ export default function Navigation() {
               <TitleSeparator />
               <Link href="/videos" className="vintage-exact-link text-sm xl:text-base whitespace-nowrap">{t('videos')}</Link>
               <TitleSeparator />
+              <Link href="/gallery" className="vintage-exact-link text-sm xl:text-base whitespace-nowrap">{t('gallery') || 'Gallery'}</Link>
+              <TitleSeparator />
               <Link href="/about" className="vintage-exact-link text-sm xl:text-base whitespace-nowrap">{t('about')}</Link>
             </div>
 
@@ -192,8 +194,8 @@ export default function Navigation() {
                     <div className="flex flex-col gap-1">
                       <Link href="/videos" className="flex items-center gap-2 p-1.5 text-sm md:text-base text-[#3c2a1e] dark:text-[#e6dfcd] hover:bg-[#3c2a1e]/5 dark:hover:bg-[#e6dfcd]/5 rounded-md transition-colors"><Video className="h-3.5 w-3.5" /> {t('videos')}</Link>
                       <Link href="/blog" className="flex items-center gap-2 p-1.5 text-sm md:text-base text-[#3c2a1e] dark:text-[#e6dfcd] hover:bg-[#3c2a1e]/5 dark:hover:bg-[#e6dfcd]/5 rounded-md transition-colors"><BookOpen className="h-3.5 w-3.5" /> {t('blog')}</Link>
+                      <Link href="/gallery" className="flex items-center gap-2 p-1.5 text-sm md:text-base text-[#3c2a1e] dark:text-[#e6dfcd] hover:bg-[#3c2a1e]/5 dark:hover:bg-[#e6dfcd]/5 rounded-md transition-colors"><ImageIcon className="h-3.5 w-3.5" /> {t('gallery') || 'Gallery'}</Link>
                       <Link href="/quiz" className="flex items-center gap-2 p-1.5 text-sm md:text-base text-[#3c2a1e] dark:text-[#e6dfcd] hover:bg-[#3c2a1e]/5 dark:hover:bg-[#e6dfcd]/5 rounded-md transition-colors"><HelpCircle className="h-3.5 w-3.5" /> {t('quiz')}</Link>
-                     
                     </div>
                   </div>
 

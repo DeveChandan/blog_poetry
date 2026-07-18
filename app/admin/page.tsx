@@ -21,18 +21,20 @@ function AdminDashboardContent() {
     orders: 0,
     reviews: 0,
     quotes: 0,
+    gallery: 0,
   })
   const [loading, setLoading] = useState(true)
 
   useEffect(() => {
     async function fetchStats() {
       try {
-        const [poemsRes, booksRes, ordersRes, reviewsRes, quotesRes] = await Promise.all([
+        const [poemsRes, booksRes, ordersRes, reviewsRes, quotesRes, galleryRes] = await Promise.all([
           fetch("/api/poems"),
           fetch("/api/books"),
           fetch("/api/orders"),
           fetch("/api/reviews"),
           fetch("/api/quotes"),
+          fetch("/api/gallery"),
         ])
 
         if (poemsRes.ok && booksRes.ok && ordersRes.ok && reviewsRes.ok) {
@@ -41,6 +43,7 @@ function AdminDashboardContent() {
           const orders = await ordersRes.json()
           const reviews = await reviewsRes.json()
           const quotes = quotesRes.ok ? await quotesRes.json() : []
+          const gallery = galleryRes.ok ? await galleryRes.json() : []
 
           setStats({
             poems: poems.length,
@@ -48,6 +51,7 @@ function AdminDashboardContent() {
             orders: orders.length,
             reviews: reviews.length,
             quotes: quotes.length,
+            gallery: gallery.length,
           })
         }
       } catch (error) {
@@ -70,7 +74,7 @@ function AdminDashboardContent() {
         </div>
 
         {/* Stats Grid */}
-        <div className="grid md:grid-cols-5 gap-4 mb-12">
+        <div className="grid grid-cols-2 md:grid-cols-6 gap-4 mb-12">
           <Card>
             <CardHeader className="pb-2">
               <CardTitle className="text-sm text-muted-foreground">Total Poems</CardTitle>
@@ -113,6 +117,15 @@ function AdminDashboardContent() {
             </CardHeader>
             <CardContent>
               <p className="text-3xl font-bold text-primary">{stats.quotes}</p>
+            </CardContent>
+          </Card>
+
+          <Card>
+            <CardHeader className="pb-2">
+              <CardTitle className="text-sm text-muted-foreground">Total Gallery</CardTitle>
+            </CardHeader>
+            <CardContent>
+              <p className="text-3xl font-bold text-primary">{stats.gallery}</p>
             </CardContent>
           </Card>
         </div>
@@ -207,6 +220,9 @@ function AdminDashboardContent() {
               </Button>
               <Button asChild variant="outline" className="w-full bg-transparent">
                 <Link href="/admin/blogs">Manage Blogs</Link>
+              </Button>
+              <Button asChild variant="outline" className="w-full bg-transparent">
+                <Link href="/admin/gallery">Manage Gallery</Link>
               </Button>
             </CardContent>
           </Card>

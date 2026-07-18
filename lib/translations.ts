@@ -24,6 +24,7 @@ const rawTranslations = {
         interact: "Interact",
         account: "Account",
         quotes: "Quotes",
+        gallery: "Gallery",
 
         // Navigation descriptions
         poems_description: "Explore a vast collection of heartfelt and soul-stirring poetry.",
@@ -132,6 +133,7 @@ const rawTranslations = {
         interact: "संवाद",
         account: "खाता",
         quotes: "कोट्स",
+        gallery: "गैलरी",
         MoreVideos:"अधिक वीडियो",
 
         // Navigation descriptions
@@ -240,6 +242,7 @@ const rawTranslations = {
         interact: "بات چیت",
         account: "اکاؤنٹ",
         quotes: "اقتباسات",
+        gallery: "گیلری",
 
         // Navigation descriptions
         poems_description: "دل کو چھونے والی اور روح پرور شاعری کا وسیع ذخیرہ دریافت کریں۔",
@@ -346,6 +349,7 @@ const rawTranslations = {
         interact: "ইন্টারঅ্যাক্ট",
         account: "অ্যাকাউন্ট",
         quotes: "উদ্ধৃতি",
+        gallery: "গ্যালারি",
 
         // Navigation descriptions
         poems_description: "হৃদয়স্পর্শী এবং আত্মার শিহরণ জাগানো কবিতার বিশাল সংগ্রহ অন্বেষণ করুন।",
@@ -452,6 +456,7 @@ const rawTranslations = {
         interact: "Interactuar",
         account: "Cuenta",
         quotes: "Frases",
+        gallery: "Galería",
 
         // Navigation descriptions
         poems_description: "Explora una vasta colección de poesía sincera y conmovedora.",

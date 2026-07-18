@@ -142,6 +142,8 @@ function VintageHeader({ t }: { t: (key: any) => string }) {
           <Link href="/blog" className="vintage-exact-link">{t("blog")}</Link>
                 <TitleSeparator />
                <Link href="/quotes" className="vintage-exact-link text-sm xl:text-base whitespace-nowrap">{t('quotes') || 'Quotes'}</Link>
+               <TitleSeparator />
+       <Link href="/gallery" className="vintage-exact-link text-sm xl:text-base whitespace-nowrap">{t('gallery') || 'Gallery'}</Link>
           <TitleSeparator />
           <Link href="/videos" className="vintage-exact-link">{t("videos")}</Link>
           <TitleSeparator />
