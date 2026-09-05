@@ -4,6 +4,7 @@ import { Card, CardContent } from "@/components/ui/card"
 import { Badge } from "@/components/ui/badge"
 import { Button } from "@/components/ui/button"
 import { BookOpen, Eye, Calendar, ArrowRight } from "lucide-react"
+import { getGoogleDriveDirectLink } from "@/lib/gallery-utils"
 
 async function getBlogs() {
     const db = await connectDB()
@@ -45,7 +46,7 @@ export default async function BlogPage() {
                                     {blog.image && (
                                         <div className="aspect-video overflow-hidden">
                                             <img
-                                                src={blog.image}
+                                                src={getGoogleDriveDirectLink(blog.image)}
                                                 alt={blog.title}
                                                 className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
                                             />

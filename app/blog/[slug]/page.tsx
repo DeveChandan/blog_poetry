@@ -9,6 +9,7 @@ import { ArrowLeft, Calendar, Eye, Clock, Share2, Bookmark, Heart } from "lucide
 import Link from "next/link"
 import { toast } from "sonner"
 import { useLanguage } from "@/lib/language-context"
+import { getGoogleDriveDirectLink } from "@/lib/gallery-utils"
 
 interface Blog {
     _id: string
@@ -195,7 +196,7 @@ export default function BlogDetailPage() {
             {blog.image && (
                 <div className="relative h-[40vh] md:h-[50vh] w-full">
                     <img
-                        src={blog.image}
+                        src={getGoogleDriveDirectLink(blog.image)}
                         alt={blog.title}
                         className="w-full h-full object-cover"
                     />

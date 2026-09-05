@@ -10,6 +10,7 @@ import { AdminGuard } from "@/components/admin-guard"
 import { toast } from "sonner"
 import { Plus, Trash2, Edit, BookOpen, Eye } from "lucide-react"
 import { RichTextEditor } from "@/components/rich-text-editor"
+import { getGoogleDriveDirectLink } from "@/lib/gallery-utils"
 
 interface Blog {
     _id: string
@@ -18,6 +19,7 @@ interface Blog {
     content: string
     excerpt: string
     image: string
+    originalImage?: string
     category: string
     views: number
 }
@@ -79,7 +81,7 @@ function AdminBlogContent() {
     const handleSubmit = async (e: React.FormEvent) => {
         e.preventDefault()
 
-        let finalImageUrl = formData.image;
+        let finalImageUrl = formData.image ? getGoogleDriveDirectLink(formData.image) : "";
 
         if (imageFile) {
             setUploadingImage(true);
@@ -110,6 +112,7 @@ function AdminBlogContent() {
                 body: JSON.stringify({
                     ...formData,
                     image: finalImageUrl,
+                    originalImage: formData.image,
                     tags: formData.tags.split(",").map(t => t.trim()).filter(Boolean),
                 }),
             })
@@ -135,7 +138,7 @@ function AdminBlogContent() {
             title: blog.title,
             content: blog.content,
             excerpt: blog.excerpt || "",
-            image: blog.image || "",
+            image: blog.originalImage || blog.image || "",
             tags: blog.tags?.join(", ") || "",
             category: blog.category || "General",
         })
@@ -222,17 +225,39 @@ function AdminBlogContent() {
                                         )}
                                     </div>
                                     <div>
-                                        <label className="block text-sm font-medium mb-2">Or Paste Image URL</label>
+                                        <label className="block text-sm font-medium mb-2">Or Google Drive Link / Image URL</label>
                                         <Input
                                             value={formData.image}
                                             onChange={(e) => {
                                                 setFormData({ ...formData, image: e.target.value });
                                                 setImageFile(null);
                                             }}
-                                            placeholder="https://example.com/image.jpg"
+                                            placeholder="https://drive.google.com/file/d/... or image URL"
                                         />
+                                        <p className="text-[11px] text-muted-foreground mt-1">
+                                            * Google Drive links are auto-converted. Ensure link is set to <strong>&quot;Anyone with the link can view&quot;</strong>.
+                                        </p>
                                     </div>
                                 </div>
+
+                                {(imageFile || formData.image.trim()) && (
+                                    <div>
+                                        <label className="block text-xs font-medium text-muted-foreground mb-1.5">Featured Image Preview</label>
+                                        <div className="relative aspect-video max-w-sm rounded-lg border overflow-hidden bg-muted/40 flex items-center justify-center">
+                                            <img
+                                                src={imageFile ? URL.createObjectURL(imageFile) : getGoogleDriveDirectLink(formData.image)}
+                                                alt="Preview"
+                                                className="w-full h-full object-cover"
+                                                onError={(e) => {
+                                                    e.currentTarget.style.display = 'none';
+                                                }}
+                                                onLoad={(e) => {
+                                                    e.currentTarget.style.display = 'block';
+                                                }}
+                                            />
+                                        </div>
+                                    </div>
+                                )}
 
                                 <div>
                                     <label className="block text-sm font-medium mb-2">Content *</label>
@@ -281,7 +306,7 @@ function AdminBlogContent() {
                         <Card key={blog._id} className="overflow-hidden">
                             {blog.image && (
                                 <div className="aspect-video">
-                                    <img src={blog.image} alt={blog.title} className="w-full h-full object-cover" />
+                                    <img src={getGoogleDriveDirectLink(blog.image)} alt={blog.title} className="w-full h-full object-cover" />
                                 </div>
                             )}
                             <CardContent className="p-4">

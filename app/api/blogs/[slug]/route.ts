@@ -3,6 +3,7 @@ import { revalidatePath } from "next/cache"
 import { connectDB } from "@/lib/db"
 import { getSession } from "@/lib/session"
 import { ObjectId } from "mongodb"
+import { getGoogleDriveDirectLink, convertGoogleDriveContentImages } from "@/lib/gallery-utils"
 
 export const dynamic = 'force-dynamic'
 
@@ -54,6 +55,14 @@ export async function PUT(
         const { slug } = await params
         const updates = await request.json()
         const db = await connectDB()
+
+        if (updates.image) {
+            updates.originalImage = updates.image
+            updates.image = getGoogleDriveDirectLink(updates.image)
+        }
+        if (updates.content) {
+            updates.content = convertGoogleDriveContentImages(updates.content)
+        }
 
         // Find by ObjectId or slug
         let query: any = { slug }

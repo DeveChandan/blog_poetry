@@ -3,6 +3,7 @@ import { revalidatePath } from "next/cache"
 import { connectDB } from "@/lib/db"
 import { getSession } from "@/lib/session"
 import { ObjectId } from "mongodb"
+import { getGoogleDriveDirectLink, convertGoogleDriveContentImages } from "@/lib/gallery-utils"
 
 export const dynamic = 'force-dynamic'
 
@@ -44,12 +45,16 @@ export async function POST(request: NextRequest) {
         const existingBlog = await db.collection("blogs").findOne({ slug })
         const finalSlug = existingBlog ? `${slug}-${Date.now()}` : slug
 
+        const processedImage = image ? getGoogleDriveDirectLink(image) : ""
+        const processedContent = content ? convertGoogleDriveContentImages(content) : ""
+
         const result = await db.collection("blogs").insertOne({
             title,
             slug: finalSlug,
-            content,
+            content: processedContent,
             excerpt: excerpt || content.substring(0, 200),
-            image: image || "",
+            image: processedImage,
+            originalImage: image || "",
             tags: tags || [],
             category: category || "General",
             views: 0,

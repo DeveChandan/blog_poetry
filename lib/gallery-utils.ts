@@ -32,3 +32,16 @@ export function getGoogleDriveDirectLink(url: string): string {
   // 4. Return original URL if it doesn't match Google Drive formats
   return trimmedUrl;
 }
+
+/**
+ * Scans HTML content for Google Drive links (e.g. inside <img src="..."> or hyperlinks)
+ * and replaces them with direct rendering links.
+ */
+export function convertGoogleDriveContentImages(content: string): string {
+  if (!content) return "";
+
+  // Matches Google Drive file/open/uc URLs in content and transforms them
+  return content.replace(/https:\/\/(?:drive\.google\.com|docs\.google\.com)\/[^\s"'>]+/g, (match) => {
+    return getGoogleDriveDirectLink(match);
+  });
+}
