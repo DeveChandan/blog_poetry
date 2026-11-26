@@ -135,8 +135,8 @@ export default function LiteratureClubClient({
       icon: Newspaper,
       gradient: "from-[#6b4226] via-[#8c5832] to-[#3c2414]",
       accent: "text-amber-100",
-      badge: "त्रैमासिक पत्रिका",
-      href: "/books",
+      badge: "त्रैमासिक पत्रिका • Coming Soon",
+      href: "/magazine",
     },
   ]
 

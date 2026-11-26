@@ -27,16 +27,17 @@ const dancingScript = Dancing_Script({
 })
 
 export const metadata: Metadata = {
-  metadataBase: new URL("https://blog-poetry.vercel.app/"), // CHANGE THIS to your actual domain
-  title: "Poetry & Books Blog | Discover Literary Works",
+  metadataBase: new URL("https://rsunkahi.com"),
+  title: "RSUNKAHI | शब्दों की दुनिया — Dr. Rupesh Kumar Singh",
   description:
-    "Explore beautifully crafted poems, published books, and literary content. Join our community of readers and writers.",
-  keywords: "poetry, books, literature, author, e-books, stories",
-  authors: [{ name: "Author" }],
+    "Explore Hindi poetry, published books, literary articles, and the RSUNKAHI Literature Club by Dr. Rupesh Kumar Singh.",
+  keywords: "rsunkahi, poetry, hindi poems, books, literature club, Dr Rupesh Kumar Singh",
+  authors: [{ name: "Dr. Rupesh Kumar Singh" }],
   openGraph: {
-    title: "Poetry & Books Blog",
-    description: "Discover poems and books from an independent author",
+    title: "RSUNKAHI | शब्दों की दुनिया",
+    description: "Discover poems, books, and the RSUNKAHI Literature Club",
     type: "website",
+    url: "https://rsunkahi.com",
   },
   robots: {
     index: true,

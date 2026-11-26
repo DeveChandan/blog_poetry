@@ -78,6 +78,11 @@ const TitleSeparator = () => (
   <span className="opacity-30 mx-3 hidden sm:inline-block">|</span>
 )
 
+const ensureHttps = (url?: string) => {
+  if (!url) return ""
+  return url.startsWith("http://") ? url.replace("http://", "https://") : url
+}
+
 // ═══════════════════════════════════════════════
 // VINTAGE HEADER
 // ═══════════════════════════════════════════════
@@ -141,7 +146,7 @@ const HeroSection = memo(function HeroSection({ t, sliders }: { t: (key: any) =>
   }, [slidersLen])
 
   const hasSliders = slidersLen > 0
-  const currentImage = hasSliders ? sliders![currentIndex].image : "/vintage-desk.png"
+  const currentImage = hasSliders ? ensureHttps(sliders![currentIndex].image) : "/vintage-desk.png"
   const currentQuote = hasSliders && sliders![currentIndex].title ? sliders![currentIndex].title : t("heroQuote")
 
   return (
@@ -252,9 +257,9 @@ const FeaturedClubMagazineTabs = memo(function FeaturedClubMagazineTabs({ t }: {
 
         {/* ── Tab 2: RSUNKAHI Quarterly Magazine ── */}
         <Link
-          href="/books"
+          href="/magazine"
           className="group relative flex flex-col justify-between overflow-hidden rounded-2xl border border-[#3c2a1e]/15 dark:border-[#e6dfcd]/20 bg-gradient-to-br from-[#fdfbf7] via-[#f7f0e4] to-[#ece0cd] p-4 sm:p-5 lg:p-6 shadow-[0_8px_24px_rgba(60,42,30,0.14)] hover:shadow-[0_12px_36px_rgba(60,42,30,0.24)] hover:border-[#3c2a1e]/35 hover:-translate-y-1 transition-all duration-300"
-          title="RSUNKAHI Quarterly Magazine"
+          title="RSUNKAHI Quarterly Magazine - Coming Soon"
         >
           <div className="relative z-10 flex flex-col sm:flex-row items-center sm:items-center justify-between gap-4 lg:gap-5 w-full">
             {/* Left: Book Icon & Titles */}
@@ -338,6 +343,7 @@ const VintageCarousel = memo(function VintageCarousel({
     slidesToScroll: 1,
   })
   const [playVideo, setPlayVideo] = useState(false)
+  const [loadReel, setLoadReel] = useState(false)
 
   useEffect(() => {
     if (!emblaApi) return
@@ -411,8 +417,8 @@ const VintageCarousel = memo(function VintageCarousel({
               <div className="vintage-col-2-box h-full min-h-[450px]">
                 <div className="vintage-books-display">
                   <div className="vintage-books-frame min-h-[220px]">
-                    <Image src={books[0]?.cover || "/placeholder.jpg"} alt="Book 1" width={110} height={160} sizes="110px" className="framed-book" />
-                    <Image src={books[1]?.cover || "/placeholder.jpg"} alt="Book 2" width={110} height={160} sizes="110px" className="framed-book" />
+                    <Image src={ensureHttps(books?.[0]?.cover) || "/placeholder.jpg"} alt="Book 1" width={110} height={160} sizes="110px" className="framed-book" />
+                    <Image src={ensureHttps(books?.[1]?.cover) || "/placeholder.jpg"} alt="Book 2" width={110} height={160} sizes="110px" className="framed-book" />
                   </div>
                   <div className="vintage-books-actions mt-4">
                     <Link href="/books" className="vintage-exact-btn-light">{t("readMore")}</Link>
@@ -507,13 +513,46 @@ const VintageCarousel = memo(function VintageCarousel({
               </div>
               <div className="vintage-col-1-box h-full min-h-[450px] p-2 flex items-center justify-center">
                 {settings?.featuredInstagramReel ? (
-                  <iframe
-                    src={`${settings.featuredInstagramReel.split("?")[0].replace(/\/$/, "")}/embed`}
-                    loading="lazy"
-                    allow="encrypted-media"
-                    className="rounded bg-white w-full max-w-[320px]"
-                    style={{ height: '380px' }}
-                  ></iframe>
+                  loadReel ? (
+                    <iframe
+                      src={`${ensureHttps(settings.featuredInstagramReel).split("?")[0].replace(/\/$/, "")}/embed`}
+                      loading="lazy"
+                      allow="encrypted-media"
+                      className="rounded bg-white w-full max-w-[320px]"
+                      style={{ height: '380px' }}
+                    ></iframe>
+                  ) : (
+                    <div className="flex flex-col items-center justify-center text-center p-6 gap-4 max-w-[300px]">
+                      <div className="w-16 h-16 rounded-full bg-gradient-to-tr from-[#f58529] via-[#dd2a7b] to-[#8134af] text-white flex items-center justify-center shadow-lg">
+                        <Instagram size={30} />
+                      </div>
+                      <div>
+                        <h4 className="font-serif font-bold text-lg text-[#3c2a1e] dark:text-[#f0ebd9]">
+                          Featured Instagram Reel
+                        </h4>
+                        <p className="text-xs font-sans text-[#3c2a1e]/75 dark:text-[#e6dfcd]/75 mt-1">
+                          Tap below to load the reel player or watch directly on Instagram.
+                        </p>
+                      </div>
+                      <div className="flex flex-col gap-2 w-full">
+                        <button
+                          type="button"
+                          onClick={() => setLoadReel(true)}
+                          className="vintage-exact-btn-light w-full text-center cursor-pointer"
+                        >
+                          Load Reel
+                        </button>
+                        <a
+                          href={ensureHttps(settings.featuredInstagramReel)}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          className="text-xs font-sans underline text-[#3c2a1e]/80 dark:text-[#e6dfcd]/80 hover:opacity-100"
+                        >
+                          Open on Instagram →
+                        </a>
+                      </div>
+                    </div>
+                  )
                 ) : (
                   <div className="text-[#3c2a1e] opacity-50 italic">No Reel Featured</div>
                 )}
