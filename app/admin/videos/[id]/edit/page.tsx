@@ -14,6 +14,7 @@ export default function EditVideoPage() {
     title: "",
     description: "",
     youtubeId: "",
+    playlist: "General",
   })
   const [loading, setLoading] = useState(true)
   const [saving, setSaving] = useState(false)
@@ -28,6 +29,7 @@ export default function EditVideoPage() {
             title: data.title,
             description: data.description,
             youtubeId: data.youtubeId,
+            playlist: data.playlist || "General",
           })
         }
       } catch (error) {
@@ -39,7 +41,7 @@ export default function EditVideoPage() {
     fetchVideo()
   }, [params.id])
 
-  const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) => {
     setFormData({
       ...formData,
       [e.target.name]: e.target.value,
@@ -106,6 +108,21 @@ export default function EditVideoPage() {
                     className="w-full px-3 py-2 rounded border border-border bg-background text-foreground"
                     placeholder="e.g., dQw4w9WgXcQ"
                   />
+                </div>
+
+                <div>
+                  <label className="text-sm text-muted-foreground mb-2 block">Playlist / Series</label>
+                  <select
+                    name="playlist"
+                    value={formData.playlist}
+                    onChange={handleChange}
+                    className="w-full px-3 py-2 rounded border border-border bg-background text-foreground"
+                  >
+                    <option value="General">General Videos</option>
+                    <option value="RSUNKAHI Literature Club – Monthly Sessions">
+                      RSUNKAHI Literature Club – Monthly Sessions
+                    </option>
+                  </select>
                 </div>
 
                 <div>

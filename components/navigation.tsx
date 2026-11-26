@@ -62,7 +62,7 @@ export default function Navigation() {
       }
     }
     
-    window.addEventListener("scroll", handleScroll)
+    window.addEventListener("scroll", handleScroll, { passive: true })
     return () => window.removeEventListener("scroll", handleScroll)
   }, [isHomePage])
 
@@ -97,7 +97,7 @@ export default function Navigation() {
           animate={{ y: 0, opacity: 1 }}
           exit={isHomePage ? { y: -80, opacity: 0 } : { y: 0, opacity: 1 }}
           transition={{ duration: 0.3, ease: "easeInOut" }}
-          className={`top-0 left-0 right-0 z-[100] bg-[#f4e8d4]/95 dark:bg-[#1f1a14]/95 backdrop-blur-md border-b border-[#3c2a1e]/10 dark:border-[#e6dfcd]/10 shadow-md ${!isHomePage ? 'sticky' : 'fixed'}`}
+          className={`top-0 left-0 right-0 z-[100] bg-[#f4e8d4]/95 dark:bg-[#1f1a14]/95 border-b border-[#3c2a1e]/10 dark:border-[#e6dfcd]/10 shadow-md ${!isHomePage ? 'sticky' : 'fixed'}`}
           dir={isRtl ? "rtl" : "ltr"}
         >
           {/* REDUCED PADDING HERE - from py-2 md:py-3 to py-1 */}
@@ -183,6 +183,7 @@ export default function Navigation() {
                       <Link href="/books" className="flex items-center gap-2 p-1.5 text-sm md:text-base text-[#3c2a1e] dark:text-[#e6dfcd] hover:bg-[#3c2a1e]/5 dark:hover:bg-[#e6dfcd]/5 rounded-md transition-colors"><BookOpen className="h-3.5 w-3.5" /> {t('books')}</Link>
                       <Link href="/quotes" className="flex items-center gap-2 p-1.5 text-sm md:text-base text-[#3c2a1e] dark:text-[#e6dfcd] hover:bg-[#3c2a1e]/5 dark:hover:bg-[#e6dfcd]/5 rounded-md transition-colors"><Quote className="h-3.5 w-3.5" /> {t('quotes') || 'Quotes'}</Link>
                        <Link href="/about" className="flex items-center gap-2 p-1.5 text-sm md:text-base text-[#3c2a1e] dark:text-[#e6dfcd] hover:bg-[#3c2a1e]/5 dark:hover:bg-[#e6dfcd]/5 rounded-md transition-colors"><User className="h-3.5 w-3.5" /> {t('about')}</Link>
+                       <Link href="/literature-club" className="flex items-center gap-2 p-1.5 text-sm md:text-base text-[#3c2a1e] dark:text-[#e6dfcd] hover:bg-[#3c2a1e]/5 dark:hover:bg-[#e6dfcd]/5 rounded-md transition-colors"><Feather className="h-3.5 w-3.5" /> Literature Club</Link>
                       {/*<Link href="/shayari" className="flex items-center gap-2 p-1.5 text-sm md:text-base text-[#3c2a1e] dark:text-[#e6dfcd] hover:bg-[#3c2a1e]/5 dark:hover:bg-[#e6dfcd]/5 rounded-md transition-colors"><PenTool className="h-3.5 w-3.5" /> {t('shayari')}</Link>
                       <Link href="/sher" className="flex items-center gap-2 p-1.5 text-sm md:text-base text-[#3c2a1e] dark:text-[#e6dfcd] hover:bg-[#3c2a1e]/5 dark:hover:bg-[#e6dfcd]/5 rounded-md transition-colors"><Feather className="h-3.5 w-3.5" /> {t('sher')}</Link>*/}
                     </div>

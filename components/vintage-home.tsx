@@ -3,10 +3,10 @@
 import React, { useEffect, useState, useRef, memo } from "react"
 import Link from "next/link"
 import Image from "next/image"
-import { motion, useInView, AnimatePresence } from "framer-motion"
+import { motion, useInView, AnimatePresence, type Variants } from "framer-motion"
 import { useTranslations, useLanguage } from "@/lib/language-context"
 import LanguageSelector from "@/components/language-selector"
-import { Facebook, Twitter, Instagram, Youtube, Linkedin, ChevronLeft, ChevronRight, Mail, Info, Menu, X } from "lucide-react"
+import { Facebook, Twitter, Instagram, Youtube, Linkedin, ChevronLeft, ChevronRight, Mail, Info, Menu, X, Play } from "lucide-react"
 import useEmblaCarousel from "embla-carousel-react"
 
 // ─── Dynamic Translit/Translation Helper ───
@@ -15,32 +15,59 @@ const TranslatedPoemTitle = ({ title }: { title: string }) => {
   const [translatedTitle, setTranslatedTitle] = useState(title)
 
   useEffect(() => {
-    if (currentLanguage.code === 'en') {
+    let cancelled = false
+
+    if (!title) return
+
+    if (currentLanguage.code === "en") {
       if (/[\u0900-\u097F]/.test(title)) {
-        translate(title).then(setTranslatedTitle).catch(console.error)
+        translate(title)
+          .then((res) => {
+            if (!cancelled) setTranslatedTitle(res)
+          })
+          .catch(console.error)
       } else {
         setTranslatedTitle(title)
       }
+      return () => {
+        cancelled = true
+      }
+    }
+
+    if (
+      currentLanguage.code === "hi" &&
+      /^[\u0900-\u097F\s\d.,!?।'"\-–—:;()•…]+$/.test(title)
+    ) {
+      setTranslatedTitle(title)
       return
     }
-    translate(title).then(setTranslatedTitle).catch(console.error)
+
+    translate(title)
+      .then((res) => {
+        if (!cancelled) setTranslatedTitle(res)
+      })
+      .catch(console.error)
+
+    return () => {
+      cancelled = true
+    }
   }, [currentLanguage.code, title, translate])
 
   return <>{translatedTitle}</>
 }
 
 // ─── Animation Variants ───
-const fadeInUp = {
+const fadeInUp: Variants = {
   hidden: { opacity: 0, y: 20 },
   visible: { opacity: 1, y: 0, transition: { duration: 0.8, ease: "easeOut" } },
 }
 
-const fadeIn = {
+const fadeIn: Variants = {
   hidden: { opacity: 0 },
   visible: { opacity: 1, transition: { duration: 1 } },
 }
 
-const staggerContainer = {
+const staggerContainer: Variants = {
   hidden: {},
   visible: {
     transition: { staggerChildren: 0.15, delayChildren: 0.1 },
@@ -50,60 +77,6 @@ const staggerContainer = {
 const TitleSeparator = () => (
   <span className="opacity-30 mx-3 hidden sm:inline-block">|</span>
 )
-
-// ═══════════════════════════════════════════════
-// VISITOR COUNTER
-// ═══════════════════════════════════════════════
-const VintageVisitorCounter = memo(function VintageVisitorCounter({ t }: { t?: any }) {
-  const [visits, setVisits] = useState<number | null>(null)
-
-  useEffect(() => {
-    // Check local storage to prevent unnecessary POST requests on refresh
-    const hasVisitedLocally = localStorage.getItem("hasVisitedSite")
-
-    if (!hasVisitedLocally) {
-      // Record new visit
-      fetch("/api/visit", { method: "POST" })
-        .then(res => res.json())
-        .then(data => {
-          if (data.totalVisits) setVisits(data.totalVisits)
-          if (data.newVisit !== undefined) {
-            localStorage.setItem("hasVisitedSite", "true")
-          }
-        })
-        .catch(console.error)
-    } else {
-      // Just fetch the current total without incrementing
-      fetch("/api/visit")
-        .then(res => res.json())
-        .then(data => {
-          if (data.totalVisits) setVisits(data.totalVisits)
-        })
-        .catch(console.error)
-    }
-  }, [])
-
-  if (visits === null) return null
-
-  return (
-    <motion.div
-      className="flex items-center"
-      initial={{ opacity: 0 }}
-      animate={{ opacity: 1 }}
-      transition={{ delay: 0.5, duration: 1 }}
-    >
-      {/* <div className="inline-flex items-center gap-2 md:gap-3 px-3 py-1 md:px-4 md:py-1.5 rounded-full bg-[#f4e8d4] border border-[#3c2a1e]/20 shadow-inner text-[#3c2a1e]">
-        <span className="relative flex h-2 w-2">
-          <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-green-500 opacity-75"></span>
-          <span className="relative inline-flex rounded-full h-2 w-2 bg-green-600"></span>
-        </span>
-        <span className="text-[10px] md:text-sm font-semibold tracking-widest uppercase opacity-80 whitespace-nowrap">
-          {visits.toLocaleString()} Travelers
-        </span>
-      </div>*/}
-    </motion.div>
-  )
-})
 
 // ═══════════════════════════════════════════════
 // VINTAGE HEADER
@@ -116,10 +89,6 @@ function VintageHeader({ t }: { t: (key: any) => string }) {
       animate="visible"
       variants={staggerContainer}
     >
-      <div className="absolute top-4 left-4 z-50">
-        <VintageVisitorCounter />
-      </div>
-
       <div className="absolute top-4 right-4 z-50">
         <LanguageSelector />
       </div>
@@ -164,7 +133,9 @@ const HeroSection = memo(function HeroSection({ t, sliders }: { t: (key: any) =>
   useEffect(() => {
     if (slidersLen <= 1) return
     const interval = setInterval(() => {
-      setCurrentIndex((prev) => (prev + 1) % slidersLen)
+      if (!document.hidden) {
+        setCurrentIndex((prev) => (prev + 1) % slidersLen)
+      }
     }, 5000)
     return () => clearInterval(interval)
   }, [slidersLen])
@@ -206,9 +177,137 @@ const HeroSection = memo(function HeroSection({ t, sliders }: { t: (key: any) =>
           {/* <h2>{currentQuote}</h2> */}
         </div>
       </div>
+    </motion.section>
+  )
+})
 
-      <div className="vintage-exact-quote-ribbon">
-        {/*<p>“{t("welcomeQuote")}”</p>*/}
+// ═══════════════════════════════════════════════
+// FEATURED TABS: LITERATURE CLUB & QUARTERLY MAGAZINE
+// ═══════════════════════════════════════════════
+const FeaturedClubMagazineTabs = memo(function FeaturedClubMagazineTabs({ t }: { t: (key: any) => string }) {
+  return (
+    <motion.section
+      className="max-w-[1400px] mx-auto px-4 md:px-12 py-5 md:py-8"
+      initial="hidden"
+      whileInView="visible"
+      viewport={{ once: true, amount: 0.1 }}
+      variants={fadeInUp}
+    >
+      <div className="grid grid-cols-1 md:grid-cols-2 gap-5 lg:gap-7 items-stretch">
+        
+        {/* ── Tab 1: RSUNKAHI Literature Club ── */}
+        <Link
+          href="/literature-club"
+          className="group relative flex flex-col justify-between overflow-hidden rounded-2xl border border-amber-800/30 dark:border-amber-700/40 bg-gradient-to-br from-[#381c10] via-[#231108] to-[#140804] p-4 sm:p-5 lg:p-6 shadow-[0_8px_24px_rgba(30,15,8,0.3)] hover:shadow-[0_12px_36px_rgba(212,175,55,0.25)] hover:border-[#d4af37]/50 hover:-translate-y-1 transition-all duration-300"
+          title="RSUNKAHI Literature Club"
+        >
+          {/* Ambient warm glow behind mic */}
+          <div className="absolute -left-8 -top-8 w-56 h-56 bg-amber-500/20 rounded-full blur-3xl pointer-events-none" />
+          <div className="absolute left-16 bottom-0 w-32 h-32 bg-orange-600/15 rounded-full blur-2xl pointer-events-none" />
+
+          <div className="relative z-10 flex flex-col sm:flex-row items-center sm:items-center justify-between gap-4 lg:gap-5 w-full">
+            {/* Left: Mic & English Titles */}
+            <div className="flex items-center gap-3 sm:gap-4 flex-shrink-0">
+              <div className="relative w-16 sm:w-20 lg:w-22 flex-shrink-0">
+                <Image
+                  src="/vintage-mic.svg"
+                  alt="Vintage Studio Microphone"
+                  width={90}
+                  height={112}
+                  className="w-full h-auto drop-shadow-[0_4px_16px_rgba(245,158,11,0.45)] transition-transform duration-500 group-hover:scale-105"
+                />
+              </div>
+
+              <div className="flex flex-col text-left">
+                <span className="text-[11px] sm:text-xs font-serif font-bold tracking-[0.25em] text-[#f3ddb3] uppercase">
+                  RSUNKAHI
+                </span>
+                <span className="text-xl sm:text-2xl lg:text-[28px] font-serif text-transparent bg-clip-text bg-gradient-to-r from-amber-100 via-amber-200 to-amber-400 font-medium leading-tight">
+                  Literature Club
+                </span>
+                {/* Gold Flourish */}
+                <svg viewBox="0 0 160 14" className="w-28 sm:w-36 h-2.5 mt-1 text-[#d4af37]" fill="none">
+                  <path d="M5 7h45c12 0 18-4 25-4s13 4 25 4h45" stroke="currentColor" strokeWidth="1.2" strokeLinecap="round" opacity="0.8" />
+                  <path d="M68 7c4 3 12 3 16 0" stroke="currentColor" strokeWidth="1.2" strokeLinecap="round" />
+                  <circle cx="76" cy="7" r="2" fill="currentColor" />
+                </svg>
+              </div>
+            </div>
+
+            {/* Vertical Divider */}
+            <div className="hidden sm:block w-[1.5px] h-20 bg-gradient-to-b from-transparent via-[#d4af37]/40 to-transparent flex-shrink-0" />
+
+            {/* Right: Hindi Tagline & Categories */}
+            <div className="flex flex-col text-center sm:text-left justify-center flex-grow">
+              <p className="font-serif sm:font-sans font-bold text-base sm:text-lg lg:text-[19px] text-[#fff7ed] leading-snug tracking-wide">
+                हर आवाज़ को मंच,<br />
+                हर रचना को पहचान।
+              </p>
+              <p className="text-[11px] sm:text-xs lg:text-sm text-amber-200/80 mt-2 font-medium tracking-wide">
+                कविता • कहानी • ग़ज़ल • विचार • और भी बहुत कुछ
+              </p>
+            </div>
+          </div>
+        </Link>
+
+        {/* ── Tab 2: RSUNKAHI Quarterly Magazine ── */}
+        <Link
+          href="/books"
+          className="group relative flex flex-col justify-between overflow-hidden rounded-2xl border border-[#3c2a1e]/15 dark:border-[#e6dfcd]/20 bg-gradient-to-br from-[#fdfbf7] via-[#f7f0e4] to-[#ece0cd] p-4 sm:p-5 lg:p-6 shadow-[0_8px_24px_rgba(60,42,30,0.14)] hover:shadow-[0_12px_36px_rgba(60,42,30,0.24)] hover:border-[#3c2a1e]/35 hover:-translate-y-1 transition-all duration-300"
+          title="RSUNKAHI Quarterly Magazine"
+        >
+          <div className="relative z-10 flex flex-col sm:flex-row items-center sm:items-center justify-between gap-4 lg:gap-5 w-full">
+            {/* Left: Book Icon & Titles */}
+            <div className="flex flex-col items-center sm:items-center text-center flex-shrink-0">
+              <div className="w-9 h-7 text-[#c59b27] flex items-center justify-center mb-1">
+                <svg viewBox="0 0 24 24" className="w-8 h-8 fill-current drop-shadow-sm">
+                  <path d="M12 4.5C10.5 3.5 8 3 5 3C3 3 2 3.5 2 3.5V18.5C2 18.5 3.5 18 5 18C8 18 10.5 19 12 20.5C13.5 19 16 18 19 18C20.5 18 22 18.5 22 18.5V3.5C22 3.5 21 3 19 3C16 3 13.5 3.5 12 4.5ZM11 18C9.5 16.8 7.5 16.5 5 16.5V5C7 5 9 5.5 11 6.5V18ZM20 16.5C17.5 16.5 15.5 16.8 14 18V6.5C16 5.5 18 5 20 5V16.5Z" />
+                </svg>
+              </div>
+
+              <span className="text-[11px] sm:text-xs font-serif font-bold tracking-[0.25em] text-[#3c2317] uppercase">
+                RSUNKAHI
+              </span>
+              <span className="text-xl sm:text-2xl lg:text-[27px] font-serif text-[#2b160a] font-normal leading-tight">
+                Quarterly Magazine
+              </span>
+              {/* Gold Flourish */}
+              <svg viewBox="0 0 160 14" className="w-28 sm:w-36 h-2.5 mt-1 text-[#c5a059]" fill="none">
+                <path d="M5 7h45c12 0 18-4 25-4s13 4 25 4h45" stroke="currentColor" strokeWidth="1.2" strokeLinecap="round" opacity="0.8" />
+                <path d="M68 7c4 3 12 3 16 0" stroke="currentColor" strokeWidth="1.2" strokeLinecap="round" />
+                <circle cx="76" cy="7" r="2" fill="currentColor" />
+              </svg>
+            </div>
+
+            {/* Vertical Divider */}
+            <div className="hidden sm:block w-[1.5px] h-20 bg-gradient-to-b from-transparent via-[#3c2a1e]/20 to-transparent flex-shrink-0" />
+
+            {/* Middle: Hindi Tagline & Action Button */}
+            <div className="flex flex-col text-center sm:text-left justify-center flex-grow">
+              <p className="font-serif sm:font-sans font-bold text-sm sm:text-base lg:text-[17px] text-[#2c180e] leading-snug">
+                समकालीन रचनाकारों की<br />
+                चयनित रचनाओं की त्रैमासिक पत्रिका
+              </p>
+              <div>
+                <span className="inline-flex items-center justify-center gap-1.5 mt-3 px-4 py-1.5 rounded-full bg-gradient-to-r from-[#d97706] to-[#b45309] text-white font-sans text-xs sm:text-sm font-bold shadow-md group-hover:from-[#b45309] group-hover:to-[#92400e] transition-all">
+                  नवीनतम अंक पढ़ें →
+                </span>
+              </div>
+            </div>
+
+            {/* Right: 3D Magazine Cover Mockup */}
+            <div className="relative w-20 sm:w-24 lg:w-26 flex-shrink-0">
+              <Image
+                src="/magazine-3d-mockup.svg"
+                alt="RSUNKAHI Quarterly Magazine Mockup"
+                width={110}
+                height={125}
+                className="w-full h-auto drop-shadow-[0_8px_20px_rgba(60,42,30,0.22)] transition-transform duration-500 group-hover:scale-105"
+              />
+            </div>
+          </div>
+        </Link>
+
       </div>
     </motion.section>
   )
@@ -238,11 +337,13 @@ const VintageCarousel = memo(function VintageCarousel({
     align: "start",
     slidesToScroll: 1,
   })
+  const [playVideo, setPlayVideo] = useState(false)
 
   useEffect(() => {
     if (!emblaApi) return
 
     const autoplay = () => {
+      if (document.hidden) return
       if (emblaApi.canScrollNext()) {
         emblaApi.scrollNext()
       } else {
@@ -273,7 +374,7 @@ const VintageCarousel = memo(function VintageCarousel({
               </div>
               <div className="vintage-col-1-box h-full min-h-[450px]">
                 <ul className="vintage-col-1-list">
-                  {poems.slice(0, 4).map((p, i) => (
+                  {(poems || []).slice(0, 4).map((p, i) => (
                     <li key={p._id || i}>
                       <span>•</span>{" "}
                       <Link href={`/poems/${p._id}`} className="hover:underline hover:text-primary transition-colors">
@@ -281,7 +382,7 @@ const VintageCarousel = memo(function VintageCarousel({
                       </Link>
                     </li>
                   ))}
-                  {poems.length === 0 && (
+                  {(!poems || poems.length === 0) && (
                     <>
                       <li><span>•</span> देव नदी वाद....</li>
                       <li><span>•</span> ओंटन की याद....</li>
@@ -335,13 +436,34 @@ const VintageCarousel = memo(function VintageCarousel({
                   <div className="w-full flex flex-col gap-3">
                     <div className="relative w-full aspect-video rounded overflow-hidden shadow-inner bg-black">
                       {recentVideo.youtubeId ? (
-                        <iframe
-                          src={`https://www.youtube.com/embed/${recentVideo.youtubeId}?rel=0`}
-                          title={recentVideo.title}
-                          allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-                          allowFullScreen
-                          className="absolute top-0 left-0 w-full h-full"
-                        />
+                        playVideo ? (
+                          <iframe
+                            src={`https://www.youtube.com/embed/${recentVideo.youtubeId}?autoplay=1&rel=0`}
+                            title={recentVideo.title}
+                            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                            allowFullScreen
+                            className="absolute top-0 left-0 w-full h-full"
+                          />
+                        ) : (
+                          <button
+                            type="button"
+                            onClick={() => setPlayVideo(true)}
+                            className="group relative w-full h-full cursor-pointer text-left"
+                            aria-label={`Play ${recentVideo.title}`}
+                          >
+                            <img
+                              src={`https://img.youtube.com/vi/${recentVideo.youtubeId}/hqdefault.jpg`}
+                              alt={recentVideo.title}
+                              loading="lazy"
+                              className="w-full h-full object-cover transition-transform duration-300 group-hover:scale-105"
+                            />
+                            <div className="absolute inset-0 bg-black/30 group-hover:bg-black/45 transition-colors flex items-center justify-center">
+                              <span className="w-12 h-12 rounded-full bg-red-600 text-white flex items-center justify-center shadow-lg group-hover:scale-110 transition-transform">
+                                <Play className="w-5 h-5 fill-current ml-0.5" />
+                              </span>
+                            </div>
+                          </button>
+                        )
                       ) : (
                         <div className="flex items-center justify-center w-full h-full text-white">Video unavailable</div>
                       )}
@@ -387,6 +509,7 @@ const VintageCarousel = memo(function VintageCarousel({
                 {settings?.featuredInstagramReel ? (
                   <iframe
                     src={`${settings.featuredInstagramReel.split("?")[0].replace(/\/$/, "")}/embed`}
+                    loading="lazy"
                     allow="encrypted-media"
                     className="rounded bg-white w-full max-w-[320px]"
                     style={{ height: '380px' }}
@@ -487,7 +610,7 @@ const VintageCombinedFooter = memo(function VintageCombinedFooter({
             <span className="line"></span>
           </div>
 
-          <div className="bg-[#ebdcb9]/30 dark:bg-[#2c2317]/30 border border-[#3c2a1e]/15 dark:border-[#e6dfcd]/15 rounded-lg p-6 md:p-8 shadow-md relative overflow-hidden backdrop-blur-sm flex-grow flex flex-col justify-center">
+          <div className="bg-[#ebdcb9]/30 dark:bg-[#2c2317]/30 border border-[#3c2a1e]/15 dark:border-[#e6dfcd]/15 rounded-lg p-6 md:p-8 shadow-md relative overflow-hidden flex-grow flex flex-col justify-center">
             {/* Corner decorations */}
             <div className="absolute top-0 right-0 w-12 h-12 pointer-events-none opacity-10 border-t-2 border-r-2 border-[#3c2a1e] dark:border-[#e6dfcd] m-2"></div>
             <div className="absolute bottom-0 left-0 w-12 h-12 pointer-events-none opacity-10 border-b-2 border-l-2 border-[#3c2a1e] dark:border-[#e6dfcd] m-2"></div>
@@ -550,7 +673,7 @@ const VintageCombinedFooter = memo(function VintageCombinedFooter({
             <span className="line"></span>
           </div>
 
-          <div className="bg-[#ebdcb9]/30 dark:bg-[#2c2317]/30 border border-[#3c2a1e]/15 dark:border-[#e6dfcd]/15 rounded-lg p-2 md:p-3 shadow-md relative overflow-hidden backdrop-blur-sm flex-grow flex flex-col justify-between">
+          <div className="bg-[#ebdcb9]/30 dark:bg-[#2c2317]/30 border border-[#3c2a1e]/15 dark:border-[#e6dfcd]/15 rounded-lg p-2 md:p-3 shadow-md relative overflow-hidden flex-grow flex flex-col justify-between">
             {/* Corner decorations */}
             <div className="absolute top-0 left-0 w-12 h-12 pointer-events-none opacity-10 border-t-2 border-l-2 border-[#3c2a1e] dark:border-[#e6dfcd] m-2"></div>
             <div className="absolute bottom-0 right-0 w-12 h-12 pointer-events-none opacity-10 border-b-2 border-r-2 border-[#3c2a1e] dark:border-[#e6dfcd] m-2"></div>
@@ -647,6 +770,9 @@ export default function VintageHome({
       <VintageHeader t={t} />
       <HeroSection t={t} sliders={sliders} />
 
+      {/* ─── FEATURED TABS: LITERATURE CLUB & QUARTERLY MAGAZINE ─── */}
+      <FeaturedClubMagazineTabs t={t} />
+
       {/* ─── 4-SECTION CAROUSEL ─── */}
       <div className="relative w-full">
         <VintageCarousel
@@ -658,7 +784,7 @@ export default function VintageHome({
         />
       </div>
 
-      <div className="relative w-full overflow-hidden">
+      <div id="contact" className="relative w-full overflow-hidden">
         <VintageCombinedFooter t={t} settings={settings} />
       </div>
     </div>

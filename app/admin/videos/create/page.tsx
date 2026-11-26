@@ -13,10 +13,11 @@ export default function CreateVideoPage() {
     title: "",
     description: "",
     youtubeId: "",
+    playlist: "General",
   })
   const [loading, setLoading] = useState(false)
 
-  const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) => {
     setFormData({
       ...formData,
       [e.target.name]: e.target.value,
@@ -84,6 +85,21 @@ export default function CreateVideoPage() {
                   <p className="text-xs text-muted-foreground mt-2">
                     Find this in YouTube URL: youtube.com/watch?v=<span className="font-mono">VIDEO_ID</span>
                   </p>
+                </div>
+
+                <div>
+                  <label className="text-sm text-muted-foreground mb-2 block">Playlist / Series</label>
+                  <select
+                    name="playlist"
+                    value={formData.playlist}
+                    onChange={handleChange}
+                    className="w-full px-3 py-2 rounded border border-border bg-background text-foreground"
+                  >
+                    <option value="General">General Videos</option>
+                    <option value="RSUNKAHI Literature Club – Monthly Sessions">
+                      RSUNKAHI Literature Club – Monthly Sessions
+                    </option>
+                  </select>
                 </div>
 
                 <div>

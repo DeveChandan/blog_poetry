@@ -1,43 +1,67 @@
 "use client"
 
-import { useState, useEffect, useCallback } from "react" // Import useCallback
+import { useState, useEffect, useCallback } from "react"
 
 interface UserSession {
   userId: string
   email: string
   isAdmin: boolean
-  // Add other user properties as needed
 }
 
 interface SessionHook {
   user: UserSession | null
   loading: boolean
   error: string | null
-  refetch: () => void // Add refetch function
+  refetch: () => Promise<UserSession | null>
+}
+
+let cachedUser: UserSession | null | undefined = undefined
+let inflightSession: Promise<UserSession | null> | null = null
+
+async function loadSession(force = false): Promise<UserSession | null> {
+  if (!force && cachedUser !== undefined) {
+    return cachedUser
+  }
+  if (!force && inflightSession) {
+    return inflightSession
+  }
+
+  inflightSession = fetch("/api/auth/session")
+    .then(async (res): Promise<UserSession | null> => {
+      if (!res.ok) {
+        cachedUser = null
+        return null
+      }
+      const data = await res.json()
+      const user: UserSession | null = data.user || null
+      cachedUser = user
+      return user
+    })
+    .catch((err) => {
+      console.error("Failed to fetch session:", err)
+      cachedUser = null
+      return null
+    })
+    .finally(() => {
+      inflightSession = null
+    })
+
+  return inflightSession
 }
 
 export function useSession(): SessionHook {
-  const [user, setUser] = useState<UserSession | null>(null)
-  const [loading, setLoading] = useState(true)
+  const [user, setUser] = useState<UserSession | null>(cachedUser ?? null)
+  const [loading, setLoading] = useState(cachedUser === undefined)
   const [error, setError] = useState<string | null>(null)
 
-  const fetchSession = useCallback(async () => {
+  const fetchSession = useCallback(async (force = true) => {
     setLoading(true)
+    setError(null)
     try {
-      const res = await fetch("/api/auth/session")
-      console.log("useSession: Raw response from /api/auth/session:", res)
-      const data = await res.json()
-      console.log("useSession: Parsed data from /api/auth/session:", data)
-
-      if (res.ok && data.user) {
-        setUser(data.user)
-        return data.user // Return the fetched user
-      } else {
-        setUser(null)
-        return null
-      }
-    } catch (err) {
-      console.error("Failed to fetch session:", err)
+      const result = await loadSession(force)
+      setUser(result)
+      return result
+    } catch {
       setError("Failed to fetch session.")
       setUser(null)
       return null
@@ -47,8 +71,22 @@ export function useSession(): SessionHook {
   }, [])
 
   useEffect(() => {
-    fetchSession()
-  }, [fetchSession])
+    let active = true
+    if (cachedUser !== undefined) {
+      setUser(cachedUser)
+      setLoading(false)
+      return
+    }
+    loadSession(false).then((result) => {
+      if (active) {
+        setUser(result)
+        setLoading(false)
+      }
+    })
+    return () => {
+      active = false
+    }
+  }, [])
 
-  return { user, loading, error, refetch: fetchSession }
+  return { user, loading, error, refetch: () => fetchSession(true) }
 }

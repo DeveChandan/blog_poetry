@@ -62,6 +62,7 @@ export async function GET() {
         _id: v._id.toString(),
         title: v.title || '',
         description: v.description || '',
+        playlist: v.playlist || 'General',
         thumbnail: thumbnail,
         views: v.views || 0,
         youtubeId: cleanYoutubeId, // Store clean ID
@@ -87,7 +88,7 @@ export async function POST(request: NextRequest) {
     }
 
     const body = await request.json()
-    const { title, description, youtubeId } = body
+    const { title, description, youtubeId, playlist } = body
 
     if (!title || !youtubeId) {
       return NextResponse.json({ error: "Title and YouTube ID are required" }, { status: 400 })
@@ -109,6 +110,7 @@ export async function POST(request: NextRequest) {
     const result = await db.collection("videos").insertOne({
       title,
       description: description || "",
+      playlist: playlist || "General",
       youtubeId: cleanYoutubeId, // Store clean ID
       originalYoutubeUrl: youtubeId, // Also store original if it's a URL
       thumbnail: generatedThumbnail,
@@ -118,6 +120,7 @@ export async function POST(request: NextRequest) {
     })
 
     revalidatePath('/videos')
+    revalidatePath('/literature-club')
     revalidatePath('/')
 
     return NextResponse.json({

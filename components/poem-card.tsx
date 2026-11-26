@@ -21,37 +21,49 @@ export default function PoemCard({ id, title, excerpt, tags, views }: PoemCardPr
   const [translatedExcerpt, setTranslatedExcerpt] = useState(excerpt)
 
   useEffect(() => {
-    // Reset to original if English and does not contain Devanagari
-    if (currentLanguage.code === 'en') {
+    let cancelled = false
+
+    const isPureHindi = (str: string) =>
+      /^[\u0900-\u097F\s\d.,!?।'"\-–—:;()•…]+$/.test(str)
+
+    if (currentLanguage.code === "en") {
       if (/[\u0900-\u097F]/.test(title) || /[\u0900-\u097F]/.test(excerpt)) {
-        const translateContent = async () => {
-          const [newTitle, newExcerpt] = await Promise.all([
-            translate(title),
-            translate(excerpt)
-          ])
-          setTranslatedTitle(newTitle)
-          setTranslatedExcerpt(newExcerpt)
-        }
-        translateContent()
+        Promise.all([translate(title), translate(excerpt)])
+          .then(([newTitle, newExcerpt]) => {
+            if (!cancelled) {
+              setTranslatedTitle(newTitle)
+              setTranslatedExcerpt(newExcerpt)
+            }
+          })
+          .catch(console.error)
       } else {
         setTranslatedTitle(title)
         setTranslatedExcerpt(excerpt)
       }
+      return () => {
+        cancelled = true
+      }
+    }
+
+    if (currentLanguage.code === "hi" && isPureHindi(title) && isPureHindi(excerpt)) {
+      setTranslatedTitle(title)
+      setTranslatedExcerpt(excerpt)
       return
     }
 
-    // Translate title and excerpt
-    const translateContent = async () => {
-      const [newTitle, newExcerpt] = await Promise.all([
-        translate(title),
-        translate(excerpt)
-      ])
-      setTranslatedTitle(newTitle)
-      setTranslatedExcerpt(newExcerpt)
-    }
+    Promise.all([translate(title), translate(excerpt)])
+      .then(([newTitle, newExcerpt]) => {
+        if (!cancelled) {
+          setTranslatedTitle(newTitle)
+          setTranslatedExcerpt(newExcerpt)
+        }
+      })
+      .catch(console.error)
 
-    translateContent()
-  }, [currentLanguage, title, excerpt, translate])
+    return () => {
+      cancelled = true
+    }
+  }, [currentLanguage.code, title, excerpt, translate])
 
   return (
     <Link href={`/poems/${id}`}>

@@ -13,6 +13,9 @@ export default function AdminSettingsPage() {
     authorImage: "",
     aboutDescription: "",
     featuredInstagramReel: "",
+    literatureClubWhatsappUrl: "",
+    literatureClubPlaylistId: "",
+    literatureClubFormUrl: "",
     youtube: "",
     instagram: "",
     facebook: "",
@@ -167,6 +170,45 @@ export default function AdminSettingsPage() {
                   placeholder="https://www.instagram.com/reel/..."
                 />
                 <p className="text-xs text-muted-foreground mt-1">This will be embedded on the vintage home screen.</p>
+              </div>
+
+              <div className="pt-4 border-t border-border space-y-4">
+                <h3 className="text-lg font-medium">RSUNKAHI Literature Club Settings</h3>
+                <div>
+                  <label className="text-sm text-muted-foreground mb-2 block">WhatsApp Group Invite Link</label>
+                  <input
+                    type="url"
+                    name="literatureClubWhatsappUrl"
+                    value={formData.literatureClubWhatsappUrl || ""}
+                    onChange={handleChange}
+                    className="w-full px-3 py-2 rounded border border-border bg-background text-foreground"
+                    placeholder="https://chat.whatsapp.com/..."
+                  />
+                  <p className="text-xs text-muted-foreground mt-1">Used for the &ldquo;Join WhatsApp Group&rdquo; CTA on the Literature Club page.</p>
+                </div>
+                <div>
+                  <label className="text-sm text-muted-foreground mb-2 block">YouTube Playlist URL or ID (Monthly Sessions)</label>
+                  <input
+                    type="text"
+                    name="literatureClubPlaylistId"
+                    value={formData.literatureClubPlaylistId || ""}
+                    onChange={handleChange}
+                    className="w-full px-3 py-2 rounded border border-border bg-background text-foreground"
+                    placeholder="https://www.youtube.com/playlist?list=PL... or PL..."
+                  />
+                  <p className="text-xs text-muted-foreground mt-1">Embedded under &ldquo;RSUNKAHI Literature Club – Monthly Sessions&rdquo;.</p>
+                </div>
+                <div>
+                  <label className="text-sm text-muted-foreground mb-2 block">Online Registration Form URL (Optional)</label>
+                  <input
+                    type="url"
+                    name="literatureClubFormUrl"
+                    value={formData.literatureClubFormUrl || ""}
+                    onChange={handleChange}
+                    className="w-full px-3 py-2 rounded border border-border bg-background text-foreground"
+                    placeholder="https://forms.gle/..."
+                  />
+                </div>
               </div>
 
               <div className="pt-4 border-t border-border">

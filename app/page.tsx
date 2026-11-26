@@ -1,91 +1,102 @@
-import { Suspense } from "react"
 import { connectDB } from "@/lib/db"
 import VintageHome from "@/components/vintage-home"
 
-function serialize(data: any) {
+// Cache rendered home page for 60s; admin mutations also call revalidatePath('/')
+export const revalidate = 60
+
+function serialize<T>(data: any): T {
   return JSON.parse(JSON.stringify(data))
 }
 
-async function getFeaturedPoems() {
-  const db = await connectDB()
-  let poems = await db.collection("poems").find({ featured: true }).sort({ createdAt: -1 }).limit(6).toArray()
-  if (poems.length === 0) {
-    poems = await db.collection("poems").find({}).sort({ createdAt: -1 }).limit(6).toArray()
+async function getHomeData() {
+  try {
+    const db = await connectDB()
+
+    const [featuredPoems, recentBooks, sliders, recentVideo, settings] = await Promise.all([
+      (async () => {
+        let poems = await db
+          .collection("poems")
+          .find({ featured: true }, { projection: { title: 1 } })
+          .sort({ createdAt: -1 })
+          .limit(6)
+          .toArray()
+        if (poems.length === 0) {
+          poems = await db
+            .collection("poems")
+            .find({}, { projection: { title: 1 } })
+            .sort({ createdAt: -1 })
+            .limit(6)
+            .toArray()
+        }
+        return serialize<any[]>(poems)
+      })().catch(() => []),
+      db
+        .collection("books")
+        .find({}, { projection: { cover: 1, title: 1 } })
+        .sort({ createdAt: -1 })
+        .limit(2)
+        .toArray()
+        .then((res) => serialize<any[]>(res))
+        .catch(() => []),
+      db
+        .collection("sliders")
+        .find({ active: true }, { projection: { image: 1, title: 1 } })
+        .sort({ order: 1, createdAt: -1 })
+        .toArray()
+        .then((res) => serialize<any[]>(res))
+        .catch(() => []),
+      db
+        .collection("videos")
+        .findOne({}, { sort: { createdAt: -1 }, projection: { title: 1, youtubeId: 1 } })
+        .then((res) => (res ? serialize<any>(res) : null))
+        .catch(() => null),
+      db
+        .collection("settings")
+        .findOne(
+          {},
+          {
+            projection: {
+              featuredInstagramReel: 1,
+              facebook: 1,
+              twitter: 1,
+              instagram: 1,
+              youtube: 1,
+              linkedin: 1,
+              email: 1,
+            },
+          }
+        )
+        .then((res) => (res ? serialize<any>(res) : null))
+        .catch(() => null),
+    ])
+
+    return { featuredPoems, recentBooks, sliders, recentVideo, settings }
+  } catch (error) {
+    console.error("Failed to fetch home page data:", error)
+    return {
+      featuredPoems: [],
+      recentBooks: [],
+      sliders: [],
+      recentVideo: null,
+      settings: null,
+    }
   }
-  return serialize(poems)
-}
-
-async function getRecentBooks() {
-  const db = await connectDB()
-  const books = await db.collection("books").find({}).sort({ createdAt: -1 }).limit(2).toArray()
-  return serialize(books)
-}
-
-async function getRecentBlogs() {
-  const db = await connectDB()
-  const blogs = await db.collection("blogs").find({}).sort({ createdAt: -1 }).limit(1).toArray()
-  return serialize(blogs)
-}
-
-async function getStats() {
-  const db = await connectDB()
-  const totalPoems = await db.collection("poems").countDocuments()
-  const booksPublished = await db.collection("books").countDocuments()
-  const totalReaders = await db.collection("users").countDocuments()
-  const totalVideos = await db.collection("videos").countDocuments()
-  const yearsWriting = new Date().getFullYear() - 2016
-
-  return {
-    totalPoems,
-    booksPublished,
-    totalReaders,
-    totalVideos,
-    yearsWriting,
-  }
-}
-
-async function getSliders() {
-  const db = await connectDB()
-  const sliders = await db.collection("sliders").find({ active: true }).sort({ order: 1, createdAt: -1 }).toArray()
-  return serialize(sliders)
-}
-
-async function getRecentVideo() {
-  const db = await connectDB()
-  const video = await db.collection("videos").findOne({}, { sort: { createdAt: -1 } })
-  if (!video) return null
-  return serialize(video)
-}
-
-async function getSettings() {
-  const db = await connectDB()
-  const settings = await db.collection("settings").findOne({})
-  if (!settings) return null
-  return serialize(settings)
 }
 
 export default async function Home() {
-  const stats = await getStats()
-  const featuredPoems = await getFeaturedPoems()
-  const recentBooks = await getRecentBooks()
-  const recentBlogs = await getRecentBlogs()
-  const sliders = await getSliders()
-  const recentVideo = await getRecentVideo()
-  const settings = await getSettings()
+  const { featuredPoems, recentBooks, sliders, recentVideo, settings } = await getHomeData()
 
   return (
     <main className="min-h-screen">
-      <Suspense fallback={<div className="vintage-home" style={{ minHeight: '100vh', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>Loading...</div>}>
-        <VintageHome
-          stats={stats}
-          featuredPoems={featuredPoems}
-          recentBooks={recentBooks}
-          recentBlogs={recentBlogs}
-          sliders={sliders}
-          recentVideo={recentVideo}
-          settings={settings}
-        />
-      </Suspense>
+      <VintageHome
+        stats={null}
+        featuredPoems={featuredPoems}
+        recentBooks={recentBooks}
+        recentBlogs={[]}
+        sliders={sliders}
+        recentVideo={recentVideo}
+        settings={settings}
+      />
     </main>
   )
 }

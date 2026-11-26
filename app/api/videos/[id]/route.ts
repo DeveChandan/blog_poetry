@@ -23,6 +23,7 @@ export async function GET(request: NextRequest, { params }: { params: { id: stri
       _id: video._id.toString(),
       title: video.title,
       description: video.description,
+      playlist: video.playlist || "General",
       thumbnail: video.thumbnail,
       views: video.views,
       youtubeId: video.youtubeId,
@@ -44,7 +45,7 @@ export async function PUT(request: NextRequest, { params }: { params: { id: stri
     }
 
     const body = await request.json()
-    const { title, description, youtubeId } = body
+    const { title, description, youtubeId, playlist } = body
 
     const db = await connectDB()
 
@@ -58,6 +59,7 @@ export async function PUT(request: NextRequest, { params }: { params: { id: stri
         $set: {
           title,
           description,
+          playlist: playlist || "General",
           youtubeId,
           thumbnail: generatedThumbnail,
           updatedAt: new Date(),

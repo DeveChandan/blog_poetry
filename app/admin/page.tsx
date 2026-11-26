@@ -241,6 +241,21 @@ function AdminDashboardContent() {
               </Button>
             </CardContent>
           </Card>
+
+          {/* RSUNKAHI Literature Club */}
+          <Card>
+            <CardHeader>
+              <CardTitle>RSUNKAHI Literature Club</CardTitle>
+            </CardHeader>
+            <CardContent className="space-y-3">
+              <Button asChild className="w-full">
+                <Link href="/admin/creators">Manage Featured Creators</Link>
+              </Button>
+              <Button asChild variant="outline" className="w-full bg-transparent">
+                <Link href="/admin/settings">WhatsApp & Playlist Settings</Link>
+              </Button>
+            </CardContent>
+          </Card>
         </div>
 
         {/* Settings & Configuration */}
